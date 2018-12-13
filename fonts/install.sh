@@ -1,1 +1,1 @@
-ln -S  "$HOME/fonts ~/Library/Application\ Support/Code/User/
+ln -s "$HOME/.fonts" "$HOME/Library/Fonts/"

@@ -5,4 +5,4 @@ done
 
 echo "Linking vscode"
 
-ln -S  "$HOME/.vscode.conf" "~/Library/Application\ Support/Code/User/"
+ln -s  "$HOME/.vscode.conf" "~/Library/Application\ Support/Code/User/"
