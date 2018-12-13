@@ -1,6 +1,5 @@
-cask_args appdir: '/Applications'
-
 tap 'homebrew/bundle'
+tap 'homebrew/cask-fonts'
 
 brew 'antibody'
 brew 'go'
@@ -17,4 +16,8 @@ cask 'rambox'
 cask 'bettertouchtool'
 cask 'aerial'
 cask 'spotify'
-case 'hyper'
+cask 'hyper'
+
+cask 'font-lato'
+cask 'font-open-sans'
+cask 'font-hasklig'
