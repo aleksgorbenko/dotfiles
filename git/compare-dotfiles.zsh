@@ -1,5 +1,20 @@
+
+DEFAULT_MSG="Routine changes"
+
+cdf() {
+    local DIR=$(pwd)
+    cd $ZSH
+    git add -A
+    git commit -m "${1:=DEFAULT_MSG}"
+    git push
+    cd $DIR
+}
+
+info () {
+  printf "\r  [ \033[00;34m..\033[0m ] $1\n"
+}
+
 if [ -n "$(git status --porcelain  $ZSH)" ]; then
-echo "status 1"
-else
-echo "status 2"
+info "There are unstaged changes to your dotfiles!"
+info ">> cdf"
 fi

@@ -1,6 +1,7 @@
 tap 'homebrew/bundle'
 tap 'homebrew/cask-fonts'
 
+brew 'coreutils'
 brew 'antibody'
 brew 'go'
 brew 'jq'
