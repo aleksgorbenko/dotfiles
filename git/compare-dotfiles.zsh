@@ -10,11 +10,11 @@ cdf() {
     cd $DIR
 }
 
-info () {
-  printf "\r  [ \033[00;34m..\033[0m ] $1\n"
+warn () {
+  printf "\r  [\033[00;33mWARN\033[0m] $1\n"
 }
 
 if [ -n "$(git --git-dir=$ZSH/.git status --porcelain)" ]; then
-info "There are unstaged changes to your dotfiles!"
-info ">> cdf"
+warn "There are unstaged changes to your dotfiles!"
+warn ">> cdf"
 fi
