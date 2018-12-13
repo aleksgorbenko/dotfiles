@@ -5,7 +5,7 @@ cdf() {
     local DIR=$(pwd)
     cd $ZSH
     git add -A
-    git commit -m "${1:=DEFAULT_MSG}"
+    git commit -m "${1:=$DEFAULT_MSG}"
     git push
     cd $DIR
 }
