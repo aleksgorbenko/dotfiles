@@ -9,6 +9,7 @@ brew 'openssl'
 brew 'yarn'
 brew 'imagemagick'
 
+cask 'keka'
 cask 'docker'
 cask '1password'
 cask 'firefox'
