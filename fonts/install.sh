@@ -1,0 +1,1 @@
+ln -S  "$HOME/fonts ~/Library/Application\ Support/Code/User/

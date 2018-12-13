@@ -1,0 +1,21 @@
+{
+  "workbench.colorTheme": "Dracula",
+  "workbench.iconTheme": "vscode-icons",
+  "editor.codeLens": false,
+  "javascript.validate.enable": false,
+  "git.autofetch": true,
+  "workbench.editor.enablePreview": false,
+  "window.zoomLevel": 0,
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "explorer.confirmDragAndDrop": false,
+  "eslint.autoFixOnSave": true,
+  "githubPullRequests.hosts": [
+    {
+      "host": "https://github.com",
+      "username": "oauth",
+      "token": "system"
+    }
+  ]
+}
