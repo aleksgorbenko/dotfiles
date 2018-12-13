@@ -12,5 +12,5 @@
   "explorer.confirmDragAndDrop": false,
   "eslint.autoFixOnSave": true,
   "editor.fontFamily": "Hasklig, OpenSans, Menlo, Monaco, 'Courier New', monospace",
-  "editor.fontLigatures": true,
+  "editor.fontLigatures": true
 }
