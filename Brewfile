@@ -3,6 +3,7 @@ tap 'homebrew/cask-fonts'
 
 brew 'coreutils'
 brew 'antibody'
+brew 'autojump'
 brew 'go'
 brew 'jq'
 brew 'grc'
