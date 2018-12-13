@@ -9,6 +9,7 @@ EditorConfig.EditorConfig
 esbenp.prettier-vscode
 flowtype.flow-for-vscode
 GitHub.vscode-pull-request-github
+jpoissonnier.vscode-styled-components
 mauve.terraform
 ms-vscode.Go
 naumovs.color-highlight
