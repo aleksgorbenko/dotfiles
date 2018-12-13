@@ -19,6 +19,7 @@ cask 'bettertouchtool'
 cask 'aerial'
 cask 'spotify'
 cask 'hyper'
+cask 'google-cloud-sdk'
 
 cask 'font-lato'
 cask 'font-open-sans'

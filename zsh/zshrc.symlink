@@ -2,6 +2,7 @@
 DISABLE_AUTO_UPDATE=true
 
 source <(antibody init)
+
 antibody bundle < ~/.zsh_plugins
 
 # enable autojump

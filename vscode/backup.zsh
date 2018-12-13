@@ -1,4 +1,11 @@
 SOURCE_LOC=$_
+EXT_FILE="$(dirname -- "$SOURCE_LOC")/extensions"
+
+
 backupCodeExt() {
-    code --list-extensions > "$(dirname -- "$SOURCE_LOC")/extensions"
+    code --list-extensions > $EXT_FILE
 }
+
+async_init
+async_start_worker vscodebkp -n
+async_job vscodebkp backupCodeExt

@@ -13,11 +13,4 @@
   "eslint.autoFixOnSave": true,
   "editor.fontFamily": "Hasklig, OpenSans, Menlo, Monaco, 'Courier New', monospace",
   "editor.fontLigatures": true,
-  "githubPullRequests.hosts": [
-    {
-      "host": "https://github.com",
-      "username": "oauth",
-      "token": "system"
-    }
-  ]
 }
