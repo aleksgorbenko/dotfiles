@@ -54,7 +54,7 @@ install_dotfiles () {
   for src in $(find -H "$DOTFILES_ROOT" -maxdepth 2 -name '*.symlink' -not -path '*.git*')
   do
     dst="$HOME/.$(basename "${src%.*}")"
-    $ZSH/bin/link-file "$src" "$dst"
+    $DOTFILES_ROOT/bin/link-file "$src" "$dst"
   done
 }
 
