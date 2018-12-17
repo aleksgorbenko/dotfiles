@@ -36,14 +36,13 @@ EOF
 }
 
 if ! gpg --list-keys dotfiles-key; then
-
     $ZSH/bin/log_user "It looks like you don't have a GPG key setup for dotfiles yet.\n\
          Would you like us to create you one now? [y/N]"
-        read -n 1 response < /dev/tty
-        if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]
-        then
-            if generate_gpg; then 
-                $ZSH/bin/log_success "GPG key created"
-            fi
+    read -n 1 response < /dev/tty
+    if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]
+    then
+        if generate_gpg; then 
+            $ZSH/bin/log_success "GPG key created"
         fi
+    fi
 fi
