@@ -1,0 +1,4 @@
+Host artemis
+    HostName 178.63.64.245
+    User root
+    IdentityFile ~/.ssh/artemis_id_rsa

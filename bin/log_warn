@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+printf "\r[\033[00;33mWARN\033[0m] $1\n"

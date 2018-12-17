@@ -1,6 +1,8 @@
 tap 'homebrew/bundle'
 tap 'homebrew/cask-fonts'
 
+brew 'gnupg'
+brew 'git-secret'
 brew 'coreutils'
 brew 'antibody'
 brew 'autojump'
@@ -23,6 +25,7 @@ cask 'aerial'
 cask 'spotify'
 cask 'hyper'
 cask 'google-cloud-sdk'
+cask 'visual-studio-code'
 
 cask 'font-lato'
 cask 'font-open-sans'
