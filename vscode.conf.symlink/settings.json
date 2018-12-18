@@ -1,7 +1,6 @@
 {
   "workbench.colorTheme": "Dracula",
   "workbench.iconTheme": "vscode-icons",
-  "editor.codeLens": false,
   "javascript.validate.enable": false,
   "git.autofetch": true,
   "workbench.editor.enablePreview": false,
@@ -13,5 +12,6 @@
   "eslint.autoFixOnSave": true,
   "editor.fontFamily": "Hasklig, OpenSans, Menlo, Monaco, 'Courier New', monospace",
   "editor.fontLigatures": true,
-  "typescript.updateImportsOnFileMove.enabled": "always"
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "go.gocodeAutoBuild": true
 }
