@@ -9,3 +9,9 @@ port() {
 killport() {
     lsof -ti:$1 | xargs kill
 }
+
+dotenv() {
+    set -o allexport
+    source $1
+    set +o allexport
+}
