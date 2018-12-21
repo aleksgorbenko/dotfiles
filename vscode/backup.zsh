@@ -4,7 +4,13 @@ GIT_EXTS="$(sort $ZSH/vscode/extensions)"
 INSTALLED="$(sort <(code --list-extensions))"
 
 EXT_TO_REMOVE=$(comm -23 <(echo $INSTALLED) <(echo $GIT_EXTS))
+EXT_TO_REMOVE_COUNT=$(echo $EXT_TO_REMOVE  | wc -l)
 EXT_TO_INSTALL=$(comm -13 <(echo $INSTALLED) <(echo $GIT_EXTS))
+EXT_TO_INSTALL_COUNT=$(echo $EXT_TO_INSTALL | wc -l)
+
+echo "Remove: $EXT_TO_REMOVE_COUNT"
+echo "Install: $EXT_TO_INSTALL_COUNT"
+
 
 
 backupCodeExt() {
