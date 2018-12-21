@@ -8,6 +8,15 @@ EXT_TO_REMOVE_COUNT=$(echo $EXT_TO_REMOVE  | wc -l)
 EXT_TO_INSTALL=$(comm -13 <(echo $INSTALLED) <(echo $GIT_EXTS))
 EXT_TO_INSTALL_COUNT=$(echo $EXT_TO_INSTALL | wc -l)
 
+if ((EXT_TO_INSTALL_COUNT > 0 && EXT_TO_REMOVE_COUNT > 0)) {
+    $ZSH/bin/log_user "VSCode out of sync, sync now?"
+    read -n 1 response < /dev/tty
+    if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]
+    then
+        
+    fi
+}
+
 echo "Remove: $EXT_TO_REMOVE_COUNT"
 echo "Install: $EXT_TO_INSTALL_COUNT"
 
