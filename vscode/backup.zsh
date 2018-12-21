@@ -9,12 +9,16 @@ EXT_TO_INSTALL=$(comm -13 <(echo $INSTALLED) <(echo $GIT_EXTS))
 EXT_TO_INSTALL_COUNT=$(echo $EXT_TO_INSTALL | wc -l)
 
 syncVSCode() {
-    $ZSH/bin/log_user "Installing $EXT_TO_INSTALL_COUNT extensions"
+    $ZSH/bin/log_info "Installing $EXT_TO_INSTALL_COUNT extensions"
     echo $EXT_TO_INSTALL | while read -r line ; do
-        echo "Installing $line"
+        $ZSH/bin/log_info "Installing $line"
         code --install-extension $line --force
     done
-    $ZSH/bin/log_user "Uninstalled $EXT_TO_REMOVE_COUNT extensions"
+    $ZSH/bin/log_user "Uninstalling $EXT_TO_REMOVE_COUNT extensions"
+    echo $EXT_TO_REMOVE | while read -r line ; do
+        $ZSH/bin/log_info "Uninstalling $line"
+        code --uninstall-extension $line --force
+    done
 }
 
 if ((EXT_TO_INSTALL_COUNT > 0 && EXT_TO_REMOVE_COUNT > 0)) {
