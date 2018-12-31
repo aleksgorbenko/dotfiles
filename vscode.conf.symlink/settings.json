@@ -13,5 +13,6 @@
   "editor.fontFamily": "Hasklig, OpenSans, Menlo, Monaco, 'Courier New', monospace",
   "editor.fontLigatures": true,
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "go.gocodeAutoBuild": true
+  "go.gocodeAutoBuild": true,
+  "vsicons.dontShowNewVersionMessage": true
 }
