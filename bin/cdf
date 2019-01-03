@@ -9,7 +9,6 @@ if [ -n "$1" ]; then
 else
   MSG="Routine changes"
 fi
-echo $MSG
 DIR=$(pwd)
 cd $ZSH
 git add -A

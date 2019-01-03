@@ -29,7 +29,7 @@ if tty -s; then
     $ZSH/bin/log_info "To remove:"
     $ZSH/bin/log_info "$EXT_TO_REMOVE"
     $ZSH/bin/log_user "Sync now?"
-    read -n 1 response < /dev/tty
+    read -n 1 -t 10 response < /dev/tty
     if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]
     then
         syncVSCode
