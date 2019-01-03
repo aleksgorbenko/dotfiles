@@ -4,6 +4,10 @@ Your dotfiles are how you personalize your system. These are mine.
 
 ## My additions
 
+- **Git hooks**
+  - Git hooks are installed as part of the `dot` command
+  - Any files named `pre-commit.zsh` or `post-merge.zsh` are automatically run during their respective hooks
+
 - **GPG and `git secret`**
   - Can automatically generate a GPG key and upload it to the public key servers
   - Using `addDotfilesUser` will fetch the given key from the same public key servers and then add the users public key to this repository, automatically re-encrypting all of the secret files.
