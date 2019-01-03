@@ -20,10 +20,9 @@ syncVSCode() {
         code --uninstall-extension $line --force
     done
 }
+exec < /dev/tty
 
-if [ -z "$PS1" ]; then
-    $ZSH/bin/log_warn "Skipping VSCode syncing as not interactive."
-    else
+if tty -s; then 
     $ZSH/bin/log_info "VScode changes"
     $ZSH/bin/log_info "To install:"
     $ZSH/bin/log_info "$EXT_TO_INSTALL"
@@ -35,5 +34,7 @@ if [ -z "$PS1" ]; then
     then
         syncVSCode
     fi
+    else
+    $ZSH/bin/log_warn "Skipping VSCode syncing as not interactive."
 fi
 
