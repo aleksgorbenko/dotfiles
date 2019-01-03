@@ -9,6 +9,8 @@ backupCodeExt() {
     fi
 }
 
+exec < /dev/tty
+
 if tty -s; then 
 backupCodeExt
 else
