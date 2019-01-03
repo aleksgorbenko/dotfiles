@@ -12,7 +12,6 @@ fi
 echo $MSG
 DIR=$(pwd)
 cd $ZSH
-git secret hide
 git add -A
 git commit -m "$MSG"
 git push

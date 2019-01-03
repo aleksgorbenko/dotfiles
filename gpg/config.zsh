@@ -1,1 +1,1 @@
-$GPG_KS=eu.pool.sks-keyservers.net 
+GPG_KS="eu.pool.sks-keyservers.net"
