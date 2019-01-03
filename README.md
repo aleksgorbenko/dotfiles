@@ -4,6 +4,10 @@ Your dotfiles are how you personalize your system. These are mine.
 
 ## My additions
 
+- **GPG and `git secret`**
+  - Can automatically generate a GPG key and upload it to the public key servers
+  - Using `addDotfilesUser` will fetch the given key from the same public key servers and then add the users public key to this repository, automatically re-encrypting all of the secret files.
+
 - **VSCode**
   - Will link `~/.vscode.conf.symlink` to  `~/Library/Application Support/Code/User` keeping them in sync with this directory automatically
   - Will backup any installed extensions to the `vscode/extensions` file
