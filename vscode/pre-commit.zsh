@@ -9,7 +9,8 @@ backupCodeExt() {
     fi
 }
 
-case "$-" in
-*i*)  backupCodeExt ;;
-*)	$ZSH/bin/log_warn "Skipping VSCode syncing as not interactive." ;;
-esac
+if tty -s; then 
+backupCodeExt
+else
+$ZSH/bin/log_warn "Skipping VSCode syncing as not interactive."
+fi
