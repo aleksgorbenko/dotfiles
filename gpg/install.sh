@@ -1,3 +1,7 @@
+DIR="${BASH_SOURCE%/*}"
+if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
+. "$DIR/config.zsh"
+
 generate_gpg() {
     REAL_NAME=`git config user.name`
     if [ $? -ne 0 ]; then
