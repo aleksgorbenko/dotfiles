@@ -15,3 +15,7 @@ dotenv() {
     source $1
     set +o allexport
 }
+
+dotfiles() {
+    $EDITOR ~/.dotfiles
+}

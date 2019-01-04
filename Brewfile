@@ -2,6 +2,7 @@ tap 'homebrew/bundle'
 tap 'homebrew/cask-fonts'
 
 brew 'gnupg'
+brew 'gettext'
 brew 'git-secret'
 brew 'coreutils'
 brew 'getantibody/tap/antibody'
