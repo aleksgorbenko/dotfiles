@@ -4,7 +4,7 @@ addDotfilesUser() {
     $ZSH/bin/log_info "Adding the user to git secret"
     git secret tell $1
     $ZSH/bin/log_info "Re-encrypting the repo"
-    git secret hide
+    git secret hide -m
     $ZSH/bin/log_info "Done! Committing the updated files"
     $ZSH/bin/cdf
 }
