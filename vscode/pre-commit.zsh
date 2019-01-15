@@ -1,6 +1,6 @@
 backupCodeExt() {
     $ZSH/bin/log_user "Backup VSCode extensions?"
-    read -n 1 -t 5 response < /dev/tty
+    read -n 1 response < /dev/tty
     if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]
     then
         local EXT_FILE="$(dirname -- "$SOURCE_LOC")/extensions"
