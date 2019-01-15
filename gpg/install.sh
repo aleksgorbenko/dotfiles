@@ -68,7 +68,7 @@ if ! gpg --list-keys | grep 'Dotfiles generated key'; then
             gpg --keyserver $GPG_KS --send-key $KEY
             $ZSH/bin/log_success "GPG Key sent."
             $ZSH/bin/log_info "To get access to the secret dotfiles you'll need to to run: 'addDotfilesUser $KEY'"
-            $ZSH/bin/log_info "And once you've pulled the updated repository, just run 'git secret reveal'"
+            $ZSH/bin/log_info "And once you've pulled the updated repository, just run 'git secret reveal -P'"
         fi
     fi
 fi
