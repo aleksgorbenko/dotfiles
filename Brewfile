@@ -15,6 +15,9 @@ brew 'openssl'
 brew 'yarn'
 brew 'imagemagick'
 
+tap 'drone/drone'
+brew 'drone'
+
 cask 'keka'
 cask 'docker'
 cask '1password'
