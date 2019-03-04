@@ -14,5 +14,6 @@
   "editor.fontLigatures": true,
   "typescript.updateImportsOnFileMove.enabled": "always",
   "go.gocodeAutoBuild": true,
-  "vsicons.dontShowNewVersionMessage": true
+  "vsicons.dontShowNewVersionMessage": true,
+  "prettier.eslintIntegration": true
 }

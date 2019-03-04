@@ -2,6 +2,8 @@ alias reload!='. ~/.zshrc'
 
 alias cls='clear' # Good 'ol Clear Screen command
 
+eval "$(hub alias -s)"
+
 port() {
     lsof -i:$1
 }

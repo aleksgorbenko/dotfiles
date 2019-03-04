@@ -1,6 +1,7 @@
 tap 'homebrew/bundle'
 tap 'homebrew/cask-fonts'
 
+brew 'hub'
 brew 'gnupg'
 brew 'gettext'
 brew 'git-secret'
