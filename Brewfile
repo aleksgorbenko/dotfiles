@@ -1,29 +1,52 @@
 tap 'homebrew/bundle'
 tap 'homebrew/cask-fonts'
+tap 'drone/drone'
 
+# git
 brew 'hub'
+brew 'git-secret'
+cask 'diffmerge'
+
 brew 'gnupg'
 brew 'gettext'
-brew 'git-secret'
+
+# shell
 brew 'coreutils'
 brew 'getantibody/tap/antibody'
+
+# langs
 brew 'go'
+brew 'java'
+brew 'kotlin'
+
+# package
+brew 'maven'
+brew 'yarn'
+
+# utils
 brew 'jq'
 brew 'grc'
+brew 'tmux'
+brew 'trash'
 brew 'openssl'
-brew 'yarn'
+brew 'youtube-dl'
 brew 'imagemagick'
+brew 'tree'
+brew 'the_silver_searcher'
+
+# cloud
+brew 'awslogs'
+cask 'google-cloud-sdk'
+
+# version managers
 brew 'nvm'
 brew 'rbenv'
 brew 'jenv'
 brew 'pyenv'
-brew 'httpie'
-brew 'tree'
-brew 'wget'
-brew 'nano'
 
-tap 'drone/drone'
-brew 'drone'
+# http
+brew 'httpie'
+brew 'wget'
 
 # apps
 cask 'keka'
@@ -39,14 +62,13 @@ cask 'telegram'
 cask 'vlc'
 cask 'calibre'
 cask 'notion'
+cask 'authy'
 
 # editor
 cask 'visual-studio-code'
-cask 'intellij-ce'
+cask 'intellij-idea-ce'
 cask 'iterm2'
-
-# sdk
-cask 'google-cloud-sdk'
+brew 'nano'
 
 # db
 cask 'dbeaver-community'
@@ -55,11 +77,13 @@ cask 'dbeaver-community'
 cask 'virtualbox'
 cask 'docker'
 cask 'minikube'
+brew 'kubernetes-cli'
+brew 'kubernetes-helm'
 cask 'postman'
-cask 'authy'
-cask 'diffmerge'
+brew 'drone'
 
 # font
 cask 'font-lato'
 cask 'font-open-sans'
 cask 'font-hasklig'
+cask 'font-fira-code'

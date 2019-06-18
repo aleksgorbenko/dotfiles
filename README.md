@@ -1,8 +1,8 @@
-# Tom does dotfiles
+# Aleks does dotfiles
 
 Your dotfiles are how you personalize your system. These are mine.
 
-## My additions
+## Edits
 
 - **Git hooks**
   - Git hooks are installed as part of the `dot` command
@@ -17,18 +17,19 @@ Your dotfiles are how you personalize your system. These are mine.
   - Will backup any installed extensions to the `vscode/extensions` file
   - On bootstrap, will install any vscode extensions in `vscode/extensions`
 
-- **hyper**
-  - Syncs the `.hyper.js` config file.
-
 - **git**
   - Will automatically check the status of your `~/.dotfiles` directory and inform you to push any changes
   - added a `cdf` command to automatically commit and push this directory
 
 - **zsh**
-  - Sets up antibody and pure.
+  - Sets up antibody and spaceship-prompt.
 
 - **brewfile**
-  - Multiple things changed in here, also adds a couple of ofnts
+  - Multiple things changed in here,
+	- added a couple of fonts
+
+	**version managers**
+	- python, ruby, node, java
 
 ## topical
 
@@ -80,4 +81,4 @@ this script in `bin/`.
 
 ## thanks
 
-Forked entirely from [holman/dotfiles](http://github.com/holman/dotfiles) and then repurposed.
+Forked entirely from [inlustra/dotfiles](http://github.com/inlustra/dotfiles) and then repurposed.

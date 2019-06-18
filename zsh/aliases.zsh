@@ -1,4 +1,7 @@
 alias reload!='. ~/.zshrc'
+alias zshrc="$EDITOR ~/.zshrc"
+alias aliases="$EDITOR ~/.aliases"
+alias hosts="$EDITOR /etc/hosts"
 
 alias cls='clear' # Good 'ol Clear Screen command
 
