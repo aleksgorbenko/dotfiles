@@ -4,7 +4,7 @@ DISABLE_AUTO_UPDATE=true
 export ZSH=$HOME/.dotfiles
 
 # your project folder that we can `c [tab]` to
-export PROJECTS=~/projects
+export PROJECTS=$HOME/projects
 
 # Stash your environment variables in ~/.localrc. This means they'll stay out
 # of your main dotfiles repository (which may be public, like this one), but
@@ -35,6 +35,9 @@ done
 antibody bundle < "${HOME}/.zsh_plugins" > "${ZSH}/zsh/zsh_plugins.sh"
 source "${ZSH}/zsh/zsh_plugins.sh"
 
+# load numbered folder and git output
+eval "$(scmpuff init -s)"
+
 # load everything but the path and completion files
 for file in ${${${${config_files:#*/path.zsh}:#*/completion.zsh}:#*/pre-commit.zsh}:#*/post-merge.zsh}
 do
@@ -64,3 +67,8 @@ zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
+
+
+
+
+
