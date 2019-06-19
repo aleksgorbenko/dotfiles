@@ -8,3 +8,4 @@ ssh.symlink/id_rsa
 ssh.symlink/id_rsa.pub
 ssh.symlink/known_hosts
 drone/path.zsh
+zsh/zsh_plugins.sh
