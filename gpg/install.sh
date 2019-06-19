@@ -21,12 +21,12 @@ generate_gpg() {
 
     while [[ $CONFIRMED_PASSPHRASE == '' ]]
     do
-        while [[ $PASSPHRASE == '' ]] 
+        while [[ $PASSPHRASE == '' ]]
         do
             $ZSH/bin/log_user "Please enter a passphrase to be used with the key"
             read -s PASSPHRASE < /dev/tty
         done
-        
+
         $ZSH/bin/log_user "Please re-enter the passphrase"
         read -s SECOND_PASSPHRASE < /dev/tty
         if [[ $PASSPHRASE == $SECOND_PASSPHRASE ]]; then
@@ -34,10 +34,10 @@ generate_gpg() {
         fi
     done
 
-    $ZSH/bin/log_info "Generating GPG key..." 
+    $ZSH/bin/log_info "Generating GPG key..."
 
     {
-cat <<-EOF 
+cat <<-EOF
     Key-Type: RSA
     Key-Length: 4096
     Subkey-Type: RSA
@@ -49,7 +49,7 @@ cat <<-EOF
     Passphrase: $PASSPHRASE
     %commit
 EOF
-    } | envsubst | gpg --batch --default-new-key-algo rsa4096 --gen-key --status-fd --with-colons 
+    } | envsubst | gpg --batch --default-new-key-algo rsa4096 --gen-key --status-fd --with-colons
 }
 
 getGPGDotfilesKey() {
@@ -62,7 +62,7 @@ if ! gpg --list-keys | grep 'Dotfiles generated key'; then
     read -n 1 response < /dev/tty
     if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]
     then
-        if generate_gpg; then 
+        if generate_gpg; then
             KEY=`getGPGDotfilesKey`
             $ZSH/bin/log_success "GPG key created: $KEY"
             gpg --keyserver $GPG_KS --send-key $KEY

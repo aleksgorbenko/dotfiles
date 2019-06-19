@@ -16,7 +16,7 @@ brew 'getantibody/tap/antibody'
 
 # langs
 brew 'go'
-brew 'java'
+cask 'java'
 brew 'kotlin'
 
 # package

@@ -9,9 +9,16 @@ export PROJECTS=~/projects
 # Stash your environment variables in ~/.localrc. This means they'll stay out
 # of your main dotfiles repository (which may be public, like this one), but
 # you'll have access to them in your scripts.
-if [[ -a ~/.localrc ]]
+if [[ -a $HOME/.localrc ]]
 then
-  source ~/.localrc
+  source $HOME/.localrc
+fi
+
+# Keep your localised aliases in the ~/.aliases.
+# These are relevant for the local machine only (work or neighbours laptop)
+if [[ -a $HOME/.aliases ]]
+then
+  source $HOME/.aliases
 fi
 
 # all of our zsh files
