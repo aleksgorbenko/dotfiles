@@ -35,8 +35,7 @@ done
 antibody bundle < "${HOME}/.zsh_plugins" > "${ZSH}/zsh/zsh_plugins.sh"
 source "${ZSH}/zsh/zsh_plugins.sh"
 
-# load numbered folder and git output
-eval "$(scmpuff init -s)"
+
 
 # load everything but the path and completion files
 for file in ${${${${config_files:#*/path.zsh}:#*/completion.zsh}:#*/pre-commit.zsh}:#*/post-merge.zsh}
@@ -69,6 +68,7 @@ bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
 
 
-
+# load numbered folder and git output
+eval "$(scmpuff init -s)"
 
 
