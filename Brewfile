@@ -25,6 +25,7 @@ brew 'yarn'
 
 # utils
 brew 'jq'
+brew 'fzy'
 brew 'grc'
 brew 'tmux'
 brew 'trash'
@@ -59,6 +60,7 @@ cask 'dropbox'
 cask 'slack'
 cask 'whatsapp'
 cask 'telegram'
+cask 'iina'
 cask 'vlc'
 cask 'calibre'
 cask 'notion'
@@ -67,6 +69,7 @@ cask 'authy'
 # editor
 cask 'visual-studio-code'
 cask 'intellij-idea-ce'
+cask 'jetbrains-toolbox'
 cask 'iterm2'
 brew 'nano'
 

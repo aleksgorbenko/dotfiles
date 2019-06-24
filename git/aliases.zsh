@@ -102,12 +102,11 @@ alias gco='git checkout'
 
 # DIFF
 alias gd='git diff'
-alias gdc='git diff --cached'
-alias gdcw='git diff --cached --word-diff'
-alias gdct='git describe --tags $(git rev-list --tags --max-count=1)'
 alias gds='git diff --staged'
+alias gdcw='git diff --staged --word-diff'
 alias gdt='git diff-tree --no-commit-id --name-only -r'
 alias gdw='git diff --word-diff'
+alias gdct='git describe --tags $(git rev-list --tags --max-count=1)'
 
 function gdv() { git diff -w "$@" | view - }
 compdef _git gdv=git-diff
