@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
-#
-# bootstrap installs things.
+# Start here
 
 cd "$(dirname "$0")/.."
 DOTFILES_ROOT=$(pwd -P)
 
 set -e
 
-echo ''
+echo 'Welcome aboard, I will turn your mac in a dev machine now\n'
+echo 'First things first...\n'
 
 info () {
   printf "\r  [ \033[00;34m..\033[0m ] $1\n"
@@ -50,28 +50,30 @@ setup_gitconfig () {
 }
 
 install_dotfiles () {
-  info 'installing dotfiles'
-  for src in $(find -H "$DOTFILES_ROOT" -maxdepth 2 -name '*.symlink' -not -path '*.git*')
-  do
-    dst="$HOME/.$(basename "${src%.*}")"
-    $DOTFILES_ROOT/bin/link-file "$src" "$dst"
-  done
+	info 'installing dotfiles'
+	for src in $(find -H "$DOTFILES_ROOT" -maxdepth 2 -name '*.symlink' -not -path '*.git*')
+	do
+		dst="$HOME/.$(basename "${src%.*}")"
+		$DOTFILES_ROOT/bin/link-file "$src" "$dst"
+	done
+}
+
+install_brew () {
+	# If we're on a Mac, let's install and setup homebrew.
+	if [ "$(uname -s)" == "Darwin" ]
+	then
+		info "installing dependencies"
+		if source bin/dot | while read -r data; do info "$data"; done
+		then
+			success "dependencies installed"
+		else
+			fail "error installing dependencies"
+		fi
+	fi
 }
 
 setup_gitconfig
 install_dotfiles
+install_brew
 
-# If we're on a Mac, let's install and setup homebrew.
-if [ "$(uname -s)" == "Darwin" ]
-then
-  info "installing dependencies"
-  if source bin/dot | while read -r data; do info "$data"; done
-  then
-    success "dependencies installed"
-  else
-    fail "error installing dependencies"
-  fi
-fi
-
-echo ''
-echo '  All installed!'
+echo '\n BOOM! All installed!'

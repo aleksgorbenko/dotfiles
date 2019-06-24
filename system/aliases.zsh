@@ -1,8 +1,8 @@
 # grc overides for ls
 #   Made possible through contributions from generous benefactors like
 #   `brew install coreutils`
-if $(exa &>/dev/null)
-then
+# if $(exa &>/dev/null)
+if which exa >/dev/null 2>&1; then
   alias ls="exa"
   alias la="exa -lha"
 fi

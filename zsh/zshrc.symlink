@@ -1,74 +1,90 @@
 # shortcut to this dotfiles path is $ZSH
-DISABLE_AUTO_UPDATE=true
-
 export ZSH=$HOME/.dotfiles
-
 # your project folder that we can `c [tab]` to
 export PROJECTS=$HOME/projects
 
+# 1. Load environmental variables
 # Stash your environment variables in ~/.localrc. This means they'll stay out
 # of your main dotfiles repository (which may be public, like this one), but
 # you'll have access to them in your scripts.
-if [[ -a $HOME/.localrc ]]
-then
-  source $HOME/.localrc
-fi
+load_local_env_vars () {
+	if [[ -a $HOME/.localrc ]]
+	then
+		source $HOME/.localrc
+	fi
+}
 
+# 2. Load local aliases
 # Keep your localised aliases in the ~/.aliases.
 # These are relevant for the local machine only (work or neighbours laptop)
-if [[ -a $HOME/.aliases ]]
-then
-  source $HOME/.aliases
-fi
+load_local_aliases () {
+	if [[ -a $HOME/.aliases ]]
+	then
+		source $HOME/.aliases
+	fi
+}
 
-# all of our zsh files
-typeset -U config_files
-config_files=($ZSH/**/*.zsh)
+# 3. Load all zsh files in the current directory
+load_zsh_config_files () {
+	typeset -U config_files
+	config_files=($ZSH/**/*.zsh)
 
-# load the path files
-for file in ${(M)config_files:#*/path.zsh}
-do
-  source $file
-done
+	# 3.1 load all path.zsh files
+	for file in ${(M)config_files:#*/path.zsh}; do
+		source $file
+	done
 
-# Load antibody plugins
-antibody bundle < "${HOME}/.zsh_plugins" > "${ZSH}/zsh/zsh_plugins.sh"
-source "${ZSH}/zsh/zsh_plugins.sh"
+	# 3.2 Load everything but the path/completion/hooks files
+	for file in ${${${${config_files:#*/path.zsh}:#*/completion.zsh}:#*/pre-commit.zsh}:#*/post-merge.zsh}
+	do
+		source $file
+	done
+}
 
+# 4. Load all completion fucntionality
+load_autocompletion() {
+	# init completion
+	# check completion cache once a day
+	autoload -Uz compinit
+	if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' ${HOME}/.zcompdump) ]; then
+		compinit
+	else
+		compinit -C
+	fi
 
-
-# load everything but the path and completion files
-for file in ${${${${config_files:#*/path.zsh}:#*/completion.zsh}:#*/pre-commit.zsh}:#*/post-merge.zsh}
-do
-  source $file
-done
-
-# initialize autocomplete here, otherwise functions won't be loaded
-autoload -Uz compinit
-
-for dump in ~/.zcompdump(N.mh+24); do
-  compinit
-done
-
-# load every completion after autocomplete loads
-for file in ${(M)config_files:#*/completion.zsh}
-do
-  source $file
-done
-
-unset config_files
-
-# Better history
-# Credits to https://coderwall.com/p/jpj_6q/zsh-better-history-searching-with-arrow-keys
-autoload -U up-line-or-beginning-search
-autoload -U down-line-or-beginning-search
-zle -N up-line-or-beginning-search
-zle -N down-line-or-beginning-search
-bindkey "^[[A" up-line-or-beginning-search # Up
-bindkey "^[[B" down-line-or-beginning-search # Down
+	typeset -U config_files
+	config_files=($ZSH/**/*.zsh)
+	# 4.1 Load every completion config after autocomplete loads
+	for file in ${(M)config_files:#*/completion.zsh}; do
+		source $file
+	done
+}
 
 
-# load numbered folder and git output
-eval "$(scmpuff init -s)"
+# 5. Helpful packages
+load_extras () {
+	# 5.1 numbered folder and git output
+	eval "$(scmpuff init -s)"
 
+	# 5.2 better navigation
+	if [[ -f /usr/local/etc/profile.d/autojump.sh ]]; then
+		source /usr/local/etc/profile.d/autojump.sh
+	fi
+}
 
+# 6. Plugins
+# We are using antibody plugin manager
+# Add new plugins to the `zsh_plugins.symlink` file and relaod zsh
+# Keep syntax highlighting plugin last
+load_plugins () {
+	antibody bundle < "${HOME}/.zsh_plugins" > "${ZSH}/zsh/zsh_plugins.sh"
+	source "${ZSH}/zsh/zsh_plugins.sh"
+}
+
+# DO NOT CHANGE THE SEQUENCE!
+load_local_env_vars
+load_local_aliases
+load_zsh_config_files
+load_autocompletion
+load_extras
+load_plugins

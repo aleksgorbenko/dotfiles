@@ -1,39 +1,53 @@
-# export LSCOLORS="exfxcxdxbxegedabagacad"
-export LSCOLORS="Gxfxcxdxbxegedabagacad"
+export LSCOLORS="exfxcxdxbxegedabagacad"
+# export LSCOLORS="Gxfxcxdxbxegedabagacad"
 export CLICOLOR=true
 ZSH_DISABLE_COMPFIX=true
-
-fpath=($ZSH/functions $fpath)
-
-autoload -U $ZSH/functions/*(:t)
 
 # Save history so we get auto suggestions
 HISTFILE="${HOME}/.zsh_history"
 HISTSIZE=1000
 SAVEHIST=${HISTSIZE}
 
-# setopt NO_BG_NICE # don't nice background tasks
-# setopt NO_HUP
-# setopt NO_LIST_BEEP
-# setopt LOCAL_OPTIONS # allow functions to have local options
-# setopt LOCAL_TRAPS # allow functions to have local traps
-# setopt HIST_VERIFY
-# setopt SHARE_HISTORY # share history between sessions ???
-# setopt EXTENDED_HISTORY # add timestamps to history
-# setopt PROMPT_SUBST
-# setopt CORRECT
-# setopt COMPLETE_IN_WORD
-# setopt IGNORE_EOF
+# Overall
+setopt no_bg_nice # don't nice background tasks
+setopt no_hup
+setopt local_options # allow functions to have local options
+setopt local_traps # allow functions to have local traps
+setopt prompt_subst
+setopt correct # correct only commands
+# setopt correct_all # autocorrect commands AND arguments
+setopt interactive_comments # allow comments in interactive shells
+setopt complete_in_word
+setopt ignore_eof # do not exit on end-of-file
+setopt auto_cd # cd by typing directory name if it's not a command
+unsetopt beep # removes all beeps
 
-setopt APPEND_HISTORY # adds history
-setopt INC_APPEND_HISTORY SHARE_HISTORY  # adds history incrementally and share it across sessions
-setopt HIST_IGNORE_ALL_DUPS  # don't record dupes in history
-setopt HIST_REDUCE_BLANKS
-
+# Completion
+setopt auto_list # automatically list choices on ambiguous completion
+setopt auto_menu # automatically use menu completion
+setopt always_to_end # move cursor to end if word had one match
 # don't expand aliases _before_ completion has finished
 #   like: git comm-[tab]
 setopt complete_aliases
 
+# history
+setopt hist_verify
+setopt extended_history # add timestamps to history
+setopt hist_ignore_all_dups # remove older duplicate entries from history
+setopt hist_reduce_blanks # remove superfluous blanks from history items
+setopt inc_append_history # save history entries as soon as they are entered
+setopt share_history # share history between different sessions
+
+# Better history
+# Credits to https://coderwall.com/p/jpj_6q/zsh-better-history-searching-with-arrow-keys
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search # Up
+bindkey "^[[B" down-line-or-beginning-search # Down
+
+# Key bindings
 bindkey '^[^[[D' backward-word
 bindkey '^[^[[C' forward-word
 bindkey '^[[5D' beginning-of-line
@@ -41,19 +55,3 @@ bindkey '^[[5C' end-of-line
 bindkey '^[[3~' delete-char
 bindkey '^[3;5~' delete-char
 bindkey '^?' backward-delete-char
-
-
-# load completion module
-zmodload -i zsh/complist
-
-# Options
-setopt auto_cd # cd by typing directory name if it's not a command
-setopt auto_list # automatically list choices on ambiguous completion
-setopt auto_menu # automatically use menu completion
-setopt always_to_end # move cursor to end if word had one match
-setopt hist_ignore_all_dups # remove older duplicate entries from history
-setopt hist_reduce_blanks # remove superfluous blanks from history items
-setopt inc_append_history # save history entries as soon as they are entered
-setopt share_history # share history between different instances
-setopt correct_all # autocorrect commands
-setopt interactive_comments # allow comments in interactive shells

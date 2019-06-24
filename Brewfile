@@ -10,6 +10,7 @@ brew 'scmpuff'
 
 brew 'gnupg'
 brew 'gettext'
+brew 'exa'
 
 # shell
 brew 'coreutils'
@@ -34,7 +35,9 @@ brew 'openssl'
 brew 'youtube-dl'
 brew 'imagemagick'
 brew 'tree'
-brew 'the_platinum_searcher'
+brew 'the_platinum_searcher' # better searcher
+brew 'bat' # better cat
+brew 'ncdu' # disk analyzer
 
 # cloud
 brew 'awslogs'
@@ -51,7 +54,6 @@ brew 'httpie'
 brew 'wget'
 
 # apps
-cask 'keka'
 cask 'spotify'
 cask 'lastpass'
 cask 'firefox'
@@ -66,6 +68,7 @@ cask 'vlc'
 cask 'calibre'
 cask 'notion'
 cask 'authy'
+cask 'docker'
 
 # editor
 cask 'visual-studio-code'
@@ -91,3 +94,4 @@ cask 'font-lato'
 cask 'font-open-sans'
 cask 'font-hasklig'
 cask 'font-fira-code'
+cask 'font-hack-nerd-font'
