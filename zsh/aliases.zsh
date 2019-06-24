@@ -1,11 +1,11 @@
-alias reload!='. ~/.zshrc'
-alias zshrc="$EDITOR ~/.zshrc"
-alias aliases="$EDITOR ~/.aliases"
+alias zh='source ~/.zshrc'
+alias ze="$EDITOR ~/.zshrc"
+alias ae="$EDITOR ~/.aliases"
 alias hosts="$EDITOR /etc/hosts"
 
 alias cls='clear' # Good 'ol Clear Screen command
 
-eval "$(hub alias -s)"
+eval "$(command hub alias -s)"
 
 port() {
     lsof -i:$1

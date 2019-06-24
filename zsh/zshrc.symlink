@@ -1,3 +1,5 @@
+# zmodload zsh/zprof # uncomment to profile laoding speed
+
 # shortcut to this dotfiles path is $ZSH
 export ZSH=$HOME/.dotfiles
 # your project folder that we can `c [tab]` to
@@ -64,7 +66,7 @@ load_autocompletion() {
 # 5. Helpful packages
 load_extras () {
 	# 5.1 numbered folder and git output
-	eval "$(scmpuff init -s)"
+	eval "$(command scmpuff init -s)"
 
 	# 5.2 better navigation
 	if [[ -f /usr/local/etc/profile.d/autojump.sh ]]; then
@@ -88,3 +90,5 @@ load_zsh_config_files
 load_autocompletion
 load_extras
 load_plugins
+
+# zprof # uncomment to profile laoding speed

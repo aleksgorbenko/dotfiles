@@ -1,7 +1,8 @@
 export LSCOLORS="exfxcxdxbxegedabagacad"
 # export LSCOLORS="Gxfxcxdxbxegedabagacad"
 export CLICOLOR=true
-ZSH_DISABLE_COMPFIX=true
+ZSH_DISABLE_COMPFIX="true"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Save history so we get auto suggestions
 HISTFILE="${HOME}/.zsh_history"

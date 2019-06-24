@@ -1,6 +1,6 @@
 # Improve autocompletion style
 # select completions with arrow keys
-zstyle ':completion:*' menu select
+zstyle ':completion:*' menu select=10
 
  # group results by category
 zstyle ':completion:*' group-name ''
