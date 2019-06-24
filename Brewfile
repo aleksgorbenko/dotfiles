@@ -6,6 +6,7 @@ tap 'drone/drone'
 brew 'hub'
 brew 'git-secret'
 cask 'diffmerge'
+brew 'scmpuff'
 
 brew 'gnupg'
 brew 'gettext'
@@ -33,7 +34,7 @@ brew 'openssl'
 brew 'youtube-dl'
 brew 'imagemagick'
 brew 'tree'
-brew 'the_silver_searcher'
+brew 'the_platinum_searcher'
 
 # cloud
 brew 'awslogs'
