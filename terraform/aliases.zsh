@@ -1,6 +1,7 @@
 alias tf="terraform"
 alias tfi="terraform init"
 alias tfp="terraform plan"
+alias tfip="terraform init && terraform plan"
 alias tfa="terraform apply"
 alias tft="terraform taint"
 alias tfs="terraform state"
