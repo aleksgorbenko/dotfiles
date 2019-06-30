@@ -5,6 +5,7 @@
 if which exa >/dev/null 2>&1; then
   alias ls="exa"
   alias la="exa -lha"
+  alias ll="exa -lTha"
 fi
 
 alias .2='cd ../../'             # Go back 2 directory levels

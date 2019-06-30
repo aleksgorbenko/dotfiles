@@ -43,6 +43,7 @@ brew 'gettext'
 brew 'exa' # better `ls`
 brew 'ctop' # htop for containers
 brew 'm-cli' # control mac os via terminal
+brew 'ctop' # container dashboard
 
 # cloud
 brew 'awslogs'
