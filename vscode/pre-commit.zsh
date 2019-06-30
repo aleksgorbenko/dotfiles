@@ -1,18 +1,17 @@
 backupCodeExt() {
     $ZSH/bin/log_user "Backup VSCode extensions?"
-    read -n 1 response < /dev/tty
-    if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]
-    then
+    read -n 1 response </dev/tty
+    if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
         local EXT_FILE="$(dirname -- "$SOURCE_LOC")/extensions"
         local INSTALLED="$(sort <(code --list-extensions))"
-        $INSTALLED > $EXT_FILE
+        $INSTALLED >$EXT_FILE
     fi
 }
 
-exec < /dev/tty
+exec </dev/tty
 
-if tty -s; then 
-backupCodeExt
+if tty -s; then
+    backupCodeExt
 else
-$ZSH/bin/log_warn "Skipping VSCode syncing as not interactive."
+    $ZSH/bin/log_warn "Skipping VSCode syncing as not interactive."
 fi

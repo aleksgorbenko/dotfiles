@@ -1,9 +1,7 @@
 akamud.vscode-caniuse
 attilabuti.vscode-mjml
 bajdzis.vscode-database
-cssho.vscode-svgviewer
 dbaeumer.vscode-eslint
-dracula-theme.theme-dracula
 eamodio.gitlens
 EditorConfig.EditorConfig
 esbenp.prettier-vscode
@@ -15,8 +13,6 @@ ms-vscode.Go
 naumovs.color-highlight
 Orta.vscode-jest
 PeterJausovec.vscode-docker
-ricard.postcss
-robertohuertasm.vscode-icons
 VisualStudioExptTeam.vscodeintellicode
 WallabyJs.quokka-vscode
 wayou.vscode-todo-highlight
