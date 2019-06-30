@@ -40,7 +40,7 @@ defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false
 defaults write com.apple.LaunchServices LSQuarantine -bool false
 
 # Disable Notification Center and remove the menu bar icon
-launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
+launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2>/dev/null
 
 # Increase sound quality for Bluetooth headphones/headsets
 defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
@@ -54,7 +54,7 @@ defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
 defaults write NSGlobalDomain AppleMetricUnits -bool true
 
 # Stop iTunes from responding to the keyboard media keys
-launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null
+launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2>/dev/null
 
 # Require password immediately after sleep or screen saver begins
 defaults write com.apple.screensaver askForPassword -int 1
@@ -133,9 +133,22 @@ defaults write com.apple.SoftwareUpdate ConfigDataInstall -int 1
 # Turn on app auto-update
 defaults write com.apple.commerce AutoUpdate -bool true
 
+# https://www.howtogeek.com/267463/how-to-enable-key-repeating-in-macos.
+defaults write -g ApplePressAndHoldEnabled -bool false
+echo 'Fast key repeat. Requires restart.'
+
+defaults write -g NSAutomaticWindowAnimationsEnabled -bool false
+echo 'Fast opening and closing windows and popovers'
+
+# https://robservatory.com/speed-up-your-mac-via-hidden-prefs/
+defaults write NSGlobalDomain NSWindowResizeTime 0.001
+echo 'Sped up dialogue boxes'
+
 ###############################################################################
 # Photos                                                                      #
 ###############################################################################
 
 # Prevent Photos from opening automatically when devices are plugged in
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
+
+echo 'Some commands here require restart! Please do that for them to take effect.'
