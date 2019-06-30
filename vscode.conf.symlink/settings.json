@@ -1,19 +1,98 @@
+// Place your settings in this file to overwrite the default settings
 {
-  "workbench.colorTheme": "Dracula",
-  "workbench.iconTheme": "vscode-icons",
-  "javascript.validate.enable": false,
-  "git.autofetch": true,
-  "workbench.editor.enablePreview": false,
+  // Window
+  "window.title": "${ditry} ${activeEditorLong}${separator}${rootName}",
   "window.zoomLevel": 0,
-  "git.enableSmartCommit": true,
-  "git.confirmSync": false,
-  "javascript.updateImportsOnFileMove.enabled": "always",
-  "explorer.confirmDragAndDrop": false,
-  "eslint.autoFixOnSave": true,
-  "editor.fontFamily": "Hasklig, OpenSans, Menlo, Monaco, 'Courier New', monospace",
+  // Editor
+  "editor.formatOnSave": true,
+  "editor.minimap.enabled": true,
+  "editor.tabSize": 2,
+  "editor.detectIndentation": true,
+  "editor.insertSpaces": false,
+  "editor.wordWrap": "wordWrapColumn",
+  "editor.wordWrapColumn": 100,
+  "editor.renderWhitespace": "all",
+  "editor.fontFamily": "FiraCode-Retina, Fira Code, DejaVuSansMono, Menlo, DroidSansMono, monospace",
   "editor.fontLigatures": true,
-  "typescript.updateImportsOnFileMove.enabled": "always",
-  "go.gocodeAutoBuild": true,
-  "vsicons.dontShowNewVersionMessage": true,
-  "prettier.eslintIntegration": true
+  "editor.fontSize": 13,
+  "editor.renderControlCharacters": true,
+  "editor.renderIndentGuides": false,
+  // Workbench
+  "workbench.colorTheme": "Monokai-Cobalt",
+  "workbench.iconTheme": "vscode-great-icons",
+  "workbench.editor.showTabs": true,
+  "workbench.panel.location": "bottom",
+  // Files
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.associations": {
+    "*.tpl": "ejs",
+    ".aliases": "shellscript",
+    ".zshrc": "shellscript",
+    ".zsh": "shellscript"
+  },
+  "search.exclude": {
+    "target/": true
+  },
+  // JavaScript
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "javascript.implicitProjectConfig.checkJs": false,
+  "javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+  "[javascript]": {
+    "editor.formatOnSave": false,
+  },
+  "javascript.validate.enable": false,
+  "prettier.eslintIntegration": true,
+  "eslint.autoFixOnSave": true,
+  "eslint.alwaysShowStatus": true,
+  "json.format.enable": true,
+  "npm-intellisense.scanDevDependencies": true,
+  // Terminal
+  "terminal.integrated.fontFamily": "Inconsolata for Powerline",
+  "terminal.integrated.fontSize": 18,
+  // CSS
+  "css.validate": false,
+  "scss.validate": false,
+  "stylelint.enable": true,
+  // Ruby
+  "ruby.format": "rubocop",
+  "ruby.lint": {
+    "rubocop": true
+  },
+  "[ruby]": {
+    "editor.insertSpaces": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveTimeout": 1500
+  },
+  "ruby.intellisense": "rubyLocate",
+  // Terraform
+  "terraform.format": {
+    "enable": false,
+  },
+  // Guides
+  "guides.normal.color.dark": "rgba(123, 129, 26, 0.5)",
+  "guides.active.color.dark": "rgba(209, 190, 36, 0.7)",
+  "guides.updateDelay": 0.01,
+  "guides.stack.color.dark": "rgba(100, 100, 100, 0.4)",
+  // GitLens
+  "gitlens.advanced.messages": {
+    "suppressCommitHasNoPreviousCommitWarning": false,
+    "suppressCommitNotFoundWarning": false,
+    "suppressFileNotUnderSourceControlWarning": false,
+    "suppressGitVersionWarning": false,
+    "suppressLineUncommittedWarning": false,
+    "suppressNoRepositoryWarning": false,
+    "suppressResultsExplorerNotice": false,
+    "suppressShowKeyBindingsNotice": true,
+    "suppressUpdateNotice": false,
+    "suppressWelcomeNotice": true
+  },
+  "gitlens.codeLens.scopes": [
+    "document",
+    "containers"
+  ],
+  "gitlens.keymap": "alternate",
+  "gitlens.historyExplorer.enabled": true,
+  "gitlens.views.fileHistory.enabled": true,
+  "gitlens.views.lineHistory.enabled": true
 }

@@ -1,11 +1,59 @@
 // Place your key bindings in this file to overwrite the defaults
 [
     {
-        "key": "cmd+s",
-        "command": "workbench.action.files.saveAll"
+        "key": "cmd+j",
+        "command": "editor.action.format",
+        "when": "editorTextFocus"
     },
     {
-        "key": "alt+cmd+s",
-        "command": "-workbench.action.files.saveAll"
+        "key": "shift+cmd+r",
+        "command": "workbench.action.reloadWindow",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+`",
+        "command": "extension.runner.start",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+j",
+        "command": "extension.join-lines"
+    },
+    {
+        "key": "shift+cmd+a",
+        "command": "extension.align",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "cmd+h",
+        "command": "extension.dash.specific",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "cmd+l",
+        "command": "expandLineSelection",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "cmd+alt+y",
+        "command": "editor.action.transformToUppercase",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "cmd+alt+x",
+        "command": "editor.action.transformToLowercase",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+`",
+        "command": "code-runner.run"
+    },
+    {
+        "key": "ctrl+alt+n",
+        "command": "-code-runner.run"
+    },
+    {
+        "key": "shift+cmd+j",
+        "command": "eslint.executeAutofix"
     }
 ]
