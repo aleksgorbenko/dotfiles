@@ -5,6 +5,7 @@
 if which exa >/dev/null 2>&1; then
   alias ls="exa"
   alias la="exa -lha"
+  alias ll="exa -lTha"
 fi
 
 alias ..="cd .."

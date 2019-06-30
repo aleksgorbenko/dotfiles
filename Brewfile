@@ -38,6 +38,7 @@ brew 'tree'
 brew 'the_platinum_searcher' # better searcher
 brew 'bat' # better cat
 brew 'ncdu' # disk analyzer
+brew 'ctop' # container dashboard
 
 # cloud
 brew 'awslogs'
