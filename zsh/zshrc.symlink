@@ -1,18 +1,18 @@
 # zmodload zsh/zprof # uncomment to profile laoding speed
 
 # shortcut to this dotfiles path is $ZSH
-export ZSH=$HOME/.dotfiles
+export ZSH=${HOME}/.dotfiles
 # your project folder that we can `c [tab]` to
-export PROJECTS=$HOME/projects
+export PROJECTS=${HOME}/projects
 
 # 1. Load environmental variables
 # Stash your environment variables in ~/.localrc. This means they'll stay out
 # of your main dotfiles repository (which may be public, like this one), but
 # you'll have access to them in your scripts.
 load_local_env_vars () {
-	if [[ -a $HOME/.localrc ]]
+	if [[ -a ${HOME}/.localrc ]]
 	then
-		source $HOME/.localrc
+		source ${HOME}/.localrc
 	fi
 }
 
@@ -20,16 +20,16 @@ load_local_env_vars () {
 # Keep your localised aliases in the ~/.aliases.
 # These are relevant for the local machine only (work or neighbours laptop)
 load_local_aliases () {
-	if [[ -a $HOME/.aliases ]]
+	if [[ -a ${HOME}/.aliases ]]
 	then
-		source $HOME/.aliases
+		source ${HOME}/.aliases
 	fi
 }
 
 # 3. Load all zsh files in the current directory
 load_zsh_config_files () {
 	typeset -U config_files
-	config_files=($ZSH/**/*.zsh)
+	config_files=(${ZSH}/**/*.zsh)
 
 	# 3.1 load all path.zsh files
 	for file in ${(M)config_files:#*/path.zsh}; do
@@ -55,7 +55,7 @@ load_autocompletion() {
 	fi
 
 	typeset -U config_files
-	config_files=($ZSH/**/*.zsh)
+	config_files=(${ZSH}/**/*.zsh)
 	# 4.1 Load every completion config after autocomplete loads
 	for file in ${(M)config_files:#*/completion.zsh}; do
 		source $file
