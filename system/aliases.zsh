@@ -31,5 +31,7 @@ re() {
 
 alias b="brew"
 alias bi="brew install"
+alias bc="brew cask"
+alias bci="brew cask install"
 alias bu="brew upgrade"
 alias bup="brew update"

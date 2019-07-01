@@ -7,6 +7,9 @@
 #
 # Run ./set-defaults.sh and you'll be good to go.
 
+echo 'Setting mac os defaults that make sense...'
+echo 'Some changes will require restart'
+
 # Enable press-and-hold for keys in favor of key repeat.
 defaults write -g ApplePressAndHoldEnabled -bool true
 
@@ -135,7 +138,7 @@ defaults write com.apple.commerce AutoUpdate -bool true
 
 # https://www.howtogeek.com/267463/how-to-enable-key-repeating-in-macos.
 defaults write -g ApplePressAndHoldEnabled -bool false
-echo 'Fast key repeat. Requires restart.'
+echo 'Fast key repeat [Requires restart]'
 
 defaults write -g NSAutomaticWindowAnimationsEnabled -bool false
 echo 'Fast opening and closing windows and popovers'
