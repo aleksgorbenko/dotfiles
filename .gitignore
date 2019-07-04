@@ -4,8 +4,10 @@ vscode.conf.symlink/workspaceStorage
 vscode.conf.symlink/globalStorage
 .gitsecret/keys/random_seed
 ssh.symlink/config
-ssh.symlink/id_rsa
-ssh.symlink/id_rsa.pub
+ssh.symlink/bb
+ssh.symlink/bb.pub
+ssh.symlink/gh
+ssh.symlink/gh.pub
 ssh.symlink/known_hosts
-drone/path.zsh
 zsh/zsh_plugins.sh
+!*.secret

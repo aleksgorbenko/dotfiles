@@ -86,6 +86,7 @@ cask 'vlc'
 cask 'calibre'
 cask 'notion'
 cask 'authy'
+cask 'anki' # learn.space.repeat
 
 # utils
 cask 'cheatsheet'
