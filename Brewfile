@@ -44,6 +44,7 @@ brew 'exa' # better `ls`
 brew 'ctop' # htop for containers
 brew 'm-cli' # control mac os via terminal
 brew 'ctop' # container dashboard
+brew 'lastpass-cli' # needed for alfred workflow intergation
 
 # cloud
 brew 'awslogs'
