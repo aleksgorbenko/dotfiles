@@ -6,6 +6,8 @@ vscode.conf.symlink/globalStorage
 ssh.symlink/config
 ssh.symlink/bb
 ssh.symlink/bb.pub
+ssh.symlink/gh
+ssh.symlink/gh.pub
 ssh.symlink/known_hosts
 zsh/zsh_plugins.sh
 !*.secret
