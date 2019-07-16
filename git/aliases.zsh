@@ -81,7 +81,7 @@ alias gdct='git describe --tags $(git rev-list --tags --max-count=1)'
 
 # FETCH
 alias gf='git fetch'
-alias gfa='git fetch --all --prune'
+alias gfp='git fetch --all --prune'
 alias gfo='git fetch origin'
 
 # PUSH

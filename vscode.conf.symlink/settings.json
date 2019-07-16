@@ -69,6 +69,13 @@
   "terraform.format": {
     "enable": false,
   },
+  "terraform.indexing": {
+    "enabled": false,
+    "liveIndexing": false,
+    "exclude": [
+      "**/*"
+    ]
+  },
   // Guides
   "guides.normal.color.dark": "rgba(123, 129, 26, 0.5)",
   "guides.active.color.dark": "rgba(209, 190, 36, 0.7)",

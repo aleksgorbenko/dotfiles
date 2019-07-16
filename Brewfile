@@ -29,7 +29,9 @@ brew 'yarn'
 # utils
 brew 'jq'
 brew 'fzy' # better `find`
-brew 'grc'
+brew 'grc' # terminal coloriser
+brew 'cheat' # short `man`
+brew 'autojump' # navigation
 brew 'tmux'
 brew 'openssl'
 brew 'youtube-dl'

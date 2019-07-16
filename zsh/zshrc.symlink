@@ -45,8 +45,7 @@ load_zsh_config_files () {
 
 # 4. Load all completion fucntionality
 load_autocompletion() {
-	# init completion
-	# check completion cache once a day
+	# 4.1 init completion (check completion cache once a day)
 	autoload -Uz compinit
 	if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' ${HOME}/.zcompdump) ]; then
 		compinit
@@ -56,12 +55,11 @@ load_autocompletion() {
 
 	typeset -U config_files
 	config_files=(${ZSH}/**/*.zsh)
-	# 4.1 Load every completion config after autocomplete loads
+	# 4.2 Load every completion config after autocomplete loads
 	for file in ${(M)config_files:#*/completion.zsh}; do
 		source $file
 	done
 }
-
 
 # 5. Helpful packages
 load_extras () {
