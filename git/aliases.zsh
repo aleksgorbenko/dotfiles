@@ -53,6 +53,8 @@ alias gcsm='git commit -s -m'
 alias gcmsg='git commit -m'
 alias gcs='git commit -S'
 
+alias prfix="gcmsg 'fix as per PR comments' && ggp"
+
 alias gcf='git config --list'
 alias gcl='git clone --recurse-submodules'
 alias gclean='git clean -id'
