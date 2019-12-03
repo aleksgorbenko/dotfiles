@@ -1,15 +1,17 @@
 tap 'homebrew/bundle'
 tap 'homebrew/cask-fonts'
-tap 'drone/drone'
+tap 'yqrashawn/goku'
 
 ############
 # PACKAGES #
 ############
 
+# compilers
+brew "gcc"
+
 # git
 brew 'hub'
 brew 'git-secret'
-brew 'scmpuff'
 cask 'diffmerge'
 
 # shell
@@ -37,7 +39,7 @@ brew 'openssl'
 brew 'youtube-dl'
 brew 'imagemagick'
 brew 'tree'
-brew 'the_platinum_searcher' # better `grep`
+brew 'the_platinum_searcher' # better `grep`. usage: ag ...
 brew 'bat' # better `cat`
 brew 'ncdu' # disk analyzer
 brew 'gnupg'
@@ -66,8 +68,7 @@ brew 'nano'
 # dev
 brew 'kubernetes-cli'
 brew 'kubernetes-helm'
-brew 'drone'
-cask 'minikube'
+brew 'minikube'
 cask 'virtualbox'
 
 ########
