@@ -108,6 +108,7 @@ defaults write com.apple.ActivityMonitor ShowCategory -int 0
 # Sort Activity Monitor results by CPU usage
 defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
 defaults write com.apple.ActivityMonitor SortDirection -int 0
+
 ###############################################################################
 # Mac App Store                                                               #
 ###############################################################################
@@ -155,3 +156,12 @@ echo 'Sped up dialogue boxes'
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
 echo 'Some commands here require restart! Please do that for them to take effect.'
+
+###############################################################################
+# Other                                                                       #
+###############################################################################
+
+# Specify the preferences directory
+defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/dotfiles/iterm2"
+# Tell iTerm2 to use the custom preferences in the directory
+defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
