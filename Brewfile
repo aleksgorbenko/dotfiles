@@ -1,6 +1,10 @@
 tap 'homebrew/bundle'
 tap 'homebrew/cask-fonts'
 tap 'yqrashawn/goku'
+tap 'weaveworks/tap' # eksctl
+tap 'getantibody/tap'
+tap 'AdoptOpenJDK/openjdk'
+tap 'mongodb/brew'
 
 ############
 # PACKAGES #
@@ -19,10 +23,10 @@ brew 'coreutils'
 brew 'getantibody/tap/antibody'
 
 # langs
-brew 'go'
-brew 'kotlin'
 brew 'cmake'
-cask 'java'
+brew 'go'
+cask 'adoptopenjdk13'
+brew 'kotlin'
 
 # package management
 brew 'maven'
@@ -47,12 +51,12 @@ brew 'gettext'
 brew 'exa' # better `ls`
 brew 'ctop' # htop for containers
 brew 'm-cli' # control mac os via terminal
-brew 'ctop' # container dashboard
 brew 'lastpass-cli' # needed for alfred workflow intergation
 
 # cloud
 brew 'awslogs'
 cask 'google-cloud-sdk'
+brew 'weaveworks/tap/eksctl'
 
 # version managers
 brew 'nvm'
@@ -70,6 +74,9 @@ brew 'kubernetes-cli'
 brew 'kubernetes-helm'
 brew 'minikube'
 cask 'virtualbox'
+
+# db
+brew `mongodb-community`
 
 ########
 # APPS #
