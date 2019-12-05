@@ -1,12 +1,14 @@
 # On first use, it will set nvm up properly which will replace the `nvm`
 # shell function with the real one
+
+# rbenv_binary=
 rbenv() {
-  if [[ -d "${HOME}/.rbenv" ]]; then
+  if [[ -x /usr/local/bin/rbenv ]]; then
     export PATH="${HOME}/.rbenv/bin:${PATH}"
 
     eval "$(command rbenv init -)"
     # invoke the real rbenv function
-    rbenv "$@"
+    /usr/local/bin/rbenv "$@"
   else
     echo "rbenv is not installed" >&2
     return 1
