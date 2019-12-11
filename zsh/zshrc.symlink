@@ -43,7 +43,7 @@ load_zsh_config_files () {
 	done
 }
 
-# 4. Load all completion fucntionality
+# 4. Load all completion functionality
 load_autocompletion() {
 	# 4.1 init completion (check completion cache once a day)
 	autoload -Uz compinit
@@ -64,11 +64,13 @@ load_autocompletion() {
 # 5. Helpful packages
 load_extras () {
 	# 5.1 numbered folder and git output
-	eval "$(command scmpuff init -s)"
+	if [[ -f "${HOME}/.scm_breeze/scm_breeze.sh" ]]; then
+		source "${HOME}/.scm_breeze/scm_breeze.sh"
+	fi
 
 	# 5.2 better navigation
-	if [[ -f /usr/local/etc/profile.d/autojump.sh ]]; then
-		source /usr/local/etc/profile.d/autojump.sh
+	if [[ -f "/usr/local/etc/profile.d/autojump.sh" ]]; then
+		source "/usr/local/etc/profile.d/autojump.sh"
 	fi
 }
 

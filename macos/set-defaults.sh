@@ -7,11 +7,8 @@
 #
 # Run ./set-defaults.sh and you'll be good to go.
 
-echo 'Setting mac os defaults that make sense...'
+echo 'Setting MacOS defaults that make sense...'
 echo 'Some changes will require restart'
-
-# Enable press-and-hold for keys in favor of key repeat.
-defaults write -g ApplePressAndHoldEnabled -bool true
 
 # Use AirDrop over every interface. srsly this should be a default.
 defaults write com.apple.NetworkBrowser BrowseAllInterfaces 1
@@ -64,7 +61,7 @@ defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 # Finder: show hidden files by default
-#defaults write com.apple.finder AppleShowAllFiles -bool true
+defaults write com.apple.finder AppleShowAllFiles -bool true
 
 # Finder: show all filename extensions
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
@@ -91,6 +88,15 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 # Disable the warning before emptying the Trash
 defaults write com.apple.finder WarnOnEmptyTrash -bool false
+
+# Disable cursos magnification on shake
+defaults write -globalDomain CGDisableCursorLocationMagnification -bool true
+
+# Disable automatically rearrange Spaces based on recent use
+defaults write com.apple.dock mru-spaces -bool false
+
+# Reduce motion everywhere, still not fast enough though :(
+defaults write com.apple.universalaccess reduceMotion -bool true
 
 ###############################################################################
 # Activity Monitor                                                            #
