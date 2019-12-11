@@ -104,6 +104,7 @@ cask 'keka' # work with archives
 # dev
 cask 'postman'
 cask 'docker'
+brew 'docker-compose'
 cask 'iterm2'
 
 # editor

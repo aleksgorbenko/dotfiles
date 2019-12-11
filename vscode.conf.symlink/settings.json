@@ -19,7 +19,7 @@
   "editor.renderIndentGuides": false,
   // Workbench
   "workbench.colorTheme": "Monokai-Cobalt",
-  "workbench.iconTheme": "vscode-great-icons",
+  "workbench.iconTheme": "vscode-icons",
   "workbench.editor.showTabs": true,
   "workbench.panel.location": "bottom",
   // Files
@@ -42,7 +42,6 @@
     "editor.formatOnSave": false,
   },
   "javascript.validate.enable": false,
-  "prettier.eslintIntegration": true,
   "eslint.autoFixOnSave": true,
   "eslint.alwaysShowStatus": true,
   "json.format.enable": true,
