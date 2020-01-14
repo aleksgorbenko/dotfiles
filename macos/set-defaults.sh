@@ -98,6 +98,9 @@ defaults write com.apple.dock mru-spaces -bool false
 # Reduce motion everywhere, still not fast enough though :(
 defaults write com.apple.universalaccess reduceMotion -bool true
 
+# Do not show recent apps in the Dock
+defaults write com.apple.dock show-recents -bool FALSE
+
 ###############################################################################
 # Activity Monitor                                                            #
 ###############################################################################
