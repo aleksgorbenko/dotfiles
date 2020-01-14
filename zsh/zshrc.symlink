@@ -72,6 +72,9 @@ load_extras () {
 	if [[ -f "/usr/local/etc/profile.d/autojump.sh" ]]; then
 		source "/usr/local/etc/profile.d/autojump.sh"
 	fi
+
+	test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+	eval $(thefuck --alias)
 }
 
 # 6. Plugins
