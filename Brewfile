@@ -74,6 +74,9 @@ brew 'nano'
 brew 'kubernetes-cli'
 brew 'kubernetes-helm'
 brew 'minikube'
+brew 'derailed/k9s/k9s' # htop for k8s
+brew 'derailed/popeye/popeye' # audit for clusters
+brew 'kubectx' # switch context quickly
 cask 'virtualbox'
 
 # db
