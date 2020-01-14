@@ -1,7 +1,5 @@
-# On first use, it will set nvm up properly which will replace the `nvm`
+# On first use, it will set rbenv up properly which will replace the `rbenv`
 # shell function with the real one
-
-# rbenv_binary=
 rbenv() {
   if [[ -x /usr/local/bin/rbenv ]]; then
     export PATH="${HOME}/.rbenv/bin:${PATH}"

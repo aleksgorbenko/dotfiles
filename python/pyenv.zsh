@@ -1,4 +1,4 @@
-# On first use, it will set nvm up properly which will replace the `nvm`
+# On first use, it will set pyenv up properly which will replace the `pyenv`
 # shell function with the real one
 pyenv() {
   if [[ -x /usr/local/bin/pyenv ]]; then
