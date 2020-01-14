@@ -12,18 +12,28 @@ alias dcrm='docker-compose rm'
 alias dcstop='docker-compose stop'
 
 alias dcrestart='docker-compose restart'
-alias dcdn='docker-compose down'
 alias dclf='docker-compose logs -f'
 alias dcpull='docker-compose pull'
 alias dcstart='docker-compose start'
 
 # Docker
 alias d='docker $*'
-alias dkp="docker pull"
-alias dkr="docker run"
-alias dkr="docker exec"
+alias dpl="docker pull"
+alias drun="docker run"
+alias dex="docker exec"
+alias dps="docker ps"
+alias dst="docker stop"
 
-function dksh() {
+function denv() {
+  eval $(docker-machine env -u)
+}
+
+function mkenv() {
+  eval $(minikube docker-env)
+}
+
+
+function dsh() {
   docker exec -it $1 sh
 }
 
