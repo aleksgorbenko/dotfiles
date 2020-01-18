@@ -4,7 +4,6 @@ tap 'yqrashawn/goku'
 tap 'weaveworks/tap' # eksctl
 tap 'getantibody/tap'
 tap 'AdoptOpenJDK/openjdk'
-tap 'mongodb/brew'
 
 ############
 # PACKAGES #
@@ -111,7 +110,6 @@ cask 'keka' # work with archives
 # dev
 cask 'postman'
 cask 'docker'
-brew 'docker-compose'
 cask 'iterm2'
 
 # editor
