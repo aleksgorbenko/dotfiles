@@ -25,6 +25,7 @@ brew 'getantibody/tap/antibody'
 # langs
 brew 'cmake'
 brew 'go'
+brew 'protobuf'
 cask 'adoptopenjdk13'
 brew 'kotlin'
 
@@ -40,13 +41,14 @@ brew 'cheat' # short `man`
 brew 'autojump' # navigation
 brew 'tmux'
 brew 'openssl'
-brew 'youtube-dl'
 brew 'imagemagick'
 brew 'tree'
 brew 'the_platinum_searcher' # better `grep`. usage: ag ...
 brew 'bat' # better `cat`
 brew 'ncdu' # disk analyzer
 brew 'gnupg'
+brew 'gnupg2'
+brew 'pinetry-mac'
 brew 'gettext'
 brew 'exa' # better `ls`
 brew 'ctop' # htop for containers
@@ -71,8 +73,8 @@ brew 'wget'
 brew 'nano'
 
 # dev
-brew 'kubernetes-cli'
-brew 'kubernetes-helm'
+brew 'kubectl'
+brew 'helm'
 brew 'minikube'
 brew 'derailed/k9s/k9s' # htop for k8s
 brew 'derailed/popeye/popeye' # audit for clusters
@@ -90,13 +92,11 @@ cask 'spotify'
 cask 'lastpass'
 cask 'firefox'
 cask 'google-chrome'
-cask 'rambox'
 cask 'dropbox'
 cask 'slack'
 cask 'whatsapp'
 cask 'telegram'
 cask 'iina'
-cask 'vlc'
 cask 'calibre'
 cask 'notion'
 cask 'authy'
@@ -104,7 +104,6 @@ cask 'anki' # learn.space.repeat
 
 # utils
 cask 'cheatsheet'
-cask 'sizeup'
 cask 'scroll-reverser'
 cask 'flux'
 cask 'alfred' # 100x better Spotlight
@@ -120,7 +119,6 @@ cask 'iterm2'
 
 # editor
 cask 'visual-studio-code'
-cask 'intellij-idea-ce'
 cask 'jetbrains-toolbox'
 
 # db
