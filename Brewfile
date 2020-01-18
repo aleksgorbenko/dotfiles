@@ -74,7 +74,9 @@ brew 'nano'
 brew 'kubectl'
 brew 'helm'
 brew 'minikube'
-brew 'docker-compose'
+brew 'derailed/k9s/k9s' # htop for k8s
+brew 'derailed/popeye/popeye' # audit for clusters
+brew 'kubectx' # switch context quickly
 cask 'virtualbox'
 
 # db
@@ -110,6 +112,7 @@ cask 'keka' # work with archives
 # dev
 cask 'postman'
 cask 'docker'
+brew 'docker-compose'
 cask 'iterm2'
 
 # editor

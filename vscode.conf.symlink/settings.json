@@ -3,6 +3,8 @@
   // Window
   "window.title": "${ditry} ${activeEditorLong}${separator}${rootName}",
   "window.zoomLevel": 0,
+  // Explorer
+  "explorer.confirmDragAndDrop": false,
   // Editor
   "editor.formatOnSave": true,
   "editor.minimap.enabled": true,
@@ -19,9 +21,8 @@
   "editor.renderIndentGuides": false,
   // Workbench
   "workbench.colorTheme": "Monokai-Cobalt",
-  "workbench.iconTheme": "vscode-great-icons",
+  "workbench.iconTheme": "vscode-icons",
   "workbench.editor.showTabs": true,
-  "workbench.panel.location": "bottom",
   // Files
   "files.trimTrailingWhitespace": true,
   "files.insertFinalNewline": true,
@@ -42,18 +43,19 @@
     "editor.formatOnSave": false,
   },
   "javascript.validate.enable": false,
-  "prettier.eslintIntegration": true,
-  "eslint.autoFixOnSave": true,
+  // JS Other
   "eslint.alwaysShowStatus": true,
   "json.format.enable": true,
   "npm-intellisense.scanDevDependencies": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
   // Terminal
   "terminal.integrated.fontFamily": "Inconsolata for Powerline",
   "terminal.integrated.fontSize": 18,
   // CSS
   "css.validate": false,
   "scss.validate": false,
-  "stylelint.enable": true,
   // Ruby
   "ruby.format": "rubocop",
   "ruby.lint": {
@@ -76,6 +78,10 @@
       "**/*"
     ]
   },
+  // Golang
+  "go.autocompleteUnimportedPackages": true,
+  "go.coverOnSave": true,
+  "go.formatTool": "goimports",
   // Guides
   "guides.normal.color.dark": "rgba(123, 129, 26, 0.5)",
   "guides.active.color.dark": "rgba(209, 190, 36, 0.7)",
@@ -99,7 +105,6 @@
     "containers"
   ],
   "gitlens.keymap": "alternate",
-  "gitlens.historyExplorer.enabled": true,
   "gitlens.views.fileHistory.enabled": true,
-  "gitlens.views.lineHistory.enabled": true
+  "gitlens.views.lineHistory.enabled": true,
 }
