@@ -47,6 +47,8 @@ brew 'the_platinum_searcher' # better `grep`. usage: ag ...
 brew 'bat' # better `cat`
 brew 'ncdu' # disk analyzer
 brew 'gnupg'
+brew 'gnupg2'
+brew 'pinetry-mac'
 brew 'gettext'
 brew 'exa' # better `ls`
 brew 'ctop' # htop for containers
