@@ -95,8 +95,26 @@ defaults write -globalDomain CGDisableCursorLocationMagnification -bool true
 # Disable automatically rearrange Spaces based on recent use
 defaults write com.apple.dock mru-spaces -bool false
 
+echo 'Sped up animation everywhere'
+# https://apple.stackexchange.com/questions/14001/how-to-turn-off-all-animations-on-os-x
 # Reduce motion everywhere, still not fast enough though :(
-defaults write com.apple.universalaccess reduceMotion -bool true
+defaults write -g NSAutomaticWindowAnimationsEnabled -bool false
+defaults write -g NSScrollAnimationEnabled -bool false
+defaults write -g NSWindowResizeTime -float 0.001
+defaults write -g QLPanelAnimationDuration -float 0
+defaults write -g NSScrollViewRubberbanding -bool false
+defaults write -g NSDocumentRevisionsWindowTransformAnimation -bool false
+defaults write -g NSToolbarFullScreenAnimationDuration -float 0
+defaults write -g NSBrowserColumnAnimationSpeedMultiplier -float 0
+defaults write com.apple.dock autohide-time-modifier -float 0
+defaults write com.apple.dock autohide-delay -float 0
+defaults write com.apple.dock expose-animation-duration -float 0
+defaults write com.apple.dock springboard-show-duration -float 0
+defaults write com.apple.dock springboard-hide-duration -float 0
+defaults write com.apple.dock springboard-page-duration -float 0
+defaults write com.apple.finder DisableAllAnimations -bool true
+defaults write com.apple.Mail DisableSendAnimations -bool true
+defaults write com.apple.Mail DisableReplyAnimations -bool true
 
 # Do not show recent apps in the Dock
 defaults write com.apple.dock show-recents -bool FALSE
@@ -151,11 +169,6 @@ defaults write -g ApplePressAndHoldEnabled -bool false
 echo 'Fast key repeat [Requires restart]'
 
 defaults write -g NSAutomaticWindowAnimationsEnabled -bool false
-echo 'Fast opening and closing windows and popovers'
-
-# https://robservatory.com/speed-up-your-mac-via-hidden-prefs/
-defaults write NSGlobalDomain NSWindowResizeTime 0.001
-echo 'Sped up dialogue boxes'
 
 ###############################################################################
 # Photos                                                                      #
