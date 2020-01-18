@@ -81,9 +81,6 @@ brew 'derailed/popeye/popeye' # audit for clusters
 brew 'kubectx' # switch context quickly
 cask 'virtualbox'
 
-# db
-brew `mongodb-community`
-
 ########
 # APPS #
 ########
