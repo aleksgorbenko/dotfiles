@@ -101,7 +101,6 @@ cask 'anki' # learn.space.repeat
 
 # utils
 cask 'cheatsheet'
-cask 'scroll-reverser'
 cask 'flux'
 cask 'alfred' # 100x better Spotlight
 cask 'karabiner-elements' # remap everything!
