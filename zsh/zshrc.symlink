@@ -74,7 +74,6 @@ load_extras () {
 	fi
 
 	test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-	eval $(thefuck --alias)
 }
 
 # 6. Plugins
