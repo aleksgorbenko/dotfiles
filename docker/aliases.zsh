@@ -1,5 +1,5 @@
 # Docker Compose
-alias dc='docker-compose $*'
+alias dc='docker-compose'
 alias dcu="docker-compose up"
 alias dcud='docker-compose up -d'
 alias dcd="docker-compose down"
@@ -17,12 +17,14 @@ alias dcpull='docker-compose pull'
 alias dcstart='docker-compose start'
 
 # Docker
-alias d='docker $*'
+alias d='docker'
 alias dpl="docker pull"
 alias drun="docker run"
 alias dex="docker exec"
 alias dps="docker ps"
+alias dpsa="docker ps -a"
 alias dst="docker stop"
+alias di="docker images"
 
 function denv() {
   eval $(docker-machine env -u)
