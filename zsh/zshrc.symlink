@@ -54,13 +54,6 @@ load_autocompletion() {
 	else
 		compinit -C
 	fi
-
-	typeset -U config_files
-	config_files=(${ZSH}/**/*.zsh)
-	# 4.2 Load every completion config after autocomplete loads
-	for file in ${(M)config_files:#*/completion.zsh}; do
-		source $file
-	done
 }
 
 # 5. Helpful packages
@@ -81,8 +74,8 @@ load_extras () {
 	fi
 
 	# 5.4 fuzzy finder helpers
-	if [[ -f ~/.fzf.zsh ]]; then
-	 source ~/.fzf.zsh
+	if [[ -f "${HOME}/.fzf.zsh" ]]; then
+	 source "${HOME}/.fzf.zsh"
 	fi
 
 	# 5.5 colored output for common unix commands
@@ -108,4 +101,4 @@ load_plugins
 
 # zprof # uncomment to profile laoding speed
 source "${ZSH}/zsh/config.zsh"
-rbenv
+# rbenv
