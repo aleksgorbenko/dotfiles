@@ -16,10 +16,13 @@ load_local_env_vars () {
 	fi
 }
 
-# 2. Load local aliases
-# Keep your localised aliases in the ~/.aliases.
-# These are relevant for the local machine only (work or neighbours laptop)
-load_local_aliases () {
+# 2. Load aliases
+load_aliases () {
+
+
+
+	# Keep your localised aliases in the ~/.aliases.
+	# These are relevant for the local machine only (work or neighbours laptop)
 	if [[ -a ${HOME}/.aliases ]]
 	then
 		source ${HOME}/.aliases
@@ -32,7 +35,7 @@ load_zsh_config_files () {
 	config_files=(${ZSH}/**/*.zsh)
 
 	# 3.1 load PATH
-		source ./path.zsh
+	source ./path.zsh
 
 	# 3.2 Load everything but the path/completion/hooks files
 	for file in ${${${${config_files:#*/path.zsh}:#*/completion.zsh}:#*/pre-commit.zsh}:#*/post-merge.zsh}
@@ -80,6 +83,9 @@ load_extras () {
 	if [[ -f ~/.fzf.zsh ]]; then
 	 source ~/.fzf.zsh
 	fi
+
+	# 5.5 colored output for common unix commands
+	[[ -s "/etc/grc.zsh" ]] && source /etc/grc.zsh
 }
 
 # 6. Plugins
@@ -93,12 +99,12 @@ load_plugins () {
 
 # DO NOT CHANGE THE SEQUENCE!
 load_local_env_vars
-load_local_aliases
+load_aliases
 load_zsh_config_files
 load_autocompletion
 load_extras
 load_plugins
 
 # zprof # uncomment to profile laoding speed
-# source "${ZSH}/zsh/config.zsh"
+source "${ZSH}/zsh/config.zsh"
 rbenv

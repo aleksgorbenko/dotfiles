@@ -40,3 +40,31 @@ alias bup="brew update"
 alias pubkey="more ~/.ssh/me/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
 
 alias kara="code ~/.config/karabiner.edn"
+
+export EDITOR='code'
+alias zh='source ~/.zshrc'
+alias ze="$EDITOR ~/.zshrc"
+alias ae="$EDITOR ~/.aliases"
+alias hosts="$EDITOR /etc/hosts"
+
+alias cls='clear' # Good 'ol Clear Screen command
+
+eval "$(command hub alias -s)"
+
+port() {
+    lsof -i:$1
+}
+
+killport() {
+    lsof -ti:$1 | xargs kill
+}
+
+dotenv() {
+    set -o allexport
+    source $1
+    set +o allexport
+}
+
+dotfiles() {
+    $EDITOR ~/.dotfiles
+}
