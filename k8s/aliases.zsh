@@ -12,6 +12,9 @@ alias ka="kubectl apply"
 
 alias kdel="kubectl delete"
 
+# kubectx
+alias kc="kubectx"
+
 # minikube
 alias mk="minikube"
 alias mks="minikube start"
