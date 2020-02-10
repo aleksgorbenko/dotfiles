@@ -35,7 +35,8 @@ load_zsh_config_files () {
 	config_files=(${ZSH}/**/*.zsh)
 
 	# 3.1 load PATH
-	source ./path.zsh
+	source $(pwd)/zsh/path.zsh
+	source $(pwd)/zsh/env.zsh
 
 	# 3.2 Load everything but the path/completion/hooks files
 	for file in ${${${${config_files:#*/path.zsh}:#*/completion.zsh}:#*/pre-commit.zsh}:#*/post-merge.zsh}
