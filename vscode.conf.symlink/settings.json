@@ -5,9 +5,7 @@
   "window.zoomLevel": 0,
   // Explorer
   "explorer.confirmDragAndDrop": false,
-  // Editor
-  "editor.formatOnSave": true,
-  "editor.minimap.enabled": true,
+  "editor.minimap.enabled": false,
   "editor.tabSize": 2,
   "editor.detectIndentation": true,
   "editor.insertSpaces": false,
@@ -16,7 +14,6 @@
   "editor.renderWhitespace": "all",
   "editor.fontFamily": "FiraCode-Retina, Fira Code, DejaVuSansMono, Menlo, DroidSansMono, monospace",
   "editor.fontLigatures": true,
-  "editor.fontSize": 13,
   "editor.renderControlCharacters": true,
   "editor.renderIndentGuides": false,
   // Workbench
@@ -57,16 +54,15 @@
   "css.validate": false,
   "scss.validate": false,
   // Ruby
-  "ruby.format": "rubocop",
-  "ruby.lint": {
-    "rubocop": true
-  },
+  "solargraph.commandPath": "/Users/aleksgorbenko/.rbenv/shims/solargraph",
+  "ruby.rubocop.executePath": "/Users/aleksgorbenko/.rbenv/shims/",
+  "ruby.rubocop.onSave": true,
+  "ruby.format": false,
   "[ruby]": {
     "editor.insertSpaces": true,
     "editor.formatOnSave": true,
-    "editor.formatOnSaveTimeout": 1500
+    "editor.formatOnSaveTimeout": 0
   },
-  "ruby.intellisense": "rubyLocate",
   // Terraform
   "terraform.format": {
     "enable": false,
@@ -80,7 +76,6 @@
   },
   // Golang
   "go.autocompleteUnimportedPackages": true,
-  "go.coverOnSave": true,
   "go.formatTool": "goimports",
   // Guides
   "guides.normal.color.dark": "rgba(123, 129, 26, 0.5)",
@@ -107,4 +102,5 @@
   "gitlens.keymap": "alternate",
   "gitlens.views.fileHistory.enabled": true,
   "gitlens.views.lineHistory.enabled": true,
+  "editor.fontSize": 13,
 }
