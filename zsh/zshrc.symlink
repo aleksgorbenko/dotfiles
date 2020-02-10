@@ -31,10 +31,8 @@ load_zsh_config_files () {
 	typeset -U config_files
 	config_files=(${ZSH}/**/*.zsh)
 
-	# 3.1 load all path.zsh files
-	for file in ${(M)config_files:#*/path.zsh}; do
-		source $file
-	done
+	# 3.1 load PATH
+		source ./path.zsh
 
 	# 3.2 Load everything but the path/completion/hooks files
 	for file in ${${${${config_files:#*/path.zsh}:#*/completion.zsh}:#*/pre-commit.zsh}:#*/post-merge.zsh}
