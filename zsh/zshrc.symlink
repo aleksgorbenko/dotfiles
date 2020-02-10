@@ -64,16 +64,24 @@ load_autocompletion() {
 # 5. Helpful packages
 load_extras () {
 	# 5.1 numbered folder and git output
-	if [[ -f "${HOME}/.scm_breeze/scm_breeze.sh" ]]; then
-		source "${HOME}/.scm_breeze/scm_breeze.sh"
+	if [[ -x /usr/local/bin/scmpuff ]]; then
+		eval "$(scmpuff init -s)"
 	fi
 
 	# 5.2 better navigation
-	if [[ -f "/usr/local/etc/profile.d/autojump.sh" ]]; then
+	if [[ -e "/usr/local/etc/profile.d/autojump.sh" ]]; then
 		source "/usr/local/etc/profile.d/autojump.sh"
 	fi
 
-	test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+	# 5.3 shell integration
+	if [[ -e "${HOME}/.iterm2_shell_integration.zsh" ]]; then
+		source "${HOME}/.iterm2_shell_integration.zsh"
+	fi
+
+	# 5.4 fuzzy finder helpers
+	if [[ -f ~/.fzf.zsh ]]; then
+	 source ~/.fzf.zsh
+	fi
 }
 
 # 6. Plugins
@@ -94,3 +102,5 @@ load_extras
 load_plugins
 
 # zprof # uncomment to profile laoding speed
+# source "${ZSH}/zsh/config.zsh"
+rbenv
