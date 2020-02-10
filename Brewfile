@@ -34,15 +34,14 @@ brew 'yarn'
 
 # utils
 brew 'jq'
-brew 'fzy' # better `find`
+brew 'fzf' # better `find`
 brew 'grc' # terminal coloriser
 brew 'cheat' # short `man`
 brew 'autojump' # navigation
 brew 'tmux'
 brew 'openssl'
-brew 'imagemagick'
 brew 'tree'
-brew 'the_platinum_searcher' # better `grep`. usage: ag ...
+brew 'ripgrep' # better `grep`. usage: rg ...
 brew 'bat' # better `cat`
 brew 'ncdu' # disk analyzer
 brew 'gnupg'
@@ -99,7 +98,6 @@ cask 'authy'
 cask 'anki' # learn.space.repeat
 
 # utils
-cask 'cheatsheet'
 cask 'flux'
 cask 'alfred' # 100x better Spotlight
 cask 'karabiner-elements' # remap everything!

@@ -177,13 +177,13 @@ defaults write -g NSAutomaticWindowAnimationsEnabled -bool false
 # Prevent Photos from opening automatically when devices are plugged in
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
-echo 'Some commands here require restart! Please do that for them to take effect.'
-
 ###############################################################################
 # Other                                                                       #
 ###############################################################################
 
 # Specify the preferences directory
-defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/dotfiles/iterm2"
+defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "${HOME}/.dotfiles/iterm2"
 # Tell iTerm2 to use the custom preferences in the directory
 defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
+
+echo 'Some commands here require restart! Please do that for them to take effect.'

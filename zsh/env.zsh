@@ -29,7 +29,6 @@ pyenv() {
   fi
 }
 
-
 # On first use, it will set nvm up properly which will replace the `nvm`
 # shell function with the real one
 nvm() {
@@ -48,7 +47,6 @@ nvm() {
     return 1
   fi
 }
-
 
 # On first use, it will set nvm up properly which will replace the `nvm`
 # shell function with the real one
