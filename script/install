@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
-#
-# Run all dotfiles installers.
 
-set -e
+./macos.sh
+./brew.sh
+./fonts.sh
 
-cd "$(dirname $0)"/..
+# link vscode settings
+${ZSH}/bin/link-file "${HOME}/.vscode.conf" "${HOME}/Library/Application Support/Code/User"
 
-# Run Homebrew through the Brewfile
-echo "› brew bundle"
-brew bundle
+# link ssh
+mkdir -p "${HOME}/.ssh"
+ln -s "${HOME}/.dotfiles/ssh/me" "${HOME}/.ssh/me"
 
-# find the installers and run them iteratively
-find . -name install.sh | while read installer ; do sh -c "${installer}" ; done
+# set git hooks
+git config core.hooksPath git/hooks/
