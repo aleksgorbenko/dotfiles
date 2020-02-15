@@ -51,7 +51,6 @@ brew 'gettext'
 brew 'exa' # better `ls`
 brew 'ctop' # htop for containers
 brew 'm-cli' # control mac os via terminal
-brew 'lastpass-cli' # needed for alfred workflow intergation
 brew 'terminal-notifier'
 
 # cloud
@@ -84,7 +83,7 @@ cask 'virtualbox'
 ########
 
 cask 'spotify'
-cask 'lastpass'
+cask '1password'
 cask 'firefox'
 cask 'google-chrome'
 cask 'dropbox'
