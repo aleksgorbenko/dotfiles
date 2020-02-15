@@ -9,7 +9,8 @@ ${ZSH}/bin/link-file "${HOME}/.vscode.conf" "${HOME}/Library/Application Support
 
 # link ssh
 mkdir -p "${HOME}/.ssh"
-ln -s "${HOME}/.dotfiles/ssh/me" "${HOME}/.ssh/me"
+ln -s "${$ZSH}/ssh/me" "${HOME}/.ssh/me"
+ln -s "${ZSH}/karabiner/karabiner.edn" "${HOME}/.config/karabiner.edn"
 
 # set git hooks
 git config core.hooksPath git/hooks/
