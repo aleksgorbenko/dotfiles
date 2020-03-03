@@ -1,8 +1,7 @@
 SPACESHIP_PROMPT_ORDER=(
-  # time          # Time stamps section
   dir           # Current directory section
   git           # Git section (git_branch + git_status)
-  kubecontext
+  # kubecontext
   exec_time     # Execution time
   line_sep      # Line break
   vi_mode       # Vi-mode indicator

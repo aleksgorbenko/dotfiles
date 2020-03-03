@@ -1,1 +1,0 @@
-GPG_KS="keys.openpgp.org"
