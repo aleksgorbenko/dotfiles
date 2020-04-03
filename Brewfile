@@ -3,7 +3,7 @@ tap 'homebrew/cask-fonts'
 tap 'yqrashawn/goku'
 tap 'weaveworks/tap' # eksctl
 tap 'getantibody/tap'
-tap 'AdoptOpenJDK/openjdk'
+tap "adoptopenjdk/openjdk"
 
 ############
 # PACKAGES #
@@ -95,6 +95,11 @@ cask 'calibre'
 cask 'notion'
 cask 'authy'
 cask 'anki' # learn.space.repeat
+cask "amazon-photos"
+cask "keybase"
+cask "onyx"
+cask "scroll-reverser"
+cask "sequel-pro"
 
 # utils
 cask 'flux'
