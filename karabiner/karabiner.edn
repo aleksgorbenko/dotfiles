@@ -416,6 +416,7 @@
 	:rules [
 		:r-mode
 		[:caps_lock [:km "open: Preview"]]
+		[:h [:km "open: Photos"]]
 		[:y [:km "Edit keyboard shortcuts"]]
 		[:a [:km "open: Alfred Preferences"]]
 		[:l [:km "open: Reeder"]]
@@ -764,7 +765,6 @@
 }
 
 ; break
-c
 
 {
 	:des "bkey (break)"
