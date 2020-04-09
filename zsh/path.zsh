@@ -9,6 +9,9 @@ export GO111MODULE=on
 export GOPATH=$HOME/go
 export PATH="$GOPATH/bin:$PATH"
 
+# git commit signatures
+export GPG_TTY=$(tty)
+
 if (( $+commands[yarn] )); then
   export PATH="$PATH:`yarn global bin`"
 fi

@@ -1,5 +1,5 @@
-# Sample gitconfig
-#
+# Local gitconfig that will be merged with global
+# user gitconfig
 
 [hub]
         protocol = https
@@ -9,11 +9,6 @@
 [credential]
         helper = GIT_CREDENTIAL_HELPER
 [alias]
-        co = checkout
-        promote = !$ZSH/bin/git-promote
-        wtf     = !$ZSH/bin/git-wtf
-        rank-contributors = !$ZSH/bin/git-rank-contributors
-        count   = !git shortlog -sn
 [color]
         diff = auto
         status = auto
