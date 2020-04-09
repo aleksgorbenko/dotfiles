@@ -1,12 +1,8 @@
-# grc overides for ls
-#   Made possible through contributions from generous benefactors like
-#   `brew install coreutils`
-# if $(exa &>/dev/null)
-if which exa >/dev/null 2>&1; then
-  alias ls="exa"
-  alias la="exa -lha"
-  alias ll="exa -lTha"
-fi
+alias cls='clear' # Good 'ol Clear Screen command
+
+alias ls="exa"
+alias la="exa -lha"
+alias ll="exa -lTha"
 
 alias .2='cd ../../'             # Go back 2 directory levels
 alias .3='cd ../../../'          # Go back 3 directory levels
@@ -19,15 +15,11 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ......="cd ../../../../.."
 alias .......="cd ../../../../../.."
-alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
+alias pc="pwd | pbcopy"
 
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip="ipconfig getifaddr en0"
-
-re() {
-  mv "$1" ~/.Trash
-}
 
 alias b="brew"
 alias bi="brew install"
@@ -39,32 +31,10 @@ alias bup="brew update"
 # Pipe my public key to my clipboard.
 alias pubkey="more ~/.ssh/me/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
 
-alias kara="code ~/.config/karabiner.edn"
-
 export EDITOR='code'
 alias zh='source ~/.zshrc'
 alias ze="$EDITOR ~/.zshrc"
 alias ae="$EDITOR ~/.aliases"
 alias hosts="$EDITOR /etc/hosts"
-
-alias cls='clear' # Good 'ol Clear Screen command
-
-eval "$(command hub alias -s)"
-
-port() {
-    lsof -i:$1
-}
-
-killport() {
-    lsof -ti:$1 | xargs kill
-}
-
-dotenv() {
-    set -o allexport
-    source $1
-    set +o allexport
-}
-
-dotfiles() {
-    $EDITOR ~/.dotfiles
-}
+alias kara="$EDITOR ~/.config/karabiner.edn"
+alias dotfiles="$EDITOR ~/.dotfiles"

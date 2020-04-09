@@ -5,12 +5,16 @@
 ./fonts.sh
 
 # link vscode settings
+# mackup
 ${ZSH}/bin/link-file "${HOME}/.vscode.conf" "${HOME}/Library/Application Support/Code/User"
 
 # link ssh
 mkdir -p "${HOME}/.ssh"
-ln -s "${$ZSH}/ssh/me" "${HOME}/.ssh/me"
-ln -s "${ZSH}/karabiner/karabiner.edn" "${HOME}/.config/karabiner.edn"
+ln -fs "${ZSH}/ssh/me" "${HOME}/.ssh/me"
+# mackup
+ln -fs "${ZSH}/karabiner/karabiner.edn" "${HOME}/.config/karabiner.edn"
+
+${ZSH}/bin/link-file "${ZSH}/vscode.conf" "${HOME}/Library/Application Support/Code/User"
 
 # set git hooks
 git config core.hooksPath git/hooks/

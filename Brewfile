@@ -9,17 +9,22 @@ tap "adoptopenjdk/openjdk"
 # PACKAGES #
 ############
 
+brew 'mas'
+brew 'mackup'
+
 # compilers
 brew "gcc"
 
 # git
 brew 'hub'
 brew 'git-secret'
+brew 'git-delta'
 cask 'diffmerge'
 
 # shell
 brew 'coreutils'
 brew 'getantibody/tap/antibody'
+brew 'scmpuff'
 
 # langs
 brew 'cmake'
@@ -59,7 +64,6 @@ cask 'google-cloud-sdk'
 brew 'weaveworks/tap/eksctl'
 
 # version managers
-brew 'nvm'
 brew 'rbenv'
 brew 'jenv'
 brew 'pyenv'
@@ -76,48 +80,53 @@ brew 'minikube'
 brew 'derailed/k9s/k9s' # htop for k8s
 brew 'derailed/popeye/popeye' # audit for clusters
 brew 'kubectx' # switch context quickly
-cask 'virtualbox'
 
 ########
 # APPS #
 ########
 
+cask 'google-chrome'
+cask 'firefox'
 cask 'spotify'
 cask '1password'
-cask 'firefox'
-cask 'google-chrome'
 cask 'dropbox'
-cask 'slack'
-cask 'whatsapp'
-cask 'telegram'
+cask 'authy'
+cask 'notion'
 cask 'iina'
 cask 'calibre'
-cask 'notion'
-cask 'authy'
 cask 'anki' # learn.space.repeat
 cask "amazon-photos"
 cask "keybase"
-cask "onyx"
-cask "scroll-reverser"
-cask "sequel-pro"
+cask "transmission"
+
+# chat
+cask 'slack'
+cask 'telegram'
+cask 'whatsapp'
+cask "discord"
 
 # utils
+cask "onyx"
+cask "scroll-reverser"
 cask 'flux'
 cask 'alfred' # 100x better Spotlight
 cask 'karabiner-elements' # remap everything!
 brew 'yqrashawn/goku/goku' # helps remap everything!
 cask 'keka' # work with archives
+cask 'keyboard-maestro'
 
 # dev
 cask 'postman'
 cask 'docker'
 cask 'iterm2'
+cask 'alacritty'
 
 # editor
 cask 'visual-studio-code'
 cask 'jetbrains-toolbox'
 
 # db
+cask "sequel-pro"
 cask 'dbeaver-community'
 
 #########

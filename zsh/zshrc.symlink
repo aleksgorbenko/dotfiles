@@ -1,113 +1,46 @@
 # zmodload zsh/zprof # uncomment to profile laoding speed
 
-# shortcut to this dotfiles path is $ZSH
 export ZSH=${HOME}/.dotfiles
-# your project folder that we can `c [tab]` to
-export PROJECTS=${HOME}/projects
-
+export PROJECTS=${HOME}/src
 export ZSH_ALIASES=${ZSH}/aliases
 
-# 1. Load environmental variables
-# Stash your environment variables in ~/.localrc. This means they'll stay out
-# of your main dotfiles repository (which may be public, like this one), but
-# you'll have access to them in your scripts.
-load_local_env_vars () {
-	if [[ -a ${HOME}/.localrc ]]
-	then
-		source ${HOME}/.localrc
-	fi
-}
+# 1. Load path
+source "${ZSH}/zsh/path.zsh"
 
 # 2. Load aliases
-load_aliases () {
-	source "${ZSH_ALIASES}/docker.zsh"
-	source "${ZSH_ALIASES}/k8s.zsh"
-	source "${ZSH_ALIASES}/git.zsh"
-	source "${ZSH_ALIASES}/misc.zsh"
-	source "${ZSH_ALIASES}/system.zsh"
-	source "${ZSH_ALIASES}/terraform.zsh"
+source "${ZSH_ALIASES}/aliases.zsh"
 
-	# Keep your localised aliases in the ~/.aliases.
-	# These are relevant for the local machine only (work or neighbours laptop)
-	if [[ -a ${HOME}/.aliases ]]
-	then
-		source ${HOME}/.aliases
-	fi
-}
+# Fuzzy finder
+[ -f "${HOME}/.fzf.zsh" ] && source "${HOME}/.fzf.zsh"
 
-# 3. Load all zsh files in the current directory
-load_zsh_config_files () {
-	# typeset -U config_files
-	# config_files=(${ZSH}/**/*.zsh)
-
-	# 3.1 load PATH
-	source "${ZSH}/zsh/path.zsh"
-	source "${ZSH}/zsh/env.zsh"
-	source "${ZSH}/zsh/completion.zsh"
-	source "${ZSH}/zsh/bindings.zsh"
-	source "${ZSH}/zsh/theme.zsh"
-	source "${ZSH}/zsh/config.zsh"
-
-	# 3.2 Load everything but the path/completion/hooks files
-	# for file in ${${${${config_files:#*/path.zsh}:#*/completion.zsh}:#*/pre-commit.zsh}:#*/post-merge.zsh}
-	# do
-		# source $file
-	# done
-}
-
-# 4. Load all completion functionality
-load_autocompletion() {
-	# 4.1 init completion (check completion cache once a day)
-	autoload -Uz compinit
-	if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' ${HOME}/.zcompdump) ]; then
-		compinit
-	else
-		compinit -C
-	fi
-}
-
-# 5. Helpful packages
-load_extras () {
-	# 5.1 numbered folder and git output
-	if [[ -x /usr/local/bin/scmpuff ]]; then
-		eval "$(scmpuff init -s)"
-	fi
-
-	# 5.2 better navigation
-	if [[ -e "/usr/local/etc/profile.d/autojump.sh" ]]; then
-		source "/usr/local/etc/profile.d/autojump.sh"
-	fi
-
-	# 5.3 shell integration
-	if [[ -e "${HOME}/.iterm2_shell_integration.zsh" ]]; then
-		source "${HOME}/.iterm2_shell_integration.zsh"
-	fi
-
-	# 5.4 fuzzy finder helpers
-	if [[ -f "${HOME}/.fzf.zsh" ]]; then
-	 source "${HOME}/.fzf.zsh"
-	fi
-
-	# 5.5 colored output for common unix commands
-	[[ -s "/usr/local/etc/grc.bashrc" ]] && source "/usr/local/etc/grc.bashrc"
-}
-
-# 6. Plugins
-# We are using antibody plugin manager
+# 4. Plugins
 # Add new plugins to the `zsh_plugins.symlink` file and relaod zsh
 # Keep syntax highlighting plugin last
-load_plugins () {
-	antibody bundle < "${HOME}/.zsh_plugins" > "${ZSH}/zsh/zsh_plugins.sh"
-	source "${ZSH}/zsh/zsh_plugins.sh"
-}
+antibody bundle < "${HOME}/.zsh_plugins" > "${ZSH}/zsh/zsh_plugins.sh"
+source "${ZSH}/zsh/zsh_plugins.sh"
 
-# DO NOT CHANGE THE SEQUENCE!
-load_local_env_vars
-load_aliases
-load_zsh_config_files
-load_autocompletion
-load_extras
-load_plugins
+# 2. Load zsh config
+source "${ZSH}/zsh/versions.zsh"
+source "${ZSH}/zsh/theme.zsh"
+source "${ZSH}/zsh/config.zsh"
+
+
+# 3. Helpful packages
+
+# Numbered folder and git output
+if [[ -x "/usr/local/bin/scmpuff" ]]; then
+	eval "$(scmpuff init -s)"
+fi
+
+# Amazing git add, log, diff, reset, checkout, stash, clean
+source "${ZSH}/zsh/plugins/forgit.zsh"
+
+# Better navigation
+if [[ -e "/usr/local/etc/profile.d/autojump.sh" ]]; then
+	source "/usr/local/etc/profile.d/autojump.sh"
+fi
+
+# Colored output for common unix commands
+[[ -s "/usr/local/etc/grc.bashrc" ]] && source "/usr/local/etc/grc.bashrc"
 
 # zprof # uncomment to profile laoding speed
-# rbenv

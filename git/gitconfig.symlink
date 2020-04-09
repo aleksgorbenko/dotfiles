@@ -17,6 +17,7 @@
 [core]
         excludesfile = ~/.gitignore
         editor = vim
+	pager = delta --dark
 [apply]
         whitespace = nowarn
 [mergetool]
