@@ -6,4 +6,5 @@ vscode.conf.symlink/globalStorage
 ssh/me/id_rsa
 ssh/me/id_rsa.pub
 zsh/zsh_plugins.sh
+zsh/plugins/**
 !*.secret
