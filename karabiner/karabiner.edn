@@ -29,11 +29,11 @@
 
 		;; simultaneous_threshold_milliseconds (def: 50)
 		;; keys need to be pressed within this threshold to be considered simultaneous
-		:sim     100
+		:sim     30
 
 		;; to_delayed_action_delay_milliseconds (def: 500)
 		;; time after which the key press is counted delayed
-		:delay   500
+		:delay   300
 
 		;; to_if_alone_timeout_milliseconds (def: 1000)
 		;; hold for 995s and single tap registered; hold for 1005s and seen as modifier
@@ -327,14 +327,16 @@
 		[:c [:km "open: Chrome"]]
 		[:s [:km "open: Spotify"]]
 		[:a [:km "open: Activity Monitor"]]
-		[:i [:km "open: Notion"]]
+		[:n [:km "open: Notion"]]
 		[:p [:km "open: Sequel Pro"]]
-		[:r [:km "open: Trello"]]
-		[:f [:km "open: 2Do"]]
-		[:j [:km "open: iTerm"]]
-		[:o [:km "open: Keyboard Maestro"]]
+		[:t [:km "open: Trello"]]
+		[:g [:km "open: Telegram"]]
+		[:2 [:km "open: 2Do"]]
+		[:v [:km "open: VS Code"]]
+		[:i [:km "open: iTerm"]]
+		[:k [:km "open: Keyboard Maestro"]]
 		[:period [:km "open: Console"]]
-		[:caps_lock [:km "open: Finder"]]
+		[:f [:km "open: Finder"]]
 	]
 }
 
@@ -348,12 +350,14 @@
 		[:n [:km "open: Notion"]]
 		[:p [:km "open: Sequel Pro"]]
 		[:t [:km "open: Trello"]]
-		[:f [:km "open: 2Do"]]
+		[:g [:km "open: Telegram"]]
+		[:2 [:km "open: 2Do"]]
 		[:v [:km "open: VS Code"]]
 		[:i [:km "open: iTerm"]]
-		[:o [:km "open: Keyboard Maestro"]]
+		[:k [:km "open: Keyboard Maestro"]]
+		[:w [:km "open: WhatsApp"]]
 		[:period [:km "open: Console"]]
-		[:caps_lock [:km "open: Finder"]]
+		[:f [:km "open: Finder"]]
 	]
 }
 
@@ -497,31 +501,31 @@
 ; trello
 
 {
-	:des "capskey (todo + trello)"
+	:des "capskey (tod2o + trello)"
 	:rules [
 		:caps-mode
 		[:1 [:alfred "Screenshot -> Imgur" "com.vitorgalvao.alfred.webscreenshot"]]
-		[:2 :!TO2] ; Screenshot -> Clipboard
+		[:2 :!TO2] ; Screenshot -> C2lipboard
 		[:3 :!TO3] ; Screenshot -> Annotate
 		[:4 :!TO4] ; Show Annotate
 		[:9 :!TO9] ; Picture of screen -> Clipboard
 		[:0 :!TO0] ; Picture of screen -> ~/Desktop
 		[:tab [:km "New ScreenFlow recording (options)"]]
 		[:q :!CO5] ; Start/stop ScreenFlow recording
-		[:f [:km "Open Ideas Trello"]]
-		[:e [:km "Open Learn Trello"]]
-		[:d [:km "Open Videos Trello"]]
-		[:u [:km "Open Courses Trello"]]
-		[:j [:km "Open 2Do Today"]]
-		[:l [:km "Open 2Do later"]]
-		[:g [:km "Open 2Do life"]]
-		[:m [:km "Open 2Do work"]]
-		[:y [:km "Open 2Do buy"]]
-		[:i [:km "Open 2Do fix"]]
-		[:m [:km "Open 2Do macro"]]
-		[:o [:km "Open 2Do tools"]]
-		[:semicolon [:km "Open 2Do Starred"]]
-		[:period [:km "Search 2Do"]]
+		[:f [:km "open ideas trello"]]
+		[:e [:km "open learn trello"]]
+		[:d [:km "open videos trello"]]
+		[:u [:km "open courses trello"]]
+		[:t [:km "open 2do today"]]
+		[:l [:km "openl 2do later"]]
+		[:g [:km "search google"]]
+		[:m [:km "open 2do work"]]
+		[:y [:km "open 2do buy"]]
+		[:i [:km "open 2do fix"]]
+		[:m [:km "open 2do macro"]]
+		[:o [:km "open 2do tools"]]
+		[:semicolon [:km "open 2do starred"]]
+		[:period [:km "search 2do"]]
 	]
 }
 

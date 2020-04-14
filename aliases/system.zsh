@@ -1,5 +1,5 @@
 alias cls='clear' # Good 'ol Clear Screen command
-
+alias a="alias"
 alias ls="exa"
 alias la="exa -lha"
 alias ll="exa -lTha"
@@ -25,6 +25,7 @@ alias b="brew"
 alias bi="brew install"
 alias bc="brew cask"
 alias bci="brew cask install"
+alias bcu="brew cask uninstall"
 alias bu="brew upgrade"
 alias bup="brew update"
 

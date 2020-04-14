@@ -1,5 +1,5 @@
 # standard path binaries
-export PATH="$ZSH/bin:/usr/local/sbin:$PATH:/usr/local/bin"
+export PATH="$ZSH/bin:/usr/local/sbin:/usr/local/bin:$PATH"
 
 # some weird dependency that is needed
 export PATH="/usr/local/opt/gettext/bin:$PATH"
@@ -8,6 +8,9 @@ export PATH="/usr/local/opt/gettext/bin:$PATH"
 export GO111MODULE=on
 export GOPATH=$HOME/go
 export PATH="$GOPATH/bin:$PATH"
+
+# Add .NET Core SDK tools
+export PATH="$PATH:/Users/gbko/.dotnet/tools"
 
 # git commit signatures
 export GPG_TTY=$(tty)

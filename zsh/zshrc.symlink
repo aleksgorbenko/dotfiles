@@ -24,9 +24,7 @@ source "${ZSH}/zsh/versions.zsh"
 source "${ZSH}/zsh/theme.zsh"
 source "${ZSH}/zsh/config.zsh"
 
-
 # 3. Helpful packages
-
 # Numbered folder and git output
 if [[ -x "/usr/local/bin/scmpuff" ]]; then
 	eval "$(scmpuff init -s)"
@@ -34,6 +32,7 @@ fi
 
 # Amazing git add, log, diff, reset, checkout, stash, clean
 source "${ZSH}/zsh/plugins/forgit.zsh"
+source "${ZSH}/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh"
 
 # Better navigation
 if [[ -e "/usr/local/etc/profile.d/autojump.sh" ]]; then
