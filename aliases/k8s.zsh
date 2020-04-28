@@ -14,6 +14,8 @@ alias kdel="kubectl delete"
 
 # kubectx
 alias kc="kubectx"
+alias kcu="kubectl config unset current-context"
+alias ukc="unset KUBECONFIG"
 
 # minikube
 alias mk="minikube"
