@@ -39,6 +39,7 @@ brew 'yarn'
 
 # utils
 brew 'jq'
+brew 'zsh'
 brew 'fzf' # better `find`
 brew 'grc' # terminal coloriser
 brew 'cheat' # short `man`

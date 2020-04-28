@@ -6,13 +6,13 @@
 
 # link vscode settings
 # mackup
-${ZSH}/bin/link-file "${ZSH}/vscode.conf.symlink" "${HOME}/Library/Application Support/Code/User"
+# ${ZSH}/bin/link-file "${ZSH}/vscode.conf.symlink" "${HOME}/Library/Application Support/Code/User"
 
 # link ssh
 mkdir -p "${HOME}/.ssh"
 ln -fs "${ZSH}/ssh/me" "${HOME}/.ssh/me"
 # mackup
-ln -fs "${ZSH}/karabiner/karabiner.edn" "${HOME}/.config/karabiner.edn"
+# ln -fs "${ZSH}/karabiner/karabiner.edn" "${HOME}/.config/karabiner.edn"
 
 # set git hooks
 git config core.hooksPath git/hooks/
