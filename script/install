@@ -1,18 +1,118 @@
 #!/usr/bin/env bash
 
-./macos.sh
-./brew.sh
-./fonts.sh
+source "${HOME}/.dotfiles/script/echos.sh"
 
-# link vscode settings
-# mackup
-# ${ZSH}/bin/link-file "${ZSH}/vscode.conf.symlink" "${HOME}/Library/Application Support/Code/User"
+bot 'Welcome aboard, I will turn your mac in a dev machine now\r'
 
-# link ssh
-mkdir -p "${HOME}/.ssh"
-ln -fs "${ZSH}/ssh/me" "${HOME}/.ssh/me"
-# mackup
-# ln -fs "${ZSH}/karabiner/karabiner.edn" "${HOME}/.config/karabiner.edn"
+cd "$(dirname "$0")/.."
+DOTS=$(pwd -P)
 
-# set git hooks
-git config core.hooksPath git/hooks/
+set -e
+
+# bot "› sudo softwareupdate -i -a"
+# sudo softwareupdate -i -a
+
+#  BREW
+if test ! $(which brew)
+then
+  bot "Installing Homebrew"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+fi
+
+function install_gitconfig () {
+  if ! [ -f git/gitconfig.local ]
+  then
+    bot 'Configuring gitconfig'
+
+    git_credential='cache'
+    if [ "$(uname -s)" == "Darwin" ]
+    then
+      git_credential='osxkeychain'
+    fi
+
+    running ' - What is your github author name?'
+    read -e git_authorname
+    running ' - What is your github author email?'
+    read -e git_authoremail
+
+    sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.local.example > git/gitconfig.local
+
+    print_success 'gitconfig configured'
+  fi
+}
+
+function install_dotfiles () {
+	bot 'Installing dotfiles'
+
+	# ssh config
+	mkdir -p "${HOME}/.ssh"
+	$DOTS/bin/link-file "${DOTS}/ssh/me" "${HOME}/.ssh/me"
+
+	# keyboard remapping
+	mkdir -p "${HOME}/.config/karabiner"
+	touch "${HOME}/.config/karabiner/karabiner.json"
+	$DOTS/bin/link-file "${DOTS}/karabiner/karabiner.edn" "${HOME}/.config/karabiner.edn"
+
+	# theme config
+	$DOTS/bin/link-file "${DOTS}/starship.toml" "${HOME}/.config/starship.toml"
+
+	# git config
+	$DOTS/bin/link-file "${DOTS}/git/gitconfig" "${HOME}/gitconfig"
+	$DOTS/bin/link-file "${DOTS}/git/gitconfig.local" "${HOME}/gitconfig.local"
+	$DOTS/bin/link-file "${DOTS}/git/gitignore" "${HOME}/gitignore"
+	git config core.hooksPath git/hooks/
+
+	# zsh
+	$DOTS/bin/link-file "${DOTS}/zsh/zshrc" "${HOME}/.zshrc"
+	$DOTS/bin/link-file "${DOTS}/zsh/zsh_plugins" "${HOME}/.zsh_plugins"
+}
+
+function install_brew_packages () {
+	if [ "$(uname -s)" == "Darwin" ]
+	then
+		bot "Installing brew packages"
+		if source bin/dot | while read -r data; do printf "\r $data \n"; done
+		then
+			print_success "dependencies installed"
+		else
+			print_error "error installing dependencies"
+		fi
+	fi
+}
+
+function install_extras () {
+	bot 'Installing fonts'
+	git clone https://github.com/powerline/fonts.git --depth=1
+	cd fonts
+	./install.sh
+	cd ..
+	rm -rf fonts
+	ok
+
+	bot 'Installing extra plugins'
+	git clone https://github.com/Aloxaf/fzf-tab ${HOME}/.dotfiles/zsh/plugins/fzf-tab
+	curl -s https://raw.githubusercontent.com/wfxr/forgit/master/forgit.plugin.zsh -o ${HOME}/.dotfiles/zsh/plugins/forgit.plugin.zsh
+	ok
+}
+
+# Do we need to ask for sudo password or is it already passwordless?
+# grep -q 'NOPASSWD:     ALL' /etc/sudoers.d/$LOGNAME > /dev/null 2>&1
+# if [ $? -ne 0 ]; then
+#   echo "no suder file"
+#   sudo -v
+
+#   # Keep-alive: update existing sudo time stamp until the script has finished
+#   while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+# fi
+
+install_gitconfig
+install_dotfiles
+install_brew_packages
+install_extras
+
+# change default shell
+sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
+chsh -s /usr/local/bin/zsh
+
+bot 'Done! May the Force be with you!'

@@ -5,12 +5,12 @@ export PROJECTS=${HOME}/src
 export ZSH_ALIASES=${ZSH}/aliases
 
 # 1. Load path
-source "${ZSH}/zsh/path.zsh"
+source "${ZSH}/zsh/env.zsh"
 
 # 2. Load aliases
 source "${ZSH_ALIASES}/aliases.zsh"
 
-# Fuzzy finder
+# 3. Fuzzy finder (need to be loaded as used by some plugins)
 [ -f "${HOME}/.fzf.zsh" ] && source "${HOME}/.fzf.zsh"
 
 # 4. Plugins
@@ -19,25 +19,23 @@ source "${ZSH_ALIASES}/aliases.zsh"
 antibody bundle < "${HOME}/.zsh_plugins" > "${ZSH}/zsh/zsh_plugins.sh"
 source "${ZSH}/zsh/zsh_plugins.sh"
 
-# 2. Load zsh config
+# 5. ZSH config
 source "${ZSH}/zsh/versions.zsh"
-source "${ZSH}/zsh/theme.zsh"
+# source "${ZSH}/zsh/theme.zsh"
+eval "$(starship init zsh)"
 source "${ZSH}/zsh/config.zsh"
 
-# 3. Helpful packages
+# 6. Helpful packages
+
 # Numbered folder and git output
-if [[ -x "/usr/local/bin/scmpuff" ]]; then
-	eval "$(scmpuff init -s)"
-fi
+[[ -x "/usr/local/bin/scmpuff" ]] && eval "$(scmpuff init -s)"
 
 # Amazing git add, log, diff, reset, checkout, stash, clean
-source "${ZSH}/zsh/plugins/forgit.zsh"
+source "${ZSH}/zsh/plugins/forgit.plugin.zsh"
 source "${ZSH}/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh"
 
 # Better navigation
-if [[ -e "/usr/local/etc/profile.d/autojump.sh" ]]; then
-	source "/usr/local/etc/profile.d/autojump.sh"
-fi
+[[ -e "/usr/local/etc/profile.d/autojump.sh" ]] && source "/usr/local/etc/profile.d/autojump.sh"
 
 # Colored output for common unix commands
 [[ -s "/usr/local/etc/grc.bashrc" ]] && source "/usr/local/etc/grc.bashrc"

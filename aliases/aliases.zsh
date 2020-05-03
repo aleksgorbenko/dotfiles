@@ -7,7 +7,5 @@ source "${ZSH_ALIASES}/misc.zsh"
 
 # Keep your localised aliases in the ~/.aliases.
 # These are relevant for the local machine only (work or neighbours laptop)
-if [[ -a ${HOME}/.aliases ]]
-then
-	source ${HOME}/.aliases
-fi
+[[ -a ${HOME}/.aliases ]] && source ${HOME}/.aliases
+

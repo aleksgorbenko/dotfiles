@@ -1,8 +1,9 @@
 alias cls='clear' # Good 'ol Clear Screen command
 alias a="alias"
 alias ls="exa"
-alias la="exa -lha"
-alias ll="exa -lTha"
+alias ll="exa -lha"
+alias la="exa -lTha"
+alias t="touch"
 
 alias .2='cd ../../'             # Go back 2 directory levels
 alias .3='cd ../../../'          # Go back 3 directory levels
@@ -26,16 +27,15 @@ alias bi="brew install"
 alias bc="brew cask"
 alias bci="brew cask install"
 alias bcu="brew cask uninstall"
-alias bu="brew upgrade"
-alias bup="brew update"
+alias bup="brew upgrade"
+alias bu="brew update"
 
 # Pipe my public key to my clipboard.
 alias pubkey="more ~/.ssh/me/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
 
-export EDITOR='code'
 alias zh='source ~/.zshrc'
 alias ze="$EDITOR ~/.zshrc"
 alias ae="$EDITOR ~/.aliases"
 alias hosts="$EDITOR /etc/hosts"
 alias kara="$EDITOR ~/.config/karabiner.edn"
-alias dotfiles="$EDITOR ~/.dotfiles"
+alias dote="$EDITOR ~/.dotfiles"

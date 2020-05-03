@@ -56,8 +56,11 @@ brew 'pinentry-mac'
 brew 'gettext'
 brew 'exa' # better `ls`
 brew 'ctop' # htop for containers
+brew 'gotop' # better top
 brew 'm-cli' # control mac os via terminal
 brew 'terminal-notifier'
+brew 'starship'
+brew 'xsv'
 
 # cloud
 brew 'awslogs'
@@ -72,7 +75,6 @@ brew 'pyenv'
 # http
 brew 'httpie'
 brew 'wget'
-brew 'nano'
 
 # dev
 brew 'kubectl'

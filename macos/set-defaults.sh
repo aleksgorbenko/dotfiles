@@ -7,7 +7,7 @@
 #
 # Run ./set-defaults.sh and you'll be good to go.
 
-source "${HOME}/.dotfiles/macos/echos.sh"
+source "${HOME}/.dotfiles/script/echos.sh"
 
 bot "Setting MacOS defaults that make sense..."
 
@@ -362,10 +362,8 @@ defaults write com.apple.messageshelper.MessageController SOInputLineSettings -d
 ###############################################################################
 
 bot "OK. Note that some of these changes require a logout/restart to take effect. Killing affected applications (so they can reboot)...."
-for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
-  "Dock" "Finder" "Mail" "Messages" "Safari" "SizeUp" "SystemUIServer" \
-  "iCal" "Terminal"; do
+for app in "Activity Monitor" "Calendar" "Contacts" "cfprefsd" \
+  "Dock" "Finder" "Mail" "Messages" "Safari" "SystemUIServer" \
+  "Terminal"; do
   killall "${app}" > /dev/null 2>&1
 done
-
-brew update && brew upgrade && brew cleanup 

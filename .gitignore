@@ -1,7 +1,4 @@
-git/gitconfig.local.symlink
-
-vscode.conf.symlink/workspaceStorage
-vscode.conf.symlink/globalStorage
+git/gitconfig.local
 .gitsecret/keys/random_seed
 ssh/me/id_rsa
 ssh/me/id_rsa.pub

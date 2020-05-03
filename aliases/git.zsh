@@ -16,6 +16,15 @@ alias git=$(which hub)
 
 alias g='git'
 
+
+# Create dir, go to it and initialise it with git. mg <dir-name>
+mg() {
+    mkdir "$1"
+    cd "$1"
+    git init
+}
+
+
 #
 # Aliases
 #
@@ -101,7 +110,6 @@ alias gpd='git push --dry-run'
 alias gpf='git push --force-with-lease'
 alias gpf!='git push --force'
 alias gpoat='git push origin --all && git push origin --tags'
-alias gpu='git push upstream'
 alias gpv='git push -v'
 
 # PULL
