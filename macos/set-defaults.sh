@@ -9,14 +9,16 @@
 
 source "${HOME}/.dotfiles/script/echos.sh"
 
-bot "Setting MacOS defaults that make sense..."
+set -e
+
+bot "=== Setting MacOS defaults that make sense ==="
 
 ###############################################################################
 bot "Configuring General System UI/UX..."
 ###############################################################################
 # Close any open System Preferences panes, to prevent them from overriding
 # settings we’re about to change
-running "closing any system preferences to prevent issues with automated changes"
+running "Closing any system preferences to prevent issues with automated changes"
 osascript -e 'tell application "System Preferences" to quit'
 ok
 
@@ -27,17 +29,20 @@ bot "Languages"
 # Set language and text formats
 # Note: if you’re in the US, replace `EUR` with `USD`, `Centimeters` with
 # `Inches`, `en_GB` with `en_US`, and `true` with `false`.
+running "Locale - UK. Currency - GBP"
 defaults write NSGlobalDomain AppleLanguages -array "en"
-defaults write NSGlobalDomain AppleLocale -string "en_GB@currency=GBP"
-defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
-defaults write NSGlobalDomain AppleMetricUnits -bool true
+defaults write NSGlobalDomain AppleLocale -string "en_GB@currency=GBP";ok
+running "Use centimeters"
+defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters";ok
+running "Use metric units"
+defaults write NSGlobalDomain AppleMetricUnits -bool true;ok
 
 ###############################################################################
 bot "Finder"
 ###############################################################################
 
 running "Keep folders on top when sorting by name (version 10.12 and later)"
-defaults write com.apple.finder _FXSortFoldersFirst -bool true
+defaults write com.apple.finder _FXSortFoldersFirst -bool true;ok
 
 running "Expand the following File Info panes: “General”, “Open with”, and “Sharing & Permissions”"
 defaults write com.apple.finder FXInfoPanesExpanded -dict \
@@ -51,17 +56,17 @@ defaults write com.apple.finder NewWindowTarget -string "PfDe"
 defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Desktop/";ok
 
 running "Use AirDrop over every interface. srsly this should be a default"
-defaults write com.apple.NetworkBrowser BrowseAllInterfaces 1
+defaults write com.apple.NetworkBrowser BrowseAllInterfaces 1;ok
 
 running "Always open everything in Finder's list view. This is important"
-defaults write com.apple.Finder FXPreferredViewStyle Nlsv
+defaults write com.apple.Finder FXPreferredViewStyle Nlsv;ok
 
 running "Show the ~/Library folder"
-chflags nohidden ~/Library
+chflags nohidden ~/Library;ok
 
 running "Set the Finder prefs for showing a few different volumes on the Desktop"
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
-defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true;ok
 
 running "Show hidden files by default"
 defaults write com.apple.finder AppleShowAllFiles -bool true;ok
@@ -112,7 +117,7 @@ defaults write com.apple.dock mru-spaces -bool false;ok
 
 running "Speed up animations everywhere"
 # https://apple.stackexchange.com/questions/14001/how-to-turn-off-all-animations-on-os-x
-# Reduce motion everywhere, still not fast enough though :(
+# Still not fast enough though :(
 defaults write -g NSAutomaticWindowAnimationsEnabled -bool false
 defaults write -g NSScrollAnimationEnabled -bool false
 defaults write -g NSWindowResizeTime -float 0.001
@@ -130,14 +135,13 @@ defaults write com.apple.dock springboard-hide-duration -float 0
 defaults write com.apple.dock springboard-page-duration -float 0
 defaults write com.apple.finder DisableAllAnimations -bool true
 defaults write com.apple.Mail DisableSendAnimations -bool true
-defaults write com.apple.Mail DisableReplyAnimations -bool true
-ok
+defaults write com.apple.Mail DisableReplyAnimations -bool true;ok
 
 ################################################
 bot "Standard System Changes"
 ################################################
 
-running "always boot in verbose mode (not MacOS GUI mode)"
+running "Always boot in verbose mode (not MacOS GUI mode)\n"
 sudo nvram boot-args="-v";ok
 
 running "Expand save panel by default"
@@ -160,8 +164,8 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false;ok
 # Disable Notification Center and remove the menu bar icon
 # launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2>/dev/null
 
-# Increase sound quality for Bluetooth headphones/headsets
-defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
+running "Increase sound quality for Bluetooth headphones/headsets"
+defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40;ok
 
 running "Require password immediately after sleep or screen saver begins"
 defaults write com.apple.screensaver askForPassword -int 1
@@ -174,11 +178,11 @@ running "Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF
 defaults write com.apple.screencapture type -string "png";ok
 
 running "Stop iTunes from responding to the keyboard media keys"
-launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2>/dev/null
+launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2>/dev/null;ok
 
 running "Require password immediately after sleep or screen saver begins"
 defaults write com.apple.screensaver askForPassword -int 1
-defaults write com.apple.screensaver askForPasswordDelay -int 0
+defaults write com.apple.screensaver askForPasswordDelay -int 0;ok
 
 ###############################################################################
 bot "Trackpad, mouse, keyboard, Bluetooth accessories, and input"
@@ -198,7 +202,7 @@ defaults write NSGlobalDomain KeyRepeat -int 2
 defaults write NSGlobalDomain InitialKeyRepeat -int 10;ok
 
 ###############################################################################
-bot "Configuring Applications..."
+bot "=== Configuring Applications ==="
 ###############################################################################
 
 ###############################################################################
@@ -226,7 +230,7 @@ defaults write com.apple.ActivityMonitor ShowCategory -int 100;ok
 # 107: Windowed Processes
 running "Sort Activity Monitor results by CPU usage"
 defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
-defaults write com.apple.ActivityMonitor SortDirection -int 0
+defaults write com.apple.ActivityMonitor SortDirection -int 0;ok
 
 running "Set columns for each tab"
 defaults write com.apple.ActivityMonitor "UserColumnsPerTab v5.0" -dict \
@@ -269,7 +273,7 @@ bot "Safari"
 ###############################################################################
 
 running "Show Safari's bookmark bar"
-defaults write com.apple.Safari ShowFavoritesBar -bool true
+defaults write com.apple.Safari ShowFavoritesBar -bool true;ok
 
 running "Set up Safari for development"
 defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
@@ -289,38 +293,38 @@ running "Enable Debug Menu in the Mac App Store"
 defaults write com.apple.appstore ShowDebugMenu -bool true;ok
 
 running "Enable the automatic update check"
-defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
+defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true;ok
 
 running "Check for software updates daily, not just once per week"
-defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
+defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1;ok
 
 running "Download newly available updates in background"
-defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
+defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1;ok
 
 running "Install System data files & security updates"
-defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -int 1
+defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -int 1;ok
 
 running "Automatically download apps purchased on other Macs"
-defaults write com.apple.SoftwareUpdate ConfigDataInstall -int 1
+defaults write com.apple.SoftwareUpdate ConfigDataInstall -int 1;ok
 
 running "Turn on app auto-update"
-defaults write com.apple.commerce AutoUpdate -bool true
+defaults write com.apple.commerce AutoUpdate -bool true;ok
 
 ###############################################################################
 bot "Photos"
 ###############################################################################
 
-# Prevent Photos from opening automatically when devices are plugged in
-defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
+running "Prevent Photos from opening automatically when devices are plugged in"
+defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true;ok
 
 ###############################################################################
 bot "iTerm"
 ###############################################################################
 
-# Specify the preferences directory
-defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "${HOME}/.dotfiles/iterm2"
-# Tell iTerm2 to use the custom preferences in the directory
-defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
+running "Specify the preferences directory"
+defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "${HOME}/.dotfiles/iterm2";ok
+running "Tell iTerm2 to use the custom preferences in the directory"
+defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true;ok
 
 ###############################################################################
 bot "TextEdit, and Disk Utility"
@@ -361,9 +365,11 @@ defaults write com.apple.messageshelper.MessageController SOInputLineSettings -d
 # Kill affected applications                                                  #
 ###############################################################################
 
-bot "OK. Note that some of these changes require a logout/restart to take effect. Killing affected applications (so they can reboot)...."
+bot "OK. Note that some of these changes require a logout/restart to take effect. Killing affected applications (so they can reboot)..."
 for app in "Activity Monitor" "Calendar" "Contacts" "cfprefsd" \
   "Dock" "Finder" "Mail" "Messages" "Safari" "SystemUIServer" \
   "Terminal"; do
   killall "${app}" > /dev/null 2>&1
 done
+
+exit 0

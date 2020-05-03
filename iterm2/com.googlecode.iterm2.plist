@@ -307,10 +307,16 @@
 	<integer>7</integer>
 	<key>LeftOption</key>
 	<integer>2</integer>
+	<key>LeftTabBarWidth</key>
+	<real>244</real>
 	<key>LoadPrefsFromCustomFolder</key>
 	<true/>
 	<key>MaxVertically</key>
 	<false/>
+	<key>NSNavLastRootDirectory</key>
+	<string>~/Documents</string>
+	<key>NSNavPanelExpandedSizeForOpenMode</key>
+	<string>{799, 448}</string>
 	<key>NSQuotedKeystrokeBinding</key>
 	<string></string>
 	<key>NSRepeatCountBinding</key>
@@ -331,7 +337,7 @@
 	dWxs0g0ODxJaTlMub2JqZWN0c1YkY2xhc3OiEBGAAoAKgA3TFA0OFRkdV05TLmtleXOj
 	FhcYgAOABIAFoxobHIAGgAeACIAJWklkZW50aWZpZXJVV2lkdGhWSGlkZGVuUTAjQGjA
 	AAAAAAAI0iUmJyhaJGNsYXNzbmFtZVgkY2xhc3Nlc1xOU0RpY3Rpb25hcnmiJylYTlNP
-	YmplY3TTFA0OKy8doxYXGIADgASABaMwMRyAC4AMgAiACVExI0B0oZ2yLQ5W0iUmNzhe
+	YmplY3TTFA0OKy8doxYXGIADgASABaMwMRyAC4AMgAiACVExI0BzsZ2yLQ5W0iUmNzhe
 	TlNNdXRhYmxlQXJyYXmjNzkpV05TQXJyYXkACAARABoAJAApADIANwBJAEwAUgBUAGMA
 	aQBuAHkAgACDAIUAhwCJAJAAmACcAJ4AoACiAKYAqACqAKwArgC5AL8AxgDIANEA0gDX
 	AOIA6wD4APsBBAELAQ8BEQETARUBGQEbAR0BHwEhASMBLAExAUABRAAAAAAAAAIBAAAA
@@ -352,8 +358,10 @@
 		<key>TB Is Shown</key>
 		<integer>1</integer>
 	</dict>
+	<key>NSWindow Frame NSNavPanelAutosaveName</key>
+	<string>698 420 799 448 0 0 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>960 44 955 1133 0 0 1920 1177 </string>
+	<string>-1331 1200 1278 1417 -1331 1200 2560 1417 </string>
 	<key>NeverWarnAboutShortLivedSessions_F229DDD8-55ED-47D9-B169-CE02C81614C3</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_F229DDD8-55ED-47D9-B169-CE02C81614C3_selection</key>
@@ -522,13 +530,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.14117647058823529</real>
+				<real>0.16058349609375</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.098039215686274508</real>
+				<real>0.11519421693409981</real>
 				<key>Red Component</key>
-				<real>0.10196078431372549</real>
+				<real>0.10479729529470205</real>
 			</dict>
 			<key>Background Image Is Tiled</key>
 			<false/>
@@ -1065,7 +1073,7 @@
 			<key>Shortcut</key>
 			<string></string>
 			<key>Show Status Bar</key>
-			<false/>
+			<true/>
 			<key>Silence Bell</key>
 			<true/>
 			<key>Smart Cursor Color</key>
@@ -1166,68 +1174,15 @@
 				<key>advanced configuration</key>
 				<dict>
 					<key>algorithm</key>
-					<integer>0</integer>
+					<integer>1</integer>
 					<key>font</key>
-					<string>FiraMonoForPowerline-Regular 12</string>
+					<string>Menlo-Regular 11</string>
 				</dict>
 				<key>components</key>
 				<array>
 					<dict>
 						<key>class</key>
-						<string>iTermStatusBarCPUUtilizationComponent</string>
-						<key>configuration</key>
-						<dict>
-							<key>knobs</key>
-							<dict>
-								<key>base: priority</key>
-								<real>5</real>
-								<key>shared text color</key>
-								<dict>
-									<key>Alpha Component</key>
-									<real>1</real>
-									<key>Blue Component</key>
-									<real>0.62999999523162842</real>
-									<key>Color Space</key>
-									<string>sRGB</string>
-									<key>Green Component</key>
-									<real>0.62999999523162842</real>
-									<key>Red Component</key>
-									<real>0.89999997615814209</real>
-								</dict>
-							</dict>
-							<key>layout advanced configuration dictionary value</key>
-							<dict>
-								<key>algorithm</key>
-								<integer>0</integer>
-								<key>font</key>
-								<string>FiraMonoForPowerline-Regular 12</string>
-							</dict>
-						</dict>
-					</dict>
-					<dict>
-						<key>class</key>
-						<string>iTermStatusBarFixedSpacerComponent</string>
-						<key>configuration</key>
-						<dict>
-							<key>knobs</key>
-							<dict>
-								<key>base: priority</key>
-								<real>5</real>
-								<key>iTermStatusBarFixedSpacerComponentWidthKnob</key>
-								<real>100</real>
-							</dict>
-							<key>layout advanced configuration dictionary value</key>
-							<dict>
-								<key>algorithm</key>
-								<integer>0</integer>
-								<key>font</key>
-								<string>FiraMonoForPowerline-Regular 12</string>
-							</dict>
-						</dict>
-					</dict>
-					<dict>
-						<key>class</key>
-						<string>iTermStatusBarMemoryUtilizationComponent</string>
+						<string>iTermStatusBarGitComponent</string>
 						<key>configuration</key>
 						<dict>
 							<key>knobs</key>
@@ -1236,53 +1191,36 @@
 								<integer>1</integer>
 								<key>base: priority</key>
 								<real>5</real>
+								<key>iTermStatusBarGitComponentPollingIntervalKey</key>
+								<real>2</real>
+								<key>maxwidth</key>
+								<real>+infinity</real>
+								<key>minwidth</key>
+								<real>0.0</real>
 								<key>shared text color</key>
 								<dict>
 									<key>Alpha Component</key>
 									<real>1</real>
 									<key>Blue Component</key>
-									<real>0.7380000000000001</real>
+									<real>0.39778277277946472</real>
 									<key>Color Space</key>
 									<string>sRGB</string>
 									<key>Green Component</key>
-									<real>0.90000000000000002</real>
+									<real>0.75042724609375</real>
 									<key>Red Component</key>
-									<real>0.63</real>
+									<real>0.40098980069160461</real>
 								</dict>
 							</dict>
 							<key>layout advanced configuration dictionary value</key>
 							<dict>
 								<key>algorithm</key>
-								<integer>0</integer>
-								<key>font</key>
-								<string>FiraMonoForPowerline-Regular 12</string>
+								<integer>1</integer>
 							</dict>
 						</dict>
 					</dict>
 					<dict>
 						<key>class</key>
-						<string>iTermStatusBarFixedSpacerComponent</string>
-						<key>configuration</key>
-						<dict>
-							<key>knobs</key>
-							<dict>
-								<key>base: priority</key>
-								<real>5</real>
-								<key>iTermStatusBarFixedSpacerComponentWidthKnob</key>
-								<real>100</real>
-							</dict>
-							<key>layout advanced configuration dictionary value</key>
-							<dict>
-								<key>algorithm</key>
-								<integer>0</integer>
-								<key>font</key>
-								<string>FiraMonoForPowerline-Regular 12</string>
-							</dict>
-						</dict>
-					</dict>
-					<dict>
-						<key>class</key>
-						<string>iTermStatusBarNetworkUtilizationComponent</string>
+						<string>iTermStatusBarClockComponent</string>
 						<key>configuration</key>
 						<dict>
 							<key>knobs</key>
@@ -1291,26 +1229,17 @@
 								<integer>1</integer>
 								<key>base: priority</key>
 								<real>5</real>
-								<key>shared text color</key>
-								<dict>
-									<key>Alpha Component</key>
-									<real>1</real>
-									<key>Blue Component</key>
-									<real>0.90000000000000002</real>
-									<key>Color Space</key>
-									<string>sRGB</string>
-									<key>Green Component</key>
-									<real>0.63</real>
-									<key>Red Component</key>
-									<real>0.8460000000000002</real>
-								</dict>
+								<key>format</key>
+								<string>MM/dd h:mm</string>
+								<key>localize</key>
+								<integer>1</integer>
 							</dict>
 							<key>layout advanced configuration dictionary value</key>
 							<dict>
 								<key>algorithm</key>
-								<integer>0</integer>
+								<integer>1</integer>
 								<key>font</key>
-								<string>FiraMonoForPowerline-Regular 12</string>
+								<string>Menlo-Regular 11</string>
 							</dict>
 						</dict>
 					</dict>
@@ -1336,9 +1265,9 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Title Components</key>
-			<integer>6</integer>
+			<integer>4</integer>
 			<key>Transparency</key>
-			<real>0.14908391497461931</real>
+			<real>0.097455980329949246</real>
 			<key>Triggers</key>
 			<array>
 				<dict>
@@ -1405,14 +1334,14 @@
 		<key>screenFrame</key>
 		<string>{{0, 0}, {1920, 1200}}</string>
 		<key>topLeft</key>
-		<string>{638, 946}</string>
+		<string>{529, 952}</string>
 	</dict>
 	<key>NoSyncInstallationId</key>
 	<string>689CC326-900A-4394-82EA-B96C79085CA6</string>
 	<key>NoSyncLastTipTime</key>
-	<real>609797430.494681</real>
+	<real>610188466.86764598</real>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>8</integer>
+	<integer>6</integer>
 	<key>NoSyncNextAnnoyanceTime</key>
 	<real>608286645.60347795</real>
 	<key>NoSyncOnboardingWindowHasBeenShown</key>
@@ -2121,16 +2050,19 @@
 	<real>607777791.54821098</real>
 	<key>NoSyncTipsToNotShow</key>
 	<array>
-		<string>0006</string>
-		<string>0003</string>
-		<string>0000</string>
-		<string>0007</string>
 		<string>0004</string>
-		<string>0001</string>
-		<string>000</string>
-		<string>0005</string>
+		<string>0000</string>
+		<string>0010</string>
+		<string>0007</string>
+		<string>0003</string>
+		<string>0006</string>
 		<string>0002</string>
+		<string>000</string>
+		<string>0009</string>
+		<string>0005</string>
+		<string>0001</string>
 		<string>0008</string>
+		<string>0011</string>
 	</array>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
@@ -2204,7 +2136,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-04-29T19:20:24Z</date>
+	<date>2020-05-03T19:30:23Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -2220,7 +2152,9 @@
 	<key>SoundForEsc</key>
 	<false/>
 	<key>SplitPaneDimmingAmount</key>
-	<real>0.49383865248226955</real>
+	<real>0.54065824468085111</real>
+	<key>StatusBarPosition</key>
+	<integer>1</integer>
 	<key>SwitchTabModifier</key>
 	<integer>4</integer>
 	<key>SwitchWindowModifier</key>
@@ -2235,6 +2169,10 @@
 	<false/>
 	<key>TmuxDashboardLimit</key>
 	<integer>10</integer>
+	<key>ToolbeltTools</key>
+	<array>
+		<string>Actions</string>
+	</array>
 	<key>TripleClickSelectsFullWrappedLines</key>
 	<true/>
 	<key>URLHandlersByGuid</key>

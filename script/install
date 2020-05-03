@@ -2,7 +2,7 @@
 
 source "${HOME}/.dotfiles/script/echos.sh"
 
-bot 'Welcome aboard, I will turn your mac in a dev machine now\r'
+bot "Welcome aboard, I will turn your mac in a dev machine now"
 
 cd "$(dirname "$0")/.."
 DOTS=$(pwd -P)
@@ -22,27 +22,26 @@ fi
 function install_gitconfig () {
   if ! [ -f git/gitconfig.local ]
   then
-    bot 'Configuring gitconfig'
-
+    bot "Configuring gitconfig"
     git_credential='cache'
     if [ "$(uname -s)" == "Darwin" ]
     then
       git_credential='osxkeychain'
     fi
 
-    running ' - What is your github author name?'
+    running " - What is your github author name?"
     read -e git_authorname
-    running ' - What is your github author email?'
+    running " - What is your github author email?"
     read -e git_authoremail
 
     sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.local.example > git/gitconfig.local
 
-    print_success 'gitconfig configured'
+    print_success "gitconfig configured"
   fi
 }
 
 function install_dotfiles () {
-	bot 'Installing dotfiles'
+	bot "Installing dotfiles"
 
 	# ssh config
 	mkdir -p "${HOME}/.ssh"
@@ -54,7 +53,7 @@ function install_dotfiles () {
 	$DOTS/bin/link-file "${DOTS}/karabiner/karabiner.edn" "${HOME}/.config/karabiner.edn"
 
 	# theme config
-	$DOTS/bin/link-file "${DOTS}/starship.toml" "${HOME}/.config/starship.toml"
+	$DOTS/bin/link-file "${DOTS}/zsh/starship.toml" "${HOME}/.config/starship.toml"
 
 	# git config
 	$DOTS/bin/link-file "${DOTS}/git/gitconfig" "${HOME}/gitconfig"
@@ -71,28 +70,44 @@ function install_brew_packages () {
 	if [ "$(uname -s)" == "Darwin" ]
 	then
 		bot "Installing brew packages"
-		if source bin/dot | while read -r data; do printf "\r $data \n"; done
+		if source bin/dot | while read -r data; do echo -e "$data"; done
 		then
-			print_success "dependencies installed"
+			ok "Dependencies installed"
 		else
-			print_error "error installing dependencies"
+			print_error "Error installing dependencies"
 		fi
 	fi
 }
 
 function install_extras () {
-	bot 'Installing fonts'
-	git clone https://github.com/powerline/fonts.git --depth=1
-	cd fonts
-	./install.sh
-	cd ..
-	rm -rf fonts
-	ok
+	# bot "Installing fonts"
+	# git clone https://github.com/powerline/fonts.git --depth=1
+	# cd fonts
+	# ./install.sh
+	# cd ..
+	# rm -rf fonts
+	# ok
 
-	bot 'Installing extra plugins'
-	git clone https://github.com/Aloxaf/fzf-tab ${HOME}/.dotfiles/zsh/plugins/fzf-tab
-	curl -s https://raw.githubusercontent.com/wfxr/forgit/master/forgit.plugin.zsh -o ${HOME}/.dotfiles/zsh/plugins/forgit.plugin.zsh
-	ok
+	bot "Installing extra plugins"
+	if [[ ! -d "${HOME}/.dotfiles/zsh/plugins/fzf-tab" ]]; then
+		running "fzf-tab"
+		git clone https://github.com/Aloxaf/fzf-tab ${HOME}/.dotfiles/zsh/plugins/fzf-tab
+		ok
+	fi
+
+	if [[ ! -e "${HOME}/.dotfiles/zsh/plugins/forgit.plugin.zsh" ]]; then
+		running "forgit"
+		curl -s https://raw.githubusercontent.com/wfxr/forgit/master/forgit.plugin.zsh -o ${HOME}/.dotfiles/zsh/plugins/forgit.plugin.zsh
+		ok
+	fi
+}
+
+function install_shell () {
+	# check current shell and change it to zsh if needed
+	if [[ ! "$(dscl . -read /Users/$USER UserShell | awk '{ print $2 }')" == /usr/local/bin/zsh ]]; then
+		sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
+		chsh -s /usr/local/bin/zsh
+	fi
 }
 
 # Do we need to ask for sudo password or is it already passwordless?
@@ -108,11 +123,9 @@ function install_extras () {
 
 install_gitconfig
 install_dotfiles
+$DOTS/macos/set-defaults.sh
 install_brew_packages
 install_extras
+install_shell
 
-# change default shell
-sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
-chsh -s /usr/local/bin/zsh
-
-bot 'Done! May the Force be with you!'
+ok 'Done! May the Force be with you!'
