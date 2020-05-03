@@ -56,9 +56,9 @@ function install_dotfiles () {
 	$DOTS/bin/link-file "${DOTS}/zsh/starship.toml" "${HOME}/.config/starship.toml"
 
 	# git config
-	$DOTS/bin/link-file "${DOTS}/git/gitconfig" "${HOME}/gitconfig"
-	$DOTS/bin/link-file "${DOTS}/git/gitconfig.local" "${HOME}/gitconfig.local"
-	$DOTS/bin/link-file "${DOTS}/git/gitignore" "${HOME}/gitignore"
+	$DOTS/bin/link-file "${DOTS}/git/gitconfig" "${HOME}/.gitconfig"
+	$DOTS/bin/link-file "${DOTS}/git/gitconfig.local" "${HOME}/.gitconfig.local"
+	$DOTS/bin/link-file "${DOTS}/git/gitignore" "${HOME}/.gitignore"
 	git config core.hooksPath git/hooks/
 
 	# zsh
