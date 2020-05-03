@@ -1,0 +1,23 @@
+# Disable the newline at the start of the prompt
+add_newline = false
+
+[line_break]
+disabled = true
+
+[cmd_duration]
+min_time = 500
+prefix = ""
+style = "bold purple"
+
+[directory]
+prefix = ""
+
+[git_status]
+style = "yellow"
+
+[git_branch]
+disabled = false
+style = "bold green"
+
+[git_commit]
+disabled = true

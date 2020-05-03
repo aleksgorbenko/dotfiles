@@ -14,18 +14,17 @@ source "${ZSH_ALIASES}/aliases.zsh"
 [ -f "${HOME}/.fzf.zsh" ] && source "${HOME}/.fzf.zsh"
 
 # 4. Plugins
-# Add new plugins to the `zsh_plugins.symlink` file and relaod zsh
+# Add new plugins to the `zsh_plugins` file and relaod zsh
 # Keep syntax highlighting plugin last
 antibody bundle < "${HOME}/.zsh_plugins" > "${ZSH}/zsh/zsh_plugins.sh"
 source "${ZSH}/zsh/zsh_plugins.sh"
 
 # 5. ZSH config
 source "${ZSH}/zsh/versions.zsh"
-# source "${ZSH}/zsh/theme.zsh"
 eval "$(starship init zsh)"
 source "${ZSH}/zsh/config.zsh"
 
-# 6. Helpful packages
+# 6. More plugins
 
 # Numbered folder and git output
 [[ -x "/usr/local/bin/scmpuff" ]] && eval "$(scmpuff init -s)"
@@ -41,3 +40,5 @@ source "${ZSH}/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh"
 [[ -s "/usr/local/etc/grc.bashrc" ]] && source "/usr/local/etc/grc.bashrc"
 
 # zprof # uncomment to profile laoding speed
+
+# [[ -e "${HOME}/.iterm2_shell_integration.zsh" ]] && source "${HOME}/.iterm2_shell_integration.zsh" || true
