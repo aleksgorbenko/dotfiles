@@ -1,3 +1,5 @@
+prompt_order=["directory", "git_state", "git_status", "kubernetes", "cmd_duration", "character"]
+
 # Disable the newline at the start of the prompt
 add_newline = false
 
@@ -6,7 +8,7 @@ disabled = true
 
 [cmd_duration]
 min_time = 500
-prefix = ""
+prefix = "| "
 style = "bold purple"
 
 [directory]
@@ -25,3 +27,4 @@ disabled = true
 [kubernetes]
 symbol = "⛵ "
 disabled = false
+style = "bold italic yellow"

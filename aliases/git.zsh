@@ -50,17 +50,15 @@ alias gav='git add --verbose'
 alias gapp='git apply'
 
 # COMMIT
-alias gc='git commit -v'
-alias gc!='git commit -v --amend'
-alias gcn!='git commit -v --no-edit --amend'
-alias gca='git commit -v -a'
-alias gca!='git commit -v -a --amend'
-alias gcan!='git commit -v -a --no-edit --amend'
-alias gcans!='git commit -v -a -s --no-edit --amend'
-alias gcam='git commit -a -m'
-alias gcsm='git commit -s -m'
-alias gcmsg='git commit -m'
-alias gcs='git commit -S'
+alias gc!='git commit --amend'
+
+function gc() {
+  git commit -m $1 && scmpuff_status
+}
+
+function gca() {
+  git commit -a -m $1 && scmpuff_status
+}
 
 alias prfix="gcmsg 'fix as per PR comments' && ggp"
 
@@ -80,7 +78,6 @@ alias gcpc='git cherry-pick --continue'
 alias gco='git checkout'
 alias gcb='git checkout -b'
 alias gcm='git checkout master'
-alias gcd='git checkout develop'
 
 # DIFF
 alias gd='git diff'
@@ -204,14 +201,13 @@ alias gres='git reset'
 alias gresh='git reset --hard'
 alias gresoh='git reset origin/$(current_branch) --hard'
 # alias gru='git reset --'
+alias gress="git reset --soft HEAD~1"
 
 alias grm='git rm'
 alias grmc='git rm --cached'
 
 # gotta love this one
 alias groot='echo I am Groot! && cd "$(git rev-parse --show-toplevel || echo .)"'
-
-alias gst='git status'
 
 alias gsh='git show'
 alias gsps='git show --pretty=short --show-signature'

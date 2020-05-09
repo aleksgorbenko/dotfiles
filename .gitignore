@@ -5,3 +5,4 @@ ssh/me/id_rsa.pub
 zsh/zsh_plugins.sh
 zsh/plugins/**
 !*.secret
+.DS_Store

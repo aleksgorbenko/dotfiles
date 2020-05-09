@@ -47,13 +47,19 @@ function install_dotfiles () {
 	mkdir -p "${HOME}/.ssh"
 	$DOTS/bin/link-file "${DOTS}/ssh/me" "${HOME}/.ssh/me"
 
+	# make sure this folder exists
+	mkdir -p "${HOME}/.config"
+
 	# keyboard remapping
 	mkdir -p "${HOME}/.config/karabiner"
 	touch "${HOME}/.config/karabiner/karabiner.json"
-	$DOTS/bin/link-file "${DOTS}/karabiner/karabiner.edn" "${HOME}/.config/karabiner.edn"
+	$DOTS/bin/link-file "${DOTS}/config/karabiner.edn" "${HOME}/.config/karabiner.edn"
 
 	# theme config
-	$DOTS/bin/link-file "${DOTS}/zsh/starship.toml" "${HOME}/.config/starship.toml"
+	$DOTS/bin/link-file "${DOTS}/config/starship.toml" "${HOME}/.config/starship.toml"
+
+	# alacritty config
+	$DOTS/bin/link-file "${DOTS}/config/alacritty.yaml" "${HOME}/.config/alacritty.yaml"
 
 	# git config
 	$DOTS/bin/link-file "${DOTS}/git/gitconfig" "${HOME}/.gitconfig"
@@ -80,24 +86,24 @@ function install_brew_packages () {
 }
 
 function install_extras () {
-	# bot "Installing fonts"
-	# git clone https://github.com/powerline/fonts.git --depth=1
-	# cd fonts
-	# ./install.sh
-	# cd ..
-	# rm -rf fonts
-	# ok
+	bot "Installing fonts"
+	git clone https://github.com/powerline/fonts.git --depth=1
+	cd fonts
+	./install.sh
+	cd ..
+	rm -rf fonts
+	ok
 
 	bot "Installing extra plugins"
 	if [[ ! -d "${HOME}/.dotfiles/zsh/plugins/fzf-tab" ]]; then
 		running "fzf-tab"
-		git clone https://github.com/Aloxaf/fzf-tab ${HOME}/.dotfiles/zsh/plugins/fzf-tab
+		git clone https://github.com/Aloxaf/fzf-tab ${DOTS}/zsh/plugins/fzf-tab
 		ok
 	fi
 
 	if [[ ! -e "${HOME}/.dotfiles/zsh/plugins/forgit.plugin.zsh" ]]; then
 		running "forgit"
-		curl -s https://raw.githubusercontent.com/wfxr/forgit/master/forgit.plugin.zsh -o ${HOME}/.dotfiles/zsh/plugins/forgit.plugin.zsh
+		curl -s https://raw.githubusercontent.com/wfxr/forgit/master/forgit.plugin.zsh -o ${DOTS}/zsh/plugins/forgit.plugin.zsh
 		ok
 	fi
 }
