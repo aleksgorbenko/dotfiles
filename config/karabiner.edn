@@ -53,6 +53,13 @@
 	:open "open \"%s\""
 }
 
+:input-sources {
+	:ru {
+		:input_source_id "com.apple.keylayout.Russian-Phonetic"
+		:language "ru"
+	}
+}
+
 :simlayers {
 	:semicolon-mode {:key :semicolon}
 	:2-mode {:key :2}
@@ -64,6 +71,7 @@
 	:r-mode {:key :r}
 	:t-mode {:key :t}
 	:i-mode {:key :i}
+	:j-mode {:key :j}
 	:o-mode {:key :o}
 	:a-mode {:key :a}
 	:s-mode {:key :s}
@@ -115,6 +123,26 @@
 
 		[:d [:km "Commit dotfiles"]]
 		[:v [:km "Commit blog"]]
+	]
+}
+
+{
+	:des "russian"
+	:rules [
+		[:h :x [:ru]] ; ч -> х
+		[:x :h [:ru]] ; х -> ч
+		[:open_bracket :hyphen [:ru]] ; [ -> ь
+		[:close_bracket :equal_sign [:ru]] ; ] -> ъ
+		[:hyphen :!Ohyphen [:ru]] ; ь -> -
+		[:equal_sign :!Oequal_sign [:ru]] ; ъ -> =
+
+		:j-mode
+		[:a :q [:ru]] ; ja -> я
+		[:u :open_bracket [:ru]] ; ju -> ю
+		[:o :!Oe [:ru]] ; jo -> ё
+
+		:z-mode
+		[:h :close_bracket [:ru]] ;-> ж
 	]
 }
 
@@ -170,6 +198,15 @@
 		[:d [:r :e :t :u :r :n :spacebar]] ; -> return
 		[:grave_accent_and_tilde [:p :r :i :n :t :!S9 :quote :hyphen :hyphen :hyphen :!Cright_arrow :caps_lock]] ; -> print('---')
 		[:v [:p :y :t :h :o :n :spacebar]]
+	]
+}
+
+{
+	:des "rudot"
+	:rules[
+		:ruby-mode
+		[:a [:p :u :t :s :spacebar]] ; -> puts
+		[:grave_accent_and_tilde [:p :u :t :s :spacebar :quote :hyphen :hyphen :hyphen :quote]] ; -> puts '---'
 	]
 }
 
@@ -240,6 +277,10 @@
 		[:k :!Cup_arrow]
 		[:l :!Cright_arrow]
 		[:h :!Cleft_arrow]
+		[:t [:km "2do (travel)"]]
+		[:w [:km "2do (work)"]]
+		[:y [:km "2do: watch"]]
+
 	]
 }
 
@@ -344,7 +385,8 @@
 	:rules [
 		:backslash-mode
 		[:c [:km "open: Chrome"]]
-		[:s [:km "open: Spotify"]]
+		[:x [:km "open: Spotify"]]
+		[:s [:km "open: Slack"]]
 		[:a [:km "open: Activity Monitor"]]
 		[:n [:km "open: Notion"]]
 		[:p [:km "open: Sequel Pro"]]
@@ -517,7 +559,7 @@
 		[:t [:km "open 2do today"]]
 		[:l [:km "openl 2do later"]]
 		[:g [:km "search google"]]
-		[:m [:km "open 2do work"]]
+		[:w [:km "open 2do work"]]
 		[:y [:km "open 2do buy"]]
 		[:i [:km "open 2do fix"]]
 		[:m [:km "open 2do macro"]]

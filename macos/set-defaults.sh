@@ -9,8 +9,6 @@
 
 source "${HOME}/.dotfiles/script/echos.sh"
 
-set -e
-
 bot "=== Setting MacOS defaults that make sense ==="
 
 ###############################################################################

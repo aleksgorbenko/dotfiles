@@ -23,8 +23,6 @@ setopt no_hup
 setopt local_options # allow functions to have local options
 setopt local_traps   # allow functions to have local traps
 setopt prompt_subst
-setopt correct              # correct only commands
-setopt correct_all # autocorrect commands AND arguments
 setopt interactive_comments # allow comments in interactive shells
 setopt complete_in_word
 setopt ignore_eof    # do not exit on end-of-file
