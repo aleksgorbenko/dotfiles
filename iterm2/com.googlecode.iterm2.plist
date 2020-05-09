@@ -337,7 +337,7 @@
 	dWxs0g0ODxJaTlMub2JqZWN0c1YkY2xhc3OiEBGAAoAKgA3TFA0OFRkdV05TLmtleXOj
 	FhcYgAOABIAFoxobHIAGgAeACIAJWklkZW50aWZpZXJVV2lkdGhWSGlkZGVuUTAjQGjA
 	AAAAAAAI0iUmJyhaJGNsYXNzbmFtZVgkY2xhc3Nlc1xOU0RpY3Rpb25hcnmiJylYTlNP
-	YmplY3TTFA0OKy8doxYXGIADgASABaMwMRyAC4AMgAiACVExI0BzsZ2yLQ5W0iUmNzhe
+	YmplY3TTFA0OKy8doxYXGIADgASABaMwMRyAC4AMgAiACVExI0B0oZ2yLQ5W0iUmNzhe
 	TlNNdXRhYmxlQXJyYXmjNzkpV05TQXJyYXkACAARABoAJAApADIANwBJAEwAUgBUAGMA
 	aQBuAHkAgACDAIUAhwCJAJAAmACcAJ4AoACiAKYAqACqAKwArgC5AL8AxgDIANEA0gDX
 	AOIA6wD4APsBBAELAQ8BEQETARUBGQEbAR0BHwEhASMBLAExAUABRAAAAAAAAAIBAAAA
@@ -361,7 +361,9 @@
 	<key>NSWindow Frame NSNavPanelAutosaveName</key>
 	<string>698 420 799 448 0 0 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>-1331 1200 1278 1417 -1331 1200 2560 1417 </string>
+	<string>44 2 1054 1173 0 0 1920 1177 </string>
+	<key>NSWindow Frame iTerm Window 1</key>
+	<string>-1009 1404 585 446 -1331 1200 2560 1417 </string>
 	<key>NeverWarnAboutShortLivedSessions_F229DDD8-55ED-47D9-B169-CE02C81614C3</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_F229DDD8-55ED-47D9-B169-CE02C81614C3_selection</key>
@@ -1019,6 +1021,8 @@
 			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<false/>
+			<key>Reduce Flicker</key>
+			<false/>
 			<key>Right Option Key Sends</key>
 			<integer>0</integer>
 			<key>Rows</key>
@@ -1176,7 +1180,7 @@
 					<key>algorithm</key>
 					<integer>1</integer>
 					<key>font</key>
-					<string>Menlo-Regular 11</string>
+					<string>FiraCode-Regular 11</string>
 				</dict>
 				<key>components</key>
 				<array>
@@ -1215,6 +1219,33 @@
 							<dict>
 								<key>algorithm</key>
 								<integer>1</integer>
+								<key>font</key>
+								<string>FiraCode-Regular 11</string>
+							</dict>
+						</dict>
+					</dict>
+					<dict>
+						<key>class</key>
+						<string>iTermStatusBarSpringComponent</string>
+						<key>configuration</key>
+						<dict>
+							<key>knobs</key>
+							<dict>
+								<key>base: compression resistance</key>
+								<integer>1</integer>
+								<key>base: priority</key>
+								<real>5</real>
+								<key>iTermStatusBarSpringComponentSizeMultipleKey</key>
+								<integer>1</integer>
+								<key>iTermStatusBarSpringComponentSpringConstantKey</key>
+								<real>0.01</real>
+							</dict>
+							<key>layout advanced configuration dictionary value</key>
+							<dict>
+								<key>algorithm</key>
+								<integer>1</integer>
+								<key>font</key>
+								<string>FiraCode-Regular 11</string>
 							</dict>
 						</dict>
 					</dict>
@@ -1239,7 +1270,53 @@
 								<key>algorithm</key>
 								<integer>1</integer>
 								<key>font</key>
-								<string>Menlo-Regular 11</string>
+								<string>FiraCode-Regular 11</string>
+							</dict>
+						</dict>
+					</dict>
+					<dict>
+						<key>class</key>
+						<string>iTermStatusBarJobComponent</string>
+						<key>configuration</key>
+						<dict>
+							<key>knobs</key>
+							<dict>
+								<key>base: compression resistance</key>
+								<integer>1</integer>
+								<key>base: priority</key>
+								<real>5</real>
+								<key>maxwidth</key>
+								<real>+infinity</real>
+								<key>minwidth</key>
+								<integer>0</integer>
+							</dict>
+							<key>layout advanced configuration dictionary value</key>
+							<dict>
+								<key>algorithm</key>
+								<integer>1</integer>
+								<key>font</key>
+								<string>FiraCode-Regular 11</string>
+							</dict>
+						</dict>
+					</dict>
+					<dict>
+						<key>class</key>
+						<string>iTermStatusBarSearchFieldComponent</string>
+						<key>configuration</key>
+						<dict>
+							<key>knobs</key>
+							<dict>
+								<key>base: compression resistance</key>
+								<integer>1</integer>
+								<key>base: priority</key>
+								<real>5</real>
+							</dict>
+							<key>layout advanced configuration dictionary value</key>
+							<dict>
+								<key>algorithm</key>
+								<integer>1</integer>
+								<key>font</key>
+								<string>FiraCode-Regular 11</string>
 							</dict>
 						</dict>
 					</dict>
@@ -1329,19 +1406,21 @@
 	<array>
 		<string>3.3.9</string>
 	</array>
+	<key>NoSyncCommandHistoryHasEverBeenUsed</key>
+	<true/>
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
 		<string>{{0, 0}, {1920, 1200}}</string>
 		<key>topLeft</key>
-		<string>{529, 952}</string>
+		<string>{832, 1117}</string>
 	</dict>
 	<key>NoSyncInstallationId</key>
 	<string>689CC326-900A-4394-82EA-B96C79085CA6</string>
 	<key>NoSyncLastTipTime</key>
-	<real>610188466.86764598</real>
+	<real>610568178.33907902</real>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>6</integer>
+	<integer>7</integer>
 	<key>NoSyncNextAnnoyanceTime</key>
 	<real>608286645.60347795</real>
 	<key>NoSyncOnboardingWindowHasBeenShown</key>
@@ -1704,6 +1783,14 @@
 			</dict>
 			<dict>
 				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentTab.currentSession.lastCommand</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
 				<false/>
 				<key>name</key>
 				<string>currentTab</string>
@@ -2061,8 +2148,9 @@
 		<string>0009</string>
 		<string>0005</string>
 		<string>0001</string>
-		<string>0008</string>
 		<string>0011</string>
+		<string>0008</string>
+		<string>0012</string>
 	</array>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
@@ -2136,7 +2224,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-05-03T19:30:23Z</date>
+	<date>2020-05-06T19:30:47Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
