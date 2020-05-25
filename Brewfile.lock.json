@@ -2,10 +2,10 @@
   "entries": {
     "tap": {
       "homebrew/bundle": {
-        "revision": "8cfc957ed337e93ef3a69256615e012b72fbbc54"
+        "revision": "9f71c51a6b64557f7bb477e8e0166cd61a482e05"
       },
       "homebrew/cask-fonts": {
-        "revision": "5c1d98b8e2d2212ef561ef3d4232a2291a055539"
+        "revision": "2997a377d214b56d9f5ee864bea6b5c7f2581ca6"
       },
       "yqrashawn/goku": {
         "revision": "464abeb3cafa4bcfbe7e24c45c5431ad5ade7cbe"
@@ -237,22 +237,22 @@
         }
       },
       "protobuf": {
-        "version": "3.11.4",
+        "version": "3.11.4_1",
         "bottle": {
           "cellar": ":any",
           "prefix": "/usr/local",
           "files": {
             "catalina": {
-              "url": "https://homebrew.bintray.com/bottles/protobuf-3.11.4.catalina.bottle.tar.gz",
-              "sha256": "b6eca888405b4998b1a5be7c7425d94f9ef2db76fcd9355ac920deaee3e2d15d"
+              "url": "https://homebrew.bintray.com/bottles/protobuf-3.11.4_1.catalina.bottle.tar.gz",
+              "sha256": "f7f2e25c0497a651a2d3ec875b67f7edc4824b9222ab4bfab103a579bb84c739"
             },
             "mojave": {
-              "url": "https://homebrew.bintray.com/bottles/protobuf-3.11.4.mojave.bottle.tar.gz",
-              "sha256": "809461047f541cfc72d836ea7c7af95ad18f0900ea9bd163f478abf53d3fafaf"
+              "url": "https://homebrew.bintray.com/bottles/protobuf-3.11.4_1.mojave.bottle.tar.gz",
+              "sha256": "60f74ef0b63faae49e74cdd7f23ae69b6cfaa6cc1a1d37dd0b5370e17fdffc9d"
             },
             "high_sierra": {
-              "url": "https://homebrew.bintray.com/bottles/protobuf-3.11.4.high_sierra.bottle.tar.gz",
-              "sha256": "ae2dd1abf649a9a9c313caa958bd08d175b5a8a88828b44770526e29c83c807e"
+              "url": "https://homebrew.bintray.com/bottles/protobuf-3.11.4_1.high_sierra.bottle.tar.gz",
+              "sha256": "aecccdd2411712a2e719b9438fe4b82f16c2db5807e9266f0c64aaf3875a7700"
             }
           }
         }
@@ -337,7 +337,7 @@
         }
       },
       "grc": {
-        "version": "1.11.3",
+        "version": "1.11.3_1",
         "bottle": false
       },
       "cheat": {
@@ -792,22 +792,22 @@
       },
       "kubectl": null,
       "helm": {
-        "version": "3.2.0",
+        "version": "3.2.1",
         "bottle": {
           "cellar": ":any_skip_relocation",
           "prefix": "/usr/local",
           "files": {
             "catalina": {
-              "url": "https://homebrew.bintray.com/bottles/helm-3.2.0.catalina.bottle.tar.gz",
-              "sha256": "e82c45b4d8763fc3dc52c9aa49bdf97bbdf8739349d6d607bc6522f48aed69b3"
+              "url": "https://homebrew.bintray.com/bottles/helm-3.2.1.catalina.bottle.tar.gz",
+              "sha256": "10b68227cc61d6ba7511268904118c240a3a5e2c9e289a5fe05b3cac44a8b4ef"
             },
             "mojave": {
-              "url": "https://homebrew.bintray.com/bottles/helm-3.2.0.mojave.bottle.tar.gz",
-              "sha256": "17ccff2bfc3caf503ff897bafe93802a3076b0feacaf67ae5005caf473b51fd3"
+              "url": "https://homebrew.bintray.com/bottles/helm-3.2.1.mojave.bottle.tar.gz",
+              "sha256": "3ca91e66102ea11a510c7ae9cf4bdee1ed28bcdfedc6b765de2dee9bad1fcd28"
             },
             "high_sierra": {
-              "url": "https://homebrew.bintray.com/bottles/helm-3.2.0.high_sierra.bottle.tar.gz",
-              "sha256": "2591010043e084eb56f6f2d3e26d9d2f99b27bca564c61ed58226fc7e8795605"
+              "url": "https://homebrew.bintray.com/bottles/helm-3.2.1.high_sierra.bottle.tar.gz",
+              "sha256": "7123a1745847d8f4cf68df8a9c48970026329ae222c9180a04dd945e29db3f37"
             }
           }
         }
@@ -924,13 +924,13 @@
         }
       },
       "google-chrome": {
-        "version": "78.0.3904.108",
+        "version": "80.0.3987.163",
         "options": {
           "full_name": "google-chrome"
         }
       },
       "firefox": {
-        "version": "71.0",
+        "version": "74.0.1",
         "options": {
           "full_name": "firefox"
         }
@@ -942,7 +942,7 @@
         }
       },
       "1password": {
-        "version": "7.4.1",
+        "version": "7.4.3",
         "options": {
           "full_name": "1password"
         }
@@ -954,7 +954,7 @@
         }
       },
       "authy": {
-        "version": "1.7.1",
+        "version": "1.8.0",
         "options": {
           "full_name": "authy"
         }
@@ -966,7 +966,7 @@
         }
       },
       "iina": {
-        "version": "1.0.4",
+        "version": "1.0.6",
         "options": {
           "full_name": "iina"
         }
@@ -990,7 +990,7 @@
         }
       },
       "keybase": {
-        "version": "5.0.0-20191114182642,f73f97dac6",
+        "version": "5.3.0-20200310172631,4f2689009b",
         "options": {
           "full_name": "keybase"
         }
@@ -1002,25 +1002,25 @@
         }
       },
       "slack": {
-        "version": "4.1.2",
+        "version": "4.4.1",
         "options": {
           "full_name": "slack"
         }
       },
       "telegram": {
-        "version": "5.8.1-185463",
+        "version": "6.0.196005",
         "options": {
           "full_name": "telegram"
         }
       },
       "whatsapp": {
-        "version": "0.3.9308",
+        "version": "0.4.2088",
         "options": {
           "full_name": "whatsapp"
         }
       },
       "discord": {
-        "version": "0.0.257",
+        "version": "0.0.256",
         "options": {
           "full_name": "discord"
         }
@@ -1044,19 +1044,19 @@
         }
       },
       "alfred": {
-        "version": "4.0.6_1124",
+        "version": "4.0.9_1144",
         "options": {
           "full_name": "alfred"
         }
       },
       "karabiner-elements": {
-        "version": "12.8.0",
+        "version": "12.9.0",
         "options": {
           "full_name": "karabiner-elements"
         }
       },
       "keka": {
-        "version": "1.1.22",
+        "version": "1.1.26",
         "options": {
           "full_name": "keka"
         }
@@ -1068,19 +1068,19 @@
         }
       },
       "postman": {
-        "version": "7.12.0",
+        "version": "7.21.2",
         "options": {
           "full_name": "postman"
         }
       },
       "docker": {
-        "version": "2.1.0.5,40693",
+        "version": "2.2.0.5,43884",
         "options": {
           "full_name": "docker"
         }
       },
       "iterm2": {
-        "version": "3.3.7",
+        "version": "3.3.9",
         "options": {
           "full_name": "iterm2"
         }
@@ -1092,13 +1092,13 @@
         }
       },
       "visual-studio-code": {
-        "version": "1.40.2",
+        "version": "1.43.2",
         "options": {
           "full_name": "visual-studio-code"
         }
       },
       "jetbrains-toolbox": {
-        "version": "1.16.6067",
+        "version": "1.16.6319",
         "options": {
           "full_name": "jetbrains-toolbox"
         }
@@ -1110,7 +1110,7 @@
         }
       },
       "dbeaver-community": {
-        "version": "7.0.3",
+        "version": "7.0.4",
         "options": {
           "full_name": "dbeaver-community"
         }
@@ -1152,8 +1152,8 @@
       "catalina": {
         "HOMEBREW_VERSION": "2.2.15",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "696389bccdc51b7c88eb1ee9f3a0bdff7302b745",
-        "CLT": "11.0.33.17",
+        "Homebrew/homebrew-core": "8d8fd446d5df745f43779a0c417f3e2e29339f68",
+        "CLT": "1103.0.32.59",
         "Xcode": "11.4.1",
         "macOS": "10.15.4"
       }

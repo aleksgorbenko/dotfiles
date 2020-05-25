@@ -31,16 +31,11 @@ brew 'cmake'
 brew 'go'
 brew 'protobuf'
 cask 'adoptopenjdk13'
-brew 'kotlin'
-
-# package management
-brew 'maven'
-brew 'yarn'
 
 # utils
 brew 'jq'
 brew 'zsh'
-brew 'fzf' # better `find`
+brew 'fzf' # fuzzy search
 brew 'grc' # terminal coloriser
 brew 'cheat' # short `man`
 brew 'autojump' # navigation
@@ -61,7 +56,7 @@ brew 'gotop' # better top
 brew 'm-cli' # control mac os via terminal
 brew 'terminal-notifier'
 brew 'starship'
-brew 'xsv'
+brew 'xsv' # work with csv
 
 # cloud
 brew 'awslogs'
@@ -100,8 +95,8 @@ cask 'iina'
 cask 'calibre'
 cask 'anki' # learn.space.repeat
 cask "amazon-photos"
-cask "keybase"
 cask "transmission"
+cask "kap" # gif/ screator / screen recorder
 
 # chat
 cask 'slack'
@@ -132,6 +127,7 @@ cask 'jetbrains-toolbox'
 # db
 cask "sequel-pro"
 cask 'dbeaver-community'
+cask 'pgcli' # autocompletion and syntax highlighting
 
 #########
 # FONTS #
