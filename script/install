@@ -59,7 +59,7 @@ function install_dotfiles () {
 	$DOTS/bin/link-file "${DOTS}/config/starship.toml" "${HOME}/.config/starship.toml"
 
 	# alacritty config
-	$DOTS/bin/link-file "${DOTS}/config/alacritty.yaml" "${HOME}/.config/alacritty.yaml"
+	$DOTS/bin/link-file "${DOTS}/config/alacritty.yml" "${HOME}/.config/alacritty/alacritty.yaml"
 
 	# git config
 	$DOTS/bin/link-file "${DOTS}/git/gitconfig" "${HOME}/.gitconfig"

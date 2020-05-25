@@ -26,7 +26,7 @@ source "${ZSH}/zsh/config.zsh"
 
 # 6. More plugins
 
-# Numbered folder and git output
+# Numbered git output
 [[ -x "/usr/local/bin/scmpuff" ]] && eval "$(scmpuff init -s)"
 
 # Amazing git add, log, diff, reset, checkout, stash, clean
@@ -39,6 +39,4 @@ source "${ZSH}/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh"
 # Colored output for common unix commands
 [[ -s "/usr/local/etc/grc.bashrc" ]] && source "/usr/local/etc/grc.bashrc"
 
-# zprof # uncomment to profile laoding speed
-
-# [[ -e "${HOME}/.iterm2_shell_integration.zsh" ]] && source "${HOME}/.iterm2_shell_integration.zsh" || true
+# zprof # uncomment to profile loading speed

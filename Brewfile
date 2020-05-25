@@ -44,6 +44,7 @@ brew 'fzf' # better `find`
 brew 'grc' # terminal coloriser
 brew 'cheat' # short `man`
 brew 'autojump' # navigation
+brew 'scc' # code line counter
 brew 'tmux'
 brew 'openssl'
 brew 'tree'
