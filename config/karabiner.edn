@@ -134,18 +134,18 @@
 		[:!Sh :!Sx [:ru]]
 		[:!Sx :!Sh [:ru]]
 
-		[:open_bracket :hyphen [:ru]] ; [ -> ь
-		[:close_bracket :equal_sign [:ru]] ; ] -> ъ
-		[:hyphen :!Ohyphen [:ru]] ; ь -> -
-		[:equal_sign :!Oequal_sign [:ru]] ; ъ -> =
+		; [:open_bracket :hyphen [:ru]] ; [ -> ь
+		; [:close_bracket :equal_sign [:ru]] ; ] -> ъ
+		; [:hyphen :!Ohyphen [:ru]] ; ь -> -
+		; [:equal_sign :!Oequal_sign [:ru]] ; ъ -> =
 
-		:j-mode
-		[:a :q [:ru]] ; ja -> я
-		[:u :open_bracket [:ru]] ; ju -> ю
-		[:o :!Oe [:ru]] ; jo -> ё
+		; :j-mode
+		; [:a :q [:ru]] ; ja -> я
+		; [:u :open_bracket [:ru]] ; ju -> ю
+		; [:o :!Oe [:ru]] ; jo -> ё
 
-		:z-mode
-		[:h :close_bracket [:ru]] ;-> ж
+		; :z-mode
+		; [:h :close_bracket [:ru]] ;-> ж
 	]
 }
 
@@ -369,17 +369,20 @@
 	:rules [
 		:w-mode
 		[:c [:km "open: Chrome"]]
-		[:s [:km "open: Spotify"]]
+		[:x [:km "open: Spotify"]]
+		[:f [:km "open: Firefox"]]
+		[:o [:km "open: Obsidian"]]
+		[:s [:km "open: Slack"]]
 		[:a [:km "open: Activity Monitor"]]
 		[:n [:km "open: Notion"]]
-		[:p [:km "open: Sequel Pro"]]
+		[:p [:km "open: PDF Expert"]]
 		[:t [:km "open: Telegram"]]
 		[:2 [:km "open: 2Do"]]
 		[:v [:km "open: VS Code"]]
 		[:i [:km "open: iTerm"]]
 		[:k [:km "open: Keyboard Maestro"]]
-		[:period [:km "open: Console"]]
-		[:f [:km "open: Finder"]]
+		[:m [:km "open: Amazon Music"]]
+		[:period [:km "open: Finder"]]
 	]
 }
 
@@ -389,18 +392,20 @@
 		:backslash-mode
 		[:c [:km "open: Chrome"]]
 		[:x [:km "open: Spotify"]]
+		[:f [:km "open: Firefox"]]
+		[:o [:km "open: Obsidian"]]
 		[:s [:km "open: Slack"]]
 		[:a [:km "open: Activity Monitor"]]
 		[:n [:km "open: Notion"]]
-		[:p [:km "open: Sequel Pro"]]
+		[:p [:km "open: PDF Expert"]]
 		[:t [:km "open: Telegram"]]
 		[:2 [:km "open: 2Do"]]
 		[:v [:km "open: VS Code"]]
 		[:i [:km "open: iTerm"]]
 		[:k [:km "open: Keyboard Maestro"]]
+		[:m [:km "open: Amazon Music"]]
 		[:w [:km "open: WhatsApp"]]
-		[:period [:km "open: Console"]]
-		[:f [:km "open: Finder"]]
+		[:period [:km "open: Finder"]]
 	]
 }
 
@@ -531,7 +536,7 @@
 		[:a [:alfred "search files" "nikivi.manage.notes"]]
 		[:c [:alfred "search emoji" "com.github.jsumners.alfred-emoji"]]
 		[:f [:alfred "search repos" "net.deanishe.alfred-git-repos"]]
-		[:s [:alfred "search clones" "com.vitorgalvao.alfred.directories"]]
+		[:s [:km "create new snippet of latest clipboard item" ]]
 		[:spacebar [:alfred "search PDFs" "nikivi.search.files"]]
 		[:d [:alfred "search folders" "nikivi.search.folders"]]
 		[:caps_lock [:alfred "search desktop" "com.vitorgalvao.alfred.directories"]]
@@ -560,7 +565,7 @@
 		[:d [:km "open videos trello"]]
 		[:u [:km "open courses trello"]]
 		[:t [:km "open 2do today"]]
-		[:l [:km "openl 2do later"]]
+		[:l [:km "open 2do later"]]
 		[:g [:km "search google"]]
 		[:w [:km "open 2do work"]]
 		[:y [:km "open 2do buy"]]
@@ -775,6 +780,18 @@
 		[:period [:alfred "next" "com.vdesabou.spotify.mini.player"]]
 		[:comma [:alfred "previous" "com.vdesabou.spotify.mini.player"]]
 		[:slash [:alfred "playpause" "com.vdesabou.spotify.mini.player"]]
+	]
+}
+; amazon musiz
+
+{
+	:des "xkey (spotify)"
+	:rules [
+		:m-mode
+
+		[:period [:km "Amazon Music: play next track"]]
+		[:comma [:km "Amazon Music: play previous track"]]
+		[:slash [:km "Amazon Music: play play/pause"]]
 	]
 }
 

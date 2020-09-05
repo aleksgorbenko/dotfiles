@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+PYTHON_VESRION=3.8.5
+RUBY_VESRION=2.7.1
+
 source "${HOME}/.dotfiles/script/echos.sh"
 
 bot "Welcome aboard, I will turn your mac in a dev machine now"
@@ -7,10 +10,20 @@ bot "Welcome aboard, I will turn your mac in a dev machine now"
 cd "$(dirname "$0")/.."
 DOTS=$(pwd -P)
 
+# exit if any command returns a non-zero code
 set -e
 
-# bot "› sudo softwareupdate -i -a"
+# bot "Install latest OS updates"
 # sudo softwareupdate -i -a
+
+# Install command tools
+if [[ `xcode-select -p 1>/dev/null;echo $?` != 0 ]];then
+	bot "Installing latest xcode tools"
+	xcode-select --install
+fi
+
+bot "Enable installation from unverified developers"
+sudo spctl --master-disable
 
 #  BREW
 if test ! $(which brew)
@@ -70,6 +83,9 @@ function install_dotfiles () {
 	# zsh
 	$DOTS/bin/link-file "${DOTS}/zsh/zshrc" "${HOME}/.zshrc"
 	$DOTS/bin/link-file "${DOTS}/zsh/zsh_plugins" "${HOME}/.zsh_plugins"
+
+	# convenience
+	$DOTS/bin/link-file "${Home}/Dropbox/src" "${HOME}/src"
 }
 
 function install_brew_packages () {
@@ -114,6 +130,29 @@ function install_shell () {
 		sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
 		chsh -s /usr/local/bin/zsh
 	fi
+
+	# reload the shell
+	# source "${HOME}/.zshrc"
+}
+
+function install_lang () {
+	# install nvm and LTS node
+	if [[ ! -s "${HOME}/.nvm/nvm.sh"  ]]; then
+		curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+		nvm install --lts
+	fi
+
+	# install python
+	if [[ -x /usr/local/bin/pyenv ]]; then
+		/usr/local/bin/pyenv install $PYTHON_VESRION
+		/usr/local/bin/pyenv global $PYTHON_VESRION
+	fi
+
+	# install ruby
+	if [[ -x /usr/local/bin/rbenv ]]; then
+		/usr/local/bin/rbenv install $RUBY_VESRION
+		/usr/local/bin/rbenv global $RUBY_VESRION
+	fi
 }
 
 # Do we need to ask for sudo password or is it already passwordless?
@@ -133,5 +172,6 @@ $DOTS/macos/set-defaults.sh
 install_brew_packages
 install_extras
 install_shell
+install_lang
 
 ok 'Done! May the Force be with you!'

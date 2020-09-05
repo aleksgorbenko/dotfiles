@@ -9,6 +9,10 @@ tap "adoptopenjdk/openjdk"
 # PACKAGES #
 ############
 
+# magnet - 441258766
+# trello - 1278508951
+# paste - 967805235
+# mas install 441258766 1278508951 967805235
 brew 'mas'
 brew 'mackup'
 
@@ -54,8 +58,8 @@ brew 'exa' # better `ls`
 brew 'ctop' # htop for containers
 brew 'gotop' # better top
 brew 'm-cli' # control mac os via terminal
-brew 'terminal-notifier'
-brew 'starship'
+brew 'terminal-notifier' # p.s this won't work in Alacritty
+brew 'starship' # theme
 brew 'xsv' # work with csv
 
 # cloud
@@ -91,11 +95,7 @@ cask '1password'
 cask 'dropbox'
 cask 'authy'
 cask 'notion'
-cask 'iina'
-cask 'calibre'
 cask 'anki' # learn.space.repeat
-cask "amazon-photos"
-cask "transmission"
 cask "kap" # gif/ screator / screen recorder
 
 # chat
@@ -107,7 +107,6 @@ cask "discord"
 # utils
 cask "onyx"
 cask "scroll-reverser"
-cask 'flux'
 cask 'alfred' # 100x better Spotlight
 cask 'karabiner-elements' # remap everything!
 brew 'yqrashawn/goku/goku' # helps remap everything!
@@ -126,8 +125,7 @@ cask 'jetbrains-toolbox'
 
 # db
 cask "sequel-pro"
-cask 'dbeaver-community'
-cask 'pgcli' # autocompletion and syntax highlighting
+brew 'pgcli' # autocompletion and syntax highlighting
 
 #########
 # FONTS #
@@ -137,3 +135,14 @@ cask 'font-open-sans'
 cask 'font-hasklig'
 cask 'font-fira-code'
 cask 'font-hack-nerd-font'
+
+############
+# OPTIONAL #
+############
+
+# cask "amazon-photos"
+# cask "amazon-music"
+# cask "transmission"
+# cask 'iina'
+# cask 'calibre'
+# cask 'dbeaver-community'

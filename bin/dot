@@ -2,4 +2,5 @@
 # `dot` handles installation, updates, things like that. Run it periodically
 # to make sure you're on the latest and greatest.
 set -e
+cd $ZSH
 brew update && brew bundle && brew doctor

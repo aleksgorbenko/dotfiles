@@ -8,22 +8,19 @@ export PATH="/usr/local/opt/gettext/bin:$PATH"
 export GO111MODULE=on
 export GOPATH=$HOME/go
 export PATH="$GOPATH/bin:$PATH"
+export GOPRIVATE="bitbucket.org/aleksgorbenko,github.com/aleksgorbenko"
 
 # Add .NET Core SDK tools
-export PATH="$PATH:/Users/gbko/.dotnet/tools"
+# export PATH="$PATH:/Users/gbko/.dotnet/tools"
 
 # git commit signatures
 export GPG_TTY=$(tty)
 
-if (( $+commands[yarn] )); then
-  export PATH="$PATH:`yarn global bin`"
-fi
-
-typeset -U PATH # Remove duplicates in $PATH
-typeset -U fpath # Remove duplicates in $fpath
+export EDITOR='code'
 
 # add functions folder to fpath if needed
 # fpath=(${ZSH}/functions $fpath)
 # autoload -U ${ZSH}/functions/*(:t)
 
-export EDITOR='code'
+typeset -U PATH # Remove duplicates in $PATH
+typeset -U fpath # Remove duplicates in $fpath

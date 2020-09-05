@@ -360,13 +360,22 @@ running "Disable continuous spell checking"
 defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "continuousSpellCheckingEnabled" -bool false;ok
 
 ###############################################################################
+bot "Anki"
+###############################################################################
+
+running "Disable App Nap for AnkiConnect to work"
+defaults write net.ankiweb.dtop NSAppSleepDisabled -bool true
+defaults write net.ichi2.anki NSAppSleepDisabled -bool true
+defaults write org.qt-project.Qt.QtWebEngineCore NSAppSleepDisabled -bool true
+
+###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
 
 bot "OK. Note that some of these changes require a logout/restart to take effect. Killing affected applications (so they can reboot)..."
 for app in "Activity Monitor" "Calendar" "Contacts" "cfprefsd" \
   "Dock" "Finder" "Mail" "Messages" "Safari" "SystemUIServer" \
-  "Terminal"; do
+  "Terminal" "Anki"; do
   killall "${app}" > /dev/null 2>&1
 done
 

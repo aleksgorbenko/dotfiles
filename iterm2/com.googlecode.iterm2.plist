@@ -256,10 +256,12 @@
 	<key>DimOnlyText</key>
 	<true/>
 	<key>DisableFullscreenTransparency</key>
-	<false/>
+	<true/>
 	<key>DisablePotentiallyInsecureEscapeSequences</key>
 	<false/>
 	<key>DoubleClickPerformsSmartSelection</key>
+	<true/>
+	<key>EnableDivisionView</key>
 	<true/>
 	<key>EnableRendezvous</key>
 	<false/>
@@ -278,9 +280,9 @@
 	<key>HideMenuBarInFullscreen</key>
 	<true/>
 	<key>HideScrollbar</key>
-	<false/>
+	<true/>
 	<key>HideTab</key>
-	<false/>
+	<true/>
 	<key>HideTabNumber</key>
 	<false/>
 	<key>HighlightTabLabels</key>
@@ -292,9 +294,9 @@
 	<key>Hotkey</key>
 	<true/>
 	<key>HotkeyChar</key>
-	<integer>96</integer>
+	<integer>46</integer>
 	<key>HotkeyCode</key>
-	<integer>50</integer>
+	<integer>47</integer>
 	<key>HotkeyMigratedFromSingleToMulti</key>
 	<true/>
 	<key>HotkeyModifiers</key>
@@ -337,7 +339,7 @@
 	dWxs0g0ODxJaTlMub2JqZWN0c1YkY2xhc3OiEBGAAoAKgA3TFA0OFRkdV05TLmtleXOj
 	FhcYgAOABIAFoxobHIAGgAeACIAJWklkZW50aWZpZXJVV2lkdGhWSGlkZGVuUTAjQGjA
 	AAAAAAAI0iUmJyhaJGNsYXNzbmFtZVgkY2xhc3Nlc1xOU0RpY3Rpb25hcnmiJylYTlNP
-	YmplY3TTFA0OKy8doxYXGIADgASABaMwMRyAC4AMgAiACVExI0B0oZ2yLQ5W0iUmNzhe
+	YmplY3TTFA0OKy8doxYXGIADgASABaMwMRyAC4AMgAiACVExI0BzsZ2yLQ5W0iUmNzhe
 	TlNNdXRhYmxlQXJyYXmjNzkpV05TQXJyYXkACAARABoAJAApADIANwBJAEwAUgBUAGMA
 	aQBuAHkAgACDAIUAhwCJAJAAmACcAJ4AoACiAKYAqACqAKwArgC5AL8AxgDIANEA0gDX
 	AOIA6wD4APsBBAELAQ8BEQETARUBGQEbAR0BHwEhASMBLAExAUABRAAAAAAAAAIBAAAA
@@ -358,10 +360,14 @@
 		<key>TB Is Shown</key>
 		<integer>1</integer>
 	</dict>
+	<key>NSWindow Frame NSColorPanel</key>
+	<string>44 83 224 275 0 0 1920 1177 </string>
 	<key>NSWindow Frame NSNavPanelAutosaveName</key>
 	<string>698 420 799 448 0 0 1920 1177 </string>
+	<key>NSWindow Frame SUUpdateAlert</key>
+	<string>-361 1968 620 392 -1331 1200 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>44 2 1054 1173 0 0 1920 1177 </string>
+	<string>-1331 1200 1277 1417 -1331 1200 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>-1009 1404 585 446 -1331 1200 2560 1417 </string>
 	<key>NeverWarnAboutShortLivedSessions_F229DDD8-55ED-47D9-B169-CE02C81614C3</key>
@@ -532,13 +538,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.16058349609375</real>
+				<real>0.25882352941176473</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.11519421693409981</real>
+				<real>0.21176470588235294</real>
 				<key>Red Component</key>
-				<real>0.10479729529470205</real>
+				<real>0.19215686274509805</real>
 			</dict>
 			<key>Background Image Is Tiled</key>
 			<false/>
@@ -665,7 +671,7 @@
 			<key>Horizontal Spacing</key>
 			<real>1</real>
 			<key>Icon</key>
-			<integer>1</integer>
+			<integer>0</integer>
 			<key>Idle Code</key>
 			<integer>0</integer>
 			<key>Initial Text</key>
@@ -1017,6 +1023,8 @@
 			<true/>
 			<key>Normal Font</key>
 			<string>FiraCode-Regular 12</string>
+			<key>Open Toolbelt</key>
+			<false/>
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
@@ -1329,22 +1337,22 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.150054931640625</real>
+				<real>0.25882352941176473</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.10807041535153984</real>
+				<real>0.21176470588235294</real>
 				<key>Red Component</key>
-				<real>0.10340546909719706</real>
+				<real>0.19215686274509805</real>
 			</dict>
 			<key>Tags</key>
 			<array/>
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Title Components</key>
-			<integer>4</integer>
+			<integer>256</integer>
 			<key>Transparency</key>
-			<real>0.097455980329949246</real>
+			<real>0.048754758883248733</real>
 			<key>Triggers</key>
 			<array>
 				<dict>
@@ -1406,6 +1414,16 @@
 	<array>
 		<string>3.3.9</string>
 	</array>
+	<key>NoSyncBFPFavorites</key>
+	<array>
+		<string>JetBrains Mono</string>
+		<string>Fira Code</string>
+	</array>
+	<key>NoSyncBFPRecents</key>
+	<array>
+		<string>Fira Code</string>
+		<string>JetBrains Mono</string>
+	</array>
 	<key>NoSyncCommandHistoryHasEverBeenUsed</key>
 	<true/>
 	<key>NoSyncFrame_SharedPreferences</key>
@@ -1415,12 +1433,14 @@
 		<key>topLeft</key>
 		<string>{832, 1117}</string>
 	</dict>
+	<key>NoSyncHaveUsedCopyMode</key>
+	<true/>
 	<key>NoSyncInstallationId</key>
 	<string>689CC326-900A-4394-82EA-B96C79085CA6</string>
 	<key>NoSyncLastTipTime</key>
-	<real>610568178.33907902</real>
+	<real>613333255.29389501</real>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>7</integer>
+	<integer>14</integer>
 	<key>NoSyncNextAnnoyanceTime</key>
 	<real>608286645.60347795</real>
 	<key>NoSyncOnboardingWindowHasBeenShown</key>
@@ -2137,20 +2157,27 @@
 	<real>607777791.54821098</real>
 	<key>NoSyncTipsToNotShow</key>
 	<array>
-		<string>0004</string>
-		<string>0000</string>
 		<string>0010</string>
-		<string>0007</string>
-		<string>0003</string>
-		<string>0006</string>
-		<string>0002</string>
-		<string>000</string>
+		<string>0015</string>
+		<string>0004</string>
 		<string>0009</string>
-		<string>0005</string>
-		<string>0001</string>
+		<string>0013</string>
+		<string>0002</string>
+		<string>0018</string>
+		<string>0007</string>
 		<string>0011</string>
+		<string>0000</string>
+		<string>0016</string>
+		<string>0005</string>
+		<string>0014</string>
+		<string>0003</string>
 		<string>0008</string>
 		<string>0012</string>
+		<string>0001</string>
+		<string>000</string>
+		<string>0017</string>
+		<string>0006</string>
+		<string>0019</string>
 	</array>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
@@ -2224,17 +2251,25 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-05-06T19:30:47Z</date>
+	<date>2020-06-08T08:56:04Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
+	<key>SUUpdateGroupIdentifier</key>
+	<integer>4110098480</integer>
+	<key>SUUpdateRelaunchingMarker</key>
+	<true/>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>SeparateStatusBarsPerPane</key>
 	<false/>
+	<key>SeparateWindowTitlePerTab</key>
+	<true/>
 	<key>ShowBookmarkName</key>
 	<true/>
-	<key>ShowPaneTitles</key>
+	<key>ShowFullScreenTabBar</key>
 	<true/>
+	<key>ShowPaneTitles</key>
+	<false/>
 	<key>SmartPlacement</key>
 	<false/>
 	<key>SoundForEsc</key>
@@ -2243,6 +2278,8 @@
 	<real>0.54065824468085111</real>
 	<key>StatusBarPosition</key>
 	<integer>1</integer>
+	<key>StretchTabsToFillBar</key>
+	<true/>
 	<key>SwitchTabModifier</key>
 	<integer>4</integer>
 	<key>SwitchWindowModifier</key>

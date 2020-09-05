@@ -29,6 +29,7 @@ alias bci="brew cask install"
 alias bcu="brew cask uninstall"
 alias bup="brew upgrade"
 alias bu="brew update"
+alias br="brew uninstall"
 
 # Pipe my public key to my clipboard.
 alias pubkey="more ~/.ssh/me/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
