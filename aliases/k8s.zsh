@@ -11,6 +11,9 @@ alias kl="kubectl logs"
 alias ka="kubectl apply"
 
 alias kdel="kubectl delete"
+alias kda="kubectl delete --all"
+alias kdap="kubectl delete --all pods"
+alias kdad="kubectl delete --all deployments"
 
 # kubectx
 alias kc="kubectx"

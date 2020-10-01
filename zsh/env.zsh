@@ -10,6 +10,9 @@ export GOPATH=$HOME/go
 export PATH="$GOPATH/bin:$PATH"
 export GOPRIVATE="bitbucket.org/aleksgorbenko,github.com/aleksgorbenko"
 
+# Serverless Framework
+export PATH="$HOME/.serverless/bin:$PATH"
+
 # Add .NET Core SDK tools
 # export PATH="$PATH:/Users/gbko/.dotnet/tools"
 

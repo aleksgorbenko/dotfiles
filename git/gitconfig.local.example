@@ -1,8 +1,6 @@
 # Local gitconfig that will be merged with global
 # user gitconfig
 
-[hub]
-        protocol = https
 [user]
         name = AUTHORNAME
         email = AUTHOREMAIL

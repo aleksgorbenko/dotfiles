@@ -55,7 +55,7 @@ jenv() {
     export PATH="$HOME/.jenv/bin:$PATH"
     unset -f jenv
 
-    eval "$(command jenv init -)"
+    eval "$(jenv init -)"
     # invoke the real jenv function
     jenv "$@"
   else

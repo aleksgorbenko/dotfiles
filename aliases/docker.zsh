@@ -43,3 +43,30 @@ function docker-nuke() {
   docker rm $(docker ps -a -q)
   docker rmi $(docker images -q)
 }
+
+function dri() {
+    echo 'docker rmi (docker images -q) -f'
+    docker rmi $(docker images -q) -f
+}
+function dsa() {
+    echo 'docker stop (docker ps -qa)'
+    docker stop $(docker ps -qa)
+}
+function drv() {
+    echo 'docker volume rm (docker volume ls -q)'
+    docker volume rm $(docker volume ls -q)
+}
+function dsp() {
+    echo 'docker system prune --volumes'
+    docker system prune --volumes
+}
+function dstats() {
+    docker stats $(docker ps --format '{{.Names}}')
+}
+function drc() {
+   echo 'docker rm (docker ps -a -q)'
+   docker rm $(docker ps -a -q)
+}
+function drn() {
+    docker network rm $(docker network ls -q)
+}

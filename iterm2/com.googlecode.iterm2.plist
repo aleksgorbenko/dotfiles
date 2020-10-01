@@ -256,12 +256,10 @@
 	<key>DimOnlyText</key>
 	<true/>
 	<key>DisableFullscreenTransparency</key>
-	<true/>
+	<false/>
 	<key>DisablePotentiallyInsecureEscapeSequences</key>
 	<false/>
 	<key>DoubleClickPerformsSmartSelection</key>
-	<true/>
-	<key>EnableDivisionView</key>
 	<true/>
 	<key>EnableRendezvous</key>
 	<false/>
@@ -280,9 +278,9 @@
 	<key>HideMenuBarInFullscreen</key>
 	<true/>
 	<key>HideScrollbar</key>
-	<true/>
+	<false/>
 	<key>HideTab</key>
-	<true/>
+	<false/>
 	<key>HideTabNumber</key>
 	<false/>
 	<key>HighlightTabLabels</key>
@@ -315,10 +313,6 @@
 	<true/>
 	<key>MaxVertically</key>
 	<false/>
-	<key>NSNavLastRootDirectory</key>
-	<string>~/Documents</string>
-	<key>NSNavPanelExpandedSizeForOpenMode</key>
-	<string>{799, 448}</string>
 	<key>NSQuotedKeystrokeBinding</key>
 	<string></string>
 	<key>NSRepeatCountBinding</key>
@@ -339,7 +333,7 @@
 	dWxs0g0ODxJaTlMub2JqZWN0c1YkY2xhc3OiEBGAAoAKgA3TFA0OFRkdV05TLmtleXOj
 	FhcYgAOABIAFoxobHIAGgAeACIAJWklkZW50aWZpZXJVV2lkdGhWSGlkZGVuUTAjQGjA
 	AAAAAAAI0iUmJyhaJGNsYXNzbmFtZVgkY2xhc3Nlc1xOU0RpY3Rpb25hcnmiJylYTlNP
-	YmplY3TTFA0OKy8doxYXGIADgASABaMwMRyAC4AMgAiACVExI0BzsZ2yLQ5W0iUmNzhe
+	YmplY3TTFA0OKy8doxYXGIADgASABaMwMRyAC4AMgAiACVExI0B0oZ2yLQ5W0iUmNzhe
 	TlNNdXRhYmxlQXJyYXmjNzkpV05TQXJyYXkACAARABoAJAApADIANwBJAEwAUgBUAGMA
 	aQBuAHkAgACDAIUAhwCJAJAAmACcAJ4AoACiAKYAqACqAKwArgC5AL8AxgDIANEA0gDX
 	AOIA6wD4APsBBAELAQ8BEQETARUBGQEbAR0BHwEhASMBLAExAUABRAAAAAAAAAIBAAAA
@@ -361,15 +355,11 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSColorPanel</key>
-	<string>44 83 224 275 0 0 1920 1177 </string>
-	<key>NSWindow Frame NSNavPanelAutosaveName</key>
-	<string>698 420 799 448 0 0 1920 1177 </string>
+	<string>0 163 224 275 0 0 1792 1097 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>-361 1968 620 392 -1331 1200 2560 1417 </string>
+	<string>586 548 620 392 0 0 1792 1097 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>-1331 1200 1277 1417 -1331 1200 2560 1417 </string>
-	<key>NSWindow Frame iTerm Window 1</key>
-	<string>-1009 1404 585 446 -1331 1200 2560 1417 </string>
+	<string>-981 1280 1677 1417 -981 1280 2560 1417 </string>
 	<key>NeverWarnAboutShortLivedSessions_F229DDD8-55ED-47D9-B169-CE02C81614C3</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_F229DDD8-55ED-47D9-B169-CE02C81614C3_selection</key>
@@ -538,13 +528,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.25882352941176473</real>
+				<real>0.16058349609375</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.21176470588235294</real>
+				<real>0.11519421693409981</real>
 				<key>Red Component</key>
-				<real>0.19215686274509805</real>
+				<real>0.10479729529470205</real>
 			</dict>
 			<key>Background Image Is Tiled</key>
 			<false/>
@@ -671,7 +661,7 @@
 			<key>Horizontal Spacing</key>
 			<real>1</real>
 			<key>Icon</key>
-			<integer>0</integer>
+			<integer>1</integer>
 			<key>Idle Code</key>
 			<integer>0</integer>
 			<key>Initial Text</key>
@@ -1023,8 +1013,6 @@
 			<true/>
 			<key>Normal Font</key>
 			<string>FiraCode-Regular 12</string>
-			<key>Open Toolbelt</key>
-			<false/>
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
@@ -1337,22 +1325,22 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.25882352941176473</real>
+				<real>0.150054931640625</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.21176470588235294</real>
+				<real>0.10807041535153984</real>
 				<key>Red Component</key>
-				<real>0.19215686274509805</real>
+				<real>0.10340546909719706</real>
 			</dict>
 			<key>Tags</key>
 			<array/>
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Title Components</key>
-			<integer>256</integer>
+			<integer>4</integer>
 			<key>Transparency</key>
-			<real>0.048754758883248733</real>
+			<real>0.097455980329949246</real>
 			<key>Triggers</key>
 			<array>
 				<dict>
@@ -1412,40 +1400,23 @@
 	</array>
 	<key>NoSyncAllAppVersions</key>
 	<array>
-		<string>3.3.9</string>
+		<string>3.3.6</string>
+		<string>3.3.12</string>
 	</array>
-	<key>NoSyncBFPFavorites</key>
-	<array>
-		<string>JetBrains Mono</string>
-		<string>Fira Code</string>
-	</array>
-	<key>NoSyncBFPRecents</key>
-	<array>
-		<string>Fira Code</string>
-		<string>JetBrains Mono</string>
-	</array>
-	<key>NoSyncCommandHistoryHasEverBeenUsed</key>
-	<true/>
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
-		<string>{{0, 0}, {1920, 1200}}</string>
+		<string>{{0, 0}, {1792, 1120}}</string>
 		<key>topLeft</key>
-		<string>{832, 1117}</string>
+		<string>{574, 895}</string>
 	</dict>
-	<key>NoSyncHaveUsedCopyMode</key>
-	<true/>
 	<key>NoSyncInstallationId</key>
-	<string>689CC326-900A-4394-82EA-B96C79085CA6</string>
-	<key>NoSyncLastTipTime</key>
-	<real>613333255.29389501</real>
+	<string>9577D3FD-C401-4C8F-9985-365C940670E9</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>14</integer>
+	<integer>3</integer>
 	<key>NoSyncNextAnnoyanceTime</key>
-	<real>608286645.60347795</real>
+	<real>621093466.86743104</real>
 	<key>NoSyncOnboardingWindowHasBeenShown</key>
-	<true/>
-	<key>NoSyncPermissionToShowTip</key>
 	<true/>
 	<key>NoSyncRecordedVariables</key>
 	<dict>
@@ -1803,14 +1774,6 @@
 			</dict>
 			<dict>
 				<key>isTerminal</key>
-				<true/>
-				<key>name</key>
-				<string>currentTab.currentSession.lastCommand</string>
-				<key>nonterminalContext</key>
-				<integer>0</integer>
-			</dict>
-			<dict>
-				<key>isTerminal</key>
 				<false/>
 				<key>name</key>
 				<string>currentTab</string>
@@ -1822,14 +1785,6 @@
 				<true/>
 				<key>name</key>
 				<string>currentTab.currentSession</string>
-				<key>nonterminalContext</key>
-				<integer>0</integer>
-			</dict>
-			<dict>
-				<key>isTerminal</key>
-				<true/>
-				<key>name</key>
-				<string>currentTab.window</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -2024,14 +1979,6 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
-				<string>window</string>
-				<key>nonterminalContext</key>
-				<integer>0</integer>
-			</dict>
-			<dict>
-				<key>isTerminal</key>
-				<true/>
-				<key>name</key>
 				<string>id</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
@@ -2154,31 +2101,7 @@
 		</array>
 	</dict>
 	<key>NoSyncTipOfTheDayEligibilityBeganTime</key>
-	<real>607777791.54821098</real>
-	<key>NoSyncTipsToNotShow</key>
-	<array>
-		<string>0010</string>
-		<string>0015</string>
-		<string>0004</string>
-		<string>0009</string>
-		<string>0013</string>
-		<string>0002</string>
-		<string>0018</string>
-		<string>0007</string>
-		<string>0011</string>
-		<string>0000</string>
-		<string>0016</string>
-		<string>0005</string>
-		<string>0014</string>
-		<string>0003</string>
-		<string>0008</string>
-		<string>0012</string>
-		<string>0001</string>
-		<string>000</string>
-		<string>0017</string>
-		<string>0006</string>
-		<string>0019</string>
-	</array>
+	<real>620920666.86707795</real>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
 	<key>OpenArrangementAtStartup</key>
@@ -2247,29 +2170,23 @@
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/final_new.xml?shard=36</string>
+	<string>https://iterm2.com/appcasts/final_new.xml?shard=41</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-06-08T08:56:04Z</date>
+	<date>2020-09-22T11:56:20Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
-	<key>SUUpdateGroupIdentifier</key>
-	<integer>4110098480</integer>
 	<key>SUUpdateRelaunchingMarker</key>
-	<true/>
+	<false/>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>SeparateStatusBarsPerPane</key>
 	<false/>
-	<key>SeparateWindowTitlePerTab</key>
-	<true/>
 	<key>ShowBookmarkName</key>
 	<true/>
-	<key>ShowFullScreenTabBar</key>
-	<true/>
 	<key>ShowPaneTitles</key>
-	<false/>
+	<true/>
 	<key>SmartPlacement</key>
 	<false/>
 	<key>SoundForEsc</key>
@@ -2278,8 +2195,6 @@
 	<real>0.54065824468085111</real>
 	<key>StatusBarPosition</key>
 	<integer>1</integer>
-	<key>StretchTabsToFillBar</key>
-	<true/>
 	<key>SwitchTabModifier</key>
 	<integer>4</integer>
 	<key>SwitchWindowModifier</key>
@@ -2327,7 +2242,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.3.9</string>
+	<string>3.3.12</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
