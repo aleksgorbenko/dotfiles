@@ -1,0 +1,38 @@
+hotKey:
+  # resources
+  shift-1:
+    shortCut:    Shift-1
+    description: Viewing pods
+    command:     pods
+
+  shift-2:
+    shortCut:    Shift-2
+    description: View deployments
+    command:     dp
+
+  shift-3:
+    shortCut:    Shift-3
+    description: Service
+    command:     svc
+
+  shift-4:
+    shortCut:    Shift-4
+    description: ConfigMap
+    command:     configmap
+
+  shift-5:
+    shortCut:    Shift-5
+    description: CiliumnNetworkPolicy
+    command:     cnp
+
+  # navigation
+  shift-0:
+    shortCut:    Shift-0
+    description: Context
+    command:     context
+
+  shift-9:
+    shortCut:    Shift-9
+    description: Namespace
+    command:     namespace
+

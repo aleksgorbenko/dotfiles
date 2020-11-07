@@ -56,10 +56,6 @@ function install_gitconfig () {
 function install_dotfiles () {
 	bot "Installing dotfiles"
 
-	# ssh config
-	mkdir -p "${HOME}/.ssh"
-	$DOTS/bin/link-file "${DOTS}/ssh/me" "${HOME}/.ssh/me"
-
 	# make sure this folder exists
 	mkdir -p "${HOME}/.config"
 
@@ -73,6 +69,12 @@ function install_dotfiles () {
 
 	# alacritty config
 	$DOTS/bin/link-file "${DOTS}/config/alacritty.yml" "${HOME}/.config/alacritty/alacritty.yml"
+
+	# tmux config
+	$DOTS/bin/link-file "${DOTS}/config/tmux.conf" "${HOME}/.tmux.conf"
+
+	# k9s config
+	$DOTS/bin/link-file "${DOTS}/config/k9s_hotkey.yml" "${HOME}/.k9s/hotkey.yml"
 
 	# git config
 	$DOTS/bin/link-file "${DOTS}/git/gitconfig" "${HOME}/.gitconfig"
