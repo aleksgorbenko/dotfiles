@@ -374,14 +374,18 @@
 		[:o [:km "open: Obsidian"]]
 		[:s [:km "open: Slack"]]
 		[:a [:km "open: Activity Monitor"]]
+		[:g [:km "open: GoLand"]]
+		[:y [:km "open: Alacritty"]]
 		[:n [:km "open: Notion"]]
 		[:p [:km "open: PDF Expert"]]
 		[:t [:km "open: Telegram"]]
 		[:2 [:km "open: 2Do"]]
 		[:v [:km "open: VS Code"]]
 		[:i [:km "open: iTerm"]]
+		[:e [:km "open: Terminal"]]
 		[:k [:km "open: Keyboard Maestro"]]
 		[:m [:km "open: Amazon Music"]]
+		[:z [:km "open: Zoom"]]
 		[:period [:km "open: Finder"]]
 	]
 }
@@ -405,6 +409,7 @@
 		[:k [:km "open: Keyboard Maestro"]]
 		[:m [:km "open: Amazon Music"]]
 		[:w [:km "open: WhatsApp"]]
+		[:z [:km "open: Zoom"]]
 		[:period [:km "open: Finder"]]
 	]
 }
@@ -748,50 +753,43 @@
 	:des "zkey (chat)"
 	:rules [
 		:z-mode
-		; [:spacebar :!CSOz] ; Selection -> Twitter
-		; [:i [:km "New tweet with current URL"]]
-		; [:k [:km "open: Telegram"]]
-		; [:f [:km "open: Spark"]]
+		[:t [:km "open: Telegram"]]
+		[:s [:km "open: Slack"]]
+		[:d [:km "open: Discord"]]
 		; [:g [:alfred "search contacts" "nikivi.search.content"]]
-		; [:c [:km "open: Contacts"]]
+		[:c [:km "open: Contacts"]]
 		; [:h [:km "Create new contact"]]
-		; [:semicolon [:km "open: Slack"]]
-		; [:l [:km "open: Discord"]]
 	]
 }
 
 ; spotify
 
+
 {
-	:des "xkey (spotify)"
+	:des "xkey (music)"
 	:rules [
 		:x-mode
-		[:o [:km "Paste current Spotify song link"]]
 
-		[:j [:alfred "spot_mini" "com.vdesabou.spotify.mini.player"]]
-		[:k [:alfred "show_current_track" "com.vdesabou.spotify.mini.player"]]
-		[:m [:alfred "add_current_track_to" "com.vdesabou.spotify.mini.player"]]
-		[:n [:alfred "remove_current_track_from" "com.vdesabou.spotify.mini.player"]]
-		[:b [:alfred "show_playlists" "com.vdesabou.spotify.mini.player"]]
-
-		[:semicolon [:alfred "play" "com.vdesabou.spotify.mini.player" "spotify:playlist:4U7w1cpN9ei5LOzwpobiPQ"]] ; Liquid
-		[:quote [:alfred "play" "com.vdesabou.spotify.mini.player" "spotify:playlist:6OjSvDzNZVny8Uf0YJyx7B"]] ; Ambient Focus
-
-		[:period [:alfred "next" "com.vdesabou.spotify.mini.player"]]
-		[:comma [:alfred "previous" "com.vdesabou.spotify.mini.player"]]
-		[:slash [:alfred "playpause" "com.vdesabou.spotify.mini.player"]]
-	]
-}
-; amazon musiz
-
-{
-	:des "xkey (spotify)"
-	:rules [
-		:m-mode
-
+		; Amazon Music
 		[:period [:km "Amazon Music: play next track"]]
 		[:comma [:km "Amazon Music: play previous track"]]
 		[:slash [:km "Amazon Music: play play/pause"]]
+
+		; Spotify
+		; [:o [:km "Paste current Spotify song link"]]
+
+		; [:j [:alfred "spot_mini" "com.vdesabou.spotify.mini.player"]]
+		; [:k [:alfred "show_current_track" "com.vdesabou.spotify.mini.player"]]
+		; [:m [:alfred "add_current_track_to" "com.vdesabou.spotify.mini.player"]]
+		; [:n [:alfred "remove_current_track_from" "com.vdesabou.spotify.mini.player"]]
+		; [:b [:alfred "show_playlists" "com.vdesabou.spotify.mini.player"]]
+
+		; [:semicolon [:alfred "play" "com.vdesabou.spotify.mini.player" "spotify:playlist:4U7w1cpN9ei5LOzwpobiPQ"]] ; Liquid
+		; [:quote [:alfred "play" "com.vdesabou.spotify.mini.player" "spotify:playlist:6OjSvDzNZVny8Uf0YJyx7B"]] ; Ambient Focus
+
+		; [:period [:alfred "next" "com.vdesabou.spotify.mini.player"]]
+		; [:comma [:alfred "previous" "com.vdesabou.spotify.mini.player"]]
+		; [:slash [:alfred "playpause" "com.vdesabou.spotify.mini.player"]]
 	]
 }
 

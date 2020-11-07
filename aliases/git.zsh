@@ -42,7 +42,7 @@ alias gbnm='git branch --no-merged'
 alias gbr='git branch --remote'
 
 # ADD
-alias ga='git add'
+alias gad='git add'
 alias gaa='git add --all'
 alias gap='git add --patch'
 alias gau='git add --update'
@@ -201,7 +201,7 @@ alias gres='git reset'
 alias gresh='git reset --hard'
 alias gresoh='git reset origin/$(current_branch) --hard'
 # alias gru='git reset --'
-alias gress="git reset --soft HEAD~1"
+alias gres1="git reset --soft HEAD~1"
 
 alias grm='git rm'
 alias grmc='git rm --cached'
@@ -226,6 +226,15 @@ alias gstl='git stash list'
 alias gstp='git stash pop'
 alias gsts='git stash show --text'
 alias gstall='git stash --all'
+
+function gstp() {
+  if [[ "$#" != 0 ]]; then
+    git stash pop stash@{"$1"}
+  else
+    [[ "$#" == 0 ]]
+    git stash pop
+  fi
+}
 
 alias gts='git tag -s'
 alias gtv='git tag | sort -V'

@@ -72,8 +72,8 @@ bindkey '^[[3~' delete-char
 bindkey '^[3;5~' delete-char
 bindkey '^?' backward-delete-char
 
-# edit word separators, e.g don't jump over slashes
-export WORDCHARS='*?_[]~=&;!#$%^(){}'
+# edit word separators, e.g don't jump over slashes and equal signs
+export WORDCHARS='*?_[]~&;!#$%^(){}'
 
 # Completion system has to be always loaded after all completion styles
 # and configurations. Make sure to source all of them before this code.

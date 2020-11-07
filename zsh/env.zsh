@@ -19,7 +19,8 @@ export PATH="$HOME/.serverless/bin:$PATH"
 # git commit signatures
 export GPG_TTY=$(tty)
 
-export EDITOR='code'
+export EDITOR='vim'
+export K9S_EDITOR="vim"
 
 # add functions folder to fpath if needed
 # fpath=(${ZSH}/functions $fpath)
