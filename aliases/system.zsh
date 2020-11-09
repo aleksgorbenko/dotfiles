@@ -26,19 +26,23 @@ alias b="brew"
 alias bi="brew install"
 alias bc="brew cask"
 alias bci="brew cask install"
-alias bcu="brew cask uninstall"
-alias bup="brew upgrade"
-alias bu="brew update"
+alias bcu="brew upgrade --cask"
+alias bcr="brew cask uninstall"
+alias bu="brew upgrade"
+alias bup="brew update"
 alias br="brew uninstall"
 
 # Pipe my public key to my clipboard.
 alias pubkey="more ~/.ssh/me/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
 
 alias zh='source ~/.zshrc'
-alias ze="$EDITOR ~/.zshrc"
-alias ae="$EDITOR ~/.aliases"
-alias hosts="$EDITOR /etc/hosts"
-alias kara="$EDITOR ~/.config/karabiner.edn"
-alias ss="$EDITOR ~/.config/starship.toml"
-alias dots="$EDITOR ~/.dotfiles"
+alias tmr='tmux source-file ~/.tmux.conf'
+
+alias hosts="sudo vim /etc/hosts"
+alias ze="code ~/.zshrc"
+alias ae="code ~/.aliases"
+alias kara="code ~/.config/karabiner.edn"
+alias ss="code ~/.config/starship.toml"
+alias dots="code ~/.dotfiles"
+
 alias cdd="cd ~/.dotfiles"

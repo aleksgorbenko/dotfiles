@@ -21,7 +21,6 @@ brew "gcc"
 
 # git
 brew 'hub'
-brew 'git-secret'
 brew 'git-delta'
 cask 'diffmerge'
 
