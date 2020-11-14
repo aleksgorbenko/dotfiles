@@ -14,6 +14,7 @@ env:
   TERM: xterm-256color
 
 window:
+  dynamic_title: true
   # Window dimensions in character columns and lines
   # (changes require restart)
   dimensions:
@@ -149,7 +150,7 @@ colors:
 #
 # To completely disable the visual bell, set its duration to 0.
 #
-visual_bell:
+bell:
   animation: EaseOutExpo
   duration: 0
 
@@ -205,8 +206,6 @@ selection:
   # the selection clipboard. Otherwise, it will only be copied to the selection
   # clipboard.
   save_to_clipboard: true
-
-dynamic_title: true
 
 cursor:
   # Cursor style

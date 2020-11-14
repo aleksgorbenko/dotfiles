@@ -44,6 +44,6 @@ source "${ZSH}/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh"
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
 
 # Local variables, aliases, functions
-source "${ZSH}/zsh/.zshrc.local"
+[[ -s "${ZSH}/zsh/.zshrc.local" ]] && source "${ZSH}/zsh/.zshrc.local"
 
 # zprof # uncomment to profile loading speed
