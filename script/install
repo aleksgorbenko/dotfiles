@@ -65,7 +65,7 @@ function install_dotfiles () {
 	$DOTS/bin/link-file "${DOTS}/config/karabiner.edn" "${HOME}/.config/karabiner.edn"
 
 	# theme config
-	$DOTS/bin/link-file "${DOTS}/config/starship.toml" "${HOME}/.config/starship.toml"
+	$DOTS/bin/link-file "${DOTS}/config/p10k.zsh" "${HOME}/.p10k.zsh"
 
 	# alacritty config
 	$DOTS/bin/link-file "${DOTS}/config/alacritty.yml" "${HOME}/.config/alacritty/alacritty.yml"
