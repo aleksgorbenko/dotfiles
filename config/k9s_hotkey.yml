@@ -25,6 +25,11 @@ hotKey:
     description: CiliumnNetworkPolicy
     command:     cnp
 
+  shift-6:
+    shortCut:    Shift-6
+    description: HelmRelease
+    command:     helm.fluxcd.io/v1/helmreleases
+
   # navigation
   shift-0:
     shortCut:    Shift-0

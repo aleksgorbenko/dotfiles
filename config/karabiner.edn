@@ -774,7 +774,7 @@
 		; Amazon Music
 		[:period [:km "Amazon Music: play next track"]]
 		[:comma [:km "Amazon Music: play previous track"]]
-		[:slash [:km "Amazon Music: play play/pause"]]
+		[:slash [:km "Amazon Music: play/pause"]]
 
 		; Spotify
 		; [:o [:km "Paste current Spotify song link"]]
