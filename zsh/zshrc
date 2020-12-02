@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # zmodload zsh/zprof # uncomment to profile laoding speed
 
 export ZSH=${HOME}/.dotfiles
@@ -21,7 +28,7 @@ source "${ZSH}/zsh/zsh_plugins.sh"
 
 # 5. ZSH config
 source "${ZSH}/zsh/versions.zsh"
-eval "$(starship init zsh)"
+# eval "$(starship init zsh)"
 source "${ZSH}/zsh/config.zsh"
 
 # 6. More plugins
@@ -30,7 +37,7 @@ source "${ZSH}/zsh/config.zsh"
 [[ -x "/usr/local/bin/scmpuff" ]] && eval "$(scmpuff init -s)"
 
 # Amazing git add, log, diff, reset, checkout, stash, clean
-source "${ZSH}/zsh/plugins/forgit.plugin.zsh"
+# source "${ZSH}/zsh/plugins/forgit.plugin.zsh"
 source "${ZSH}/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh"
 
 # Better navigation
@@ -44,6 +51,10 @@ source "${ZSH}/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh"
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
 
 # Local variables, aliases, functions
-source "${ZSH}/zsh/.zshrc.local"
+[[ -s "${ZSH}/zsh/.zshrc.local" ]] && source "${ZSH}/zsh/.zshrc.local"
 
 # zprof # uncomment to profile loading speed
+source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

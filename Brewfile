@@ -27,23 +27,23 @@ cask 'diffmerge'
 # shell
 brew 'coreutils'
 brew 'getantibody/tap/antibody'
+brew 'romkatv/powerlevel10k/powerlevel10k'
 brew 'scmpuff'
+brew 'tmux'
+brew 'grc' # terminal coloriser
+brew 'fzf' # fuzzy search
+brew 'autojump' # navigation
 
 # langs
 brew 'cmake'
 brew 'go'
 brew 'protobuf'
-cask 'adoptopenjdk13'
 
 # utils
 brew 'jq'
 brew 'zsh'
-brew 'fzf' # fuzzy search
-brew 'grc' # terminal coloriser
 brew 'cheat' # short `man`
-brew 'autojump' # navigation
 brew 'scc' # code line counter
-brew 'tmux'
 brew 'openssl'
 brew 'tree'
 brew 'ripgrep' # better `grep`. usage: rg ...
@@ -58,7 +58,6 @@ brew 'ctop' # htop for containers
 brew 'gotop' # better top
 brew 'm-cli' # control mac os via terminal
 brew 'terminal-notifier' # p.s this won't work in Alacritty
-brew 'starship' # theme
 brew 'xsv' # work with csv
 
 # cloud
@@ -94,6 +93,7 @@ cask '1password'
 cask 'dropbox'
 cask 'authy'
 cask 'notion'
+cask 'obsidian'
 cask 'anki' # learn.space.repeat
 cask "kap" # gif/ screator / screen recorder
 
@@ -145,3 +145,4 @@ cask 'font-hack-nerd-font'
 # cask 'iina'
 # cask 'calibre'
 # cask 'dbeaver-community'
+# cask 'adoptopenjdk13'

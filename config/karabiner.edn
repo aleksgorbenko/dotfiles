@@ -493,17 +493,17 @@
 		[:j :!SOTw] ; Replies
 		[:k :!SOTf] ; App specific
 		[:l :!SOTr] ; Personal
-		[:r [:km "w: Repl"]]
-		[:n [:km "w: Tachyons"]]
-		[:m [:km "w: Meetup"]]
-		[:e [:km "w: Stripe"]]
-		[:o [:km "w: Dropbox"]]
-		[:a [:km "w: Amazon"]]
-		[:h [:km "w: Twitch"]]
-		[:period [:km "w: IFTTT"]]
-		[:z [:km "w: MDN"]]
-		[:semicolon [:km "w: Netlify"]]
-		[:p [:km "w: NPM"]]
+		; [:r [:km "w: Repl"]]
+		; [:n [:km "w: Tachyons"]]
+		; [:m [:km "w: Meetup"]]
+		; [:e [:km "w: Stripe"]]
+		; [:o [:km "w: Dropbox"]]
+		; [:a [:km "w: Amazon"]]
+		; [:h [:km "w: Twitch"]]
+		; [:period [:km "w: IFTTT"]]
+		; [:z [:km "w: MDN"]]
+		; [:semicolon [:km "w: Netlify"]]
+		; [:p [:km "w: NPM"]]
 	]
 }
 
@@ -542,7 +542,7 @@
 		[:a [:alfred "search files" "nikivi.manage.notes"]]
 		[:c [:alfred "search emoji" "com.github.jsumners.alfred-emoji"]]
 		[:f [:alfred "search repos" "net.deanishe.alfred-git-repos"]]
-		[:s [:km "create new snippet of latest clipboard item" ]]
+		[:a [:km "create new snippet of latest clipboard item" ]]
 		[:spacebar [:alfred "search PDFs" "nikivi.search.files"]]
 		[:d [:alfred "search folders" "nikivi.search.folders"]]
 		[:caps_lock [:alfred "search desktop" "com.vitorgalvao.alfred.directories"]]
@@ -775,6 +775,8 @@
 		[:period [:km "Amazon Music: play next track"]]
 		[:comma [:km "Amazon Music: play previous track"]]
 		[:slash [:km "Amazon Music: play/pause"]]
+		[:quote [:km "Amazon Music: volume up"]]
+		[:semicolon [:km "Amazon Music: volume down"]]
 
 		; Spotify
 		; [:o [:km "Paste current Spotify song link"]]
