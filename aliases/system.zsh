@@ -42,7 +42,7 @@ alias hosts="sudo vim /etc/hosts"
 alias ze="code ~/.zshrc"
 alias ae="code ~/.aliases"
 alias kara="code ~/.config/karabiner.edn"
-alias ss="code ~/.config/starship.toml"
 alias dots="code ~/.dotfiles"
 
 alias cdd="cd ~/.dotfiles"
+alias cdp="cd ~/src/projects"
