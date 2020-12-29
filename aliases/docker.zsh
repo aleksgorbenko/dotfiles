@@ -25,6 +25,7 @@ alias dps="docker ps"
 alias dpsa="docker ps -a"
 alias dst="docker stop"
 alias di="docker images"
+alias dlf="docker logs --follow"
 
 function denv() {
   eval $(docker-machine env -u)
