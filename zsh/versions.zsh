@@ -51,7 +51,7 @@ nvm() {
 # On first use, it will set nvm up properly which will replace the `nvm`
 # shell function with the real one
 jenv() {
-  if [[ -d "${HOME}/.jenv" ]]; then
+  if [[ -x "/usr/local/bin/jenv" ]]; then
     export PATH="$HOME/.jenv/bin:$PATH"
     unset -f jenv
 
