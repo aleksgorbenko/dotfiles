@@ -10,6 +10,8 @@ export GOPATH=$HOME/go
 export PATH="$GOPATH/bin:$PATH"
 export GOPRIVATE="bitbucket.org/aleksgorbenko,github.com/aleksgorbenko"
 
+export MOSK_ROOT="$HOME/Dropbox/mosk"
+
 # Serverless Framework
 export PATH="$HOME/.serverless/bin:$PATH"
 

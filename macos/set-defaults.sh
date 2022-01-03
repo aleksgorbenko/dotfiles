@@ -103,6 +103,9 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true;ok
 running "Disable the warning before emptying the Trash"
 defaults write com.apple.finder WarnOnEmptyTrash -bool true;ok
 
+running "Display App Switcher on both monitors"
+defaults write com.apple.Dock appswitcher-all-displays -bool true;ok
+
 ###############################################################################
 bot "Animation"
 ###############################################################################

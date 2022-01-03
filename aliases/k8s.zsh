@@ -8,7 +8,9 @@ alias kga="kubectl get all"
 
 alias kd="kubectl describe"
 alias kl="kubectl logs"
+alias klf="kubectl logs -f"
 alias ka="kubectl apply"
+alias kpf="kubectl port-forward"
 
 alias kdel="kubectl delete"
 alias kda="kubectl delete --all"

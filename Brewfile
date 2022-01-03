@@ -88,7 +88,6 @@ brew 'kubectx' # switch context quickly
 
 cask 'google-chrome'
 cask 'firefox'
-cask 'spotify'
 cask '1password'
 cask 'dropbox'
 cask 'authy'
@@ -104,7 +103,6 @@ cask 'whatsapp'
 cask "discord"
 
 # utils
-cask "onyx"
 cask "scroll-reverser"
 cask 'alfred' # 100x better Spotlight
 cask 'karabiner-elements' # remap everything!

@@ -1,5 +1,6 @@
 alias cls='clear' # Good 'ol Clear Screen command
 alias a="alias"
+alias sa="alias | grep" # search aliases
 alias ls="exa"
 alias ll="exa -lha"
 alias la="exa -lTha"
@@ -24,13 +25,12 @@ alias localip="ipconfig getifaddr en0"
 
 alias b="brew"
 alias bi="brew install"
-alias bc="brew cask"
-alias bci="brew cask install"
-alias bcu="brew upgrade --cask"
-alias bcr="brew cask uninstall"
+alias bic="brew install --cask"
 alias bu="brew upgrade"
+alias buc="brew upgrade --cask"
+alias brmc="brew uninstall --cask"
+alias brm="brew uninstall"
 alias bup="brew update"
-alias br="brew uninstall"
 
 # Pipe my public key to my clipboard.
 alias pubkey="more ~/.ssh/me/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
@@ -46,3 +46,14 @@ alias dots="code ~/.dotfiles"
 
 alias cdd="cd ~/.dotfiles"
 alias cdp="cd ~/src/projects"
+
+# Golang toolchain
+alias gmv="go mode vendor"
+alias gmt="go mode tidy"
+
+# FUNCTIONS
+
+function sync-mosk() {
+	rsync -aEu -delete "${HOME}/Documents/mosk/" "${HOME}/Dropbox/mosk/"
+	rsync -aEu  "${HOME}/Dropbox/mosk/" "${HOME}/Documents/mosk/"
+}

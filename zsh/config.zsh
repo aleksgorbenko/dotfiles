@@ -6,7 +6,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # history
 HISTFILE="${HOME}/.zsh_history"
-HISTSIZE=1000
+HISTSIZE=10000
 SAVEHIST=${HISTSIZE}
 
 setopt extended_history     # add timestamps to history

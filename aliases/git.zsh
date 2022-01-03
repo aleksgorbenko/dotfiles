@@ -154,9 +154,6 @@ alias gpsup='git push --set-upstream origin $(current_branch)'
 alias gignore='git update-index --assume-unchanged'
 alias gignored='git ls-files -v | grep "^[[:lower:]]"'
 
-alias gk='\gitk --all --branches'
-alias gke='\gitk --all $(git log -g --pretty=%h)'
-
 alias gl='git pull'
 alias glg='git log --stat'
 alias glgp='git log --stat -p'
@@ -174,7 +171,7 @@ alias gm='git merge'
 alias gmm='git merge master'
 alias gmom='git merge origin/master'
 alias gmum='git merge upstream/master'
-alias gmt='git mergetool --no-prompt'
+alias gmtool='git mergetool --no-prompt'
 alias gma='git merge --abort'
 
 # REMOTE

@@ -777,6 +777,7 @@
 		[:slash [:km "Amazon Music: play/pause"]]
 		[:quote [:km "Amazon Music: volume up"]]
 		[:semicolon [:km "Amazon Music: volume down"]]
+		[:p [:km "Amazon Music: add to Cyberpunk playlist"]]
 
 		; Spotify
 		; [:o [:km "Paste current Spotify song link"]]
