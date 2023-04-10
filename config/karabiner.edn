@@ -48,7 +48,7 @@
 ; You can trigger these from any shortcut below
 
 :templates {
-	:alfred "osascript -e 'tell application \"Alfred 4\" to run trigger \"%s\" in workflow \"%s\" with argument \"%s\"'"
+	:alfred "osascript -e 'tell application \"Alfred 5\" to run trigger \"%s\" in workflow \"%s\" with argument \"%s\"'"
 	:km "osascript -e 'tell application \"Keyboard Maestro Engine\" to do script \"%s\"'"
 	:open "open \"%s\""
 }
@@ -280,7 +280,7 @@
 		[:k :!Cup_arrow]
 		[:l :!Cright_arrow]
 		[:h :!Cleft_arrow]
-		[:t [:km "2do (travel)"]]
+		[:t [:km "2do (tools)"]]
 		[:w [:km "2do (work)"]]
 		[:y [:km "2do: watch"]]
 
