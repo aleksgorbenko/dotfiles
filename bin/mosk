@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+cd $MOSK_ROOT
+git add --all
+git commit -m ":robot: Routine changes"
