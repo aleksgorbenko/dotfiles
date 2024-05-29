@@ -2,4 +2,4 @@ zsh-users/zsh-completions
 zsh-users/zsh-autosuggestions
 marzocchi/zsh-notify
 
-zdharma/fast-syntax-highlighting
+zdharma-continuum/fast-syntax-highlighting

@@ -26,7 +26,5 @@
         default = simple
 [hub]
         protocol = ssh
-[gpg]
-	program = gpg
 [pull]
 	rebase = false

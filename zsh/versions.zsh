@@ -1,12 +1,12 @@
 # On first use, it will set rbenv up properly which will replace the `rbenv`
 # shell function with the real one
 rbenv() {
-  if [[ -x /usr/local/bin/rbenv ]]; then
+  if [[ -x $(brew --prefix)/bin/rbenv ]]; then
     export PATH="${HOME}/.rbenv/bin:${PATH}"
 
     eval "$(command rbenv init -)"
     # invoke the real rbenv function
-    /usr/local/bin/rbenv "$@"
+    $(brew --prefix)/bin/rbenv "$@"
   else
     echo "rbenv is not installed" >&2
     return 1
@@ -16,13 +16,13 @@ rbenv() {
 # On first use, it will set pyenv up properly which will replace the `pyenv`
 # shell function with the real one
 pyenv() {
-  if [[ -x /usr/local/bin/pyenv ]]; then
+  if [[ -x "$(brew --prefix)/bin/pyenv" ]]; then
     export PYENV_ROOT="$HOME/.pyenv"
     export PATH="$PYENV_ROOT/bin:$PATH"
 
     eval "$(command pyenv init -)"
     # invoke the real pyenv function
-    /usr/local/bin/pyenv "$@"
+    $(brew --prefix)/bin/pyenv "$@"
   else
     echo "pyenv is not installed" >&2
     return 1
@@ -51,7 +51,7 @@ nvm() {
 # On first use, it will set nvm up properly which will replace the `nvm`
 # shell function with the real one
 jenv() {
-  if [[ -x "/usr/local/bin/jenv" ]]; then
+  if [[ -x "$(brew --prefix)/bin/jenv" ]]; then
     export PATH="$HOME/.jenv/bin:$PATH"
     unset -f jenv
 

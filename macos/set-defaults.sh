@@ -106,6 +106,18 @@ defaults write com.apple.finder WarnOnEmptyTrash -bool true;ok
 running "Display App Switcher on both monitors"
 defaults write com.apple.Dock appswitcher-all-displays -bool true;ok
 
+running "Set Dock to left side"
+defaults write com.apple.dock "orientation" -string "left";ok
+
+running "Set Dock to autohide"
+defaults write com.apple.dock "autohide" -bool true;ok
+
+running "Hide Recents in Dock"
+defaults write com.apple.dock "show-recents" -bool false;ok
+
+running "Only show active applications in Dock"
+defaults write com.apple.dock "static-only" -bool true;ok
+
 ###############################################################################
 bot "Animation"
 ###############################################################################
@@ -134,6 +146,7 @@ defaults write com.apple.dock expose-animation-duration -float 0
 defaults write com.apple.dock springboard-show-duration -float 0
 defaults write com.apple.dock springboard-hide-duration -float 0
 defaults write com.apple.dock springboard-page-duration -float 0
+defaults write com.apple.dock "mineffect" -string "genie" # it is faster than scale
 defaults write com.apple.finder DisableAllAnimations -bool true
 defaults write com.apple.Mail DisableSendAnimations -bool true
 defaults write com.apple.Mail DisableReplyAnimations -bool true;ok
@@ -142,8 +155,8 @@ defaults write com.apple.Mail DisableReplyAnimations -bool true;ok
 bot "Standard System Changes"
 ################################################
 
-running "Always boot in verbose mode (not MacOS GUI mode)\n"
-sudo nvram boot-args="-v";ok
+# running "Always boot in verbose mode (not MacOS GUI mode)\n"
+# sudo nvram boot-args="-v";ok
 
 running "Expand save panel by default"
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
@@ -275,6 +288,9 @@ bot "Safari"
 
 running "Show Safari's bookmark bar"
 defaults write com.apple.Safari ShowFavoritesBar -bool true;ok
+
+running "Show Safari's full URL in address bar"
+defaults write com.apple.safari "ShowFullURLInSmartSearchField" -bool true;ok
 
 running "Set up Safari for development"
 defaults write com.apple.Safari IncludeInternalDebugMenu -bool true

@@ -372,7 +372,8 @@
 		; [:x [:km "open: Spotify"]]
 		[:f [:km "open: Firefox"]]
 		[:o [:km "open: Obsidian"]]
-		[:s [:km "open: Slack"]]
+		[:s [:km "open: Safari"]]
+		[:l [:km "open: Slack"]]
 		[:a [:km "open: Activity Monitor"]]
 		[:g [:km "open: GoLand"]]
 		[:y [:km "open: Alacritty"]]
@@ -398,7 +399,8 @@
 		; [:x [:km "open: Spotify"]]
 		[:f [:km "open: Firefox"]]
 		[:o [:km "open: Obsidian"]]
-		[:s [:km "open: Slack"]]
+		[:s [:km "open: Safari"]]
+		[:l [:km "open: Slack"]]
 		[:a [:km "open: Activity Monitor"]]
 		[:n [:km "open: Notion"]]
 		[:e [:km "open: PDF Expert"]]
@@ -780,7 +782,7 @@
 		[:p [:km "Amazon Music: add to Cyberpunk playlist"]]
 
 		; Spotify
-		; [:o [:km "Paste current Spotify song link"]]
+		[:o [:km "Paste current Spotify song link"]]
 
 		; [:j [:alfred "spot_mini" "com.vdesabou.spotify.mini.player"]]
 		; [:k [:alfred "show_current_track" "com.vdesabou.spotify.mini.player"]]

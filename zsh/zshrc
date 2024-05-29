@@ -10,6 +10,7 @@ fi
 export ZSH=${HOME}/.dotfiles
 export PROJECTS=${HOME}/src
 export ZSH_ALIASES=${ZSH}/aliases
+export BREW_PREFIX=$(brew --prefix)
 
 # 1. Load path
 source "${ZSH}/zsh/env.zsh"
@@ -21,30 +22,29 @@ source "${ZSH_ALIASES}/aliases.zsh"
 [ -f "${HOME}/.fzf.zsh" ] && source "${HOME}/.fzf.zsh"
 
 # 4. Plugins
-# Add new plugins to the `zsh_plugins` file and relaod zsh
-# Keep syntax highlighting plugin last
-antibody bundle < "${HOME}/.zsh_plugins" > "${ZSH}/zsh/zsh_plugins.sh"
-source "${ZSH}/zsh/zsh_plugins.sh"
+# Add new plugins to the `zsh_plugins.txt` file and relaod zsh
+# Keep syntax highlighting plugin last!
+source ${BREW_PREFIX}/opt/antidote/share/antidote/antidote.zsh
+antidote load
 
 # 5. ZSH config
 source "${ZSH}/zsh/versions.zsh"
-# eval "$(starship init zsh)"
 source "${ZSH}/zsh/config.zsh"
 
 # 6. More plugins
 
 # Numbered git output
-[[ -x "/usr/local/bin/scmpuff" ]] && eval "$(scmpuff init -s)"
+[[ -x "${BREW_PREFIX}/bin/scmpuff" ]] && eval "$(scmpuff init -s)"
 
 # Amazing git add, log, diff, reset, checkout, stash, clean
 # source "${ZSH}/zsh/plugins/forgit.plugin.zsh"
 source "${ZSH}/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh"
 
 # Better navigation
-[[ -e "/usr/local/etc/profile.d/autojump.sh" ]] && source "/usr/local/etc/profile.d/autojump.sh"
+[[ -e "${BREW_PREFIX}/etc/profile.d/autojump.sh" ]] && source "${BREW_PREFIX}/etc/profile.d/autojump.sh"
 
 # Colored output for common unix commands
-[[ -s "/usr/local/etc/grc.bashrc" ]] && source "/usr/local/etc/grc.bashrc"
+[[ -s "${BREW_PREFIX}/etc/grc.bashrc" ]] && source "${BREW_PREFIX}/etc/grc.bashrc"
 
 # tabtab source for packages
 # uninstall by removing these lines
@@ -54,7 +54,13 @@ source "${ZSH}/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh"
 [[ -s "${ZSH}/zsh/.zshrc.local" ]] && source "${ZSH}/zsh/.zshrc.local"
 
 # zprof # uncomment to profile loading speed
-source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
+source ${BREW_PREFIX}/opt/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

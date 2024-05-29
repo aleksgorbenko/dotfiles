@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-PYTHON_VESRION=3.8.5
-RUBY_VESRION=2.7.1
+PYTHON_VESRION=3.11.3
+RUBY_VESRION=3.2.2
 
 source "${HOME}/.dotfiles/script/echos.sh"
 
-bot "Welcome aboard, I will turn your mac in a dev machine now"
+bot "Welcome aboard, I will turn your mac into a dev machine now"
 
 cd "$(dirname "$0")/.."
 DOTS=$(pwd -P)
@@ -20,6 +20,11 @@ set -e
 if [[ `xcode-select -p 1>/dev/null;echo $?` != 0 ]];then
 	bot "Installing latest xcode tools"
 	xcode-select --install
+fi
+
+if [ "$(arch)" == "arm64" ];then
+	bot "Enable Rosetta 2"
+	softwareupdate --install-rosetta
 fi
 
 bot "Enable installation from unverified developers"
@@ -84,7 +89,7 @@ function install_dotfiles () {
 
 	# zsh
 	$DOTS/bin/link-file "${DOTS}/zsh/zshrc" "${HOME}/.zshrc"
-	$DOTS/bin/link-file "${DOTS}/zsh/zsh_plugins" "${HOME}/.zsh_plugins"
+	$DOTS/bin/link-file "${DOTS}/zsh/zsh_plugins.txt" "${HOME}/.zsh_plugins.txt"
 
 	# convenience
 	$DOTS/bin/link-file "${Home}/Dropbox/src" "${HOME}/src"
@@ -119,41 +124,38 @@ function install_extras () {
 		ok
 	fi
 
+	bot "Configuring fzf"
+	# this will install extras and bindings for fzf, e.g ctrl+r history search
+	# .zshrc will be modified
+	yes | $(brew --prefix)/opt/fzf/install
+	ok
+
 	if [[ ! -e "${HOME}/.dotfiles/zsh/plugins/forgit.plugin.zsh" ]]; then
 		running "forgit"
 		curl -s https://raw.githubusercontent.com/wfxr/forgit/master/forgit.plugin.zsh -o ${DOTS}/zsh/plugins/forgit.plugin.zsh
 		ok
 	fi
-}
 
-function install_shell () {
-	# check current shell and change it to zsh if needed
-	if [[ ! "$(dscl . -read /Users/$USER UserShell | awk '{ print $2 }')" == /usr/local/bin/zsh ]]; then
-		sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
-		chsh -s /usr/local/bin/zsh
-	fi
-
-	# reload the shell
-	# source "${HOME}/.zshrc"
+	bot "Install Karabiner Settings"
+	goku
 }
 
 function install_lang () {
 	# install nvm and LTS node
 	if [[ ! -s "${HOME}/.nvm/nvm.sh"  ]]; then
-		curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
-		nvm install --lts
+		curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 	fi
 
 	# install python
-	if [[ -x /usr/local/bin/pyenv ]]; then
-		/usr/local/bin/pyenv install $PYTHON_VESRION
-		/usr/local/bin/pyenv global $PYTHON_VESRION
+	if [[ -x "$(brew --prefix)/bin/pyenv" ]]; then
+		$(brew --prefix)/bin/pyenv install $PYTHON_VESRION
+		$(brew --prefix)/bin/pyenv global $PYTHON_VESRION
 	fi
 
 	# install ruby
-	if [[ -x /usr/local/bin/rbenv ]]; then
-		/usr/local/bin/rbenv install $RUBY_VESRION
-		/usr/local/bin/rbenv global $RUBY_VESRION
+	if [[ -x "$(brew --prefix)/bin/rbenv" ]]; then
+		"$(brew --prefix)/bin/rbenv" install $RUBY_VESRION
+		"$(brew --prefix)/bin/rbenv" global $RUBY_VESRION
 	fi
 }
 
@@ -173,7 +175,6 @@ install_dotfiles
 $DOTS/macos/set-defaults.sh
 install_brew_packages
 install_extras
-install_shell
 install_lang
 
 ok 'Done! May the Force be with you!'
