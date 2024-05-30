@@ -8,7 +8,7 @@ tap "derailed/k9s"
 tap "romkatv/powerlevel10k"
 
 # set arguments for all 'brew install --cask' commands
-cask_args appdir: "~/Applications", require_sha: true
+cask_args appdir: "/Applications", require_sha: true
 
 ############
 # PACKAGES #
@@ -129,7 +129,6 @@ cask "visual-studio-code"
 cask "jetbrains-toolbox"
 
 # db
-cask "sequel-pro"
 brew "pgcli" # autocompletion and syntax highlighting
 
 #########
