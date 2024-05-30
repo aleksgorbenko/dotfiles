@@ -18,11 +18,12 @@ export PATH="$HOME/.serverless/bin:$PATH"
 # Add .NET Core SDK tools
 # export PATH="$PATH:/Users/gbko/.dotnet/tools"
 
-# git commit signatures
-export GPG_TTY=$(tty)
-
 export EDITOR='vim'
 export K9S_EDITOR="vim"
+
+# use 1Password ssh agent socket
+# https://developer.1password.com/docs/ssh/get-started/#step-4-configure-your-ssh-or-git-client
+export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
 
 # add functions folder to fpath if needed
 # fpath=(${ZSH}/functions $fpath)

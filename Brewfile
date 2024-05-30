@@ -2,14 +2,10 @@
 # https://github.com/Homebrew/homebrew-bundle
 
 tap "homebrew/bundle"
-tap "homebrew/cask-fonts"
 tap "yqrashawn/goku"
 tap "weaveworks/tap" # eksctl
-tap "homebrew/cask-versions"
 tap "derailed/k9s"
-tap "derailed/popeye"
 tap "romkatv/powerlevel10k"
-tap "homebrew/cask-drivers" # logitech apps
 
 # set arguments for all 'brew install --cask' commands
 cask_args appdir: "~/Applications", require_sha: true
@@ -37,7 +33,7 @@ cask "diffmerge"
 # shell
 brew "coreutils"
 brew "antidote"
-brew "romkatv/powerlevel10k/powerlevel10k"
+brew "powerlevel10k"
 brew "scmpuff"
 brew "tmux"
 brew "grc" # terminal coloriser
@@ -60,11 +56,8 @@ brew "tree"
 brew "ripgrep" # better `grep`. usage: rg ...
 brew "bat" # better `cat`
 brew "ncdu" # disk analyzer
-brew "gnupg"
-brew "gnupg2"
-brew "pinentry-mac"
 brew "gettext"
-brew "exa" # better `ls`
+brew "eza" # better `ls`
 brew "ctop" # htop for containers
 brew "gotop" # better top
 brew "terminal-notifier" # p.s this won"t work in Alacritty
@@ -92,7 +85,6 @@ brew "minikube"
 brew "kind" # k8s
 brew "tilt" # k8s
 brew "derailed/k9s/k9s" # htop for k8s
-brew "derailed/popeye/popeye" # audit for clusters
 brew "kubectx" # switch context quickly
 
 ########
@@ -102,7 +94,7 @@ brew "kubectx" # switch context quickly
 cask "google-chrome"
 cask "firefox"
 cask "1password"
-cask "1password-cli" # needed for Alflred integration
+cask "1password-cli" # needed for Alfred integration
 cask "dropbox"
 cask "authy"
 cask "notion"
@@ -113,7 +105,6 @@ cask "kap" # gif / creator / screen recorder
 # chat
 cask "slack"
 cask "telegram"
-cask "whatsapp"
 cask "discord"
 cask "zoom"
 
@@ -131,7 +122,7 @@ cask "docker"
 cask "iterm2"
 cask "alacritty"
 brew "libyaml" # needed for ruby on apple silicon
-brew "multipass" # vm, somewhat similar to virtual box. It is powered by qemu and made by Canonical (ubuntu)
+cask "multipass" # vm, somewhat similar to virtual box. It is powered by qemu and made by Canonical (ubuntu)
 
 # editor
 cask "visual-studio-code"
@@ -162,9 +153,7 @@ cask "font-jetbrains-mono"
 cask "amazon-photos"
 cask "adobe-creative-cloud"
 cask "imageoptim"
-cask "amazon-music"
 cask "spotify"
-cask "kindle"
 # cask "transmission"
 # cask "stremio"
 # cask "iina"

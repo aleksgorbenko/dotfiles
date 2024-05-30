@@ -1,9 +1,9 @@
 alias cls='clear' # Good 'ol Clear Screen command
 alias a="alias"
 alias sa="alias | grep" # search aliases
-alias ls="exa"
-alias ll="exa -lha"
-alias la="exa -lTha"
+alias ls="eza"
+alias ll="eza -lha"
+alias la="eza -lTha"
 alias t="touch"
 
 alias .2='cd ../../'             # Go back 2 directory levels
