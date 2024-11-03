@@ -54,7 +54,9 @@ source "${ZSH}/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh"
 [[ -s "${ZSH}/zsh/.zshrc.local" ]] && source "${ZSH}/zsh/.zshrc.local"
 
 # zprof # uncomment to profile loading speed
-source ${BREW_PREFIX}/opt/powerlevel10k/powerlevel10k.zsh-theme
+
+# load a theme
+source ${BREW_PREFIX}/share/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
