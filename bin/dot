@@ -3,4 +3,4 @@
 # to make sure you're on the latest and greatest.
 set -e
 cd $ZSH
-brew update && brew bundle && brew doctor
+brew update && brew bundle && brew && brew clean

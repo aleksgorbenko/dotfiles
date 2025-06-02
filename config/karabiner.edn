@@ -72,7 +72,7 @@
 	:t-mode {:key :t}
 	:i-mode {:key :i}
 	:j-mode {:key :j}
-	:o-mode {:key :o}
+	:p-mode {:key :p}
 	:a-mode {:key :a}
 	:s-mode {:key :s}
 	:d-mode {:key :d}
@@ -271,19 +271,20 @@
 ; alfred
 
 {
-	:des "2key (move + alfred)"
+	:des "2key (nav)"
 	:rules [
 		:2-mode
-		[:semicolon :!Oup_arrow]
-		[:quote :!Odown_arrow]
-		[:j :!Cdown_arrow]
-		[:k :!Cup_arrow]
-		[:l :!Cright_arrow]
-		[:h :!Cleft_arrow]
-		[:t [:km "2do (tools)"]]
-		[:w [:km "2do (work)"]]
-		[:y [:km "2do: watch"]]
-
+		;; [:semicolon :!Oup_arrow]
+		;; [:quote :!Odown_arrow]
+		[:i [:km "open 2do inbox"]]
+		[:n [:km "open 2do next"]]
+		[:v [:km "open 2do watch"]]
+		[:t [:km "open 2do today"]]
+		[:s [:km "open 2do someday"]]
+		[:w [:km "open 2do work"]]
+		[:p [:km "open 2do waiting"]]
+		[:t [:km "open 2do tools"]]
+		[:period [:km "search 2do"]]
 	]
 }
 
@@ -369,7 +370,7 @@
 	:rules [
 		:w-mode
 		[:c [:km "open: Chrome"]]
-		; [:x [:km "open: Spotify"]]
+		[:x [:km "open: Spotify"]]
 		[:f [:km "open: Firefox"]]
 		[:o [:km "open: Obsidian"]]
 		[:s [:km "open: Safari"]]
@@ -396,7 +397,7 @@
 	:rules [
 		:backslash-mode
 		[:c [:km "open: Chrome"]]
-		; [:x [:km "open: Spotify"]]
+		[:x [:km "open: Spotify"]]
 		[:f [:km "open: Firefox"]]
 		[:o [:km "open: Obsidian"]]
 		[:s [:km "open: Safari"]]
@@ -410,7 +411,6 @@
 		[:v [:km "open: VS Code"]]
 		[:i [:km "open: iTerm"]]
 		[:k [:km "open: Keyboard Maestro"]]
-		[:m [:km "open: Amazon Music"]]
 		[:w [:km "open: WhatsApp"]]
 		[:z [:km "open: Zoom"]]
 		[:period [:km "open: Finder"]]
@@ -423,49 +423,7 @@
 	:des "ekey (cmd)"
 	:rules [
 		:e-mode
-		; [:spacebar :!CSO7] ; Selection -> Google Lucky
-		; [:open_bracket :!Copen_bracket]
-		; [:close_bracket :!Cclose_bracket]
-		; [:semicolon :!Csemicolon]
-		; [:quote :!Cquote]
-		; [:comma :!Ccomma]
-		; [:period :!Cperiod]
-		; [:slash :!Cslash]
-		; [:a :!Ca]
-		; [:b :!Cb]
-		; [:c :!Cc]
-		; [:d :!Cd]
-		; [:f :!Cf]
-		; [:g :!Cg]
-		; [:h :!Ch]
-		; [:i :!Ci]
-		; [:j :!Cj]
-		; [:k :!Ck]
-		; [:l :!Cl]
-		; [:m :!Cm]
-		; [:n :!Cn]
-		; [:o :!Co]
-		; [:p :!Cp]
-		; [:q :!Cq]
-		; [:r :!Cr]
-		; [:s :!Cs]
-		; [:t :!Ct]
-		; [:u :!Cu]
-		; [:v :!Cv]
-		; [:w :!Cw]
-		; [:x :!Cx]
-		; [:y :!Cy]
-		; [:z :!Cz]
-		; [:1 :!C1]
-		; [:2 :!C2]
-		; [:3 :!C3]
-		; [:4 :!C4]
-		; [:5 :!C5]
-		; [:6 :!C6]
-		; [:7 :!C7]
-		; [:8 :!C8]
-		; [:9 :!C9]
-		; [:0 :!C0]
+
 	]
 }
 
@@ -494,18 +452,9 @@
 		[:spacebar :!COSr] ; Selection -> Google Translate
 		[:j :!SOTw] ; Replies
 		[:k :!SOTf] ; App specific
-		[:l :!SOTr] ; Personal
-		; [:r [:km "w: Repl"]]
-		; [:n [:km "w: Tachyons"]]
-		; [:m [:km "w: Meetup"]]
-		; [:e [:km "w: Stripe"]]
+		[:l :!SOTr] ; Personals"]]
 		; [:o [:km "w: Dropbox"]]
-		; [:a [:km "w: Amazon"]]
-		; [:h [:km "w: Twitch"]]
-		; [:period [:km "w: IFTTT"]]
-		; [:z [:km "w: MDN"]]
 		; [:semicolon [:km "w: Netlify"]]
-		; [:p [:km "w: NPM"]]
 	]
 }
 
@@ -522,35 +471,24 @@
 ; alfred
 
 {
-	:des "okey (alfred)"
+	:des "pkey (alfred)"
 	:rules [
-		:o-mode
-		[:1 :!C1]
-		[:2 :!C2]
-		[:3 :!C3]
-		[:4 :!C4]
-		[:5 :!C5]
-		[:6 :!C6]
-		[:t [:alfred "search tty sessions" "net.isometry.alfred.tty"]] ; TODO: replace with pocket
-		; [:n [:alfred "search lists" "nikivi.learn.anything"]]
-		[:x [:alfred "search workflows" "org.jeef.workflowdirectory"]]
-		[:w :!CObackslash] ; 1Password search
-		[:grave_accent_and_tilde [:alfred "search processes" "com.vitorgalvao.alfred.processcontrol"]]
-		[:e [:km "2Do (work)"]]
-		[:b [:km "Make 2Do task with Safari title as name + note as current URL"]]
-		[:v [:km "Make 2Do task with note as current URL"]]
-		[:r [:km "2Do with current url as note (pr)"]]
-		[:q [:alfred "search downloads" "recentdownloads.ddjfreedom"]]
-		[:a [:alfred "search files" "nikivi.manage.notes"]]
-		[:c [:alfred "search emoji" "com.github.jsumners.alfred-emoji"]]
-		[:f [:alfred "search repos" "net.deanishe.alfred-git-repos"]]
-		[:a [:km "create new snippet of latest clipboard item" ]]
-		[:spacebar [:alfred "search PDFs" "nikivi.search.files"]]
-		[:d [:alfred "search folders" "nikivi.search.folders"]]
+		:p-mode
+		;; [:1 :!C1]
+		;; [:2 :!C2]
+		;; [:3 :!C3]
+		;; [:4 :!C4]
+		;; [:5 :!C5]
+		;; [:6 :!C6]
+		[:r [:alfred "search repos" "net.deanishe.alfred-git-repos"]]
+		[:b [:alfred "search obsidian" "de.chris-grieser.shimmering-obsidian"]]
+		[:d [:alfred "search downloads" "recentdownloads.ddjfreedom"]]
+		[:k [:alfred "run" "iansinnott.keyboardmaestro"]]
+		[:m [:alfred "search menu bar" "com.folded-paper.menu-bar-search"]]
 		[:caps_lock [:alfred "search desktop" "com.vitorgalvao.alfred.directories"]]
-		[:i [:alfred "search alfred" "nikivi.utilities" "?"]]
-		[:j [:alfred "run" "iansinnott.keyboardmaestro"]]
-		[:k [:alfred "search menu bar" "com.tedwise.menubarsearch"]]
+		;; [:u [:km "Make 2Do task with Safari title as name + note as current URL"]]
+		;; [:v [:km "Make 2Do task with note as current URL"]]
+		;; [:a [:km "create new snippet of latest clipboard item"]]
 	]
 }
 
@@ -560,28 +498,7 @@
 	:des "capskey (tod2o + trello)"
 	:rules [
 		:caps-mode
-		[:1 [:alfred "Screenshot -> Imgur" "com.vitorgalvao.alfred.webscreenshot"]]
-		[:2 :!TO2] ; Screenshot -> C2lipboard
-		[:3 :!TO3] ; Screenshot -> Annotate
-		[:4 :!TO4] ; Show Annotate
-		[:9 :!TO9] ; Picture of screen -> Clipboard
-		[:0 :!TO0] ; Picture of screen -> ~/Desktop
-		[:tab [:km "New ScreenFlow recording (options)"]]
-		[:q :!CO5] ; Start/stop ScreenFlow recording
-		[:f [:km "open ideas trello"]]
-		[:e [:km "open learn trello"]]
-		[:d [:km "open videos trello"]]
-		[:u [:km "open courses trello"]]
-		[:t [:km "open 2do today"]]
-		[:l [:km "open 2do later"]]
 		[:g [:km "search google"]]
-		[:w [:km "open 2do work"]]
-		[:y [:km "open 2do buy"]]
-		[:i [:km "open 2do fix"]]
-		[:m [:km "open 2do macro"]]
-		[:o [:km "open 2do tools"]]
-		[:semicolon [:km "open 2do starred"]]
-		[:period [:km "search 2do"]]
 	]
 }
 
@@ -592,48 +509,6 @@
 	:rules [
 		:a-mode
 		; [:spacebar :!CT9] ; Selection -> Google
-		; [:open_bracket :!Topen_bracket]
-		; [:close_bracket :!Tclose_bracket]
-		; [:semicolon :!Tsemicolon]
-		; [:quote :!Tquote]
-		; [:comma :!Tcomma]
-		; [:period :!Tperiod]
-		; [:slash :!Tslash]
-		; [:b :!Tb]
-		; [:c :!Tc]
-		; [:d :!Td]
-		; [:e :!Te]
-		; [:f :!Tf]
-		; [:g :!Tg]
-		; [:h :!Th]
-		; [:i :!Ti]
-		; [:j :!Tj]
-		; [:k :!Tk]
-		; [:l :!Tl]
-		; [:m :!Tm]
-		; [:n :!Tn]
-		; [:o :!To]
-		; [:p :!Tp]
-		; [:q :!Tq]
-		; [:r :!Tr]
-		; [:s :!Ts]
-		; [:t :!Tt]
-		; [:u :!Tu]
-		; [:v :!Tv]
-		; [:w :!Tw]
-		; [:x :!Tx]
-		; [:y :!Ty]
-		; [:z :!Tz]
-		; [:1 :!T1]
-		; [:2 :!T2]
-		; [:3 :!T3]
-		; [:4 :!T4]
-		; [:5 :!T5]
-		; [:6 :!T6]
-		; [:7 :!T7]
-		; [:8 :!T8]
-		; [:9 :!T9]
-		; [:0 :!T0]
 	]
 }
 
@@ -735,10 +610,7 @@
 		; [:e [:km "Test"]]
 		; [:r [:km "Go to test macro"]]
 		; [:d [:km "Make global macro"]]
-		; [:j :!Cgrave_accent_and_tilde] ; Switch between active windows  (go down)
-		; [:e :!CT3] ; Search bartender menu items
-		; [:k :!COSf] ; Maximize window
-		; [:n :!CTOg] ; Turn on/off notifications
+
 		; [:m :!COslash] ; Show/hide notification centre
 		; [:a [:km "Go to KM group of current app"]]
 		; [:semicolon :!COSs] ; Move window between different screen & maximize
@@ -759,9 +631,8 @@
 		[:t [:km "open: Telegram"]]
 		[:s [:km "open: Slack"]]
 		[:d [:km "open: Discord"]]
-		; [:g [:alfred "search contacts" "nikivi.search.content"]]
 		[:c [:km "open: Contacts"]]
-		; [:h [:km "Create new contact"]]
+		; [:h [:km "new contact"]]
 	]
 }
 
@@ -774,18 +645,17 @@
 		:x-mode
 
 		; Amazon Music
-		[:period [:km "Amazon Music: play next track"]]
-		[:comma [:km "Amazon Music: play previous track"]]
-		[:slash [:km "Amazon Music: play/pause"]]
-		[:quote [:km "Amazon Music: volume up"]]
-		[:semicolon [:km "Amazon Music: volume down"]]
-		[:p [:km "Amazon Music: add to Cyberpunk playlist"]]
+		; [:period [:km "Amazon Music: play next track"]]
+		; [:comma [:km "Amazon Music: play previous track"]]
+		; [:slash [:km "Amazon Music: play/pause"]]
+		; [:quote [:km "Amazon Music: volume up"]]
+		; [:semicolon [:km "Amazon Music: volume down"]]
 
 		; Spotify
 		[:o [:km "Paste current Spotify song link"]]
 
 		; [:j [:alfred "spot_mini" "com.vdesabou.spotify.mini.player"]]
-		; [:k [:alfred "show_current_track" "com.vdesabou.spotify.mini.player"]]
+		[:k [:alfred "show_current_track" "com.vdesabou.spotify.mini.player"]]
 		; [:m [:alfred "add_current_track_to" "com.vdesabou.spotify.mini.player"]]
 		; [:n [:alfred "remove_current_track_from" "com.vdesabou.spotify.mini.player"]]
 		; [:b [:alfred "show_playlists" "com.vdesabou.spotify.mini.player"]]
@@ -793,9 +663,9 @@
 		; [:semicolon [:alfred "play" "com.vdesabou.spotify.mini.player" "spotify:playlist:4U7w1cpN9ei5LOzwpobiPQ"]] ; Liquid
 		; [:quote [:alfred "play" "com.vdesabou.spotify.mini.player" "spotify:playlist:6OjSvDzNZVny8Uf0YJyx7B"]] ; Ambient Focus
 
-		; [:period [:alfred "next" "com.vdesabou.spotify.mini.player"]]
-		; [:comma [:alfred "previous" "com.vdesabou.spotify.mini.player"]]
-		; [:slash [:alfred "playpause" "com.vdesabou.spotify.mini.player"]]
+		[:period [:alfred "next" "com.vdesabou.spotify.mini.player"]]
+		[:comma [:alfred "previous" "com.vdesabou.spotify.mini.player"]]
+		[:slash [:alfred "playpause" "com.vdesabou.spotify.mini.player"]]
 	]
 }
 
@@ -805,13 +675,11 @@
 	:des "vkey (media)"
 	:rules [
 		:v-mode
-		[:spacebar :!CSOv] ; Selection -> Google Images
-		[:j :mute]
 		[:i :display_brightness_decrement]
 		[:o :display_brightness_increment]
-		[:h :vk_consumer_previous]
-		[:l :vk_consumer_next]
-		[:k :vk_consumer_play]
+		;; [:h :vk_consumer_previous]
+		;; [:l :vk_consumer_next]
+		;; [:k :vk_consumer_play]
 		[:n :volume_decrement]
 		[:m :volume_increment]
 	]
@@ -838,24 +706,11 @@
 	:des "bkey (break)"
 	:rules [
 		:b-mode
-		; [:spacebar :!TOSs] ; Selection -> DuckDuckGo
-		; [:period [:km "Break 5 min"]]
-		; [:semicolon [:km "w: GitHub (trending)"]]
-		; [:d [:km "w: Reddit Saved"]]
-		; ;[:comma [:km "w: Medium (network)"]]
-		; [:comma [:km "w: Medium (bookmarks)"]]
-		; [:o [:km "w: Pinboard"]]
 		; [:u [:km "w: YouTube (subs)"]]
 		; [:l [:km "w: Lobsters"]]
-		; [:p [:km "w: Product Hunt"]]
 		; [:open_bracket [:km "w: Lobsters (new)"]]
-		; [:close_bracket [:km "w: Indie Hackers"]]
-		; [:9 [:km "w: HN (show new)"]]
 		; [:0 [:km "w: Lobsters (comments)"]]
-		; [:a [:km "w: Alfred forum"]]
 		; [:m [:km "w: KM forum"]]
-		; [:h [:alfred "search hn" "com.vitorgalvao.alfred.hackerboard"]]
-		; [:n [:km "w: HckrNews"]]
 		; [:j [:km "w: HN"]]
 	]
 }
@@ -863,32 +718,13 @@
 ; alfred
 
 {
-	:des "nkey (alfred)"
+	:des "nkey (2do new task)"
 	:rules [
 		:n-mode
-		; [:1 :!O1]
-		; [:2 :!O2]
-		; [:3 :!O3]
-		; [:4 :!O4]
-		; [:5 :!O5]
-		; [:6 :!O6]
-		; [:d [:alfred "search stack overflow" "net.deanishe.alfred-stackoverflow"]]
-		; [:q [:alfred "search github" "nikivi.search.the.web"]]
-		; [:w [:alfred "search twitter" "nikivi.search.the.web"]]
-		; [:c [:alfred "search wiki" "nikivi.mind"]]
-		; [:v [:alfred "search links" "nikivi.mind"]]
-		; [:h [:alfred "search hn" "nikivi.search.the.web"]]
-		; [:tab [:alfred "search lists" "nikivi.awesome.lists"]]
-		; [:x [:alfred "search stack" "net.deanishe.alfred-stackoverflow"]]
-		; [:t [:alfred "ssh" "net.deanishe.alfred-ssh"]]
-		; [:r [:alfred "search reddit" "nikivi.search.the.web"]]
-		; [:d [:alfred "search packages" "com.sindresorhus.npms"]]
-		; [:z [:alfred "search lobsters" "nikivi.search.the.web"]]
-		; [:a [:alfred "search shares" "nikivi.ask.create.share"]]
-		; [:s [:alfred "search websites" "nikivi.web.searches"]]
-		; [:f [:alfred "search repos" "me.lachlan.githubjump"]]
-		; [:g [:alfred "search godoc" "nikivi.search.the.web"]]
-		; [:caps_lock [:alfred "search mindnode" "nikivi.search.files"]]
+			[:w [:km "new 2do work"]]
+			[:s [:km "new 2do someday"]]
+			[:r [:km "new 2do read"]]
+			[:v [:km "new 2do watch"]]
 	]
 }
 
@@ -901,19 +737,9 @@
 		; [:j [:km "w: YouTube"]]
 		; [:k [:km "w: GitHub"]]
 		; [:semicolon [:km "w: GitHub (issues)"]]
-		; [:t [:km "w: Spectrum"]]
-		; [:period [:km "w: GitHub (prs)"]]
-		; [:l [:km "w: CodeSandbox"]]
-		; [:o [:km "w: GoDoc"]]
-		; [:f [:km "w: Google Docs"]]
-		; [:m [:km "w: Metabase"]]
 		; [:i [:km "w: GitHub (notifications)"]]
-		; [:a [:km "w: Google"]]
-		; [:u [:km "w: Medium"]]
-		; [:b [:km "w: Observable"]]
 		; [:w [:km "w: AWS"]]
 		; [:g [:km "w: GCP"]]
-		; [:open_bracket [:km "w: regex101"]]
 		; [:s [:km "w: Stack Overflow"]]
 	]
 }] ; main end

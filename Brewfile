@@ -149,7 +149,7 @@ cask "font-jetbrains-mono"
 # OPTIONAL #
 ############
 
-cask "amazon-photos"
+# cask "amazon-photos"
 cask "adobe-creative-cloud"
 cask "imageoptim"
 cask "spotify"
