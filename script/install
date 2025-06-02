@@ -18,8 +18,9 @@ set -e
 
 # Install command tools
 if [[ `xcode-select -p 1>/dev/null;echo $?` != 0 ]];then
-	bot "Installing latest xcode tools"
-	xcode-select --install
+	bot "Installing latest xcode tools, the machine will be restarted after the installation is complete."
+	sudo xcode-select --install
+	sudo shutdown -r now
 fi
 
 if [ "$(arch)" == "arm64" ];then
@@ -34,7 +35,10 @@ sudo spctl --master-disable
 if test ! $(which brew)
 then
   bot "Installing Homebrew"
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  # the below is only for M1
+	(echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/gbko/.zprofile
+	eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 function install_gitconfig () {
@@ -85,7 +89,7 @@ function install_dotfiles () {
 	$DOTS/bin/link-file "${DOTS}/git/gitconfig" "${HOME}/.gitconfig"
 	$DOTS/bin/link-file "${DOTS}/git/gitconfig.local" "${HOME}/.gitconfig.local"
 	$DOTS/bin/link-file "${DOTS}/git/gitignore" "${HOME}/.gitignore"
-	git config core.hooksPath git/hooks/
+	git config core.hooksPath "${DOTS}git/hooks/"
 
 	# zsh
 	$DOTS/bin/link-file "${DOTS}/zsh/zshrc" "${HOME}/.zshrc"
@@ -144,6 +148,7 @@ function install_lang () {
 	# install nvm and LTS node
 	if [[ ! -s "${HOME}/.nvm/nvm.sh"  ]]; then
 		curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+		nvm install --lts
 	fi
 
 	# install python
