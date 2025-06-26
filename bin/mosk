@@ -2,4 +2,4 @@
 
 cd $MOSK_ROOT
 git add --all
-git commit -m ":robot: Routine changes"
+git commit -m "chore: Routine changes :robot:"
