@@ -122,7 +122,7 @@
 		[:r [["in-ruby" 1] ["in-python" 0] ["in-go" 0] ["in-js" 0] ["in-swift" 0]]]
 
 		[:d [:km "Commit dotfiles"]]
-		[:v [:km "Commit blog"]]
+		[:b [:km "Commit blog"]]
 	]
 }
 
@@ -403,6 +403,7 @@
 		[:s [:km "open: Safari"]]
 		[:l [:km "open: Slack"]]
 		[:a [:km "open: Activity Monitor"]]
+		[:d [:km "open: Nihongo"]] ;; mnemonic: d -> dictionary
 		[:n [:km "open: Notion"]]
 		[:e [:km "open: PDF Expert"]]
 		[:p [:km "open: Postman"]]
@@ -480,10 +481,11 @@
 		;; [:4 :!C4]
 		;; [:5 :!C5]
 		;; [:6 :!C6]
-		[:r [:alfred "search repos" "net.deanishe.alfred-git-repos"]]
 		[:b [:alfred "search obsidian" "de.chris-grieser.shimmering-obsidian"]]
 		[:d [:alfred "search downloads" "recentdownloads.ddjfreedom"]]
 		[:k [:alfred "run" "iansinnott.keyboardmaestro"]]
+		[:r [:alfred "search repos" "de.xdevcloud.alfred-repos"]]
+		[:s [:alfred "spot_mini" "com.vdesabou.spotify.mini.player"]]
 		[:m [:alfred "search menu bar" "com.folded-paper.menu-bar-search"]]
 		[:caps_lock [:alfred "search desktop" "com.vitorgalvao.alfred.directories"]]
 		;; [:u [:km "Make 2Do task with Safari title as name + note as current URL"]]
@@ -498,7 +500,7 @@
 	:des "capskey (tod2o + trello)"
 	:rules [
 		:caps-mode
-		[:g [:km "search google"]]
+		[:g [:km "Search google"]]
 	]
 }
 
@@ -520,8 +522,6 @@
 		:s-mode
 		; [:e :tab]
 		; [:r :!Stab]
-		; [:i :!CTperiod] ; Contexts search active windows
-		; [:period :!COS0] ; Selection -> Typinator snippet
 		; [:a :!Cc] ; Copy
 		; [:u :!Cx] ; Cut
 		; [:v :left_shift]
@@ -555,12 +555,9 @@
 		; [:j {:mkey {:vwheel 60}}] ; Scroll down
 		; [:k {:mkey {:vwheel -60}}] ; Scroll up
 		; [:a [:!Cc :!Ctab]] ; Copy & activate previous app
-		; [:w [:km "Google Searchio selected word"]]
-		; [:quote [:km "Select line and google"]]
-		; [:semicolon [:km "Google selected word"]]
+
 		; [:n [:km "Open URL in clipboard in Safari"]]
-		; [:u [:km "Google Lucky selected word"]]
-		; [:l [:km "Google clipboard"]]
+
 		; [:period :!CTO3]
 	]
 } ; Mission control
@@ -632,7 +629,6 @@
 		[:s [:km "open: Slack"]]
 		[:d [:km "open: Discord"]]
 		[:c [:km "open: Contacts"]]
-		; [:h [:km "new contact"]]
 	]
 }
 
@@ -652,20 +648,33 @@
 		; [:semicolon [:km "Amazon Music: volume down"]]
 
 		; Spotify
+		[:p [:alfred "show_playlists" "com.vdesabou.spotify.mini.player"]]
 		[:o [:km "Paste current Spotify song link"]]
 
-		; [:j [:alfred "spot_mini" "com.vdesabou.spotify.mini.player"]]
+		[:j [:alfred "spot_mini" "com.vdesabou.spotify.mini.player"]]
 		[:k [:alfred "show_current_track" "com.vdesabou.spotify.mini.player"]]
-		; [:m [:alfred "add_current_track_to" "com.vdesabou.spotify.mini.player"]]
-		; [:n [:alfred "remove_current_track_from" "com.vdesabou.spotify.mini.player"]]
-		; [:b [:alfred "show_playlists" "com.vdesabou.spotify.mini.player"]]
-
-		; [:semicolon [:alfred "play" "com.vdesabou.spotify.mini.player" "spotify:playlist:4U7w1cpN9ei5LOzwpobiPQ"]] ; Liquid
-		; [:quote [:alfred "play" "com.vdesabou.spotify.mini.player" "spotify:playlist:6OjSvDzNZVny8Uf0YJyx7B"]] ; Ambient Focus
+		[:n [:alfred "add_current_track_to" "com.vdesabou.spotify.mini.player"]]
+		[:m [:alfred "remove_current_track_from" "com.vdesabou.spotify.mini.player"]]
 
 		[:period [:alfred "next" "com.vdesabou.spotify.mini.player"]]
 		[:comma [:alfred "previous" "com.vdesabou.spotify.mini.player"]]
 		[:slash [:alfred "playpause" "com.vdesabou.spotify.mini.player"]]
+		[:quote [:alfred "volume_up" "com.vdesabou.spotify.mini.player"]]
+		[:semicolon [:alfred "volume_down" "com.vdesabou.spotify.mini.player"]]
+
+		; Playlists - probably don't need?
+		; [:semicolon [:alfred "play" "com.vdesabou.spotify.mini.player" "spotify:playlist:4U7w1cpN9ei5LOzwpobiPQ"]] ; Liquid
+		; [:quote [:alfred "play" "com.vdesabou.spotify.mini.player" "spotify:playlist:6OjSvDzNZVny8Uf0YJyx7B"]] ; Ambient Focus
+	]
+}
+
+; AI
+
+{
+	:des "okey (ai)"
+	:rules [
+		:o-mode
+		[:s [:km "Summarise selected text with Aplle AI"]]
 	]
 }
 
