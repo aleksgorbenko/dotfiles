@@ -22,6 +22,7 @@ alias pc="pwd | pbcopy"
 
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip="ipconfig getifaddr en0"
+alias ipinfo="curl ipinfo.io | jq"
 
 alias b="brew"
 alias bi="brew install"
