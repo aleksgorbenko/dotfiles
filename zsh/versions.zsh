@@ -48,7 +48,12 @@ nvm() {
   fi
 }
 
-# On first use, it will set nvm up properly which will replace the `nvm`
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+# On first use, it will set jenv up properly which will replace the `jenv`
 # shell function with the real one
 jenv() {
   if [[ -x "$(brew --prefix)/bin/jenv" ]]; then

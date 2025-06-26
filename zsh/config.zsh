@@ -1,5 +1,4 @@
 export LSCOLORS="exfxcxdxbxegedabagacad"
-# export LSCOLORS="Gxfxcxdxbxegedabagacad"
 export CLICOLOR=true
 ZSH_DISABLE_COMPFIX="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
@@ -40,7 +39,7 @@ setopt always_to_end # move cursor to end if word had one match
 # COMPLETION     #
 ##################
 
-# not needed as now we have fzf-tab
+# Not needed as now we have fzf-tab!
 # select completions with arrow keys
 # zstyle ':completion:*' menu select=10
 # # group results by category
@@ -52,6 +51,8 @@ setopt always_to_end # move cursor to end if word had one match
 # # pasting with tabs doesn't perform completion
 # zstyle ':completion:*' insert-tab pending
 zstyle ':completion:*' fzf-search-display true
+# show preview of the dir in cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 
 ##################
 # KEY BINDINGS   #

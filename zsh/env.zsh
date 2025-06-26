@@ -1,3 +1,8 @@
+# generic envs
+export PROJECTS=${HOME}/src
+export ZSH_ALIASES=${ZSH}/aliases
+export BREW_PREFIX=$(brew --prefix)
+
 # standard path binaries
 export PATH="$ZSH/bin:/usr/local/sbin:/usr/local/bin:$PATH"
 

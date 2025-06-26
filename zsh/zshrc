@@ -6,39 +6,40 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # zmodload zsh/zprof # uncomment to profile laoding speed
-
 export ZSH=${HOME}/.dotfiles
-export PROJECTS=${HOME}/src
-export ZSH_ALIASES=${ZSH}/aliases
-export BREW_PREFIX=$(brew --prefix)
 
-# 1. Load path
+# 1. Load paths and ENVs
 source "${ZSH}/zsh/env.zsh"
 
 # 2. Load aliases
 source "${ZSH_ALIASES}/aliases.zsh"
 
-# 3. Fuzzy finder (need to be loaded as used by some plugins)
+# 3. Load version managers
+source "${ZSH}/zsh/versions.zsh"
+
+# 4. Fuzzy finder (needs to be loaded BEFORE compinit)
+# alt+c - trigger OR "cd **<TAB>"
 [ -f "${HOME}/.fzf.zsh" ] && source "${HOME}/.fzf.zsh"
 
-# 4. Plugins
-# Add new plugins to the `zsh_plugins.txt` file and relaod zsh
+# 5. ZSH config (autoload compinit)
+source "${ZSH}/zsh/config.zsh"
+
+# 6. fzf-tab - fuzzy search with a simple tab (needs to be loaded AFTER compinit)
+source "${ZSH}/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh"
+
+# 7. Plugins
+# Add new plugins to the `zsh_plugins.txt` file and reload zsh
 # Keep syntax highlighting plugin last!
 source ${BREW_PREFIX}/opt/antidote/share/antidote/antidote.zsh
 antidote load
 
-# 5. ZSH config
-source "${ZSH}/zsh/versions.zsh"
-source "${ZSH}/zsh/config.zsh"
-
-# 6. More plugins
+# 8. Load misc tools
 
 # Numbered git output
 [[ -x "${BREW_PREFIX}/bin/scmpuff" ]] && eval "$(scmpuff init -s)"
 
 # Amazing git add, log, diff, reset, checkout, stash, clean
 # source "${ZSH}/zsh/plugins/forgit.plugin.zsh"
-source "${ZSH}/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh"
 
 # Better navigation
 [[ -e "${BREW_PREFIX}/etc/profile.d/autojump.sh" ]] && source "${BREW_PREFIX}/etc/profile.d/autojump.sh"
@@ -46,23 +47,15 @@ source "${ZSH}/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh"
 # Colored output for common unix commands
 [[ -s "${BREW_PREFIX}/etc/grc.bashrc" ]] && source "${BREW_PREFIX}/etc/grc.bashrc"
 
-# tabtab source for packages
-# uninstall by removing these lines
-[[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
+# Load theme
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+source ${BREW_PREFIX}/share/powerlevel10k/powerlevel10k.zsh-theme
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+##################
+# FOOTER         #
+##################
 
 # Local variables, aliases, functions
 [[ -s "${ZSH}/zsh/.zshrc.local" ]] && source "${ZSH}/zsh/.zshrc.local"
-
 # zprof # uncomment to profile loading speed
-
-# load a theme
-source ${BREW_PREFIX}/share/powerlevel10k/powerlevel10k.zsh-theme
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
