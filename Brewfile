@@ -77,6 +77,7 @@ brew "pyenv"
 # http
 brew "httpie"
 brew "wget"
+brew "nmap" # network tool
 
 # dev
 brew "kubectl"
@@ -119,6 +120,7 @@ cask "logi-options-plus" # configure logitech mouse and keyboard
 # dev
 cask "postman"
 cask "docker"
+brew "dive" # inspect docker image layers
 cask "iterm2"
 cask "alacritty"
 brew "libyaml" # needed for ruby on apple silicon
