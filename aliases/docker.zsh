@@ -38,6 +38,7 @@ function mkenv() {
 
 
 function dsh() {
+  echo 'docker exec -it $1 sh'
   docker exec -it $1 sh
 }
 

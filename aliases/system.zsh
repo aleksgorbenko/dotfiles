@@ -44,15 +44,32 @@ alias ze="code ~/.zshrc"
 alias ae="code ~/.aliases"
 alias kara="code ~/.config/karabiner.edn"
 alias dots="code ~/.dotfiles"
-
 alias cdd="cd ~/.dotfiles"
 alias cdp="cd ~/src/projects"
+
+
+# mkdir and cd to it
+mkc() {
+  mkdir -p "$1" && cd "$1" || return 1
+}
+
+_mkc() {
+  #compdef mkc
+  _files -W "$1" -/
+}
 
 # Golang toolchain
 alias gmv="go mode vendor"
 alias gmt="go mode tidy"
 
+alias mp="multipass"
+
 # FUNCTIONS
+
+alias mosk-books1="cd /Users/gbko/Dropbox/mosk/ && git pull origin master"
+alias mosk-books2="git add . && git commit -m \"chore: Add book notes\" && git push origin master"
+alias mosk-books3="cd ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/mosk/ && git pull origin master"
+
 
 function sync-mosk() {
 	rsync -aEu -delete "${HOME}/Documents/mosk/" "${HOME}/Dropbox/mosk/"
