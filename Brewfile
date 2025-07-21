@@ -62,6 +62,7 @@ brew "ctop" # htop for containers
 brew "gotop" # better top
 brew "terminal-notifier" # p.s this won"t work in Alacritty
 brew "xsv" # work with csv
+brew "hugo" # work on my blog https://aleksgorbenko.dev
 
 # cloud
 brew "awslogs"
@@ -97,9 +98,9 @@ cask "firefox"
 cask "1password"
 cask "1password-cli" # needed for Alfred integration
 cask "dropbox"
-cask "authy"
 cask "notion"
 cask "obsidian"
+cask "spotify"
 cask "anki" # learn.space.repeat
 cask "kap" # gif / creator / screen recorder
 
@@ -151,20 +152,14 @@ cask "font-jetbrains-mono"
 # OPTIONAL #
 ############
 
-# cask "amazon-photos"
-cask "adobe-creative-cloud"
-cask "imageoptim"
-cask "spotify"
-# cask "transmission"
-# cask "stremio"
-# cask "iina"
-cask "calibre"
+# cask "imageoptim"
+# cask "calibre"
 # cask "dbeaver-community"
-cask "temurin"
-cask "ledger-live"
+# cask "temurin"
+# cask "ledger-live"
 
 # gaming
-cask "battle-net"
-cask "epic-games"
-cask "nvidia-geforce-now"
-cask "steam"
+# cask "battle-net"
+# cask "epic-games"
+# cask "nvidia-geforce-now"
+# cask "steam"

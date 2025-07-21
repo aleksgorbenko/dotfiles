@@ -85,6 +85,7 @@
 	:b-mode {:key :b}
 	:n-mode {:key :n}
 	:m-mode {:key :m}
+	:u-mode {:key :u}
 	:backslash-mode {:key :backslash}
 	:spacebar-mode {:key :spacebar}
 	:tilde-mode {:key :grave_accent_and_tilde}
@@ -724,10 +725,19 @@
 	]
 }
 
+{
+	:des "u - Url mode"
+	:rules [
+		:u-mode
+			[:c [:km "Open current url in Chrome"]]
+			[:s [:km "Open current url in Safari"]]
+	]
+}
+
 ; alfred
 
 {
-	:des "nkey (2do new task)"
+	:des "n - 2do New task"
 	:rules [
 		:n-mode
 			[:w [:km "new 2do work"]]

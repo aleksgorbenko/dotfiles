@@ -42,10 +42,13 @@ alias tmr='tmux source-file ~/.tmux.conf'
 alias hosts="sudo vim /etc/hosts"
 alias ze="code ~/.zshrc"
 alias ae="code ~/.aliases"
-alias kara="code ~/.config/karabiner.edn"
-alias dots="code ~/.dotfiles"
+alias edot="code ~/.dotfiles/config/karabiner.edn" # edit dotfiles karabiner config
+alias ebrew="code ~/.dotfiles/Brewfile" # edit brewfile
+alias edots="code ~/.dotfiles"
 alias cdd="cd ~/.dotfiles"
 alias cdp="cd ~/src/projects"
+alias cdeng="cd ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/engineering-notebook/"
+alias cdm="cd ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/mosk/"
 
 
 # mkdir and cd to it
