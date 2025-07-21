@@ -7,7 +7,7 @@
 if [ -n "$1" ]; then
   MSG=$1
 else
-  MSG=":robot: Routine changes"
+  MSG="chore: Routine changes :robot:"
 fi
 DIR=$(pwd)
 cd $ZSH
