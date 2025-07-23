@@ -68,156 +68,45 @@
 }
 
 :simlayers {
-	:semicolon-mode {:key :semicolon}
+	;; Alphanumeric
 	:2-mode {:key :2}
 	:3-mode {:key :3}
 	:4-mode {:key :4}
-	:q-mode {:key :q}
-	:w-mode {:key :w}
-	:e-mode {:key :e}
-	:r-mode {:key :r}
-	:t-mode {:key :t}
-	:i-mode {:key :i}
-	:j-mode {:key :j}
-	:p-mode {:key :p}
 	:a-mode {:key :a}
-	:s-mode {:key :s}
+	:b-mode {:key :b}
+	:c-mode {:key :c}
 	:d-mode {:key :d}
+	:e-mode {:key :e}
 	:f-mode {:key :f}
 	:g-mode {:key :g}
-	:z-mode {:key :z}
-	:x-mode {:key :x}
-	:c-mode {:key :c}
-	:v-mode {:key :v}
-	:b-mode {:key :b}
-	:n-mode {:key :n}
+	:i-mode {:key :i}
+	:j-mode {:key :j}
 	:m-mode {:key :m}
+	:n-mode {:key :n}
+	:p-mode {:key :p}
+	:q-mode {:key :q}
+	:r-mode {:key :r}
+	:s-mode {:key :s}
+	:t-mode {:key :t}
 	:u-mode {:key :u}
-	:backslash-mode {:key :backslash}
+	:v-mode {:key :v}
+	:w-mode {:key :w}
+	:x-mode {:key :x}
+	:z-mode {:key :z}
+
+	;; Symbols
+	:semicolon-mode {:key :semicolon}
 	:slash-mode {:key :slash}
-	:spacebar-mode {:key :spacebar}
+	:backslash-mode {:key :backslash}
 	:tilde-mode {:key :grave_accent_and_tilde}
-	:dot-mode {:key :period} ; TODO
-	:go-mode {:key :period :condi ["in-go" 1]}
-	:python-mode {:key :period :condi ["in-python" 1]}
-	:ruby-mode {:key :period :condi ["in-ruby" 1]}
-	:js-mode {:key :period :condi ["in-js" 1]}
+	:dot-mode {:key :period}
+
+	;; Other
+	:spacebar-mode {:key :spacebar}
 	:caps-mode {:key :caps_lock}
 }
 
 :main [
-
-; Language switches
-
-{
-	:des "tilkey (actions + language switches)"
-	:rules [
-		:tilde-mode
-
-		; JS
-		[:j [["in-ruby" 0] ["in-python" 0] ["in-go" 0] ["in-js" 1]]]
-
-		; Go
-		[:g [["in-ruby" 0] ["in-python" 0] ["in-go" 1] ["in-js" 0]]]
-
-		; Python
-		[:p [["in-ruby" 0] ["in-python" 1] ["in-go" 0] ["in-js" 0]]]
-
-		; Ruby
-		[:r [["in-ruby" 1] ["in-python" 0] ["in-go" 0] ["in-js" 0]]]
-
-		[:d [:km "Commit dotfiles"]]
-		[:b [:km "Commit blog"]]
-	]
-}
-
-{
-	:des "russian"
-	:rules [
-		[:h :x [:ru]] ; ч -> х
-		[:x :h [:ru]] ; х -> ч
-		[:!Sh :!Sx [:ru]]
-		[:!Sx :!Sh [:ru]]
-
-		; [:open_bracket :hyphen [:ru]] ; [ -> ь
-		; [:close_bracket :equal_sign [:ru]] ; ] -> ъ
-		; [:hyphen :!Ohyphen [:ru]] ; ь -> -
-		; [:equal_sign :!Oequal_sign [:ru]] ; ъ -> =
-
-		; :j-mode
-		; [:a :q [:ru]] ; ja -> я
-		; [:u :open_bracket [:ru]] ; ju -> ю
-		; [:o :!Oe [:ru]] ; jo -> ё
-
-		; :z-mode
-		; [:h :close_bracket [:ru]] ;-> ж
-	]
-}
-
-; jsdot
-
-{
-	:des "jsdot"
-	:rules [
-		:js-mode
-		[:a [:c :o :n :s :o :l :e :period :l :o :g :!S9 :!S0 :left_arrow]] ; -> console.log()
-		[:s [:equal_sign :!Speriod :spacebar]] ; -> =>
-		[:d [:r :e :t :u :r :n :spacebar]] ; -> return
-		[:f [:!Cf :c :o :n :s :o :l :e :period :l :o :g :!S9 :return_or_enter]] ; -> search console.log( in file
-		[:j [:right_arrow :spacebar :equal_sign :spacebar]] ; -> =
-		[:k [:right_arrow :spacebar :!Sopen_bracket :return_or_enter]] ; -> {  }
-		[:g [:right_arrow :spacebar :equal_sign :!Speriod :spacebar :!Sopen_bracket :return_or_enter]] ; -> => {}
-		[:z [:spacebar :c :l :a :s :s :!Sn :a :m :e :equal_sign :!Squote :!Squote :left_arrow]] ; -> className=""
-		;[:x [:t :a :c :h :y :o :n :s :spacebar]] ; -> tachyons
-		[:c [:spacebar :s :t :y :l :e :equal_sign :!Sopen_bracket :!Sopen_bracket :!Sclose_bracket :!Sclose_bracket :left_arrow :left_arrow]] ; -> style={{}}
-		[:b [:t :y :p :e :s :c :r :i :p :t :spacebar]] ; -> typescript
-		[:v [:j :a :v :a :s :c :r :i :p :t :spacebar]]
-	]
-}
-
-; godot
-
-{
-	:des "godot"
-	:rules[
-		:go-mode
-		[:a [:f :m :t :period :!Sp :r :i :n :t :l :n :!S9 :!S0 :left_arrow]] ; -> fmt.Println()
-		[:s [:!Ssemicolon :equal_sign :spacebar]] ; -> :=
-		[:d [:r :e :t :u :r :n :spacebar]] ; -> return
-		[:f [:!Cf :f :m :t :period :p :return_or_enter]] ; -> search fmt.p in file
-		[:g [:i :f :spacebar :e :r :r :spacebar :!S1 :equal_sign :spacebar :n :i :l :spacebar :!Sopen_bracket :return_or_enter]] ; -> if err != nil {}
-		[:j [:grave_accent_and_tilde :j :s :o :n :!Ssemicolon :!Squote :!Squote :grave_accent_and_tilde :left_arrow :left_arrow]] ; -> `json:""`
-		[:z [:l :o :g :period :!Sp :r :i :n :t :l :n :!S9 :!S0 :left_arrow]] ; -> log.Println()
-		[:x [:f :m :t :period :!Sp :r :i :n :t :l :n :!S9 :!S0 :left_arrow :!Squote :hyphen :hyphen]] ; -> fmt.Println("--")
-		[:c [:!STsemicolon]] ; Selection -> Go Playground
-		[:b [:l :o :g :period :!Sf :a :t :a :l :!S9 :e :r :r :!S0]] ; -> log.Fatal(err)
-		[:v [:g :o :l :a :n :g :spacebar]]
-	]
-}
-
-; pydot
-
-{
-	:des "pydot"
-	:rules[
-		:py-mode
-		[:a [:p :r :i :n :t :!S9 :!S0 :left_arrow]] ; -> print()
-		[:s [:hyphen :!Speriod]] ; -> ->
-		[:d [:r :e :t :u :r :n :spacebar]] ; -> return
-		[:grave_accent_and_tilde [:p :r :i :n :t :!S9 :quote :hyphen :hyphen :hyphen :!Cright_arrow :caps_lock]] ; -> print('---')
-		[:v [:p :y :t :h :o :n :spacebar]]
-	]
-}
-
-{
-	:des "rudot"
-	:rules[
-		:ruby-mode
-		[:a [:p :u :t :s :spacebar]] ; -> puts
-		[:grave_accent_and_tilde [:p :u :t :s :spacebar :quote :hyphen :hyphen :hyphen :quote]] ; -> puts '---'
-	]
-}
-
 
 ; ALPHANUMERIC KEYS
 
@@ -554,15 +443,14 @@
 
 ; SYMBOLS
 
-; search
-
 {
-	:des "caps-key - Search"
+	:des "tilde-key - ?"
 	:rules [
-		:caps-mode
-		[:g [:km "Search google"]]
+		:tilde-mode
+
 	]
 }
+
 
 ; chat
 
@@ -570,9 +458,9 @@
 	:des "slash-key - Social"
 	:rules [
 		:slash-mode
-		[:t [:km "open: Telegram"]]
-		[:s [:km "open: Slack"]]
 		[:c [:km "open: Contacts"]]
+		[:s [:km "open: Slack"]]
+		[:t [:km "open: Telegram"]]
 	]
 }
 
@@ -603,55 +491,92 @@
 	]
 }
 
+{
+	:des "semicolon-key - ?"
+		:rules [
+		:semicolon-mode
+		[:q :!Sq]
+		[:w :!Sw]
+		[:e :!Se]
+		[:r :!Sr]
+		[:t :!St]
+		[:y :!Sy]
+		[:u :!Su]
+		[:i :!Si]
+		[:o :!So]
+		[:p :!Sp]
+		[:a :!Sa]
+		[:s :!Ss]
+		[:d :!Sd]
+		[:f :!Sf]
+		[:g :!Sg]
+		[:h :!Sh]
+		[:j :!Sj]
+		[:k :!Sk]
+		[:l :!Sl]
+		[:z :!Sz]
+		[:x :!Sx]
+		[:c :!Sc]
+		[:v :!Sv]
+		[:b :!Sb]
+		[:n :!Sn]
+		[:m :!Sm]
+		[:grave_accent_and_tilde [:!Sgrave_accent_and_tilde]] ; -> ~
+		[:1 :!T1]
+		[:2 :!T2]
+		[:3 :!T3]
+		[:4 :!T4]
+		[:5 :!T5]
+		[:6 :!T6]
+	]
+}
+
+;; OTHER
+
 ; websites
 
 {
-	:des "space-key (websites)"
+	:des "space-key - ?"
 	:rules [
 		:spacebar-mode
 
 	]
 }
 
+; search
+
 {
-	:des "colonkey (shift)"
-		:rules [
-			:semicolon-mode
-			[:q :!Sq]
-			[:w :!Sw]
-			[:e :!Se]
-			[:r :!Sr]
-			[:t :!St]
-			[:y :!Sy]
-			[:u :!Su]
-			[:i :!Si]
-			[:o :!So]
-			[:p :!Sp]
-			[:a :!Sa]
-			[:s :!Ss]
-			[:d :!Sd]
-			[:f :!Sf]
-			[:g :!Sg]
-			[:h :!Sh]
-			[:j :!Sj]
-			[:k :!Sk]
-			[:l :!Sl]
-			[:z :!Sz]
-			[:x :!Sx]
-			[:c :!Sc]
-			[:v :!Sv]
-			[:b :!Sb]
-			[:n :!Sn]
-			[:m :!Sm]
-			[:grave_accent_and_tilde [:!Sgrave_accent_and_tilde]] ; -> ~
-			[:1 :!T1]
-			[:2 :!T2]
-			[:3 :!T3]
-			[:4 :!T4]
-			[:5 :!T5]
-			[:6 :!T6]
-		]
-	}
+	:des "caps-key - Search"
+	:rules [
+		:caps-mode
+		[:g [:km "Search google"]]
+	]
+}
+
+;; Language key-remap
+
+{
+	:des "russian"
+	:rules [
+		[:h :x [:ru]] ; ч -> х
+		[:x :h [:ru]] ; х -> ч
+		[:!Sh :!Sx [:ru]]
+		[:!Sx :!Sh [:ru]]
+
+		; [:open_bracket :hyphen [:ru]] ; [ -> ь
+		; [:close_bracket :equal_sign [:ru]] ; ] -> ъ
+		; [:hyphen :!Ohyphen [:ru]] ; ь -> -
+		; [:equal_sign :!Oequal_sign [:ru]] ; ъ -> =
+
+		; :j-mode
+		; [:a :q [:ru]] ; ja -> я
+		; [:u :open_bracket [:ru]] ; ju -> ю
+		; [:o :!Oe [:ru]] ; jo -> ё
+
+		; :z-mode
+		; [:h :close_bracket [:ru]] ;-> ж
+	]
+}
 
 ] ; main end
 } ; end
