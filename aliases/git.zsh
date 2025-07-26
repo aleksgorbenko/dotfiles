@@ -10,13 +10,6 @@ function current_branch() {
   echo ${ref#refs/heads/}
 }
 
-# Use `hub` as our git wrapper:
-# https://hub.github.com/
-alias git=$(which hub)
-
-alias g='git'
-
-
 # Create dir, go to it and initialise it with git. mg <dir-name>
 mg() {
     mkdir "$1"
@@ -24,10 +17,22 @@ mg() {
     git init
 }
 
+# Use `hub` as our git wrapper:
+# https://hub.github.com/
+alias git=$(which hub)
+alias g='git'
 
-#
+
 # Aliases
-#
+# A-Z order
+
+# ADD
+alias gad='git add'
+alias gaa='git add --all'
+alias gap='git add --patch'
+alias gau='git add --update'
+alias gav='git add --verbose'
+alias gapp='git apply'
 
 # BRANCH
 alias gb='git branch'
@@ -41,13 +46,12 @@ alias gbm='git branch --merged'
 alias gbnm='git branch --no-merged'
 alias gbr='git branch --remote'
 
-# ADD
-alias gad='git add'
-alias gaa='git add --all'
-alias gap='git add --patch'
-alias gau='git add --update'
-alias gav='git add --verbose'
-alias gapp='git apply'
+# BISECT
+alias gbs='git bisect'
+alias gbsb='git bisect bad'
+alias gbsg='git bisect good'
+alias gbsr='git bisect reset'
+alias gbss='git bisect start'
 
 # COMMIT
 alias gc!='git commit --amend'
@@ -60,14 +64,15 @@ function gca() {
   git commit -a -m $1 && scmpuff_status
 }
 
-alias prfix="gcmsg 'fix as per PR comments' && ggp"
-
 alias gcf='git config --list'
-alias gcl='git clone --recurse-submodules'
-alias gclean='git clean -id'
-alias gpristine='git reset --hard && git clean -dfx'
 
-# alias gcount='git shortlog -sn'
+### CLONE
+alias gcl='git clone --recurse-submodules'
+
+### CLEAN
+alias gclean='git clean -id'
+
+alias gcount='git shortlog -sn'
 
 # CHERRY PICK
 alias gcp='git cherry-pick'
@@ -134,13 +139,6 @@ alias gupa='git pull --rebase --autostash'
 alias gupav='git pull --rebase --autostash -v'
 alias glum='git pull upstream master'
 
-# BISECT
-alias gbs='git bisect'
-alias gbsb='git bisect bad'
-alias gbsg='git bisect good'
-alias gbsr='git bisect reset'
-alias gbss='git bisect start'
-
 function ggu() {
   [[ "$#" != 1 ]] && local b="$(current_branch)"
   git pull --rebase origin "${b:=$1}"
@@ -154,6 +152,8 @@ alias gpsup='git push --set-upstream origin $(current_branch)'
 alias gignore='git update-index --assume-unchanged'
 alias gignored='git ls-files -v | grep "^[[:lower:]]"'
 
+# LOG
+# These aliases are based on the git log command, which is used to view the commit history.
 alias gl='git pull'
 alias glg='git log --stat'
 alias glgp='git log --stat -p'
@@ -193,15 +193,23 @@ alias grbi='git rebase -i'
 alias grbm='git rebase master'
 alias grbs='git rebase --skip'
 
+### REVERT
 alias grev='git revert'
-alias gres='git reset'
-alias gresh='git reset --hard'
-alias gresoh='git reset origin/$(current_branch) --hard'
-# alias gru='git reset --'
-alias gres1="git reset --soft HEAD~1"
 
-alias grm='git rm'
-alias grmc='git rm --cached'
+### RESET
+alias gresh='git reset --hard'
+alias gresho='git reset origin/$(current_branch) --hard' # reset to origin branch, discarding all local changes
+alias gres1="git reset --mixed HEAD~1" # uncommit last commit, but keep changes unstaged
+alias gpristine="git reset --hard && git clean -dfx"
+
+### RESTORE
+alias gres="git restore" # restore changes in the working directory
+alias gres="git restore --cached" # unstage changes
+
+### REMOVE
+
+alias grm='git rm' # remove files from the working tree and index
+alias grmc='git rm --cached' # unstage changes without deleting files
 
 # gotta love this one
 alias groot='echo I am Groot! && cd "$(git rev-parse --show-toplevel || echo .)"'
@@ -209,13 +217,16 @@ alias groot='echo I am Groot! && cd "$(git rev-parse --show-toplevel || echo .)"
 alias gsh='git show'
 alias gsps='git show --pretty=short --show-signature'
 
-# use the default stash push on git 2.13 and newer
-autoload -Uz is-at-least
-is-at-least 2.13 "$(git --version 2>/dev/null | awk '{print $3}')" &&
-  alias gsta='git stash push' ||
-  alias gsta='git stash save'
-
 # STASH
+function gsts() {
+  if [[ "$#" != 0 ]]; then
+    git stash push -m "$1"
+  else
+    [[ "$#" == 0 ]]
+    git stash push
+  fi
+}
+
 alias gstaa='git stash apply'
 alias gstc='git stash clear'
 alias gstd='git stash drop'
@@ -232,6 +243,8 @@ function gstp() {
     git stash pop
   fi
 }
+
+### TAG
 
 alias gts='git tag -s'
 alias gtv='git tag | sort -V'
