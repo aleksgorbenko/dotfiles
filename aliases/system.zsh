@@ -1,10 +1,30 @@
 alias cls='clear' # Good 'ol Clear Screen command
 alias a="alias"
-alias sa="alias | grep" # search aliases
+
+# search all functions and aliases
+sa() {
+    if [ -z "$1" ]; then
+        echo "Usage: sa <name>"
+        return 1
+    fi
+
+    # Check if function exists
+    if type "$1" >/dev/null 2>&1; then
+        functions "$1"
+        return 0
+    fi
+
+    alias | grep --color=always -E "$1" || echo "No matching alias found."
+}
+
 alias ls="eza"
 alias ll="eza -lha"
 alias la="eza -lTha"
 alias t="touch"
+
+to() { # touch and open file in VS Code
+  touch "$1" && code "$1"
+}
 
 alias .2='cd ../../'             # Go back 2 directory levels
 alias .3='cd ../../../'          # Go back 3 directory levels
@@ -45,11 +65,13 @@ alias ae="code ~/.aliases"
 alias edot="code ~/.dotfiles/config/karabiner.edn" # edit dotfiles karabiner config
 alias ebrew="code ~/.dotfiles/Brewfile" # edit brewfile
 alias edots="code ~/.dotfiles"
+
+alias cdm="cd ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/mosk/"
+alias cdeng="cd ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/engineering-notebook/"
 alias cdd="cd ~/.dotfiles"
 alias cdp="cd ~/src/projects"
-alias cdeng="cd ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/engineering-notebook/"
-alias cdm="cd ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/mosk/"
-
+alias cdk="cd ~/src/kata"
+alias cddown="cd ~/Downloads"
 
 # mkdir and cd to it
 mkc() {

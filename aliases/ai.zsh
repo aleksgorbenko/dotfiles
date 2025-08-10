@@ -1,0 +1,6 @@
+alias o="ollama"
+alias ops="ollama ps"
+alias ols="ollama list"
+alias ost="ollama stop"
+alias ostd="echo 'stopping \"deepseek-r1:latest\" ...' && ollama stop deepseek-r1:latest && ops"
+alias ostg="echo 'stopping \"gpt-oss:20b\" ...' && ollama stop gpt-oss:20b && ops"
