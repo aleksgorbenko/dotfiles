@@ -84,6 +84,7 @@
 	:m-mode {:key :m}
 	:n-mode {:key :n}
 	:p-mode {:key :p}
+	:o-mode {:key :o}
 	:q-mode {:key :q}
 	:r-mode {:key :r}
 	:s-mode {:key :s}
@@ -148,10 +149,13 @@
 ; ctrl
 
 {
-	:des "a-key - ?"
+	:des "a-key - "
 	:rules [
 		:a-mode
-
+			;; [:c [:km "Ask Claude"]]
+			;; [:g [:km "Ask ChatGPT"]]
+			;; [:l [:km "Ask Google"]]
+			;; [:p [:km "Ask Perplexity"]]
 	]
 }
 
@@ -180,7 +184,7 @@
 	]
 }
 
-; 
+;
 
 {
 	:des "d-key - ?"
@@ -190,7 +194,7 @@
 	]
 }
 
-; 
+;
 
 {
 	:des "e-key - ?"
@@ -211,7 +215,7 @@
 	]
 }
 
-; 
+;
 
 {
 	:des "g-key - ?"
@@ -220,7 +224,7 @@
 	]
 }
 
-; 
+;
 
 {
 	:des "i-key - ?"
@@ -248,7 +252,9 @@
 	:des "o-key - AI"
 	:rules [
 		:o-mode
-		[:s [:km "Summarise selected text with Aplle AI"]]
+		[:s [:km "Summarise selected text with Apple AI"]]
+		[:g [:km "open: ChatGPT"]]
+		[:c [:km "open: Claude"]]
 	]
 }
 
@@ -265,12 +271,13 @@
 		;; [:5 :!C5]
 		;; [:6 :!C6]
 		[:b [:alfred "search obsidian" "de.chris-grieser.shimmering-obsidian"]]
-		[:d [:alfred "search downloads" "recentdownloads.ddjfreedom"]]
-		[:e [:alfred "search desktop" "com.vitorgalvao.alfred.directories"]]
+		[:d [:alfred "search downloads" "dev.gbko.alfred.directories"]]
+		[:e [:alfred "search desktop" "dev.gbko.alfred.directories"]]
 		[:k [:alfred "run" "iansinnott.keyboardmaestro"]]
 		[:r [:alfred "search repos" "de.xdevcloud.alfred-repos"]]
-		[:s [:alfred "spot_mini" "com.vdesabou.spotify.mini.player"]]
 		[:m [:alfred "search menu bar" "com.folded-paper.menu-bar-search"]]
+		[:s [:alfred "shortcuts" "com.alfredapp.vitor.shortcuts"]]
+		[:x [:alfred "spot_mini" "com.vdesabou.spotify.mini.player"]]
 	]
 }
 
@@ -346,7 +353,7 @@
 	]
 }
 
-; 
+;
 
 {
 	:des "t-key - ?"
@@ -385,6 +392,7 @@
 		:w-mode
 		[:2 [:km "open: 2Do"]]
 		[:a [:km "open: Anki"]]
+		[:b [:km "open: Postman"]]
 		[:c [:km "open: Chrome"]]
 		[:d [:km "open: Discord"]]
 		[:e [:km "open: PDF Expert"]]
@@ -395,13 +403,14 @@
 		[:m [:km "open: Activity Monitor"]]
 		[:n [:km "open: Notion"]]
 		[:o [:km "open: Obsidian"]]
-		[:p [:km "open: Postman"]]
+		[:p [:km "open: Perplexity"]]
 		[:s [:km "open: Safari"]]
 		[:t [:km "open: Telegram"]]
 		[:v [:km "open: VS Code"]]
 		[:x [:km "open: Spotify"]]
 		[:y [:km "open: Alacritty"]]
 		[:z [:km "open: Zoom"]]
+		[:comma [:km "open: XCode"]]
 		[:period [:km "open: Finder"]]
 	]
 }
@@ -434,6 +443,7 @@
 		[:slash [:alfred "playpause" "com.vdesabou.spotify.mini.player"]]
 		[:quote [:alfred "volume_up" "com.vdesabou.spotify.mini.player"]]
 		[:semicolon [:alfred "volume_down" "com.vdesabou.spotify.mini.player"]]
+		[:period [:alfred "" "com.vdesabou.spotify.mini.player"]]
 
 		; Playlists - probably don't need?
 		; [:semicolon [:alfred "play" "com.vdesabou.spotify.mini.player" "spotify:playlist:4U7w1cpN9ei5LOzwpobiPQ"]] ; Liquid
@@ -546,10 +556,13 @@
 ; search
 
 {
-	:des "caps-key - Search"
+	:des "caps-key - Ask GPT, Google, Perplexity, Claude etc"
 	:rules [
 		:caps-mode
-		[:g [:km "Search google"]]
+		[:c [:km "Ask Claude"]]
+		[:g [:km "Ask ChatGPT"]]
+		[:l [:km "Ask Google"]]
+		[:p [:km "Ask Perplexity"]]
 	]
 }
 
