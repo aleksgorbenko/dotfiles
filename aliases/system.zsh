@@ -45,6 +45,7 @@ alias localip="ipconfig getifaddr en0"
 alias ipinfo="curl ipinfo.io | jq"
 
 alias b="brew"
+alias bb="brew bundle --file $HOME/.dotfiles/Brewfile"
 alias bi="brew install"
 alias bic="brew install --cask"
 alias bu="brew upgrade"
