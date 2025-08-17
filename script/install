@@ -95,6 +95,12 @@ function install_dotfiles () {
 	$DOTS/bin/link-file "${DOTS}/zsh/zshrc" "${HOME}/.zshrc"
 	$DOTS/bin/link-file "${DOTS}/zsh/zsh_plugins.txt" "${HOME}/.zsh_plugins.txt"
 
+	# editor key bindings
+	bot "Installing XCode, Zed and VSCode keybindings"
+	cp -f "${DOTS}/config/xcode.idekeybindings" "${HOME}/Library/Developer/Xcode/UserData/KeyBindings/Default.idekeybindings"
+	cp -f "${DOTS}/config/zed-keymap.json" "${HOME}/.config/zed/keymap.json"
+	cp -f "${DOTS}/config/vscode-keybindings.json" "${HOME}/Library/Application Support/Code/User/keybindings.json"
+
 	# convenience
 	$DOTS/bin/link-file "${Home}/Dropbox/src" "${HOME}/src"
 }
