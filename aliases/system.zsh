@@ -101,3 +101,69 @@ function sync-mosk() {
 	rsync -aEu -delete "${HOME}/Documents/mosk/" "${HOME}/Dropbox/mosk/"
 	rsync -aEu  "${HOME}/Dropbox/mosk/" "${HOME}/Documents/mosk/"
 }
+
+# Symlinks for app preferences are disabled since Sonoma.
+# That's why this copies files after any changes in settings.
+# This way the changes can be saved and committed.
+
+##########
+# EXPORT #
+##########
+
+function export-xcode-keybindings() {
+  echo "Exporting Xcode keybindings to dotfiles..."
+  echo "${HOME}/Library/Developer/Xcode/UserData/KeyBindings/Default.idekeybindings -> ${DOTS}/config/xcode.idekeybindings"
+  cp -f "${HOME}/Library/Developer/Xcode/UserData/KeyBindings/Default.idekeybindings" "${DOTS}/config/xcode.idekeybindings"
+  echo "Copied!"
+}
+
+function export-vscode-keybindings() {
+  echo "Exporting Xcode keybindings to dotfiles..."
+  echo "${HOME}/Library/Application Support/Code/User/keybindings.json -> ${DOTS}/config/vscode-keybindings.json"
+  cp -f "${HOME}/Library/Application Support/Code/User/keybindings.json" "${DOTS}/config/vscode-keybindings.json"
+  echo "Copied!"
+}
+
+function export-zed-keybindings() {
+  echo "Exporting Zed keybindings to dotfiles..."
+  echo "${HOME}/.config/zed/keymap.json -> ${DOTS}/config/zed-keymap.json"
+  cp -f "${HOME}/.config/zed/keymap.json" "${DOTS}/config/zed-keymap.json"
+  echo "Copied!"
+}
+
+function export-app-settings() {
+  export-xcode-keybindings
+  export-zed-keybindings
+  export-vscode-keybindings
+}
+
+##########
+# IMPORT #
+##########
+
+function import-xcode-keybindings() {
+  echo "Importing Xcode keybindings from dotfiles..."
+  echo "${DOTS}/config/xcode.idekeybindings -> ${HOME}/Library/Developer/Xcode/UserData/KeyBindings/Default.idekeybindings"
+  cp -f "${DOTS}/config/xcode.idekeybindings" "${HOME}/Library/Developer/Xcode/UserData/KeyBindings/Default.idekeybindings"
+  echo "Copied!"
+}
+
+function import-vscode-keybindings() {
+  echo "Importing VSCode keybindings from dotfiles..."
+  echo "${DOTS}/config/vscode-keybindings.json -> ${HOME}/Library/Application Support/Code/User/keybindings.json"
+  cp -f "${DOTS}/config/vscode-keybindings.json" "${HOME}/Library/Application Support/Code/User/keybindings.json"
+  echo "Copied!"
+}
+
+function import-zed-keybindings() {
+  echo "Importing Zed keybindings from dotfiles..."
+  echo "${DOTS}/config/zed-keymap.json -> ${HOME}/.config/zed/keymap.json"
+  cp -f "${DOTS}/config/zed-keymap.json" "${HOME}/.config/zed/keymap.json"
+  echo "Copied!"
+}
+
+function import-app-settings() {
+  import-xcode-keybindings
+  import-zed-keybindings
+  import-vscode-keybindings
+}
