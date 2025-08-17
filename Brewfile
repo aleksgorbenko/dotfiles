@@ -16,11 +16,12 @@ cask_args appdir: "/Applications", require_sha: true
 
 # magnet - 441258766
 # trello - 1278508951
-# paste - 967805235
 # 2do - 477670270
-# mas install 441258766 1278508951 967805235 477670270
+# perplexity ai - 6714467650
+# Xcode - 497799835
+# Apple Developer - 640199958
+# mas install 441258766 1278508951 477670270 6714467650 497799835 640199958
 brew "mas"
-# brew "mackup"
 
 # compilers
 brew "gcc"
@@ -34,7 +35,7 @@ cask "diffmerge"
 brew "coreutils"
 brew "antidote"
 brew "powerlevel10k"
-brew "scmpuff"
+brew "scmpuff" # nicer git commans in terminal
 brew "tmux"
 brew "grc" # terminal coloriser
 brew "fzf" # fuzzy search
@@ -101,8 +102,11 @@ cask "dropbox"
 cask "notion"
 cask "obsidian"
 cask "spotify"
-cask "anki" # learn.space.repeat
+# do not update beyond anki 25.02. Keyboard Maestro does not work with newer version
+# https://github.com/ankitects/anki/releases?page=2
+# cask "anki" # learn.space.repeat
 cask "kap" # gif / creator / screen recorder
+cask "reminders-menubar" # quick add to reminders app
 
 # chat
 cask "slack"
@@ -127,12 +131,19 @@ cask "alacritty"
 brew "libyaml" # needed for ruby on apple silicon
 cask "multipass" # vm, somewhat similar to virtual box. It is powered by qemu and made by Canonical (ubuntu)
 
-# editor
+# code editor
 cask "visual-studio-code"
 cask "jetbrains-toolbox"
+cask "zed"
 
 # db
 brew "pgcli" # autocompletion and syntax highlighting
+brew "sqlite"
+
+# AI
+brew "ollama" # run, push, pull LLMs locally
+cask "chatgpt" # macOS app for ChatGPT
+# intellibar (manual install) - better ChatGPT interface + shortcuts
 
 #########
 # FONTS #
@@ -163,3 +174,6 @@ cask "font-jetbrains-mono"
 # cask "epic-games"
 # cask "nvidia-geforce-now"
 # cask "steam"
+
+# utilities
+# cask "onyx"
