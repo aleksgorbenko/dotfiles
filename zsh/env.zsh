@@ -1,5 +1,6 @@
 # generic envs
 export PROJECTS=${HOME}/src
+export DOTS=${HOME}/.dotfiles
 export ZSH_ALIASES=${ZSH}/aliases
 export BREW_PREFIX=$(brew --prefix)
 
