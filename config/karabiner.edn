@@ -274,6 +274,7 @@
 		[:b [:alfred "search obsidian" "de.chris-grieser.shimmering-obsidian"]]
 		[:d [:alfred "search downloads" "dev.gbko.alfred.directories"]]
 		[:e [:alfred "search desktop" "dev.gbko.alfred.directories"]]
+		[:i [:alfred "search icons" "dev.gbko.alfred.directories"]]
 		[:k [:alfred "run" "iansinnott.keyboardmaestro"]]
 		[:r [:alfred "search repos" "de.xdevcloud.alfred-repos"]]
 		[:m [:alfred "search menu bar" "com.folded-paper.menu-bar-search"]]
@@ -341,7 +342,7 @@
 	:rules [
 		:r-mode
 		[:p [:km "show palette: Personal"]]
-		[:t [:km "show palette: Thanks"]]
+		;; [:t [:km "show palette: Thanks"]]
 	]
 }
 
