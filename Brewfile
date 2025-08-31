@@ -107,8 +107,9 @@ cask "spotify"
 # cask "anki" # learn.space.repeat
 cask "kap" # gif / creator / screen recorder
 cask "reminders-menubar" # quick add to reminders app
+cask "obs" # screen recording
 
-# chat
+# comms
 cask "slack"
 cask "telegram"
 cask "discord"
@@ -121,6 +122,9 @@ brew "yqrashawn/goku/goku" # helps remap everything!
 cask "keka" # work with archives
 cask "keyboard-maestro"
 cask "logi-options-plus" # configure logitech mouse and keyboard
+cask "jordanbaird-ice" # menu bar icon manager
+cask "istat-menus" # cou, memory, temperature stats
+# cask "stats" # free alternative to istat-menus
 
 # dev
 cask "postman"
@@ -175,5 +179,5 @@ cask "font-jetbrains-mono"
 # cask "nvidia-geforce-now"
 # cask "steam"
 
-# utilities
+# utils
 # cask "onyx"
