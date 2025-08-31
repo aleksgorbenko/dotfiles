@@ -29,4 +29,20 @@ alias mkst="minikube stop"
 alias mkd="minikube delete"
 alias mkrs="minikube delete; minikube start"
 
+# Flux aliases
+
+alias fgk="flux get kustomizations --all-namespaces"
+alias fgs="flux get sources git --all-namespaces"
+alias frk="flux reconcile kustomization --with-source" # --namespace"
+alias frg="flux reconcile source git" # --namespace"
+alias fsk="flux suspend kustomization" # --namespace"
+alias frkz="flux resume kustomization" # --namespace"
+alias fshr="flux suspend helmrelease" # --namespace"
+alias frhr="flux resume helmrelease" # --namespace"
+alias fghr="flux get helmreleases" # --all-namespaces"
+alias frhl="flux reconcile helmrelease --with-source" # --namespace"
+alias fdk="flux delete kustomization" # --namespace"
+alias fdhr="flux delete helmrelease" # --namespace"
+alias fchk="flux check --pre"
+
 # eksctl
