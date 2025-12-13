@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-PYTHON_VESRION=3.11.3
-RUBY_VESRION=3.2.2
+PYTHON_VERSION=3.13.0
+RUBY_VERSION=3.4.5
 
 source "${HOME}/.dotfiles/script/echos.sh"
 
@@ -85,6 +85,9 @@ function install_dotfiles () {
 	# k9s config
 	$DOTS/bin/link-file "${DOTS}/config/k9s_hotkey.yml" "${HOME}/.k9s/hotkey.yml"
 
+	# ripgrep config
+	$DOTS/bin/link-file "${DOTS}/config/ripgreprc" "${HOME}/.ripgreprc"
+
 	# git config
 	$DOTS/bin/link-file "${DOTS}/git/gitconfig" "${HOME}/.gitconfig"
 	$DOTS/bin/link-file "${DOTS}/git/gitconfig.local" "${HOME}/.gitconfig.local"
@@ -96,10 +99,32 @@ function install_dotfiles () {
 	$DOTS/bin/link-file "${DOTS}/zsh/zsh_plugins.txt" "${HOME}/.zsh_plugins.txt"
 
 	# editor key bindings
+	# Symlinks for app preferences are disabled since Sonoma.
+	# That's why this copies files after any changes in settings.
+	# This way the changes can be saved and committed.
 	bot "Installing XCode, Zed and VSCode keybindings"
 	cp -f "${DOTS}/config/xcode.idekeybindings" "${HOME}/Library/Developer/Xcode/UserData/KeyBindings/Default.idekeybindings"
 	cp -f "${DOTS}/config/zed-keymap.json" "${HOME}/.config/zed/keymap.json"
 	cp -f "${DOTS}/config/vscode-keybindings.json" "${HOME}/Library/Application Support/Code/User/keybindings.json"
+
+	# MacOS Ding Sounds when Valid shortcuts are pressed
+	# https://github.com/microsoft/vscode/issues/44070
+	# https://code.visualstudio.com/docs/terminal/basics#_why-does-macos-make-a-ding-sound-when-i-resize-terminal-split-panes
+	# This is because of Electron...
+	# This is a workaround - this will turn of the ding sound
+	mkdir -p ~/Library/KeyBindings
+	cat > ~/Library/KeyBindings/DefaultKeyBinding.dict <<EOF
+{
+"@^\UF700" = "noop:";
+"@^\UF701" = "noop:";
+"@^\UF702" = "noop:";
+"@^\UF703" = "noop:";
+"@~^\UF700" = "noop:";
+"@~^\UF701" = "noop:";
+"@~^\UF702" = "noop:";
+"@~^\UF703" = "noop:";
+}
+EOF
 
 	# convenience
 	$DOTS/bin/link-file "${Home}/Dropbox/src" "${HOME}/src"
@@ -140,17 +165,13 @@ function install_extras () {
 	yes | $(brew --prefix)/opt/fzf/install
 	ok
 
-	if [[ ! -e "${HOME}/.dotfiles/zsh/plugins/forgit.plugin.zsh" ]]; then
-		running "forgit"
-		curl -s https://raw.githubusercontent.com/wfxr/forgit/master/forgit.plugin.zsh -o ${DOTS}/zsh/plugins/forgit.plugin.zsh
-		ok
-	fi
-
 	bot "Install Karabiner Settings"
 	goku
+	ok
 }
 
 function install_lang () {
+	bot "Install node version manager and latest LTS node"
 	# install nvm and LTS node
 	if [[ ! -s "${HOME}/.nvm/nvm.sh"  ]]; then
 		curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
@@ -158,15 +179,17 @@ function install_lang () {
 	fi
 
 	# install python
+	bot "Install python version: $PYTHON_VERSION"
 	if [[ -x "$(brew --prefix)/bin/pyenv" ]]; then
-		$(brew --prefix)/bin/pyenv install $PYTHON_VESRION
-		$(brew --prefix)/bin/pyenv global $PYTHON_VESRION
+		$(brew --prefix)/bin/pyenv install $PYTHON_VERSION
+		$(brew --prefix)/bin/pyenv global $PYTHON_VERSION
 	fi
 
 	# install ruby
+	bot "Install ruby version: $RUBY_VERSION"
 	if [[ -x "$(brew --prefix)/bin/rbenv" ]]; then
-		"$(brew --prefix)/bin/rbenv" install $RUBY_VESRION
-		"$(brew --prefix)/bin/rbenv" global $RUBY_VESRION
+		"$(brew --prefix)/bin/rbenv" install $RUBY_VERSION
+		"$(brew --prefix)/bin/rbenv" global $RUBY_VERSION
 	fi
 }
 

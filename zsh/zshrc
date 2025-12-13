@@ -35,14 +35,14 @@ antidote load
 
 # 8. Load misc tools
 
+# Amazing git add, log, diff, reset, checkout, stash, clean
+[ -f "$BREW_PREFIX/share/forgit/forgit.plugin.zsh" ] && source "$BREW_PREFIX/share/forgit/forgit.plugin.zsh"
 # Numbered git output
+
 [[ -x "${BREW_PREFIX}/bin/scmpuff" ]] && eval "$(scmpuff init -s)"
 
-# Amazing git add, log, diff, reset, checkout, stash, clean
-# source "${ZSH}/zsh/plugins/forgit.plugin.zsh"
-
-# Better navigation
-[[ -e "${BREW_PREFIX}/etc/profile.d/autojump.sh" ]] && source "${BREW_PREFIX}/etc/profile.d/autojump.sh"
+# Better cd navigation (like autojump)
+[[ -x "${BREW_PREFIX}/bin/zoxide" ]] && eval "$(zoxide init zsh --cmd j)"
 
 # Colored output for common unix commands
 [[ -s "${BREW_PREFIX}/etc/grc.bashrc" ]] && source "${BREW_PREFIX}/etc/grc.bashrc"
@@ -52,10 +52,23 @@ antidote load
 source ${BREW_PREFIX}/share/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/opt/homebrew/share/google-cloud-sdk/path.zsh.inc' ]; then . '/opt/homebrew/share/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/opt/homebrew/share/google-cloud-sdk/completion.zsh.inc' ]; then . '/opt/homebrew/share/google-cloud-sdk/completion.zsh.inc'; fi
+
 ##################
 # FOOTER        #
 ##################
 
 # Local variables, aliases, functions
 [[ -s "${ZSH}/zsh/.zshrc.local" ]] && source "${ZSH}/zsh/.zshrc.local"
+
 # zprof # uncomment to profile loading speed
+
+### Nothing should be after this line - if you see anything present
+# most likely some script/tool added it there. Find the right place for it
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /Users/gbko/.config/tfenv/versions/1.14.0/terraform terraform
