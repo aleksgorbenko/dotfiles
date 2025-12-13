@@ -79,8 +79,10 @@
 	:e-mode {:key :e}
 	:f-mode {:key :f}
 	:g-mode {:key :g}
+	:h-mode {:key :h}
 	:i-mode {:key :i}
 	:j-mode {:key :j}
+	:k-mode {:key :k}
 	:m-mode {:key :m}
 	:n-mode {:key :n}
 	:p-mode {:key :p}
@@ -101,6 +103,9 @@
 	:backslash-mode {:key :backslash}
 	:tilde-mode {:key :grave_accent_and_tilde}
 	:dot-mode {:key :period}
+	;; :section {:key :section} ;; ? key
+	;; :non-us-pound-mode {:key :section} ;; ? key
+	:non-us-backslash-mode {:key :non_us_backslash} ;; § key
 
 	;; Other
 	:spacebar-mode {:key :spacebar}
@@ -121,13 +126,34 @@
 		[:c [:km "open 2do completed"]]
 		[:d [:km "open 2do done"]]
 		[:i [:km "open 2do inbox"]]
+		[:j [:km "open 2do work"]] ; Job
 		[:n [:km "open 2do next"]]
 		[:p [:km "open 2do waiting"]]
 		[:r [:km "open 2do read"]]
 		[:s [:km "open 2do someday"]]
+		[:l [:km "open 2do music"]]
 		[:t [:km "open 2do today"]]
 		[:v [:km "open 2do watch"]]
-		[:w [:km "open 2do work"]]
+		[:period [:km "search 2do"]]
+	]
+
+}
+{
+	:des "2-key - 2do lists"
+	:rules [
+		:2-mode
+		[:a [:km "open 2do all"]]
+		[:c [:km "open 2do completed"]]
+		[:d [:km "open 2do done"]]
+		[:i [:km "open 2do inbox"]]
+		[:j [:km "open 2do work"]] ; Job
+		[:n [:km "open 2do next"]]
+		[:p [:km "open 2do waiting"]]
+		[:r [:km "open 2do read"]]
+		[:s [:km "open 2do someday"]]
+		[:l [:km "open 2do music"]]
+		[:t [:km "open 2do today"]]
+		[:v [:km "open 2do watch"]]
 		[:period [:km "search 2do"]]
 	]
 }
@@ -170,19 +196,24 @@
 	]
 }
 
-; code test
+; code
 
 {
-	:des "c-key - Code ?"
+	:des "c-key - text Case"
 	:rules [
 		:c-mode
 		; [:a [:km "Clone repo to ~/src/clones and open with VS Code"]]
 		; [:s [:km "Clone repo to ~/src/clones"]]
 		; [:j [:km "test: JS"]]
 		; [:k [:km "test: Go"]]
-		; [:l [:km "test: Python"]]
+		;; [:l [:km "case: Lowercase"]]
+		;; [:u [:km "case: Uppercase"]]
+		;; [:s [:km "case: Snake"]]
+		;; [:s [:km "case: Kebab"]]
+		[:p [:km "show palette: case"]]
 	]
 }
+
 
 ;
 
@@ -224,12 +255,26 @@
 	]
 }
 
+{
+	:des "h-key - ?"
+	:rules [
+		:h-mode
+	]
+}
+
 ;
 
 {
 	:des "i-key - ?"
-		:rules [
+	:rules [
 		:i-mode
+	]
+}
+
+{
+	:des "j-key - ?"
+	:rules [
+		:j-mode
 	]
 }
 
@@ -242,7 +287,8 @@
 			[:w [:km "new 2do work"]]
 			[:s [:km "new 2do someday"]]
 			[:r [:km "new 2do read"]]
-			[:v [:km "new 2do watch"]]
+			[:v [:km "new 2do video"]]
+			[:l [:km "new 2do listen"]]
 	]
 }
 
@@ -261,7 +307,7 @@
 ; alfred
 
 {
-	:des "p-key (alfred)"
+	:des "p-key (Palettes)"
 	:rules [
 		:p-mode
 		;; [:1 :!C1]
@@ -273,13 +319,16 @@
 		[:c [:alfred "shortcuts" "com.alfredapp.vitor.shortcuts"]]
 		[:b [:alfred "search obsidian" "de.chris-grieser.shimmering-obsidian"]]
 		[:d [:alfred "search downloads" "dev.gbko.alfred.directories"]]
-		[:e [:alfred "search desktop" "dev.gbko.alfred.directories"]]
-		[:i [:alfred "search icons" "dev.gbko.alfred.directories"]]
+		[:f [:alfred "search desktop" "dev.gbko.alfred.directories"]]
+		[:v [:alfred "search icons" "dev.gbko.alfred.directories"]]
+		[:j [:alfred "search img" "dev.gbko.alfred.directories"]]
 		[:k [:alfred "run" "iansinnott.keyboardmaestro"]]
 		[:r [:alfred "search repos" "de.xdevcloud.alfred-repos"]]
 		[:m [:alfred "search menu bar" "com.folded-paper.menu-bar-search"]]
 		[:s [:alfred "snippets_lab" "com.renfei.SnippetsLab.AlfredWorkflow"]]
+		[:t [:km "Trigger iTerm2 Command Palette"]] ; iTerm2 Terminal
 		[:x [:alfred "spot_mini" "com.vdesabou.spotify.mini.player"]]
+		[:y :!CTOy]
 	]
 }
 
@@ -289,49 +338,49 @@
 	:des "q-key (cmd + shift)"
 	:rules [
 		:q-mode
-		[:spacebar :!CSOe] ; Selection -> YouTube
-		[:open_bracket :!CSopen_bracket]
-		[:close_bracket :!CSclose_bracket]
-		[:semicolon :!CSsemicolon]
-		[:quote :!CSquote]
-		[:comma :!CScomma]
-		[:period :!CSperiod]
-		[:slash :!CSslash]
-		[:a :!CSa]
-		[:b :!CSb]
-		[:c :!CSc]
-		[:d :!CSd]
-		[:e :!CSe]
-		[:f :!CSf]
-		[:g :!CSg]
-		[:h :!CSh]
-		[:i :!CSi]
-		[:j :!CSj]
-		[:k :!CSk]
-		[:l :!CSl]
-		[:m :!CSm]
-		[:n :!CSn]
-		[:o :!CSo]
-		[:p :!CSp]
-		[:r :!CSr]
-		[:s :!CSs]
-		[:t :!CSt]
-		[:u :!CSu]
-		[:v :!CSv]
-		[:w :!CSw]
-		[:x :!CSx]
-		[:y :!CSy]
-		[:z :!CSz]
-		[:1 :!CS1]
-		[:2 :!CS2]
-		[:3 :!CS3]
-		[:4 :!CS4]
-		[:5 :!CS5]
-		[:6 :!CS6]
-		[:7 :!CS7]
-		[:8 :!CS8]
-		[:9 :!CS9]
-		[:0 :!CS0]
+		;; [:spacebar :!CSOe] ; Selection -> YouTube
+		;; [:open_bracket :!CSopen_bracket]
+		;; [:close_bracket :!CSclose_bracket]
+		;; [:semicolon :!CSsemicolon]
+		;; [:quote :!CSquote]
+		;; [:comma :!CScomma]
+		;; [:period :!CSperiod]
+		;; [:slash :!CSslash]
+		;; [:a :!CSa]
+		;; [:b :!CSb]
+		;; [:c :!CSc]
+		;; [:d :!CSd]
+		;; [:e :!CSe]
+		;; [:f :!CSf]
+		;; [:g :!CSg]
+		;; [:h :!CSh]
+		;; [:i :!CSi]
+		;; [:j :!CSj]
+		;; [:k :!CSk]
+		;; [:l :!CSl]
+		;; [:m :!CSm]
+		;; [:n :!CSn]
+		;; [:o :!CSo]
+		;; [:p :!CSp]
+		;; [:r :!CSr]
+		;; [:s :!CSs]
+		;; [:t :!CSt]
+		;; [:u :!CSu]
+		;; [:v :!CSv]
+		;; [:w :!CSw]
+		;; [:x :!CSx]
+		;; [:y :!CSy]
+		;; [:z :!CSz]
+		;; [:1 :!CS1]
+		;; [:2 :!CS2]
+		;; [:3 :!CS3]
+		;; [:4 :!CS4]
+		;; [:5 :!CS5]
+		;; [:6 :!CS6]
+		;; [:7 :!CS7]
+		;; [:8 :!CS8]
+		;; [:9 :!CS9]
+		;; [:0 :!CS0]
 	]
 }
 
@@ -396,14 +445,14 @@
 		[:a [:km "open: Anki"]]
 		[:b [:km "open: Postman"]]
 		[:c [:km "open: Chrome"]]
-		[:d [:km "open: Discord"]]
+		;; [:d [:km "open: Discord"]]
 		[:e [:km "open: PDF Expert"]]
 		[:g [:km "open: GoLand"]]
 		[:i [:km "open: iTerm"]]
 		[:k [:km "open: Keyboard Maestro"]]
 		[:l [:km "open: Slack"]]
 		[:m [:km "open: Activity Monitor"]]
-		[:n [:km "open: Notion"]]
+		[:n [:km "open: Numbers"]]
 		[:o [:km "open: Obsidian"]]
 		[:p [:km "open: Perplexity"]]
 		[:s [:km "open: Safari"]]
@@ -445,7 +494,6 @@
 		[:slash [:alfred "playpause" "com.vdesabou.spotify.mini.player"]]
 		[:quote [:alfred "volume_up" "com.vdesabou.spotify.mini.player"]]
 		[:semicolon [:alfred "volume_down" "com.vdesabou.spotify.mini.player"]]
-		[:period [:alfred "" "com.vdesabou.spotify.mini.player"]]
 
 		; Playlists - probably don't need?
 		; [:semicolon [:alfred "play" "com.vdesabou.spotify.mini.player" "spotify:playlist:4U7w1cpN9ei5LOzwpobiPQ"]] ; Liquid
@@ -473,6 +521,7 @@
 		[:c [:km "open: Contacts"]]
 		[:s [:km "open: Slack"]]
 		[:t [:km "open: Telegram"]]
+		[:d [:km "open: Discord"]]
 	]
 }
 
@@ -490,9 +539,9 @@
 		[:k [:km "open: Keyboard Maestro"]]
 		[:l [:km "open: Slack"]]
 		[:m [:km "open: Activity Monitor"]]
-		[:n [:km "open: Notion"]]
 		[:o [:km "open: Obsidian"]]
 		[:p [:km "open: Postman"]]
+		[:r [:km "open: Calendar"]]
 		[:s [:km "open: Safari"]]
 		[:t [:km "open: Telegram"]]
 		[:v [:km "open: VS Code"]]
@@ -542,6 +591,18 @@
 		[:6 :!T6]
 	]
 }
+
+{
+	:des "section - experimental"
+	:rules [
+		:non-us-backslash-mode
+		;; [:c [:km "open: Contacts"]]
+		;; [:s [:km "open: Slack"]]
+		;; [:t [:km "open: Telegram"]]
+		;; [:d [:km "open: Discord"]]
+	]
+}
+
 
 ;; OTHER
 
