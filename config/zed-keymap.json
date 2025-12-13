@@ -81,5 +81,11 @@
     "bindings": {
       "cmd-shift-|": "pane::SplitDown"
     }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "alt-g": "git_panel::ToggleFocus"
+    }
   }
 ]

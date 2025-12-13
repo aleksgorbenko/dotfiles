@@ -6,11 +6,6 @@
         "when": "editorTextFocus"
     },
     {
-        "key": "shift+cmd+r",
-        "command": "workbench.action.reloadWindow",
-        "when": "editorTextFocus"
-    },
-    {
         "key": "ctrl+shift+`",
         "command": "extension.runner.start",
         "when": "editorTextFocus"
@@ -57,7 +52,7 @@
         "command": "eslint.executeAutofix"
     },
     {
-        "key": "cmd+enter",
+        "key": "shift+cmd+enter",
         "command": "editor.action.revealDefinitionAside",
         "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
     },
@@ -67,7 +62,7 @@
         "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
     },
     {
-        "key": "alt+cmd+enter",
+        "key": "cmd+enter",
         "command": "editor.action.revealDefinition",
         "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
     },
@@ -214,10 +209,6 @@
     },
     {
         "key": "alt+b",
-        "command": "gitlens.gitCommands.switch"
-    },
-    {
-        "key": "alt+b",
         "command": "-gitlens.toggleFileBlame",
         "when": "editorTextFocus && config.gitlens.keymap == 'alternate' && resource in 'gitlens:tabs:blameable'"
     },
@@ -307,5 +298,252 @@
         "key": "ctrl+shift+r",
         "command": "-editor.action.refactor",
         "when": "editorHasCodeActionsProvider && textInputFocus && !editorReadonly"
+    },
+    {
+        "key": "cmd+p",
+        "command": "workbench.action.files.openFile",
+        "when": "false"
+    },
+    {
+        "key": "cmd+o",
+        "command": "-workbench.action.files.openFile",
+        "when": "false"
+    },
+    {
+        "key": "cmd+p",
+        "command": "-workbench.action.quickOpenNavigateNextInFilePicker",
+        "when": "inFilesPicker && inQuickOpen"
+    },
+    {
+        "key": "shift+cmd+p",
+        "command": "-workbench.action.showCommands"
+    },
+    {
+        "key": "cmd+p",
+        "command": "workbench.action.showCommands"
+    },
+    {
+        "key": "cmd+7",
+        "command": "outline.focus"
+    },
+    {
+        "key": "cmd+k cmd+2",
+        "command": "-editor.foldLevel2",
+        "when": "editorTextFocus && foldingEnabled"
+    },
+    {
+        "key": "cmd+2",
+        "command": "bookmarksExplorer.focus"
+    },
+    {
+        "key": "cmd+9",
+        "command": "workbench.scm.focus"
+    },
+    {
+        "key": "cmd+3",
+        "command": "workbench.view.search.focus"
+    },
+    {
+        "key": "shift+cmd+i",
+        "command": "workbench.action.chat.history"
+    },
+    {
+        "key": "shift+cmd+enter",
+        "command": "editor.action.goToImplementation",
+        "when": "editorHasImplementationProvider && editorTextFocus"
+    },
+    {
+        "key": "cmd+f12",
+        "command": "-editor.action.goToImplementation",
+        "when": "editorHasImplementationProvider && editorTextFocus"
+    },
+    {
+        "key": "shift+cmd+f12",
+        "command": "-editor.action.peekImplementation",
+        "when": "editorHasImplementationProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor"
+    },
+    {
+        "key": "alt+cmd+z",
+        "command": "git.blame.toggleEditorDecoration"
+    },
+    {
+        "key": "cmd+b",
+        "command": "workbench.action.togglePanel"
+    },
+    {
+        "key": "cmd+j",
+        "command": "-workbench.action.togglePanel"
+    },
+    {
+        "key": "shift+cmd+p",
+        "command": "search-everywhere.search"
+    },
+    {
+        "key": "shift shift",
+        "command": "-search-everywhere.search"
+    },
+    {
+        "key": "cmd+e",
+        "command": "-actions.findWithSelection"
+    },
+    {
+        "key": "cmd+e",
+        "command": "workbench.action.openRecent"
+    },
+    {
+        "key": "ctrl+r",
+        "command": "-workbench.action.openRecent"
+    },
+    {
+        "key": "cmd+r",
+        "command": "-workbench.action.reloadWindow",
+        "when": "isDevelopment"
+    },
+    {
+        "key": "cmd+g b",
+        "command": "git.branchFrom"
+    },
+    {
+        "key": "cmd+g p",
+        "command": "git.push"
+    },
+    {
+        "key": "cmd+g l",
+        "command": "git.pull"
+    },
+    {
+        "key": "shift+cmd+o",
+        "command": "workbench.action.showAllSymbols"
+    },
+    {
+        "key": "cmd+t",
+        "command": "-workbench.action.showAllSymbols"
+    },
+    {
+        "key": "cmd+k s",
+        "command": "-workbench.action.files.saveWithoutFormatting"
+    },
+    {
+        "key": "cmd+k s",
+        "command": "workbench.action.openSettings2"
+    },
+    {
+        "key": "cmd+k c",
+        "command": "-workbench.files.action.compareWithClipboard"
+    },
+    {
+        "key": "cmd+i c",
+        "command": "claude-vscode.sidebar.open"
+    },
+    {
+        "key": "cmd+i p",
+        "command": "workbench.panel.chat",
+        "when": "workbench.panel.chat.view.copilot.active"
+    },
+    {
+        "key": "ctrl+cmd+i",
+        "command": "-workbench.panel.chat",
+        "when": "workbench.panel.chat.view.copilot.active"
+    },
+    {
+        "key": "ctrl+cmd+right",
+        "command": "workbench.action.moveEditorToRightGroup"
+    },
+    {
+        "key": "ctrl+cmd+right",
+        "command": "-workbench.action.moveEditorToNextGroup"
+    },
+    {
+        "key": "ctrl+cmd+right",
+        "command": "-workbench.action.terminal.resizePaneRight",
+        "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+    },
+    {
+        "key": "ctrl+cmd+left",
+        "command": "workbench.action.moveEditorToLeftGroup"
+    },
+    {
+        "key": "ctrl+cmd+down",
+        "command": "workbench.action.moveEditorToBelowGroup"
+    },
+    {
+        "key": "ctrl+cmd+up",
+        "command": "workbench.action.moveEditorToAboveGroup"
+    },
+    {
+        "key": "ctrl+cmd+left",
+        "command": "-workbench.action.moveEditorToPreviousGroup"
+    },
+    {
+        "key": "ctrl+shift+alt+right",
+        "command": "-cursorWordPartRightSelect",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "ctrl+shift+alt+left",
+        "command": "-cursorWordPartLeftSelect",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "ctrl+shift+alt+right",
+        "command": "editor.action.smartSelect.expand",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+cmd+right",
+        "command": "-editor.action.smartSelect.expand",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+alt+left",
+        "command": "editor.action.smartSelect.shrink",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+cmd+left",
+        "command": "-editor.action.smartSelect.shrink",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "cmd+g",
+        "command": "-editor.action.nextMatchFindAction",
+        "when": "editorFocus"
+    },
+    {
+        "key": "cmd+g",
+        "command": "-workbench.action.terminal.findNext",
+        "when": "terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocusInAny && terminalHasBeenCreated || terminalFocusInAny && terminalProcessSupported"
+    },
+    {
+        "key": "f4",
+        "command": "-search.action.focusNextSearchResult",
+        "when": "hasSearchResult || inSearchEditor"
+    },
+    {
+        "key": "cmd+enter",
+        "command": "search.action.focusSearchList",
+        "when": "searchViewletFocus && !listHasSelectionOrFocus"
+    },
+    {
+        "key": "ctrl+shift+/",
+        "command": "code-runner.stop"
+    },
+    {
+        "key": "ctrl+alt+m",
+        "command": "-code-runner.stop"
+    },
+    {
+        "key": "shift+cmd+n",
+        "command": "explorer.newFolder",
+        "when": "filesExplorerFocus"
+    },
+    {
+        "key": "cmd+n",
+        "command": "welcome.showNewFileEntries",
+        "when": "filesExplorerFocus"
+    },
+    {
+        "key": "ctrl+alt+cmd+n",
+        "command": "-welcome.showNewFileEntries"
     }
 ]
