@@ -60,6 +60,10 @@ function gc() {
   git commit -m $1 && scmpuff_status
 }
 
+function gcem() {
+  git commit --allow-empty -m $1 && scmpuff_status
+}
+
 function gca() {
   git commit -a -m $1 && scmpuff_status
 }
@@ -197,24 +201,24 @@ alias grbs='git rebase --skip'
 alias grev='git revert'
 
 ### RESET
-alias gresh='git reset --hard'
-alias gresho='git reset origin/$(current_branch) --hard' # reset to origin branch, discarding all local changes
-alias gres1="git reset --mixed HEAD~1" # uncommit last commit, but keep changes unstaged
+alias gresth='git reset --hard'
+alias grestho='git reset origin/$(current_branch) --hard' # reset to origin branch, discarding all local changes
+alias grest1="git reset --mixed HEAD~1" # uncommit last commit, but keep changes unstaged
 alias gpristine="git reset --hard && git clean -dfx"
 
 ### RESTORE
 alias gres="git restore" # restore changes in the working directory
-alias gres="git restore --cached" # unstage changes
+alias gress="git restore --staged" # unstage changes
 
 ### REMOVE
 
 alias grm='git rm' # remove files from the working tree and index
-alias grmc='git rm --cached' # unstage changes without deleting files
+alias grmc='git rm --cached' # stages the removal of the file(s) OR unstage changes without deleting files.
 
 # gotta love this one
 alias groot='echo I am Groot! && cd "$(git rev-parse --show-toplevel || echo .)"'
 
-alias gsh='git show'
+alias gsh='git show' # shows last commit
 alias gsps='git show --pretty=short --show-signature'
 
 # STASH

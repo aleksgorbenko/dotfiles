@@ -4,9 +4,12 @@ alias a="alias"
 # search all functions and aliases
 sa() {
     if [ -z "$1" ]; then
-        echo "Usage: sa <name>"
+        echo "Search Alias (sa) usage: sa <alias|function_name>"
         return 1
     fi
+
+    # Check if alias exists
+    alias | grep --color=always -E "$1" || echo "No matching alias found."
 
     # Check if function exists
     if type "$1" >/dev/null 2>&1; then
@@ -14,7 +17,15 @@ sa() {
         return 0
     fi
 
-    alias | grep --color=always -E "$1" || echo "No matching alias found."
+}
+
+# Run the previous command substituting in shell and copy output
+cpl() {
+  # Capture last command output
+  output=$(eval "$(fc -ln -1)")
+  # Trim trailing newline and copy
+  printf "%s" "$output" | pbcopy
+  echo "copied!"
 }
 
 alias ls="eza"
@@ -43,10 +54,14 @@ alias pc="pwd | pbcopy"
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip="ipconfig getifaddr en0"
 alias ipinfo="curl ipinfo.io | jq"
+alias nq="networkquality"
+alias nqv="networkquality -v" # verbose mode
 
 # BREW
 
 alias b="brew"
+alias bs="brew search"
+alias bsc="brew search --cask"
 alias bls="brew list"
 alias blsc="brew list --cask"
 alias blsl="brew list --formulae"
@@ -80,18 +95,27 @@ alias zh='source ~/.zshrc'
 alias tmr='tmux source-file ~/.tmux.conf'
 
 alias hosts="sudo vim /etc/hosts"
-alias ze="code ~/.zshrc"
-alias ae="code ~/.aliases"
-alias edot="code ~/.dotfiles/config/karabiner.edn" # edit dotfiles karabiner config
+
+# EDIT
+alias ez="code ~/.zshrc"
+alias ea="code ~/.aliases"
+alias ekara="code ~/.dotfiles/config/karabiner.edn" # edit dotfiles karabiner config
 alias ebrew="code ~/.dotfiles/Brewfile" # edit brewfile
 alias edots="code ~/.dotfiles"
 
+# Change Directory
+alias wd="cd ${PROJECTS}/chord/"
+alias cdd="cd ~/.dotfiles"
+alias cds="cd ${SRC}"
+alias cdp="cd ${PROJECTS}"
+alias cdk="cd ${SRC}/kata"
+alias cdl="cd ${SRC}/lab"
+alias cdi="cd ${SRC}/iview"
+alias cddo="cd ~/Downloads"
+alias cdde="cd ~/Desktop"
+
 alias cdm="cd ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/mosk/"
 alias cdeng="cd ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/engineering-notebook/"
-alias cdd="cd ~/.dotfiles"
-alias cdp="cd ~/src/projects"
-alias cdk="cd ~/src/kata"
-alias cddown="cd ~/Downloads"
 
 # mkdir and cd to it
 mkc() {
@@ -101,6 +125,13 @@ mkc() {
 _mkc() {
   #compdef mkc
   _files -W "$1" -/
+}
+
+# PID
+
+get_pid_name() {
+  local cmd_name="$1"
+  ps ax -o pid,comm | grep "$cmd_name" | grep -v grep
 }
 
 # Golang toolchain
@@ -130,24 +161,24 @@ function sync-mosk() {
 ##########
 
 function export-xcode-keybindings() {
-  echo "Exporting Xcode keybindings to dotfiles..."
+  echo "⬆️ Exporting Xcode keybindings to dotfiles..."
   echo "${HOME}/Library/Developer/Xcode/UserData/KeyBindings/Default.idekeybindings -> ${DOTS}/config/xcode.idekeybindings"
   cp -f "${HOME}/Library/Developer/Xcode/UserData/KeyBindings/Default.idekeybindings" "${DOTS}/config/xcode.idekeybindings"
-  echo "Copied!"
+  echo "✅ Exported!"
 }
 
 function export-vscode-keybindings() {
-  echo "Exporting Xcode keybindings to dotfiles..."
+  echo "⬆️ Exporting VSCode keybindings to dotfiles..."
   echo "${HOME}/Library/Application Support/Code/User/keybindings.json -> ${DOTS}/config/vscode-keybindings.json"
   cp -f "${HOME}/Library/Application Support/Code/User/keybindings.json" "${DOTS}/config/vscode-keybindings.json"
-  echo "Copied!"
+  echo "✅ Exported!"
 }
 
 function export-zed-keybindings() {
-  echo "Exporting Zed keybindings to dotfiles..."
+  echo "⬆️ Exporting Zed keybindings to dotfiles..."
   echo "${HOME}/.config/zed/keymap.json -> ${DOTS}/config/zed-keymap.json"
   cp -f "${HOME}/.config/zed/keymap.json" "${DOTS}/config/zed-keymap.json"
-  echo "Copied!"
+  echo "✅ Exported!"
 }
 
 function export-app-settings() {
@@ -161,24 +192,24 @@ function export-app-settings() {
 ##########
 
 function import-xcode-keybindings() {
-  echo "Importing Xcode keybindings from dotfiles..."
+  echo "⬇️ Importing Xcode keybindings from dotfiles..."
   echo "${DOTS}/config/xcode.idekeybindings -> ${HOME}/Library/Developer/Xcode/UserData/KeyBindings/Default.idekeybindings"
   cp -f "${DOTS}/config/xcode.idekeybindings" "${HOME}/Library/Developer/Xcode/UserData/KeyBindings/Default.idekeybindings"
-  echo "Copied!"
+  echo "✅ Imported!"
 }
 
 function import-vscode-keybindings() {
-  echo "Importing VSCode keybindings from dotfiles..."
+  echo "⬇️ Importing VSCode keybindings from dotfiles..."
   echo "${DOTS}/config/vscode-keybindings.json -> ${HOME}/Library/Application Support/Code/User/keybindings.json"
   cp -f "${DOTS}/config/vscode-keybindings.json" "${HOME}/Library/Application Support/Code/User/keybindings.json"
-  echo "Copied!"
+  echo "✅ Imported!"
 }
 
 function import-zed-keybindings() {
-  echo "Importing Zed keybindings from dotfiles..."
+  echo "⬇️ Importing Zed keybindings from dotfiles..."
   echo "${DOTS}/config/zed-keymap.json -> ${HOME}/.config/zed/keymap.json"
   cp -f "${DOTS}/config/zed-keymap.json" "${HOME}/.config/zed/keymap.json"
-  echo "Copied!"
+  echo "✅ Imported!"
 }
 
 function import-app-settings() {

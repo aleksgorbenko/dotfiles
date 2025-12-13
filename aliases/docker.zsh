@@ -21,8 +21,8 @@ alias d='docker'
 alias dpl="docker pull"
 alias drun="docker run"
 alias dex="docker exec"
-alias dps="docker ps --format 'table {{.ID}}\t{.Image}}\t{{.Status}}\t{{.Ports}}'"
-alias dpsa="docker ps -a --format 'table {{.ID}}\t{.Image}}\t{{.Status}}\t{{.Ports}}'"
+alias dps="docker ps --format 'table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}'"
+alias dpsa="docker ps -a --format 'table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}'"
 alias dst="docker stop"
 alias di="docker image"
 alias dls="docker image ls"
@@ -37,10 +37,27 @@ function mkenv() {
 }
 
 
-function dsh() {
-  echo 'docker exec -it $1 sh'
-  docker exec -it $1 sh
+dsh() {
+  cid="$(docker ps --format '{{.ID}} {{.Image}}' \
+        | grep -i "$1" \
+        | awk '{print $1}' \
+        | head -n1)"
+
+  [ -z "$cid" ] && return 1
+
+  docker exec -it "$cid" sh
 }
+
+function dsa() {
+    echo 'docker stop (docker ps -qa)'
+    docker stop $(docker ps -qa)
+}
+
+function dstats() {
+    docker stats $(docker ps --format '{{.Names}}')
+}
+
+# REMOVE/DELETE
 
 function docker-nuke() {
   echo "Stopping all containers..."
@@ -59,10 +76,7 @@ function drmi() {
     echo 'docker rmi (docker images -q) -f'
     docker rmi $(docker images -q) -f
 }
-function dsa() {
-    echo 'docker stop (docker ps -qa)'
-    docker stop $(docker ps -qa)
-}
+
 function drmv() {
     echo 'docker volume rm (docker volume ls -q)'
     docker volume rm $(docker volume ls -q)
@@ -70,9 +84,6 @@ function drmv() {
 function dsp() {
     echo 'docker system prune --volumes'
     docker system prune --volumes
-}
-function dstats() {
-    docker stats $(docker ps --format '{{.Names}}')
 }
 function drmc() {
    echo 'docker rm (docker ps -a -q)'
