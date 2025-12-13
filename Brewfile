@@ -1,11 +1,12 @@
 # Docs:
 # https://github.com/Homebrew/homebrew-bundle
 
-tap "homebrew/bundle"
 tap "yqrashawn/goku"
 tap "weaveworks/tap" # eksctl
 tap "derailed/k9s"
 tap "romkatv/powerlevel10k"
+tap "nats-io/nats-tools"
+tap "fluxcd/tap"
 
 # set arguments for all 'brew install --cask' commands
 cask_args appdir: "/Applications", require_sha: true
@@ -16,10 +17,13 @@ cask_args appdir: "/Applications", require_sha: true
 
 # magnet - 441258766
 # trello - 1278508951
-# 2do - 477670270
+# 2do - 477670270 (manual install now from https://www.2doapp.com/mac/)
 # perplexity ai - 6714467650
 # Xcode - 497799835
 # Apple Developer - 640199958
+# Pixelmator Pro 1289583905
+# Photomator 1444636541
+
 # mas install 441258766 1278508951 477670270 6714467650 497799835 640199958
 brew "mas"
 
@@ -28,8 +32,10 @@ brew "gcc"
 
 # git
 brew "hub"
+brew "gh" #github cli
+brew "glab" #gitlab cli
 brew "git-delta"
-cask "diffmerge"
+brew "forgit"
 
 # shell
 brew "coreutils"
@@ -39,8 +45,9 @@ brew "scmpuff" # nicer git commans in terminal
 brew "tmux"
 brew "grc" # terminal coloriser
 brew "fzf" # fuzzy search
-brew "autojump" # navigation
+brew "zoxide" # navigation
 brew "watch" # similar to watch on linux
+brew "gnupg" # manage GPG key
 
 # langs
 brew "cmake"
@@ -61,13 +68,13 @@ brew "gettext"
 brew "eza" # better `ls`
 brew "ctop" # htop for containers
 brew "gotop" # better top
-brew "terminal-notifier" # p.s this won"t work in Alacritty
+brew "terminal-notifier" # p.s this won't work in Alacritty
 brew "xsv" # work with csv
 brew "hugo" # work on my blog https://aleksgorbenko.dev
 
 # cloud
 brew "awslogs"
-cask "google-cloud-sdk"
+cask "gcloud-cli"
 brew "eksctl"
 brew "awscli"
 
@@ -75,20 +82,27 @@ brew "awscli"
 brew "rbenv"
 brew "jenv"
 brew "pyenv"
+brew "tfenv"
 
 # http
 brew "httpie"
 brew "wget"
 brew "nmap" # network tool
+brew "dstp" # common network tests against a site
 
-# dev
+brew "nats-io/nats-tools/nats" # debug and manage nats
+
+# k8s
 brew "kubectl"
 brew "helm"
 brew "minikube"
-brew "kind" # k8s
-brew "tilt" # k8s
+brew "kind"
+brew "tilt"
+brew "k3d" # docker wrapper around k3s - minimalistic k8s
 brew "derailed/k9s/k9s" # htop for k8s
 brew "kubectx" # switch context quickly
+brew "flux"
+brew "kubecolor"
 
 ########
 # APPS #
@@ -121,14 +135,16 @@ cask "karabiner-elements" # remap everything!
 brew "yqrashawn/goku/goku" # helps remap everything!
 cask "keka" # work with archives
 cask "keyboard-maestro"
-cask "logi-options-plus" # configure logitech mouse and keyboard
+cask "logi-options+" # configure logitech mouse and keyboard
 cask "jordanbaird-ice" # menu bar icon manager
-cask "istat-menus" # cou, memory, temperature stats
-# cask "stats" # free alternative to istat-menus
-
+# cask "istat-menus" # cou, memory, temperature stats
+cask "stats" # free alternative to istat-menus
+cask "appcleaner" # cleanup all traces of uninstalled apps
+cask "keycombiner"
+cask "keyclu" # shortcut reference
 # dev
 cask "postman"
-cask "docker"
+cask "docker-desktop"
 brew "dive" # inspect docker image layers
 cask "iterm2"
 cask "alacritty"
@@ -143,11 +159,15 @@ cask "zed"
 # db
 brew "pgcli" # autocompletion and syntax highlighting
 brew "sqlite"
+cask "beekeeper-studio"
 
 # AI
 brew "ollama" # run, push, pull LLMs locally
 cask "chatgpt" # macOS app for ChatGPT
 # intellibar (manual install) - better ChatGPT interface + shortcuts
+cask "macwhisper" # macOS app to dictate and transcribe
+cask "claude-code"
+brew "opencode"
 
 #########
 # FONTS #
@@ -161,17 +181,20 @@ cask "font-hasklig"
 cask "font-fira-code"
 cask "font-hack-nerd-font"
 cask "font-meslo-lg-nerd-font"
+cask "font-meslo-for-powerlevel10k"
 cask "font-jetbrains-mono"
 
 ############
 # OPTIONAL #
 ############
 
+# media
+cask "affinity" # photo editor
+# cask "pinta" # simple oss image editor
 # cask "imageoptim"
-# cask "calibre"
-# cask "dbeaver-community"
+
+# dev
 # cask "temurin"
-# cask "ledger-live"
 
 # gaming
 # cask "battle-net"
@@ -180,4 +203,6 @@ cask "font-jetbrains-mono"
 # cask "steam"
 
 # utils
+# cask "calibre"
+# cask "ledger-live"
 # cask "onyx"
