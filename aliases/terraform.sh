@@ -6,4 +6,5 @@ alias tfa="terraform apply"
 alias tft="terraform taint"
 alias tfs="terraform state"
 alias tfsl="terraform state list"
-alias tfss="terraform state show $*"
+
+# alias tfss="terraform state show $*"

@@ -1,4 +1,4 @@
-alias cls='clear' # Good 'ol Clear Screen command
+alias cls="clear" # Good "ol Clear Screen command
 alias a="alias"
 
 alias ls="eza"
@@ -6,18 +6,18 @@ alias ll="eza -lha"
 alias la="eza -lTha"
 alias t="touch"
 
-alias .2='cd ../../'             # Go back 2 directory levels
-alias .3='cd ../../../'          # Go back 3 directory levels
-alias .4='cd ../../../../'       # Go back 4 directory levels
-alias .5='cd ../../../../../'    # Go back 5 directory levels
-alias .6='cd ../../../../../../' # Go back 6 directory levels
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
-alias ......="cd ../../../../.."
-alias .......="cd ../../../../../.."
-alias -- -="cd -"
+# alias .2="cd ../../"             # Go back 2 directory levels
+# alias .3="cd ../../../"          # Go back 3 directory levels
+# alias .4="cd ../../../../"       # Go back 4 directory levels
+# alias .5="cd ../../../../../"    # Go back 5 directory levels
+# alias .6="cd ../../../../../../" # Go back 6 directory levels
+# alias ..="cd .."
+# alias ...="cd ../.."
+# alias ....="cd ../../.."
+# alias .....="cd ../../../.."
+# alias ......="cd ../../../../.."
+# alias .......="cd ../../../../../.."
+# alias -- -="cd -"
 alias pc="pwd | pbcopy"
 
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
@@ -60,8 +60,8 @@ alias mrm="mas remove"
 # Pipe my public key to my clipboard.
 alias pubkey="more ~/.ssh/me/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
 
-alias zh='source ~/.zshrc'
-alias tmr='tmux source-file ~/.tmux.conf'
+alias zh="source ~/.zshrc"
+alias tmr="tmux source-file ~/.tmux.conf"
 
 alias hosts="sudo vim /etc/hosts"
 
@@ -73,13 +73,13 @@ alias ebrew="code ~/.dotfiles/Brewfile" # edit brewfile
 alias edots="code ~/.dotfiles"
 
 # Change Directory
-alias wd="cd ${PROJECTS}/chord/"
+alias wd="cd $PROJECTS/chord"
 alias cdd="cd ~/.dotfiles"
-alias cds="cd ${SRC}"
-alias cdp="cd ${PROJECTS}"
-alias cdk="cd ${SRC}/kata"
-alias cdl="cd ${SRC}/lab"
-alias cdi="cd ${SRC}/iview"
+alias cds="cd $SRC"
+alias cdp="cd $PROJECTS"
+alias cdk="cd $SRC/kata"
+alias cdl="cd $SRC/lab"
+alias cdi="cd $SRC/iview"
 alias cddo="cd ~/Downloads"
 alias cdde="cd ~/Desktop"
 

@@ -1,23 +1,23 @@
 # Docker Compose
-alias dc='docker-compose'
+alias dc="docker-compose"
 alias dcu="docker-compose up"
-alias dcud='docker-compose up -d'
+alias dcud="docker-compose up -d"
 alias dcd="docker-compose down"
 alias dcb="docker-compose build"
-alias dce='docker-compose exec'
-alias dcps='docker-compose ps'
-alias dcl='docker-compose logs'
-alias dcr='docker-compose run'
-alias dcrm='docker-compose rm'
-alias dcstop='docker-compose stop'
+alias dce="docker-compose exec"
+alias dcps="docker-compose ps"
+alias dcl="docker-compose logs"
+alias dcr="docker-compose run"
+alias dcrm="docker-compose rm"
+alias dcstop="docker-compose stop"
 
-alias dcrestart='docker-compose restart'
-alias dclf='docker-compose logs -f'
-alias dcpull='docker-compose pull'
-alias dcstart='docker-compose start'
+alias dcrestart="docker-compose restart"
+alias dclf="docker-compose logs -f"
+alias dcpull="docker-compose pull"
+alias dcstart="docker-compose start"
 
 # Docker
-alias d='docker'
+alias d="docker"
 alias dpl="docker pull"
 alias drun="docker run"
 alias dex="docker exec"

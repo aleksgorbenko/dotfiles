@@ -1,9 +1,9 @@
 # generic envs
-export SRC=${HOME}/src
-export PROJECTS=${SRC}/proj
-export DOTS=${HOME}/.dotfiles
-export MY_ALIASES=${DOTS}/aliases
-export MY_FUNCTIONS=${DOTS}/functions
+export SRC="$HOME/src"
+export PROJECTS="$SRC/proj"
+export DOTS="$HOME/.dotfiles"
+export MY_ALIASES="$DOTS/aliases"
+export MY_FUNCTIONS="$DOTS/functions"
 export BREW_PREFIX=$(brew --prefix)
 export MOSK="$HOME/Dropbox/mosk"
 
