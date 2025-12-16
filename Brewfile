@@ -104,6 +104,10 @@ brew "kubectx" # switch context quickly
 brew "flux"
 brew "kubecolor"
 
+# containers
+cask "docker-desktop"
+brew "dive" # inspect docker image layers
+
 ########
 # APPS #
 ########
@@ -142,21 +146,27 @@ cask "stats" # free alternative to istat-menus
 cask "appcleaner" # cleanup all traces of uninstalled apps
 cask "keycombiner"
 cask "keyclu" # shortcut reference
-# dev
+
+#######
+# DEV #
+#######
 cask "postman"
-cask "docker-desktop"
-brew "dive" # inspect docker image layers
-cask "iterm2"
-cask "alacritty"
 brew "libyaml" # needed for ruby on apple silicon
 cask "multipass" # vm, somewhat similar to virtual box. It is powered by qemu and made by Canonical (ubuntu)
+
+# terminal
+cask "ghostty" # minimal terminal
+brew "helix" # terminal code editor
+cask "iterm2"
+cask "alacritty"
+brew "fish" # alternative shell
 
 # code editor
 cask "visual-studio-code"
 cask "jetbrains-toolbox"
 cask "zed"
 
-# db
+# database
 brew "pgcli" # autocompletion and syntax highlighting
 brew "sqlite"
 cask "beekeeper-studio"
@@ -194,7 +204,7 @@ cask "affinity" # photo editor
 # cask "imageoptim"
 
 # dev
-# cask "temurin"
+# cask "temurin" # alternative jdk
 
 # gaming
 # cask "battle-net"

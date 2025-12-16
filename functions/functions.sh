@@ -1,0 +1,6 @@
+source "${MY_FUNCTIONS}/system.sh"
+source "${MY_FUNCTIONS}/git.sh"
+source "${MY_FUNCTIONS}/docker.sh"
+source "${MY_FUNCTIONS}/k8s.sh"
+source "${MY_FUNCTIONS}/terraform.sh"
+source "${MY_FUNCTIONS}/ai.sh"

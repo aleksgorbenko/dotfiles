@@ -1,33 +1,3 @@
-# Docker Compose
-alias dc='docker-compose'
-alias dcu="docker-compose up"
-alias dcud='docker-compose up -d'
-alias dcd="docker-compose down"
-alias dcb="docker-compose build"
-alias dce='docker-compose exec'
-alias dcps='docker-compose ps'
-alias dcl='docker-compose logs'
-alias dcr='docker-compose run'
-alias dcrm='docker-compose rm'
-alias dcstop='docker-compose stop'
-
-alias dcrestart='docker-compose restart'
-alias dclf='docker-compose logs -f'
-alias dcpull='docker-compose pull'
-alias dcstart='docker-compose start'
-
-# Docker
-alias d='docker'
-alias dpl="docker pull"
-alias drun="docker run"
-alias dex="docker exec"
-alias dps="docker ps --format 'table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}'"
-alias dpsa="docker ps -a --format 'table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}'"
-alias dst="docker stop"
-alias di="docker image"
-alias dls="docker image ls"
-alias dlf="docker logs --follow"
-
 function denv() {
   eval $(docker-machine env -u)
 }

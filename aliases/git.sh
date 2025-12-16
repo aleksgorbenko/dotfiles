@@ -1,22 +1,3 @@
-# The name of the current branch
-function current_branch() {
-  local ref
-  ref=$(command git symbolic-ref --quiet HEAD 2>/dev/null)
-  local ret=$?
-  if [[ $ret != 0 ]]; then
-    [[ $ret == 128 ]] && return # no git repo.
-    ref=$(command git rev-parse --short HEAD 2>/dev/null) || return
-  fi
-  echo ${ref#refs/heads/}
-}
-
-# Create dir, go to it and initialise it with git. mg <dir-name>
-mg() {
-    mkdir "$1"
-    cd "$1"
-    git init
-}
-
 # Use `hub` as our git wrapper:
 # https://hub.github.com/
 alias git=$(which hub)
@@ -55,19 +36,6 @@ alias gbss='git bisect start'
 
 # COMMIT
 alias gc!='git commit --amend'
-
-function gc() {
-  git commit -m $1 && scmpuff_status
-}
-
-function gcem() {
-  git commit --allow-empty -m $1 && scmpuff_status
-}
-
-function gca() {
-  git commit -a -m $1 && scmpuff_status
-}
-
 alias gcf='git config --list'
 
 ### CLONE
@@ -102,15 +70,6 @@ alias gfp='git fetch --all --prune'
 alias gfo='git fetch origin'
 
 # PUSH
-function ggp() {
-  if [[ "$#" != 0 ]] && [[ "$#" != 1 ]]; then
-    git push origin "${*}"
-  else
-    [[ "$#" == 0 ]] && local b="$(current_branch)"
-    git push origin "${b:=$1}"
-  fi
-}
-
 alias gp='git push'
 alias gpd='git push --dry-run'
 alias gpf='git push --force-with-lease'
@@ -119,35 +78,12 @@ alias gpoat='git push origin --all && git push origin --tags'
 alias gpv='git push -v'
 
 # PULL
-function ggl() {
-  if [[ "$#" != 0 ]] && [[ "$#" != 1 ]]; then
-    git pull origin "${*}"
-  else
-    [[ "$#" == 0 ]] && local b="$(current_branch)"
-    git pull origin "${b:=$1}"
-  fi
-}
-
-function gglp() {
-  if [[ "$#" == 0 ]]; then
-    git pull origin && git push origin
-  else
-    git pull origin "${*}" && git push origin "${*}"
-  fi
-}
-
 alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
 alias gup='git pull --rebase'
 alias gupv='git pull --rebase -v'
 alias gupa='git pull --rebase --autostash'
 alias gupav='git pull --rebase --autostash -v'
 alias glum='git pull upstream master'
-
-function ggu() {
-  [[ "$#" != 1 ]] && local b="$(current_branch)"
-  git pull --rebase origin "${b:=$1}"
-}
-
 alias ggpur='ggu'
 
 alias ggsup='git branch --set-upstream-to=origin/$(current_branch)'
@@ -222,15 +158,6 @@ alias gsh='git show' # shows last commit
 alias gsps='git show --pretty=short --show-signature'
 
 # STASH
-function gsts() {
-  if [[ "$#" != 0 ]]; then
-    git stash push -m "$1"
-  else
-    [[ "$#" == 0 ]]
-    git stash push
-  fi
-}
-
 alias gstaa='git stash apply'
 alias gstc='git stash clear'
 alias gstd='git stash drop'
@@ -238,15 +165,6 @@ alias gstl='git stash list'
 alias gstp='git stash pop'
 alias gsts='git stash show --text'
 alias gstall='git stash --all'
-
-function gstp() {
-  if [[ "$#" != 0 ]]; then
-    git stash pop stash@{"$1"}
-  else
-    [[ "$#" == 0 ]]
-    git stash pop
-  fi
-}
 
 ### TAG
 
