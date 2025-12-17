@@ -1,34 +1,52 @@
 # Local/private config goes in the include
 [include]
-        path = ~/.gitconfig.local
+    path = ~/.gitconfig.local
+
+# Branch listings show most recently active first
+[branch]
+    sort = -committerdate
+
 [color]
-        diff = auto
-        status = auto
-        branch = auto
-        ui = true
+    ui = true
+
 [core]
-        excludesfile = ~/.gitignore
-        editor = hx
-[apply]
-        whitespace = nowarn
+    excludesfile = ~/.gitignore
+    editor = hx
+    pager = delta
+
+[delta]
+    navigate = true  # use n and N to move between diff sections
+    dark = true      # or light = true, or omit for auto-detection
+
+# Applies delta to:
+# - git add -p
+# - git rebase -i
+[interactive]
+    diffFilter = delta --color-only
+
+[merge]
+    conflictStyle = zdiff3
+
+# Prevents .orig backup files after merge resolution.
 [mergetool]
-        keepBackup = false
-[difftool]
-        prompt = false
-[help]
-        autocorrect = 1
-[push]
-        # See `git help config` (search for push.default)
-        # for more information on different options of the below setting.
-        #
-        # Setting to git 2.0 default to suppress warning message
-        default = simple
-[hub]
-        protocol = ssh
+    keepBackup = false
+
+[apply]
+    whitespace = nowarn
+
+# Pull only then you can fast forward, avoid implicit merges
 [pull]
+    ff = only
+
+# Erase branches that were deleted on remote
+[fetch]
+    prune = true
+    pruneTags = true
+
+# Credential helper for GiHub CLI
 [credential "https://github.com"]
-	helper =
-	helper = !/opt/homebrew/bin/gh auth git-credential
+    helper =
+    helper = !/opt/homebrew/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-	helper =
-	helper = !/opt/homebrew/bin/gh auth git-credential
+    helper =
+    helper = !/opt/homebrew/bin/gh auth git-credential

@@ -34,6 +34,7 @@ brew "gcc"
 brew "gh" # github cli
 brew "glab" # gitlab cli
 brew "lazygit"
+brew "git-delta" # better git diffs, config in ~/.gitconfig
 brew "scmpuff" # nicer git commands in terminal
 
 # shell
