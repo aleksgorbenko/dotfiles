@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ok () {
-  echo "✅ "$1""
+  echo "✅ $1"
 }
 
 echo "🤖 Welcome aboard, I will turn your mac into a dev machine now"
