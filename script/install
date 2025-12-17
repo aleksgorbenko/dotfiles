@@ -83,9 +83,13 @@ function install_dotfiles () {
 	# tmux config
 	$DOTS/bin/link-file "${DOTS}/config/tmux.conf" "${HOME}/.tmux.conf"
 
-	# tmux config
+	# ghostty config
 	mkdir -p "${HOME}/.config/ghostty"
 	$DOTS/bin/link-file "${DOTS}/config/ghostty" "${HOME}/.config/ghostty/config"
+
+	# helix config
+	mkdir -p "${HOME}/.config/helix"
+	$DOTS/bin/link-file "${DOTS}/config/helix.toml" "${HOME}/.config/helix/config.toml"
 
 	# k9s config
 	$DOTS/bin/link-file "${DOTS}/config/k9s_hotkey.yml" "${HOME}/.k9s/hotkey.yml"

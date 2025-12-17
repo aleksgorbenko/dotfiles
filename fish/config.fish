@@ -2,12 +2,6 @@
 # COLOURS #
 ###########
 
-# Colour scheme - valid commands in green
-set fish_color_command green
-set fish_color_error red
-set fish_color_param normal
-set fish_color_quote yellow
-
 # Completion colors
 set fish_pager_color_background cyan
 set fish_pager_color_completion grey --bold
@@ -22,11 +16,9 @@ set fish_pager_color_selected_description black --bold
 ###############
 
 # Custom keybindings (change Ctrl+Alt+F to Ctrl+F)
-# \e\cf = Alt+F
-# \ct = Ctrl+T
-# \cp = Ctrl+P
+# \e\cf = Alt+Ctrl+F
+# \cF = Ctrl+F
 fzf_configure_bindings --directory=\cf --git_log=\cg --git_status=\cs --history=\cr --variables=\cv
-set fzf_preview_dir_cmd eza --all --color=always
 set fzf_fd_opts --hidden --exclude=.git
 
 ##########
@@ -36,10 +28,5 @@ set fzf_fd_opts --hidden --exclude=.git
 # Source environment variables
 source "$HOME/.dotfiles/config/env.fish"
 
-# Source aliases
 source "$MY_ALIASES/aliases.sh"
-
-# Initialize scmpuff for numbered git output
-if command -v scmpuff > /dev/null
-    scmpuff init --shell=fish | source
-end
+# source "$MY_FUNCTIONS/functions.fish"
