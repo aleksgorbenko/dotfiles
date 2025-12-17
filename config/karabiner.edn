@@ -281,14 +281,18 @@
 ; tasks
 
 {
-	:des "n-key - New tasks"
+	:des "n-key - New tasks/todos"
 	:rules [
 		:n-mode
-			[:w [:km "new 2do work"]]
-			[:s [:km "new 2do someday"]]
-			[:r [:km "new 2do read"]]
-			[:v [:km "new 2do video"]]
+			[:b [:km "new 2do books"]]
+			[:l [:km "new 2do learn"]]
+			[:d [:km "new 2do learn dev"]]
+			[:e [:km "new 2do dev"]]
 			[:l [:km "new 2do listen"]]
+			[:r [:km "new 2do read"]]
+			[:s [:km "new 2do someday"]]
+			[:v [:km "new 2do video"]]
+			[:w [:km "new 2do work"]]
 	]
 }
 
@@ -532,7 +536,7 @@
 		[:2 [:km "open: 2Do"]]
 		[:a [:km "open: Anki"]]
 		[:c [:km "open: Chrome"]]
-		[:d [:km "open: Discord"]]
+		;; [:d [:km "open: Discord"]]
 		[:e [:km "open: PDF Expert"]]
 		[:g [:km "open: GoLand"]]
 		[:i [:km "open: iTerm"]]
