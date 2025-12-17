@@ -80,7 +80,6 @@ alias gupv="git pull --rebase -v"
 alias gupa="git pull --rebase --autostash"
 alias gupav="git pull --rebase --autostash -v"
 alias glum="git pull upstream master"
-# alias ggpur="ggu" # references ggu function
 
 # alias ggsup="git branch --set-upstream-to=origin/$(current_branch)"
 # alias gpsup="git push --set-upstream origin $(current_branch)"

@@ -1,7 +1,21 @@
 ### CONFIG ###
 # command = /opt/homebrew/bin/fish
 shell-integration = fish
-copy-on-select = true
+shell-integration-features = no-cursor
+copy-on-select = clipboard
+link-url = true
+
+### APPEARANCE ###
+theme = "Catppuccin Mocha"
+cursor-style = underline
+cursor-style-blink = false
+cursor-color = cyan
+
+window-padding-x = 4
+window-padding-y = 4
+
+background-opacity = 0.9
+background-blur = true
 
 ### KEY BINDINGS ###
 

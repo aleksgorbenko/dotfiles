@@ -1,16 +1,3 @@
-###########
-# COLOURS #
-###########
-
-# Completion colors
-set fish_pager_color_background cyan
-set fish_pager_color_completion grey --bold
-set fish_pager_color_description cyan
-set fish_pager_color_prefix cyan --bold
-set fish_pager_color_progress 'black' --background=white
-set fish_pager_color_selected_background --background=grey
-set fish_pager_color_selected_description black --bold
-
 ###############
 # KEYBINDINGS #
 ###############
@@ -28,5 +15,9 @@ set fzf_fd_opts --hidden --exclude=.git
 # Source environment variables
 source "$HOME/.dotfiles/config/env.fish"
 
+# Add custom function path - all lazy loaded
+# Only add functions there and then wrap with in aliases in custom_function_aliases.fish
+set -gp fish_function_path $DOTS/fish/functions/custom
+
+# Source aliases - they use functions, so keep this at the end
 source "$MY_ALIASES/aliases.sh"
-# source "$MY_FUNCTIONS/functions.fish"

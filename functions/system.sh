@@ -1,5 +1,5 @@
 # search all functions and aliases
-sa() {
+function sa() {
     if [ -z "$1" ]; then
         echo "Search Alias (sa) usage: sa <alias|function_name>"
         return 1
@@ -17,7 +17,7 @@ sa() {
 }
 
 # Run the previous command substituting in shell and copy output
-cpl() {
+function cpl() {
   # Capture last command output
   output=$(eval "$(fc -ln -1)")
   # Trim trailing newline and copy
@@ -25,33 +25,22 @@ cpl() {
   echo "copied!"
 }
 
-to() { # touch and open file in VS Code
+function to() { # touch and open file in VS Code
   touch "$1" && code "$1"
 }
 
 # mkdir and cd to it
-mkc() {
+function mkc() {
   mkdir -p "$1" && cd "$1" || return 1
-}
-
-_mkc() {
-  #compdef mkc
-  _files -W "$1" -/
 }
 
 # PID
 
-get_pid_name() {
+function get_pid_name() {
   local cmd_name="$1"
   ps ax -o pid,comm | grep "$cmd_name" | grep -v grep
 }
 
-# FUNCTIONS
-
-function sync-mosk() {
-	rsync -aEu -delete "${HOME}/Documents/mosk/" "${HOME}/Dropbox/mosk/"
-	rsync -aEu  "${HOME}/Dropbox/mosk/" "${HOME}/Documents/mosk/"
-}
 
 # Symlinks for app preferences are disabled since Sonoma.
 # That's why this copies files after any changes in settings.

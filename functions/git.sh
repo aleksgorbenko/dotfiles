@@ -1,5 +1,5 @@
-# Create dir, go to it and initialise it with git. mg <dir-name>
-function mg() {
+# Create dir, go to it and initialise it with git
+function mkg() {
     mkdir "$1"
     cd "$1"
     git init
@@ -23,7 +23,7 @@ function current_branch() {
   echo ${ref#refs/heads/}
 }
 
-function gdct() {
+function gdtl() {
     git describe --tags $(git rev-list --tags --max-count=1)
 }
 
@@ -62,9 +62,9 @@ function ggl() {
 
 function gglp() {
   if [[ "$#" == 0 ]]; then
-    git pull origin && git push origin
+    git pull origin && git push -u origin
   else
-    git pull origin "${*}" && git push origin "${*}"
+    git pull origin "${*}" && git push -u origin "${*}"
   fi
 }
 
