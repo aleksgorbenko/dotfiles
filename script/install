@@ -1,126 +1,144 @@
 #!/usr/bin/env bash
 
-PYTHON_VERSION=3.13.0
-RUBY_VERSION=3.4.5
+ok () {
+  echo "✅ "$1""
+}
 
-source "${HOME}/.dotfiles/script/echos.sh"
-
-bot "Welcome aboard, I will turn your mac into a dev machine now"
+echo "🤖 Welcome aboard, I will turn your mac into a dev machine now"
 
 cd "$(dirname "$0")/.."
 DOTS=$(pwd -P)
 
 # exit if any command returns a non-zero code
 set -e
+################
+# SYSTEM SETUP #
+################
 
-# bot "Install latest OS updates"
-# sudo softwareupdate -i -a
+function install_system_updates () {
+	# echo "🤖 Install latest OS updates"
+	# sudo softwareupdate -i -a
 
-# Install command tools
-if [[ `xcode-select -p 1>/dev/null;echo $?` != 0 ]];then
-	bot "Installing latest xcode tools, the machine will be restarted after the installation is complete."
-	sudo xcode-select --install
-	sudo shutdown -r now
-fi
+	# Install command tools
+	if [[ `xcode-select -p 1>/dev/null;echo $?` != 0 ]];then
+		echo "🤖 Installing latest xcode tools, the machine will be restarted after the installation is complete."
+		sudo xcode-select --install
+		sudo shutdown -r now
+	fi
 
-if [ "$(arch)" == "arm64" ];then
-	bot "Enable Rosetta 2"
-	softwareupdate --install-rosetta
-fi
+	if [ "$(arch)" == "arm64" ];then
+		echo "🤖 Enable Rosetta 2"
+		softwareupdate --install-rosetta
+	fi
 
-bot "Enable installation from unverified developers"
-sudo spctl --master-disable
+	echo "🤖 Enable installation from unverified developers status: $(spctl --status)"
+}
 
-#  BREW
-if test ! $(which brew)
-then
-  bot "Installing Homebrew"
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  # the below is only for M1
-	(echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/gbko/.zprofile
-	eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
+function install_homebrew() {
+	if test ! $(which brew)
+	then
+		echo "🤖 Installing Homebrew"
+		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+			# Inject brewfile path loading into zprofile which is used by ZSH
+		(echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> "$HOME/.zprofile"
+		eval "$(/opt/homebrew/bin/brew shellenv)"
+	fi
+}
+
 
 function install_gitconfig () {
   if ! [ -f git/gitconfig.local ]
   then
-    bot "Configuring gitconfig"
+    echo "🤖 Configuring gitconfig"
     git_credential='cache'
     if [ "$(uname -s)" == "Darwin" ]
     then
       git_credential='osxkeychain'
     fi
 
-    running " - What is your github author name?"
+    echo "- What is your github author name ❓"
     read -e git_authorname
-    running " - What is your github author email?"
+    echo "- What is your github author email ❓"
     read -e git_authoremail
 
     sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.local.example > git/gitconfig.local
 
-    print_success "gitconfig configured"
-  fi
-}
-
-function install_dotfiles () {
-	bot "Installing dotfiles"
-
-	# make sure this folder exists
-	mkdir -p "${HOME}/.config"
-
-	# keyboard remapping
-	mkdir -p "${HOME}/.config/karabiner"
-	touch "${HOME}/.config/karabiner/karabiner.json"
-	$DOTS/bin/link-file "${DOTS}/config/karabiner.edn" "${HOME}/.config/karabiner.edn"
-
-	# theme config
-	$DOTS/bin/link-file "${DOTS}/config/p10k.zsh" "${HOME}/.p10k.zsh"
-
-	# alacritty config
-	mkdir -p "${HOME}/.config/alacritty"
-	$DOTS/bin/link-file "${DOTS}/config/alacritty.yml" "${HOME}/.config/alacritty/alacritty.yml"
-
-	# tmux config
-	$DOTS/bin/link-file "${DOTS}/config/tmux.conf" "${HOME}/.tmux.conf"
-
-	# ghostty config
-	mkdir -p "${HOME}/.config/ghostty"
-	$DOTS/bin/link-file "${DOTS}/config/ghostty" "${HOME}/.config/ghostty/config"
-
-	# helix config
-	mkdir -p "${HOME}/.config/helix"
-	$DOTS/bin/link-file "${DOTS}/config/helix.toml" "${HOME}/.config/helix/config.toml"
-
-	# k9s config
-	$DOTS/bin/link-file "${DOTS}/config/k9s_hotkey.yml" "${HOME}/.k9s/hotkey.yml"
-
-	# ripgrep config
-	$DOTS/bin/link-file "${DOTS}/config/ripgreprc" "${HOME}/.ripgreprc"
-
-	# git config
+	echo "🤖 Linking gitconfig files"
 	$DOTS/bin/link-file "${DOTS}/git/gitconfig" "${HOME}/.gitconfig"
 	$DOTS/bin/link-file "${DOTS}/git/gitconfig.local" "${HOME}/.gitconfig.local"
 	$DOTS/bin/link-file "${DOTS}/git/gitignore" "${HOME}/.gitignore"
 
-	# zsh
-	$DOTS/bin/link-file "${DOTS}/zsh/zshrc" "${HOME}/.zshrc"
-	$DOTS/bin/link-file "${DOTS}/zsh/zsh_plugins.txt" "${HOME}/.zsh_plugins.txt"
+    ok "gitconfig configured"
+  fi
+}
 
+function install_dotfiles () {
+	echo "🤖 Installing dotfiles"
+
+	# make sure this folder exists
+	mkdir -p "${HOME}/.config"
+
+	echo "🤖 Configuring shells"
 	# fish
 	mkdir -p "${HOME}/.config/fish"
 	$DOTS/bin/link-file "${DOTS}/fish" "${HOME}/.config/fish"
+	ok "fish configured"
+
+	# theme config for ZSH
+	$DOTS/bin/link-file "${DOTS}/config/p10k.zsh" "${HOME}/.p10k.zsh"
+
+	# zsh
+	$DOTS/bin/link-file "${DOTS}/zsh/zshrc" "${HOME}/.zshrc"
+	$DOTS/bin/link-file "${DOTS}/zsh/zsh_plugins.txt" "${HOME}/.zsh_plugins.txt"
+	ok "zsh configured"
+
+	echo "🤖 Configuring terminals & text editors"
+	# alacritty config
+	mkdir -p "${HOME}/.config/alacritty"
+	$DOTS/bin/link-file "${DOTS}/config/alacritty.yml" "${HOME}/.config/alacritty/alacritty.yml"
+	ok "Alacritty terminal configured"
+
+	# ghostty config
+	mkdir -p "${HOME}/.config/ghostty"
+	$DOTS/bin/link-file "${DOTS}/config/ghostty" "${HOME}/.config/ghostty/config"
+	ok "Ghostty terminal configured"
+
+	# tmux config
+	$DOTS/bin/link-file "${DOTS}/config/tmux.conf" "${HOME}/.tmux.conf"
+	ok "tmux configured"
+
+	# helix config
+	mkdir -p "${HOME}/.config/helix"
+	$DOTS/bin/link-file "${DOTS}/config/helix.toml" "${HOME}/.config/helix/config.toml"
+	ok "Helix editor configured"
+
+	echo "🤖 Configuring tools"
+	# k9s config
+	$DOTS/bin/link-file "${DOTS}/config/k9s_hotkey.yml" "${HOME}/.k9s/hotkey.yml"
+	ok "k9s configured"
+
+	# ripgrep config
+	$DOTS/bin/link-file "${DOTS}/config/ripgreprc" "${HOME}/.ripgreprc"
+	ok "ripgrep configured"
 
 	# editor key bindings
 	# Symlinks for app preferences are disabled since Sonoma.
 	# That's why this copies files after any changes in settings.
 	# This way the changes can be saved and committed.
-	bot "Installing XCode, Zed and VSCode keybindings"
+	echo "🤖 Configuring XCode, Zed and VSCode keybindings"
 	cp -f "${DOTS}/config/xcode.idekeybindings" "${HOME}/Library/Developer/Xcode/UserData/KeyBindings/Default.idekeybindings"
 	cp -f "${DOTS}/config/zed-keymap.json" "${HOME}/.config/zed/keymap.json"
 	cp -f "${DOTS}/config/vscode-keybindings.json" "${HOME}/Library/Application Support/Code/User/keybindings.json"
 
-	# convenience
-	$DOTS/bin/link-file "${HOME}/Dropbox/src" "${HOME}/src"
+
+	echo "🤖 Configuring Karabiner key remapping"
+	# keyboard remapping
+	mkdir -p "${HOME}/.config/karabiner"
+	touch "${HOME}/.config/karabiner/karabiner.json"
+	$DOTS/bin/link-file "${DOTS}/config/karabiner.edn" "${HOME}/.config/karabiner.edn"
+	echo "🤖 Install Karabiner Settings"
+	goku
+	ok "Karabiner configured"
 
 	# MacOS Ding Sounds when Valid shortcuts are pressed
 	# https://github.com/microsoft/vscode/issues/44070
@@ -140,62 +158,69 @@ function install_dotfiles () {
 "@~^\UF703" = "noop:";
 }
 EOF
+	ok "MacOS Ding sounds on valid shortcuts silence configured"
+
+	# convenient links
+	$DOTS/bin/link-file "${HOME}/Dropbox/src" "${HOME}/src"
+	ok "Convenient links configured"
 }
 
 function install_brew_packages () {
 	if [ "$(uname -s)" == "Darwin" ]
 	then
-		bot "Installing brew packages"
+		echo "🤖 Installing brew packages"
 		if source bin/dot | while read -r data; do echo -e "$data"; done
 		then
-			ok "Dependencies installed"
+			echo "✅ Brew packages installed"
 		else
-			print_error "Error installing dependencies"
+			echo "❌ Error installing brew packages"
 		fi
 	fi
 }
 
 function install_fish () {
-	# this needs to be installed from within the fish itself already
-	bot "Installing fisher plugin manager for fish"
-	curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
-	ok
-
-	bot "Install theme for fish"
-	fisher install IlanCosman/tide@v5
-
-	bot "Install fzf for fish"
-	fisher install patrickf3139/fzf.fish
-
-	bot "Add fish to the list of allowed shells"
+	echo "🤖 Add fish to the list of allowed shells"
 	if ! grep -Fxq "$(which fish)" /etc/shells; then
 		echo "$(which fish)" | sudo tee -a /etc/shells
 	fi
 
-	bot "Set fish as default shell"
-	chsh -s $(which fish)
+	echo "🤖 Set fish as default shell"
+	chsh -s "$(which fish)"
 
+	# this needs to be installed from within the fish itself already
+	echo "🤖 Installing fisher plugin manager for fish"
+	curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
 	ok
+
+	echo "🤖 Install Tide theme for fish"
+	fisher install IlanCosman/tide@v6
+	ok
+
+	echo "🤖 Install fzf for fish"
+	fisher install patrickf3139/fzf.fish
+	ok
+
+	ok "fish configured"
 }
 
-function install_extras () {
-	bot "Installing fonts"
+function install_fonts () {
+	echo "🤖 Installing fonts"
 	git clone https://github.com/powerline/fonts.git --depth=1
 	cd fonts
 	./install.sh
 	cd ..
 	rm -rf fonts
-	ok
+	ok "powerline fonts installed"
+}
 
-	bot "Configuring fzf"
-	# this will install extras and bindings for fzf, e.g ctrl+r history search
-	# .zshrc will be modified
-	yes | $(brew --prefix)/opt/fzf/install
-	ok
-
-	bot "Install Karabiner Settings"
-	goku
-	ok
+function install_language_versions () {
+	echo "🤖 Installing language versions"
+	mise use --global go@latest
+	mise use --global python@latest
+	mise use --global ruby@latest
+	mise use --global terraform@latest
+	mise use --global temurin@21
+	ok "Language versions installed"
 }
 
 # Do we need to ask for sudo password or is it already passwordless?
@@ -209,10 +234,19 @@ function install_extras () {
 
 # fi
 
-install_gitconfig
-install_dotfiles
-$DOTS/macos/set-defaults.sh
+function install_macos_defaults () {
+	$DOTS/bin/set-macos-defaults
+}
+
+install_system_updates
+install_homebrew
 install_brew_packages
-install_extras
+install_language_versions
+install_dotfiles
+
+# install_fish
+install_fonts
+install_macos_defaults
+install_gitconfig
 
 ok 'Done! May the Force be with you!'

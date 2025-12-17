@@ -15,11 +15,8 @@ set -gx MOSK "$HOME/Dropbox/mosk"
 # standard path binaries
 fish_add_path "$HOME/.dotfiles/bin" /usr/local/sbin /usr/local/bin
 
-# some weird dependency that is needed
+# Used by GNU projects. See deps by brew uses --installed gettext and brew uses --installed gettext
 fish_add_path /usr/local/opt/gettext/bin
-
-# Serverless Framework
-fish_add_path "$HOME/.serverless/bin"
 
 # Go
 set -gx GO111MODULE on

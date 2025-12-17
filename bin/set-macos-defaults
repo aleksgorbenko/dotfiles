@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Sets reasonable macOS defaults.
 #
 # Or, in other words, set shit how I like in macOS.
@@ -7,21 +9,26 @@
 #
 # Run ./set-defaults.sh and you'll be good to go.
 
-source "${HOME}/.dotfiles/script/echos.sh"
+ok () {
+  echo "✅ "$1""
+}
 
-bot "=== Setting MacOS defaults that make sense ==="
+running() {
+    echo -n "=> "$1": "
+}
+
+echo "=== Setting MacOS defaults that make sense ==="
 
 ###############################################################################
-bot "Configuring General System UI/UX..."
+echo "🤖 Configuring General System UI/UX..."
 ###############################################################################
 # Close any open System Preferences panes, to prevent them from overriding
 # settings we’re about to change
 running "Closing any system preferences to prevent issues with automated changes"
-osascript -e 'tell application "System Preferences" to quit'
-ok
+osascript -e 'tell application "System Preferences" to quit';ok
 
 ###############################################################################
-bot "Languages"
+echo "🤖 Configuring Languages"
 ###############################################################################
 
 # Set language and text formats
@@ -36,7 +43,7 @@ running "Use metric units"
 defaults write NSGlobalDomain AppleMetricUnits -bool true;ok
 
 ###############################################################################
-bot "Finder"
+echo "🤖 Configuring Finder"
 ###############################################################################
 
 running "Keep folders on top when sorting by name (version 10.12 and later)"
@@ -103,7 +110,7 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true;ok
 running "Disable the warning before emptying the Trash"
 defaults write com.apple.finder WarnOnEmptyTrash -bool true;ok
 
-running "Display App Switcher on both monitors"
+running "Display App Switcher on echoh 🤖 monitors"
 defaults write com.apple.Dock appswitcher-all-displays -bool true;ok
 
 running "Set Dock to left side"
@@ -119,7 +126,7 @@ running "Only show active applications in Dock"
 defaults write com.apple.dock "static-only" -bool true;ok
 
 ###############################################################################
-bot "Animation"
+echo "🤖 Animation"
 ###############################################################################
 
 running "Disable cursos magnification on shake"
@@ -152,7 +159,7 @@ defaults write com.apple.Mail DisableSendAnimations -bool true
 defaults write com.apple.Mail DisableReplyAnimations -bool true;ok
 
 ################################################
-bot "Standard System Changes"
+echo "🤖 Standard System Changes"
 ################################################
 
 # running "Always boot in verbose mode (not MacOS GUI mode)\n"
@@ -199,7 +206,7 @@ defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 0;ok
 
 ###############################################################################
-bot "Trackpad, mouse, keyboard, Bluetooth accessories, and input"
+echo "🤖 Trackpad, mouse, keyboard, Bluetooth accessories, and input"
 ###############################################################################
 
 running "Trackpad: enable tap to click for this user and for the login screen"
@@ -216,11 +223,11 @@ defaults write NSGlobalDomain KeyRepeat -int 2
 defaults write NSGlobalDomain InitialKeyRepeat -int 10;ok
 
 ###############################################################################
-bot "=== Configuring Applications ==="
+echo "=== Configuring Applications ==="
 ###############################################################################
 
 ###############################################################################
-bot "Activity Monitor"
+echo "🤖 Activity Monitor"
 ###############################################################################
 
 running "Show the main window when launching Activity Monitor"
@@ -283,7 +290,7 @@ running "Change Dock Icon"
 defaults write com.apple.ActivityMonitor IconType -int 3;ok
 
 ###############################################################################
-bot "Safari"
+echo "🤖 Safari"
 ###############################################################################
 
 running "Show Safari's bookmark bar"
@@ -300,7 +307,7 @@ defaults write com.apple.Safari "com.apple.Safari.ContentPageGroupIdentifier.Web
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true;ok
 
 ###############################################################################
-bot "Mac App Store"
+echo "🤖 Mac App Store"
 ###############################################################################
 
 running "Enable the WebKit Developer Tools in the Mac App Store"
@@ -328,14 +335,14 @@ running "Turn on app auto-update"
 defaults write com.apple.commerce AutoUpdate -bool true;ok
 
 ###############################################################################
-bot "Photos"
+echo "🤖 Photos"
 ###############################################################################
 
 running "Prevent Photos from opening automatically when devices are plugged in"
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true;ok
 
 ###############################################################################
-bot "iTerm"
+echo "🤖 iTerm"
 ###############################################################################
 
 running "Specify the preferences directory"
@@ -344,7 +351,7 @@ running "Tell iTerm2 to use the custom preferences in the directory"
 defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true;ok
 
 ###############################################################################
-bot "TextEdit, and Disk Utility"
+echo "🤖 TextEdit, and Disk Utility"
 ###############################################################################
 
 running "Use plain text mode for new TextEdit documents"
@@ -359,14 +366,14 @@ defaults write com.apple.DiskUtility DUDebugMenuEnabled -bool true
 defaults write com.apple.DiskUtility advanced-image-options -bool true;ok
 
 ###############################################################################
-bot "Time Machine"
+echo "🤖 Time Machine"
 ###############################################################################
 
 running "Prevent Time Machine from prompting to use new hard drives as backup volume"
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true;ok
 
 ###############################################################################
-bot "Messages"
+echo "🤖 Messages"
 ###############################################################################
 
 running "Disable automatic emoji substitution (i.e. use plain text smileys)"
@@ -379,7 +386,7 @@ running "Disable continuous spell checking"
 defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "continuousSpellCheckingEnabled" -bool false;ok
 
 ###############################################################################
-bot "Anki"
+echo "🤖 Anki"
 ###############################################################################
 
 running "Disable App Nap for AnkiConnect to work"
@@ -391,7 +398,7 @@ defaults write org.qt-project.Qt.QtWebEngineCore NSAppSleepDisabled -bool true
 # Kill affected applications                                                  #
 ###############################################################################
 
-bot "OK. Note that some of these changes require a logout/restart to take effect. Killing affected applications (so they can reboot)..."
+echo "🤖 OK. Note that some of these changes require a logout/restart to take effect. Killing affected applications (so they can reboot)..."
 for app in "Activity Monitor" "Calendar" "Contacts" "cfprefsd" \
   "Dock" "Finder" "Mail" "Messages" "Safari" "SystemUIServer" \
   "Terminal" "Anki"; do
