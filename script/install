@@ -77,10 +77,15 @@ function install_dotfiles () {
 	$DOTS/bin/link-file "${DOTS}/config/p10k.zsh" "${HOME}/.p10k.zsh"
 
 	# alacritty config
+	mkdir -p "${HOME}/.config/alacritty"
 	$DOTS/bin/link-file "${DOTS}/config/alacritty.yml" "${HOME}/.config/alacritty/alacritty.yml"
 
 	# tmux config
 	$DOTS/bin/link-file "${DOTS}/config/tmux.conf" "${HOME}/.tmux.conf"
+
+	# tmux config
+	mkdir -p "${HOME}/.config/ghostty"
+	$DOTS/bin/link-file "${DOTS}/config/ghostty" "${HOME}/.config/ghostty/config"
 
 	# k9s config
 	$DOTS/bin/link-file "${DOTS}/config/k9s_hotkey.yml" "${HOME}/.k9s/hotkey.yml"
@@ -92,11 +97,14 @@ function install_dotfiles () {
 	$DOTS/bin/link-file "${DOTS}/git/gitconfig" "${HOME}/.gitconfig"
 	$DOTS/bin/link-file "${DOTS}/git/gitconfig.local" "${HOME}/.gitconfig.local"
 	$DOTS/bin/link-file "${DOTS}/git/gitignore" "${HOME}/.gitignore"
-	git config core.hooksPath "${DOTS}git/hooks/"
 
 	# zsh
 	$DOTS/bin/link-file "${DOTS}/zsh/zshrc" "${HOME}/.zshrc"
 	$DOTS/bin/link-file "${DOTS}/zsh/zsh_plugins.txt" "${HOME}/.zsh_plugins.txt"
+
+	# fish
+	mkdir -p "${HOME}/.config/fish"
+	$DOTS/bin/link-file "${DOTS}/fish" "${HOME}/.config/fish"
 
 	# editor key bindings
 	# Symlinks for app preferences are disabled since Sonoma.
@@ -106,6 +114,9 @@ function install_dotfiles () {
 	cp -f "${DOTS}/config/xcode.idekeybindings" "${HOME}/Library/Developer/Xcode/UserData/KeyBindings/Default.idekeybindings"
 	cp -f "${DOTS}/config/zed-keymap.json" "${HOME}/.config/zed/keymap.json"
 	cp -f "${DOTS}/config/vscode-keybindings.json" "${HOME}/Library/Application Support/Code/User/keybindings.json"
+
+	# convenience
+	$DOTS/bin/link-file "${HOME}/Dropbox/src" "${HOME}/src"
 
 	# MacOS Ding Sounds when Valid shortcuts are pressed
 	# https://github.com/microsoft/vscode/issues/44070
@@ -125,9 +136,6 @@ function install_dotfiles () {
 "@~^\UF703" = "noop:";
 }
 EOF
-
-	# convenience
-	$DOTS/bin/link-file "${Home}/Dropbox/src" "${HOME}/src"
 }
 
 function install_brew_packages () {
@@ -143,6 +151,29 @@ function install_brew_packages () {
 	fi
 }
 
+function install_fish () {
+	# this needs to be installed from within the fish itself already
+	bot "Installing fisher plugin manager for fish"
+	curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
+	ok
+
+	bot "Install theme for fish"
+	fisher install IlanCosman/tide@v5
+
+	bot "Install fzf for fish"
+	fisher install patrickf3139/fzf.fish
+
+	bot "Add fish to the list of allowed shells"
+	if ! grep -Fxq "$(which fish)" /etc/shells; then
+		echo "$(which fish)" | sudo tee -a /etc/shells
+	fi
+
+	bot "Set fish as default shell"
+	chsh -s $(which fish)
+
+	ok
+}
+
 function install_extras () {
 	bot "Installing fonts"
 	git clone https://github.com/powerline/fonts.git --depth=1
@@ -151,13 +182,6 @@ function install_extras () {
 	cd ..
 	rm -rf fonts
 	ok
-
-	bot "Installing extra plugins"
-	if [[ ! -d "${HOME}/.dotfiles/zsh/plugins/fzf-tab" ]]; then
-		running "fzf-tab"
-		git clone https://github.com/Aloxaf/fzf-tab ${DOTS}/zsh/plugins/fzf-tab
-		ok
-	fi
 
 	bot "Configuring fzf"
 	# this will install extras and bindings for fzf, e.g ctrl+r history search
@@ -168,29 +192,6 @@ function install_extras () {
 	bot "Install Karabiner Settings"
 	goku
 	ok
-}
-
-function install_lang () {
-	bot "Install node version manager and latest LTS node"
-	# install nvm and LTS node
-	if [[ ! -s "${HOME}/.nvm/nvm.sh"  ]]; then
-		curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
-		nvm install --lts
-	fi
-
-	# install python
-	bot "Install python version: $PYTHON_VERSION"
-	if [[ -x "$(brew --prefix)/bin/pyenv" ]]; then
-		$(brew --prefix)/bin/pyenv install $PYTHON_VERSION
-		$(brew --prefix)/bin/pyenv global $PYTHON_VERSION
-	fi
-
-	# install ruby
-	bot "Install ruby version: $RUBY_VERSION"
-	if [[ -x "$(brew --prefix)/bin/rbenv" ]]; then
-		"$(brew --prefix)/bin/rbenv" install $RUBY_VERSION
-		"$(brew --prefix)/bin/rbenv" global $RUBY_VERSION
-	fi
 }
 
 # Do we need to ask for sudo password or is it already passwordless?
@@ -209,6 +210,5 @@ install_dotfiles
 $DOTS/macos/set-defaults.sh
 install_brew_packages
 install_extras
-install_lang
 
 ok 'Done! May the Force be with you!'

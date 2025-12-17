@@ -8,8 +8,7 @@
         ui = true
 [core]
         excludesfile = ~/.gitignore
-        editor = vim
-	pager = delta --dark
+        editor = hx
 [apply]
         whitespace = nowarn
 [mergetool]
@@ -28,8 +27,8 @@
         protocol = ssh
 [pull]
 [credential "https://github.com"]
-	helper = 
+	helper =
 	helper = !/opt/homebrew/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-	helper = 
+	helper =
 	helper = !/opt/homebrew/bin/gh auth git-credential

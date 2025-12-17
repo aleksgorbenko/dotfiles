@@ -6,18 +6,17 @@ alias ll="eza -lha"
 alias la="eza -lTha"
 alias t="touch"
 
-# alias .2="cd ../../"             # Go back 2 directory levels
-# alias .3="cd ../../../"          # Go back 3 directory levels
-# alias .4="cd ../../../../"       # Go back 4 directory levels
-# alias .5="cd ../../../../../"    # Go back 5 directory levels
-# alias .6="cd ../../../../../../" # Go back 6 directory levels
-# alias ..="cd .."
-# alias ...="cd ../.."
-# alias ....="cd ../../.."
-# alias .....="cd ../../../.."
-# alias ......="cd ../../../../.."
-# alias .......="cd ../../../../../.."
-# alias -- -="cd -"
+alias .2="cd ../../"             # Go back 2 directory levels
+alias .3="cd ../../../"          # Go back 3 directory levels
+alias .4="cd ../../../../"       # Go back 4 directory levels
+alias .5="cd ../../../../../"    # Go back 5 directory levels
+alias .6="cd ../../../../../../" # Go back 6 directory levels
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
+alias .......="cd ../../../../../.."
 alias pc="pwd | pbcopy"
 
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
@@ -60,7 +59,8 @@ alias mrm="mas remove"
 # Pipe my public key to my clipboard.
 alias pubkey="more ~/.ssh/me/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
 
-alias zh="source ~/.zshrc"
+alias zh="source $HOME/.zshrc && echo 'Zsh config reloaded!'"
+alias fh="source $HOME/.config/fish/config.fish && echo 'Fish config reloaded!'"
 alias tmr="tmux source-file ~/.tmux.conf"
 
 alias hosts="sudo vim /etc/hosts"
@@ -95,3 +95,6 @@ alias mp="multipass"
 alias mosk-books1="cd /Users/gbko/Dropbox/mosk/ && git pull origin master"
 alias mosk-books2="git add . && git commit -m \"chore: Add book notes\" && git push origin master"
 alias mosk-books3="cd ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/mosk/ && git pull origin master"
+
+# print path
+alias ppath="echo $PATH | tr ':' '\n'"

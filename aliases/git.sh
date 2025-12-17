@@ -1,8 +1,5 @@
-# Use `hub` as our git wrapper:
-# https://hub.github.com/
-alias git=$(which hub)
 alias g="git"
-
+alias lg="lazygit"
 
 # Aliases
 # A-Z order
@@ -62,7 +59,6 @@ alias gdw="git diff --word-diff"
 alias gds="git diff --staged"
 alias gdsw="git diff --staged --word-diff"
 alias gdt="git diff-tree --no-commit-id --name-only -r"
-alias gdct="git describe --tags $(git rev-list --tags --max-count=1)"
 
 # FETCH
 alias gf="git fetch"
@@ -90,7 +86,7 @@ alias glum="git pull upstream master"
 # alias gpsup="git push --set-upstream origin $(current_branch)"
 
 alias gignore="git update-index --assume-unchanged"
-alias gignored="git ls-files -v | grep "^[[:lower:]]""
+alias gignored="git ls-files -v | grep '^[[:lower:]]'"
 
 # LOG
 # These aliases are based on the git log command, which is used to view the commit history.
@@ -101,10 +97,10 @@ alias glgg="git log --graph"
 alias glgga="git log --graph --decorate --all"
 alias glgm="git log --graph --max-count=10"
 alias glol="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
-alias glols="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --stat"
 alias glod="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset'"
-alias glods="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --date=short"
-alias glola="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --all"
+alias glols="git log --graph --stat --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
+alias glods="git log --graph --date=short --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset'"
+alias glola="git log --graph --all --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
 
 # MERGE
 alias gm="git merge"
@@ -150,9 +146,6 @@ alias gress="git restore --staged" # unstage changes
 
 alias grm="git rm" # remove files from the working tree and index
 alias grmc="git rm --cached" # stages the removal of the file(s) OR unstage changes without deleting files.
-
-# gotta love this one
-alias groot="echo I am Groot! && cd "$(git rev-parse --show-toplevel || echo .)""
 
 alias gsh="git show" # shows last commit
 alias gsps="git show --pretty=short --show-signature"

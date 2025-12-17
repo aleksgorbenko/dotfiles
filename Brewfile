@@ -31,20 +31,19 @@ brew "mas"
 brew "gcc"
 
 # git
-brew "hub"
-brew "gh" #github cli
-brew "glab" #gitlab cli
-brew "git-delta"
-brew "forgit"
+brew "gh" # github cli
+brew "glab" # gitlab cli
+brew "lazygit"
+brew "scmpuff" # nicer git commands in terminal
 
 # shell
 brew "coreutils"
 brew "antidote"
 brew "powerlevel10k"
-brew "scmpuff" # nicer git commans in terminal
 brew "tmux"
 brew "grc" # terminal coloriser
 brew "fzf" # fuzzy search
+brew "fd" # find alternative. Also used by fzf in Fish
 brew "zoxide" # navigation
 brew "watch" # similar to watch on linux
 brew "gnupg" # manage GPG key
@@ -71,6 +70,7 @@ brew "gotop" # better top
 brew "terminal-notifier" # p.s this won't work in Alacritty
 brew "xsv" # work with csv
 brew "hugo" # work on my blog https://aleksgorbenko.dev
+brew "pstree"
 
 # cloud
 brew "awslogs"
@@ -78,11 +78,8 @@ cask "gcloud-cli"
 brew "eksctl"
 brew "awscli"
 
-# version managers
-brew "rbenv"
-brew "jenv"
-brew "pyenv"
-brew "tfenv"
+# one version manager to rule them all
+brew "mise"
 
 # http
 brew "httpie"
@@ -158,7 +155,6 @@ cask "multipass" # vm, somewhat similar to virtual box. It is powered by qemu an
 cask "ghostty" # minimal terminal
 brew "helix" # terminal code editor
 cask "iterm2"
-cask "alacritty"
 brew "fish" # alternative shell
 
 # code editor

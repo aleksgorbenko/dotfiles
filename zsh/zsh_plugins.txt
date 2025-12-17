@@ -1,5 +1,6 @@
 zsh-users/zsh-completions
 zsh-users/zsh-autosuggestions
 marzocchi/zsh-notify
+Aloxaf/fzf-tab
 
 zdharma-continuum/fast-syntax-highlighting

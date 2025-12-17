@@ -1,3 +1,16 @@
+# Create dir, go to it and initialise it with git. mg <dir-name>
+function mg() {
+    mkdir "$1"
+    cd "$1"
+    git init
+}
+
+# gotta love this one
+function groot() {
+    echo "I am Groot!"
+    cd "$(git rev-parse --show-toplevel || echo .)"
+}
+
 # The name of the current branch
 function current_branch() {
   local ref
@@ -10,11 +23,8 @@ function current_branch() {
   echo ${ref#refs/heads/}
 }
 
-# Create dir, go to it and initialise it with git. mg <dir-name>
-mg() {
-    mkdir "$1"
-    cd "$1"
-    git init
+function gdct() {
+    git describe --tags $(git rev-list --tags --max-count=1)
 }
 
 # COMMIT
@@ -64,7 +74,7 @@ function ggu() {
 }
 
 # STASH
-function gsts() {
+function gstpu() {
   if [[ "$#" != 0 ]]; then
     git stash push -m "$1"
   else
@@ -73,7 +83,7 @@ function gsts() {
   fi
 }
 
-function gstp() {
+function gstpo() {
   if [[ "$#" != 0 ]]; then
     git stash pop stash@{"$1"}
   else

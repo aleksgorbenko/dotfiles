@@ -2,5 +2,7 @@
 # `dot` handles installation, updates, things like that. Run it periodically
 # to make sure you're on the latest and greatest.
 set -e
-cd $ZSH
-brew update && brew bundle && brew && brew clean
+cd $DOTS
+# brew update is not here as it will bump anki and break things
+# update manually for now
+brew bundle && brew upgrade &&  brew cleanup

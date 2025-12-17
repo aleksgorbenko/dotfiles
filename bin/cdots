@@ -10,7 +10,7 @@ else
   MSG="chore: Routine changes :robot:"
 fi
 DIR=$(pwd)
-cd $ZSH
+cd $DOTS
 git add -A
 git commit -m "$MSG"
 git push

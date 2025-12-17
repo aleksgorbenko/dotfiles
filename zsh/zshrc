@@ -6,29 +6,22 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # zmodload zsh/zprof # uncomment to profile laoding speed
-export ZSH=${HOME}/.dotfiles
 
 # 1. Load paths and ENVs
-source "${ZSH}/zsh/env.zsh"
+source "$HOME/.dotfiles/zsh/env.zsh"
 
 # 2. Load aliases
 source "${MY_ALIASES}/aliases.sh"
 source "${MY_FUNCTIONS}/functions.sh"
-
-# 3. Load version managers
-source "${ZSH}/zsh/versions.zsh"
 
 # 4. Fuzzy finder (needs to be loaded BEFORE compinit)
 # alt+c - trigger OR "cd **<TAB>"
 [ -f "${HOME}/.fzf.zsh" ] && source "${HOME}/.fzf.zsh"
 
 # 5. ZSH config (autoload compinit)
-source "${ZSH}/zsh/config.zsh"
+source "${DOTS}/zsh/config.zsh"
 
-# 6. fzf-tab - fuzzy search with a simple tab (needs to be loaded AFTER compinit)
-source "${ZSH}/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh"
-
-# 7. Plugins
+# 6. Plugins (fzf-tab will be loaded by Antidote after compinit)
 # Add new plugins to the `zsh_plugins.txt` file and reload zsh
 # Keep syntax highlighting plugin last!
 source ${BREW_PREFIX}/opt/antidote/share/antidote/antidote.zsh
@@ -36,17 +29,17 @@ antidote load
 
 # 8. Load misc tools
 
-# Amazing git add, log, diff, reset, checkout, stash, clean
-[ -f "$BREW_PREFIX/share/forgit/forgit.plugin.zsh" ] && source "$BREW_PREFIX/share/forgit/forgit.plugin.zsh"
 # Numbered git output
-
-[[ -x "${BREW_PREFIX}/bin/scmpuff" ]] && eval "$(scmpuff init -s)"
+[[ -x "${BREW_PREFIX}/bin/scmpuff" ]] && eval "$(scmpuff init --shell=zsh)"
 
 # Better cd navigation (like autojump)
 [[ -x "${BREW_PREFIX}/bin/zoxide" ]] && eval "$(zoxide init zsh --cmd j)"
 
 # Colored output for common unix commands
-[[ -s "${BREW_PREFIX}/etc/grc.bashrc" ]] && source "${BREW_PREFIX}/etc/grc.bashrc"
+[[ -s "${BREW_PREFIX}/etc/grc.zsh" ]] && source "${BREW_PREFIX}/etc/grc.zsh"
+
+# Disable GRC for problematic commands that hang
+unalias netstat 2>/dev/null
 
 # Load theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -64,11 +57,7 @@ if [ -f '/opt/homebrew/share/google-cloud-sdk/completion.zsh.inc' ]; then . '/op
 ##################
 
 # Local variables, aliases, functions
-[[ -s "${ZSH}/zsh/.zshrc.local" ]] && source "${ZSH}/zsh/.zshrc.local"
-
-complete -o nospace -C /Users/gbko/.config/tfenv/versions/1.14.0/terraform terraform
-
-autoload -U +X bashcompinit && bashcompinit
+[[ -s "${DOTS}/zsh/.zshrc.local" ]] && source "${DOTS}/zsh/.zshrc.local"
 
 ### Nothing should be after this line - if you see anything present
 # most likely some script/tool added it there. Find the right place for it

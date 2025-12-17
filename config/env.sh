@@ -8,8 +8,8 @@ export BREW_PREFIX=$(brew --prefix)
 export MOSK="$HOME/Dropbox/mosk"
 
 ### PATH ###
-# standard path binaries
-export PATH="$ZSH/bin:/usr/local/sbin:/usr/local/bin:$PATH"
+# Add dotfiles binaries
+export PATH="$DOTS/bin:$PATH"
 
 # some weird dependency that is needed
 export PATH="/usr/local/opt/gettext/bin:$PATH"
@@ -19,7 +19,7 @@ export PATH="$HOME/.serverless/bin:$PATH"
 
 # Go
 export GO111MODULE=on
-export GOPATH=$HOME/go
+export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
 export GOPRIVATE="bitbucket.org/aleksgorbenko,github.com/aleksgorbenko"
 

@@ -1,5 +1,5 @@
 # Initialize Homebrew manually
-# Fish does not rely on things suzh as ~/.zprofile which loads it for ZSH
+# Fish does not rely on things such as ~/.zprofile which loads it for ZSH
 eval (/opt/homebrew/bin/brew shellenv)
 
 # generic envs

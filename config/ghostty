@@ -1,10 +1,13 @@
 ### CONFIG ###
-command = /opt/homebrew/bin/fish --login
-# shell-integration = fish
+# command = /opt/homebrew/bin/fish
+shell-integration = fish
+copy-on-select = true
 
 ### KEY BINDINGS ###
 
-keybind = super+p=toggle_command_palette
+keybind = super+shift+p=toggle_command_palette
+# This is only supported on Linux and when the system's libadwaita version is 1.4 or newer. The current libadwaita version can be found by running ghostty +version.
+keybind = super+p=toggle_tab_overview
 
  # TAB NAVIGATION
 keybind = super+alt+arrow_right=next_tab
