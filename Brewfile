@@ -50,8 +50,8 @@ brew "watch" # similar to watch on linux
 brew "gnupg" # manage GPG key
 
 # langs
+brew "mise" # one version manager to rule them all
 brew "cmake"
-brew "go"
 brew "protobuf"
 
 # utils
@@ -78,9 +78,6 @@ brew "awslogs"
 cask "gcloud-cli"
 brew "eksctl"
 brew "awscli"
-
-# one version manager to rule them all
-brew "mise"
 
 # http
 brew "httpie"
@@ -199,9 +196,6 @@ cask "font-jetbrains-mono"
 cask "affinity" # photo editor
 # cask "pinta" # simple oss image editor
 # cask "imageoptim"
-
-# dev
-# cask "temurin" # alternative jdk
 
 # gaming
 # cask "battle-net"
