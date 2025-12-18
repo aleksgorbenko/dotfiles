@@ -2,7 +2,11 @@
 
 # `dot` handles installation, updates, things like that. Run it periodically
 # to make sure you're on the latest and greatest.
-set -e
+set -o errexit  # abort on nonzero exitstatus
+set -o nounset  # abort on unbound variable
+set -o pipefail # don't hide errors within pipes
+set -o xtrace   # print execution commands
+
 cd $DOTS
 # brew upgrade is not here as it will bump anki and break things
 # update manually for now
