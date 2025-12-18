@@ -1,7 +1,6 @@
 ### CONFIG ###
 # command = /opt/homebrew/bin/fish
 shell-integration = fish
-shell-integration-features = no-cursor
 copy-on-select = clipboard
 link-url = true
 
