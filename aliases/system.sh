@@ -60,7 +60,8 @@ alias mrm="mas remove"
 alias pubkey="more ~/.ssh/me/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
 
 alias zh="source $HOME/.zshrc && echo 'Zsh config reloaded!'"
-alias fh="source $HOME/.config/fish/config.fish && echo 'Fish config reloaded!'"
+alias fsh="source $HOME/.config/fish/config.fish && echo 'Fish config reloaded!'"
+alias fh="exec fish"
 alias tmr="tmux source-file ~/.tmux.conf"
 
 alias hosts="sudo vim /etc/hosts"
@@ -98,3 +99,4 @@ alias mosk-books3="cd ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/m
 
 # print path
 alias ppath="echo $PATH | tr ':' '\n'"
+alias ppaths="echo $PATH | tr ':' '\n' | sort | nl"
