@@ -2,30 +2,18 @@
 # user gitconfig
 
 [user]
-        name = AUTHORNAME
-        email = AUTHOREMAIL
-[credential]
-        helper = GIT_CREDENTIAL_HELPER
-[alias]
-[color]
-        diff = auto
-        status = auto
-        branch = auto
-        ui = true
-[core]
-        excludesfile = ~/.gitignore
-        editor = vim
-[apply]
-        whitespace = nowarn
-[mergetool]
-        keepBackup = false
-[difftool]
-        prompt = false
-[help]
-        autocorrect = 1
-[push]
-        # See `git help config` (search for push.default)
-        # for more information on different options of the below setting.
-        #
-        # Setting to git 2.0 default to surpress warning message
-        default = simple
+    name = AUTHOR_NAME
+    email = AUTHOR_EMAIL
+
+# start 1Password signing config
+    signingkey = YOUR_1Password_GENERATED_KEY
+[gpg]
+    format = ssh
+
+[gpg "ssh"]
+    program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+
+[commit]
+    gpgsign = true
+
+# end 1Password signing config
