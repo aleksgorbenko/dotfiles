@@ -60,10 +60,9 @@ brew "zsh"
 brew "cheat" # short `man`
 brew "scc" # code line counter
 brew "openssl"
-brew "tree"
+# brew "tree"
 brew "ripgrep" # better `grep`. usage: rg ...
 brew "bat" # better `cat`
-brew "ncdu" # disk analyzer
 brew "gettext"
 brew "eza" # better `ls`
 brew "ctop" # htop for containers
@@ -71,7 +70,9 @@ brew "gotop" # better top
 brew "terminal-notifier" # p.s this won't work in Alacritty
 brew "xsv" # work with csv
 brew "hugo" # work on my blog https://aleksgorbenko.dev
-brew "pstree"
+brew "pstree" # process tree viewer
+brew "clipboard" # terminal clipboard manager
+brew "gdu" # better disk usage analyser
 
 # cloud
 brew "awslogs"

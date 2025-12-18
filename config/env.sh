@@ -11,9 +11,6 @@ export MOSK="$HOME/Dropbox/mosk"
 # Add dotfiles binaries
 export PATH="$DOTS/bin:$PATH"
 
-# Used by GNU projects. See deps by brew uses --installed gettext and brew uses --installed gettext
-export PATH="/usr/local/opt/gettext/bin:$PATH"
-
 # Go
 export GO111MODULE=on
 export GOPATH="$HOME/go"
