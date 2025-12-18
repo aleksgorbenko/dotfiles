@@ -21,6 +21,9 @@ set -g fish_pager_color_selected_background --background=black --bold
 set -g fish_pager_color_selected_completion brmagenta
 set -g fish_pager_color_selected_description brcyan
 
+# Path validation - reddish magenta with underline for valid paths, normal for invalid
+set -g fish_color_valid_path CC3A6E --underline
+
 ##########
 # CONFIG #
 ##########
@@ -29,8 +32,11 @@ set -g fish_pager_color_selected_description brcyan
 source "$HOME/.dotfiles/config/env.fish"
 
 # Add custom function path - all lazy loaded
-# Only add functions there and then wrap with in aliases in custom_function_aliases.fish
 set -gp fish_function_path $DOTS/fish/functions/custom
 
-# Source aliases - they use functions, so keep this at the end
+# Source Fish-native function aliases
+# Wraps only custom functions sourced above
+source "$DOTS/fish/custom_function_aliases.fish"
+
+# Source Bash-compatible aliases (git, system, docker, k8s, etc.)
 source "$MY_ALIASES/aliases.sh"

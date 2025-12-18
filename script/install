@@ -1,16 +1,14 @@
 #!/usr/bin/env bash
 
+set -o errexit  # abort on nonzero exitstatus
+set -o nounset  # abort on unbound variable
+set -o pipefail # don't hide errors within pipes
+set -o xtrace   # print execution commands
+
 ok () {
   echo "✅ $1"
 }
 
-echo "🤖 Welcome aboard, I will turn your mac into a dev machine now"
-
-cd "$(dirname "$0")/.."
-DOTS=$(pwd -P)
-
-# exit if any command returns a non-zero code
-set -e
 ################
 # SYSTEM SETUP #
 ################
@@ -47,21 +45,17 @@ function install_homebrew() {
 
 
 function install_gitconfig () {
+echo "🤖 Configuring gitconfig"
   if ! [ -f git/gitconfig.local ]
   then
-    echo "🤖 Configuring gitconfig"
-    git_credential='cache'
-    if [ "$(uname -s)" == "Darwin" ]
-    then
-      git_credential='osxkeychain'
-    fi
+    echo "Creating gitconfig.local file"
 
     echo "- What is your github author name ❓"
-    read -e git_authorname
+    read -e git_author_name
     echo "- What is your github author email ❓"
-    read -e git_authoremail
+    read -e git_author_email
 
-    sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.local.example > git/gitconfig.local
+    sed -e "s/AUTHOR_NAME/$git_author_name/g" -e "s/AUTHOR_EMAIL/$git_author_email/g" git/gitconfig.local.example > git/gitconfig.local
 
 	echo "🤖 Linking gitconfig files"
 	$DOTS/bin/link-file "${DOTS}/git/gitconfig" "${HOME}/.gitconfig"
@@ -220,6 +214,7 @@ function install_language_versions () {
 	mise use --global ruby@latest
 	mise use --global terraform@latest
 	mise use --global temurin@21
+	mise use --global node@24
 	ok "Language versions installed"
 }
 
@@ -237,6 +232,13 @@ function install_language_versions () {
 function install_macos_defaults () {
 	$DOTS/bin/set-macos-defaults
 }
+
+################
+# EXECUTE      #
+################
+echo "🤖 Welcome aboard, I will turn your mac into a dev machine now"
+cd "$(dirname "$0")/.."
+DOTS=$(pwd -P)
 
 install_system_updates
 install_homebrew
