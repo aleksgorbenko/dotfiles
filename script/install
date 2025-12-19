@@ -72,12 +72,7 @@ function install_dotfiles () {
 	# make sure this folder exists
 	mkdir -p "${HOME}/.config"
 
-	echo "🤖 Configuring shells"
-	# fish
-	mkdir -p "${HOME}/.config/fish"
-	$DOTS/bin/link-file "${DOTS}/fish" "${HOME}/.config/fish"
-	ok "fish configured"
-
+	echo "🤖 Configuring zsh"
 	# theme config for ZSH
 	$DOTS/bin/link-file "${DOTS}/config/p10k.zsh" "${HOME}/.p10k.zsh"
 
@@ -173,6 +168,14 @@ function install_brew_packages () {
 }
 
 function install_fish () {
+	echo "🤖 Configuring fish"
+
+	mkdir -p "${HOME}/.config/fish/conf.d"
+	$DOTS/bin/link-file "${DOTS}/fish/config.fish" "${HOME}/.config/fish/config.fish"
+	$DOTS/bin/link-file "${DOTS}/fish/fish_plugins" "${HOME}/.config/fish/fish_plugins"
+	$DOTS/bin/sync-fish-confd
+	ok "fish symlinks created"
+
 	echo "🤖 Add fish to the list of allowed shells"
 	if ! grep -Fxq "$(which fish)" /etc/shells; then
 		echo "$(which fish)" | sudo tee -a /etc/shells

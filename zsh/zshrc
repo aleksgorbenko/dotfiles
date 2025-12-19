@@ -65,3 +65,6 @@ if [ -f '/opt/homebrew/share/google-cloud-sdk/completion.zsh.inc' ]; then . '/op
 # most likely some script/tool added it there. Find the right place for it
 
 # zprof # uncomment to profile loading speed
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /Users/gbko/.local/share/mise/installs/terraform/1.14.2/terraform terraform

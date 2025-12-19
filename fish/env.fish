@@ -1,6 +1,12 @@
 # Initialize Homebrew manually
 # Fish does not rely on things such as ~/.zprofile which loads it for ZSH
-eval (/opt/homebrew/bin/brew shellenv)
+# Use hardcoded path instead of subshell for speed
+set -gx HOMEBREW_PREFIX /opt/homebrew
+set -gx HOMEBREW_CELLAR /opt/homebrew/Cellar
+set -gx HOMEBREW_REPOSITORY /opt/homebrew
+fish_add_path -gP /opt/homebrew/bin /opt/homebrew/sbin
+set -q MANPATH; or set MANPATH ''; set -gx MANPATH /opt/homebrew/share/man $MANPATH
+set -q INFOPATH; or set INFOPATH ''; set -gx INFOPATH /opt/homebrew/share/info $INFOPATH
 
 # generic envs
 set -gx SRC "$HOME/src"
@@ -8,7 +14,7 @@ set -gx PROJECTS "$SRC/proj"
 set -gx DOTS "$HOME/.dotfiles"
 set -gx MY_ALIASES "$DOTS/aliases"
 set -gx MY_FUNCTIONS "$DOTS/functions"
-set -gx BREW_PREFIX (brew --prefix)
+set -gx BREW_PREFIX /opt/homebrew
 set -gx MOSK "$HOME/Dropbox/mosk"
 
 ### PATH ###

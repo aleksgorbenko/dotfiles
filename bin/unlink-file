@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+# Safely removes a symlink, refusing to delete actual files
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+if [ $# -eq 0 ]; then
+    echo "Usage: unlink-file <path>"
+    exit 1
+fi
+
+TARGET="$1"
+
+if [ ! -e "$TARGET" ] && [ ! -L "$TARGET" ]; then
+    echo "No file or symlink found at: $TARGET"
+    exit 0
+fi
+
+if [ -L "$TARGET" ]; then
+    # Get the source before removing
+    SOURCE=$(readlink "$TARGET")
+
+    rm "$TARGET"
+    echo "✅ Symlink removed: $TARGET"
+    echo "   Source was: $SOURCE"
+    echo ""
+    echo "To restore, run:"
+    echo "   ~/.dotfiles/bin/link-file \"$SOURCE\" \"$TARGET\""
+else
+    echo "❌ Error: $TARGET is not a symlink, refusing to delete"
+    exit 1
+fi

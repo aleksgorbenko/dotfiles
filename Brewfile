@@ -7,6 +7,7 @@ tap "derailed/k9s"
 tap "romkatv/powerlevel10k"
 tap "nats-io/nats-tools"
 tap "fluxcd/tap"
+tap "tsonglew/dutis"
 
 # set arguments for all 'brew install --cask' commands
 cask_args appdir: "/Applications", require_sha: true

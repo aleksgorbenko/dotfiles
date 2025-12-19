@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+# Syncs all conf.d files from dotfiles to ~/.config/fish/conf.d
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DOTS="$(cd "$SCRIPT_DIR/.." && pwd)"
+FISH_CONFD_SOURCE="${DOTS}/fish/conf.d"
+FISH_CONFD_TARGET="${HOME}/.config/fish/conf.d"
+
+# Create target directory if it doesn't exist
+mkdir -p "$FISH_CONFD_TARGET"
+
+echo "🔄 Syncing fish conf.d files..."
+
+# Loop through all .fish files in source conf.d
+for file in "$FISH_CONFD_SOURCE"/*.fish; do
+    # Skip if no files found
+    [ -e "$file" ] || continue
+
+    source_path="$file"
+    target_path="$FISH_CONFD_TARGET/$(basename "$file")"
+
+    # Create symlink (link-file handles existing links and output)
+    "$DOTS/bin/link-file" "$source_path" "$target_path"
+done

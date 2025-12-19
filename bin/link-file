@@ -2,14 +2,6 @@
 
 overwrite_all=false backup_all=false skip_all=false
 
-user () {
-  printf "\r  [ \033[0;33m??\033[0m ] $1\n"
-}
-
-success () {
-  printf "\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"
-}
-
 link_file () {
   local src=$1 dst=$2
 
@@ -31,7 +23,7 @@ link_file () {
 
       else
 
-        user "File already exists: $dst ($(basename "$src")), what do you want to do?\n\
+        echo "❓ File already exists: $dst ($(basename "$src")), what do you want to do?\n\
         [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
         read -n 1 action < /dev/tty
 
@@ -63,25 +55,25 @@ link_file () {
     if [ "$overwrite" == "true" ]
     then
       rm -rf "$dst"
-      success "removed $dst"
+      echo "  ❌ removed $dst"
     fi
 
     if [ "$backup" == "true" ]
     then
       mv "$dst" "${dst}.backup"
-      success "moved $dst to ${dst}.backup"
+      echo "  ➡️ moved $dst to ${dst}.backup"
     fi
 
     if [ "$skip" == "true" ]
     then
-      success "skipped $src"
+      echo "  ⏭️ skipped $src"
     fi
   fi
 
   if [ "$skip" != "true" ]  # "false" or empty
   then
     ln -s "$1" "$2"
-    success "linked $1 to $2"
+    echo "  ✅ linked $1 to $2"
   fi
 }
 
