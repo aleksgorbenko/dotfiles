@@ -109,5 +109,15 @@ function import-app-settings() {
 }
 
 function scotty-beam-me-up!() {
-  # export everything
+  # export app keybindings and configs
+
+  # export engineering-notebook
+
+  # export snippets
+
+  # make sure dotfiles are up to date
+
+  # archive everything
+
+  # echo message to transfer file securely
 }

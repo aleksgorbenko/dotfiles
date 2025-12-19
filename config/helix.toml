@@ -4,6 +4,10 @@ theme = "ayu_mirage"
 cursorline = true
 auto-save = true
 
+[editor.whitespace.render]
+space = "all"
+tab = "all"
+
 [editor.cursor-shape]
 insert = "bar"
 normal = "block"

@@ -6,3 +6,4 @@ zsh/zsh_plugins.sh
 
 # Fish - ignore plugin-managed files
 fish/fish_variables
+fish/config.local.fish

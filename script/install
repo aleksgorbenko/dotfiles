@@ -177,21 +177,15 @@ function install_fish () {
 	if ! grep -Fxq "$(which fish)" /etc/shells; then
 		echo "$(which fish)" | sudo tee -a /etc/shells
 	fi
+	ok
 
 	echo "🤖 Set fish as default shell"
 	chsh -s "$(which fish)"
-
-	# this needs to be installed from within the fish itself already
-	echo "🤖 Installing fisher plugin manager for fish"
-	curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
 	ok
 
-	echo "🤖 Install Tide theme for fish"
-	fisher install IlanCosman/tide@v6
-	ok
-
-	echo "🤖 Install fzf for fish"
-	fisher install patrickf3139/fzf.fish
+	# see fish/fish_plugins for a list of plugins
+	echo "🤖 Install fisher plugins"
+	fish -c "fisher update"
 	ok
 
 	ok "fish configured"
@@ -237,6 +231,7 @@ function install_macos_defaults () {
 # EXECUTE      #
 ################
 echo "🤖 Welcome aboard, I will turn your mac into a dev machine now"
+
 cd "$(dirname "$0")/.."
 DOTS=$(pwd -P)
 
@@ -246,9 +241,9 @@ install_brew_packages
 install_language_versions
 install_dotfiles
 
-# install_fish
+install_fish
 install_fonts
 install_macos_defaults
 install_gitconfig
 
-ok 'Done! May the Force be with you!'
+ok "Done! May the Force be with you!"

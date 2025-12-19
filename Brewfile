@@ -37,17 +37,27 @@ brew "lazygit"
 brew "git-delta" # better git diffs, config in ~/.gitconfig
 brew "scmpuff" # nicer git commands in terminal
 
-# shell
-brew "coreutils"
-brew "antidote"
+# shell: zsh
+brew "zsh"
+brew "antidote" # zsh plugin manager
 brew "powerlevel10k"
-brew "tmux"
+
+# shell: fish
+brew "fish" # alternative shell
+brew "fisher" # fish plugin manager
+
+# shell
+brew "tmux" # terminal multiplexer
 brew "grc" # terminal coloriser
 brew "fzf" # fuzzy search
-brew "fd" # find alternative. Also used by fzf in Fish
-brew "zoxide" # navigation
-brew "watch" # similar to watch on linux
-brew "gnupg" # manage GPG key
+brew "fd" # better 'find'. Also used by fzf in Fish
+brew "zoxide" # better 'cd'
+brew "eza" # better 'ls'
+brew "bat" # better 'cat'
+brew "pstree" # better 'ps' process tree viewer
+brew "gdu" # better 'du': disk usage analyser
+brew "ripgrep" # better 'grep'
+brew "gotop" # better 'top'
 
 # langs
 brew "mise" # one version manager to rule them all
@@ -55,24 +65,22 @@ brew "cmake"
 brew "protobuf"
 
 # utils
-brew "jq"
-brew "zsh"
-brew "cheat" # short `man`
+brew "helix" # terminal code editor
+brew "coreutils"
+brew "terminal-notifier" # p.s this won't work in Alacritty
 brew "scc" # code line counter
 brew "openssl"
+brew "gnupg" # manage GPG key
+brew "clipboard" # terminal clipboard manager
+brew "watch" # similar to watch on linux
+brew "jq"
+brew "jc" # to-json parser of many cli tools, e.g jc -p dig cloudflare.com
+brew "cheat" # short 'man'
 # brew "tree"
-brew "ripgrep" # better `grep`. usage: rg ...
-brew "bat" # better `cat`
 brew "gettext"
-brew "eza" # better `ls`
-brew "ctop" # htop for containers
-brew "gotop" # better top
-brew "terminal-notifier" # p.s this won't work in Alacritty
 brew "xsv" # work with csv
 brew "hugo" # work on my blog https://aleksgorbenko.dev
-brew "pstree" # process tree viewer
-brew "clipboard" # terminal clipboard manager
-brew "gdu" # better disk usage analyser
+brew "tsonglew/dutis/dutis" # set default apps for file types
 
 # cloud
 brew "awslogs"
@@ -86,8 +94,6 @@ brew "wget"
 brew "nmap" # network tool
 brew "dstp" # common network tests against a site
 
-brew "nats-io/nats-tools/nats" # debug and manage nats
-
 # k8s
 brew "kubectl"
 brew "helm"
@@ -99,10 +105,12 @@ brew "derailed/k9s/k9s" # htop for k8s
 brew "kubectx" # switch context quickly
 brew "flux"
 brew "kubecolor"
+brew "nats-io/nats-tools/nats" # debug and manage nats
 
 # containers
 cask "docker-desktop"
 brew "dive" # inspect docker image layers
+brew "ctop" # htop for containers
 
 ########
 # APPS #
@@ -152,9 +160,7 @@ cask "multipass" # vm, somewhat similar to virtual box. It is powered by qemu an
 
 # terminal
 cask "ghostty" # minimal terminal
-brew "helix" # terminal code editor
 cask "iterm2"
-brew "fish" # alternative shell
 
 # code editor
 cask "visual-studio-code"

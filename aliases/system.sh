@@ -25,6 +25,12 @@ alias ipinfo="curl ipinfo.io | jq"
 alias nq="networkquality"
 alias nqv="networkquality -v" # verbose mode
 
+# Print common files
+alias paws="bat ~/.aws/config"
+alias ppath="echo $PATH | tr ':' '\n'"
+alias ppaths="echo $PATH | tr ':' '\n' | sort | nl"
+alias list-fish-completions="ls -la /opt/homebrew/share/fish/vendor_completions.d/"
+
 # BREW
 
 alias b="brew"
@@ -96,7 +102,3 @@ alias mp="multipass"
 alias mosk-books1="cd /Users/gbko/Dropbox/mosk/ && git pull origin master"
 alias mosk-books2="git add . && git commit -m \"chore: Add book notes\" && git push origin master"
 alias mosk-books3="cd ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/mosk/ && git pull origin master"
-
-# print path
-alias ppath="echo $PATH | tr ':' '\n'"
-alias ppaths="echo $PATH | tr ':' '\n' | sort | nl"

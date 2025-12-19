@@ -37,9 +37,11 @@ antidote load
 
 # Colored output for common unix commands
 [[ -s "${BREW_PREFIX}/etc/grc.zsh" ]] && source "${BREW_PREFIX}/etc/grc.zsh"
-
 # Disable GRC for problematic commands that hang
 unalias netstat 2>/dev/null
+
+# load version manager
+eval "$(mise activate zsh)"
 
 # Load theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
