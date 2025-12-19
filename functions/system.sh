@@ -52,29 +52,27 @@ function get_pid_name() {
 
 function export-xcode-keybindings() {
   echo "⬆️ Exporting Xcode keybindings to dotfiles..."
-  echo "${HOME}/Library/Developer/Xcode/UserData/KeyBindings/Default.idekeybindings -> ${DOTS}/config/xcode.idekeybindings"
-  cp -f "${HOME}/Library/Developer/Xcode/UserData/KeyBindings/Default.idekeybindings" "${DOTS}/config/xcode.idekeybindings"
-  echo "✅ Exported!"
+  cp -f "$HOME/Library/Developer/Xcode/UserData/KeyBindings/Default.idekeybindings" "$DOTS/config/xcode.idekeybindings"
+  echo "✅ Exported: $HOME/Library/Developer/Xcode/UserData/KeyBindings/Default.idekeybindings -> $DOTS/config/xcode.idekeybindings"
 }
 
 function export-vscode-keybindings() {
   echo "⬆️ Exporting VSCode keybindings to dotfiles..."
-  echo "${HOME}/Library/Application Support/Code/User/keybindings.json -> ${DOTS}/config/vscode-keybindings.json"
-  cp -f "${HOME}/Library/Application Support/Code/User/keybindings.json" "${DOTS}/config/vscode-keybindings.json"
-  echo "✅ Exported!"
+  cp -f "$HOME/Library/Application Support/Code/User/keybindings.json" "$DOTS/config/vscode-keybindings.json"
+  echo "✅ Exported: $HOME/Library/Application Support/Code/User/keybindings.json -> $DOTS/config/vscode-keybindings.json"
 }
 
 function export-zed-keybindings() {
   echo "⬆️ Exporting Zed keybindings to dotfiles..."
-  echo "${HOME}/.config/zed/keymap.json -> ${DOTS}/config/zed-keymap.json"
-  cp -f "${HOME}/.config/zed/keymap.json" "${DOTS}/config/zed-keymap.json"
-  echo "✅ Exported!"
+  cp -f "$HOME/.config/zed/keymap.json" "$DOTS/config/zed-keymap.json"
+  echo "✅ Exported: $HOME/.config/zed/keymap.json -> $DOTS/config/zed-keymap.json"
 }
 
 function export-app-settings() {
   export-xcode-keybindings
   export-zed-keybindings
   export-vscode-keybindings
+  echo "✅ Exported all keybindings!"
 }
 
 ##########
