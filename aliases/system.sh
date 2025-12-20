@@ -96,6 +96,8 @@ alias cdeng="cd ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/enginee
 # Golang toolchain
 alias gmv="go mode vendor"
 alias gmt="go mode tidy"
+alias gobls="ls -la $GOBIN" # go bin ls
+alias gi="go install"
 
 alias mp="multipass"
 

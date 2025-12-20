@@ -48,6 +48,7 @@ brew "fish" # alternative shell
 brew "fisher" # fish plugin manager
 
 # shell
+brew "starship" # cross-shell prompt
 brew "tmux" # terminal multiplexer
 brew "grc" # terminal coloriser
 brew "fzf" # fuzzy search

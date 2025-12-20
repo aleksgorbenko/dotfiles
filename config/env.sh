@@ -1,21 +1,14 @@
 # generic envs
+export DOTS="$HOME/.dotfiles"
 export SRC="$HOME/src"
 export PROJECTS="$SRC/proj"
-export DOTS="$HOME/.dotfiles"
 export MY_ALIASES="$DOTS/aliases"
 export MY_FUNCTIONS="$DOTS/functions"
-export BREW_PREFIX=$(brew --prefix)
 export MOSK="$HOME/Dropbox/mosk"
 
 ### PATH ###
 # Add dotfiles binaries
 export PATH="$DOTS/bin:$PATH"
-
-# Go
-export GO111MODULE=on
-export GOPATH="$HOME/go"
-export PATH="$GOPATH/bin:$PATH"
-export GOPRIVATE="bitbucket.org/aleksgorbenko,github.com/aleksgorbenko"
 
 # Editors
 export EDITOR="hx" # helix

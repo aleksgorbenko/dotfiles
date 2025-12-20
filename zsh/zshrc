@@ -24,19 +24,19 @@ source "${DOTS}/zsh/config.zsh"
 # 6. Plugins (fzf-tab will be loaded by Antidote after compinit)
 # Add new plugins to the `zsh_plugins.txt` file and reload zsh
 # Keep syntax highlighting plugin last!
-source ${BREW_PREFIX}/opt/antidote/share/antidote/antidote.zsh
+source ${HOMEBREW_PREFIX}/opt/antidote/share/antidote/antidote.zsh
 antidote load
 
 # 8. Load misc tools
 
 # Numbered git output
-[[ -x "${BREW_PREFIX}/bin/scmpuff" ]] && eval "$(scmpuff init --shell=zsh)"
+[[ -x "${HOMEBREW_PREFIX}/bin/scmpuff" ]] && eval "$(scmpuff init --shell=zsh)"
 
 # Better cd navigation (like autojump)
-[[ -x "${BREW_PREFIX}/bin/zoxide" ]] && eval "$(zoxide init zsh --cmd j)"
+[[ -x "${HOMEBREW_PREFIX}/bin/zoxide" ]] && eval "$(zoxide init zsh --cmd j)"
 
 # Colored output for common unix commands
-[[ -s "${BREW_PREFIX}/etc/grc.zsh" ]] && source "${BREW_PREFIX}/etc/grc.zsh"
+[[ -s "${HOMEBREW_PREFIX}/etc/grc.zsh" ]] && source "${HOMEBREW_PREFIX}/etc/grc.zsh"
 # Disable GRC for problematic commands that hang
 unalias netstat 2>/dev/null
 
@@ -45,7 +45,7 @@ eval "$(mise activate zsh)"
 
 # Load theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-source ${BREW_PREFIX}/share/powerlevel10k/powerlevel10k.zsh-theme
+source ${HOMEBREW_PREFIX}/share/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # The next line updates PATH for the Google Cloud SDK.

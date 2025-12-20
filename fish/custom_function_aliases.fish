@@ -40,3 +40,10 @@ alias gstpo="git_stash_pop"
 alias gdtl="git_describe_latest_tag"
 alias groot="git_root"
 alias mkg="make_git_repo"
+alias mkgo="make_golang_git_repo"
+
+################
+# GO FUNCTIONS #
+################
+
+alias gormb="go_rm_bin"

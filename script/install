@@ -87,6 +87,9 @@ function install_dotfiles () {
 	$DOTS/bin/link-file "${DOTS}/config/alacritty.yml" "${HOME}/.config/alacritty/alacritty.yml"
 	ok "Alacritty terminal configured"
 
+	$DOTS/bin/link-file "${DOTS}/config/starship.toml" "${HOME}/.config/starship.toml"
+	ok "starship theme configured"
+
 	# ghostty config
 	mkdir -p "${HOME}/.config/ghostty"
 	$DOTS/bin/link-file "${DOTS}/config/ghostty" "${HOME}/.config/ghostty/config"
