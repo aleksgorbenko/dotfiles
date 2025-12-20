@@ -1,6 +1,8 @@
 ### CONFIG ###
 # command = /opt/homebrew/bin/fish
 shell-integration = fish
+# do not do anything with cursor via shell integration
+shell-integration-features = no-cursor
 copy-on-select = clipboard
 link-url = true
 
@@ -21,8 +23,6 @@ background-blur = true
 keybind = super+shift+p=toggle_command_palette
 # This is only supported on Linux and when the system's libadwaita version is 1.4 or newer. The current libadwaita version can be found by running ghostty +version.
 keybind = super+p=toggle_tab_overview
-# send custom sequence for fzf directory search
-keybind = super+d=text:\x1b[200~
 
  # TAB NAVIGATION
 keybind = super+alt+arrow_right=next_tab
