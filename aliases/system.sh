@@ -27,6 +27,7 @@ alias nqv="networkquality -v" # verbose mode
 
 # Print common files
 alias paws="bat ~/.aws/config"
+alias pawsc="bat ~/.aws/credentials"
 alias ppath="echo $PATH | tr ':' '\n'"
 alias ppaths="echo $PATH | tr ':' '\n' | sort | nl"
 alias list-fish-completions="ls -la /opt/homebrew/share/fish/vendor_completions.d/"
@@ -87,20 +88,14 @@ alias cdp="cd $PROJECTS"
 alias cdk="cd $SRC/kata"
 alias cdl="cd $SRC/lab"
 alias cdi="cd $SRC/iview"
-alias cddo="cd ~/Downloads"
-alias cdde="cd ~/Desktop"
-
-alias cdm="cd ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/mosk/"
-alias cdeng="cd ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/engineering-notebook/"
+alias cddo="cd $HOME/Downloads"
+alias cdde="cd $HOME/Desktop"
 
 # Golang toolchain
-alias gmv="go mode vendor"
-alias gmt="go mode tidy"
-alias gobls="ls -la $GOBIN" # go bin ls
 alias gi="go install"
+alias gomv="go mod vendor"
+alias gomt="go mod tidy"
+alias goua="go get -u ./... && go mod tidy"
+alias gobls="ls -la $GOBIN"
 
 alias mp="multipass"
-
-alias mosk-books1="cd /Users/gbko/Dropbox/mosk/ && git pull origin master"
-alias mosk-books2="git add . && git commit -m \"chore: Add book notes\" && git push origin master"
-alias mosk-books3="cd ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/mosk/ && git pull origin master"

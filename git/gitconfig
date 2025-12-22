@@ -34,6 +34,10 @@
 [apply]
     whitespace = nowarn
 
+# When pushing a branch for the first time, set the remote as upstream
+[push]
+    autoSetupRemote = true
+
 # Pull only then you can fast forward, avoid implicit merges
 [pull]
     ff = only

@@ -51,7 +51,7 @@ alias gcpc="git cherry-pick --continue"
 # CHECKOUT
 alias gco="git checkout"
 alias gcb="git checkout -b"
-alias gcm="git checkout master"
+alias gcm="git checkout master 2&> /dev/null || git checkout main"
 
 # DIFF
 alias gd="git diff"

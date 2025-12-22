@@ -68,6 +68,7 @@ brew "protobuf"
 
 # utils
 brew "helix" # terminal code editor
+brew "fastfetch" # system info
 brew "coreutils"
 brew "terminal-notifier" # p.s this won't work in Alacritty
 brew "scc" # code line counter
