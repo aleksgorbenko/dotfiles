@@ -27,7 +27,6 @@ alias gca="git_commit_all"
 alias gcem="git_commit_empty"
 
 # Git push/pull shortcuts
-alias ggp="git_push"
 alias ggl="git_pull"
 alias gglp="git_pull_push"
 alias ggu="git_pull_rebase"
