@@ -34,6 +34,7 @@ Temporary Items
 ### Local ###
 # ignore local configs
 git/gitconfig.local
-zsh/.zshrc.local
+zsh/zshrc.local
 zsh/zsh_plugins.sh
 fish/config.local.fish
+Brewfile.local

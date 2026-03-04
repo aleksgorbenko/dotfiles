@@ -16,8 +16,7 @@ alias gapp="git apply"
 alias gb="git branch"
 alias gba="git branch -a" # list all + remote
 alias gbd="git branch -d" # delete branch
-# delete all that are merged into 4 branches listed above
-# alias gbda="git branch --no-color --merged | command grep -vE "^(\*|\s*(master|develop|dev|release-candidate)\s*$)" | command xargs -n 1 git branch -d"
+
 alias gbD="git branch -D" # force delete
 alias gbl="git blame -b -w"
 alias gbm="git branch --merged"
@@ -103,7 +102,7 @@ alias glola="git log --graph --all --pretty='%Cred%h%Creset -%C(auto)%d%Creset %
 
 # MERGE
 alias gm="git merge"
-alias gmm="git merge master"
+alias gmm="git merge main"
 alias gmom="git merge origin/master"
 alias gmum="git merge upstream/master"
 alias gmtool="git mergetool --no-prompt"
@@ -132,9 +131,11 @@ alias grbs="git rebase --skip"
 alias grev="git revert"
 
 ### RESET
-alias gresth="git reset --hard"
+alias grsth="git reset --hard"
+alias grsts="git reset --soft main" # reset to main, keeping changes staged
 # alias grestho="git reset origin/$(current_branch) --hard" # reset to origin branch, discarding all local changes
-alias grest1="git reset --mixed HEAD~1" # uncommit last commit, but keep changes unstaged
+alias grst1="git reset --mixed HEAD~1" # uncommit last commit, but keep changes unstaged
+alias grst2="git reset --mixed HEAD~2" # uncommit last 2 commits, but keep changes unstaged
 alias gpristine="git reset --hard && git clean -dfx"
 
 ### RESTORE
@@ -154,9 +155,8 @@ alias gstaa="git stash apply"
 alias gstc="git stash clear"
 alias gstd="git stash drop"
 alias gstl="git stash list"
-alias gstp="git stash pop"
 alias gsts="git stash show --text"
-alias gstall="git stash --all"
+alias gstall="git stash --all" # stashes tracked changes, untracked files, and ignored files from your working directory
 
 ### TAG
 

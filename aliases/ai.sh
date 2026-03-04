@@ -11,3 +11,7 @@ alias clr="claude --resume" # pick from the past conversation
 alias cll="claude list"
 alias cls="claude stop"
 alias cma="claude mcp add"
+
+alias clss="ll ~/.claude/skills"
+alias clsc="ll ~/.claude/commands"
+alias clsp="ll ~/.claude/plugins"

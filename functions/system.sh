@@ -1,3 +1,10 @@
+function bb() {
+  brew bundle --file "$HOME/.dotfiles/Brewfile"
+  if [ -f "$HOME/.dotfiles/Brewfile.local" ]; then
+    brew bundle --file "$HOME/.dotfiles/Brewfile.local"
+  fi
+}
+
 # search all functions and aliases
 function sa() {
     if [ -z "$1" ]; then

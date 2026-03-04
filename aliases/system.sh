@@ -19,8 +19,8 @@ alias ......="cd ../../../../.."
 alias .......="cd ../../../../../.."
 alias pc="pwd | pbcopy"
 
-alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
-alias localip="ipconfig getifaddr en0"
+alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias mylocalip="ipconfig getifaddr en0"
 alias ipinfo="curl ipinfo.io | jq"
 alias nq="networkquality"
 alias nqv="networkquality -v" # verbose mode
@@ -41,7 +41,6 @@ alias bls="brew list"
 alias blsc="brew list --cask"
 alias blsl="brew list --formulae"
 alias bcl="brew cleanup"
-alias bb="brew bundle --file $HOME/.dotfiles/Brewfile"
 
 alias bi="brew install"
 alias bic="brew install --cask"

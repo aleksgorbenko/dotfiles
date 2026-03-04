@@ -5,9 +5,25 @@
 set -o errexit  # abort on nonzero exitstatus
 set -o nounset  # abort on unbound variable
 set -o pipefail # don't hide errors within pipes
-set -o xtrace   # print execution commands
+# set -o xtrace   # print execution commands
 
 cd $DOTS
-# brew upgrade is not here as it will bump anki and break things
-# update manually for now
-brew bundle && brew update &&  brew cleanup
+
+# update brew itself
+brew update
+
+# install/update packages from Brewfile
+brew bundle
+
+# install/update packages from Brewfile.local if it exists
+if [ -f "$DOTS/Brewfile.local" ]; then
+    echo "🟢 Running brew bundle for Brewfile.local 🟢"
+    brew bundle --file "$DOTS/Brewfile.local"
+fi
+
+# update all casks. Ignore anki, beyond 25.02 it breaks Keyboard Maestro key overrides
+brew upgrade && brew upgrade --cask
+
+# cleanup and make sure nothing is broken, symlinks, etc
+brew cleanup
+brew doctor

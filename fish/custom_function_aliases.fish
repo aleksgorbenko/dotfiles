@@ -26,6 +26,9 @@ alias gc="git_commit"
 alias gca="git_commit_all"
 alias gcem="git_commit_empty"
 
+# Git branch shortcuts
+alias gbda="git_delete_merged_branches"
+
 # Git push/pull shortcuts
 alias ggl="git_pull"
 alias gglp="git_pull_push"
@@ -46,3 +49,9 @@ alias mkgo="make_golang_git_repo"
 ################
 
 alias gormb="go_rm_bin"
+
+##################
+# BREW FUNCTIONS #
+##################
+
+alias bb="brew_bundle_all"

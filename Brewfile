@@ -8,13 +8,14 @@ tap "romkatv/powerlevel10k"
 tap "nats-io/nats-tools"
 tap "fluxcd/tap"
 tap "tsonglew/dutis"
+tap "hashicorp/tap"
 
 # set arguments for all 'brew install --cask' commands
 cask_args appdir: "/Applications", require_sha: true
 
-############
-# PACKAGES #
-############
+##################
+# App Store Apps #
+##################
 
 # magnet - 441258766
 # trello - 1278508951
@@ -27,6 +28,10 @@ cask_args appdir: "/Applications", require_sha: true
 
 # mas install 441258766 1278508951 477670270 6714467650 497799835 640199958
 brew "mas"
+
+#######
+# DEV #
+#######
 
 # compilers
 brew "gcc"
@@ -81,7 +86,6 @@ brew "jc" # to-json parser of many cli tools, e.g jc -p dig cloudflare.com
 brew "cheat" # short 'man'
 # brew "tree"
 brew "gettext"
-brew "xsv" # work with csv
 brew "hugo" # work on my blog https://aleksgorbenko.dev
 brew "tsonglew/dutis/dutis" # set default apps for file types
 
@@ -108,57 +112,21 @@ brew "derailed/k9s/k9s" # htop for k8s
 brew "kubectx" # switch context quickly
 brew "flux"
 brew "kubecolor"
-brew "nats-io/nats-tools/nats" # debug and manage nats
 
 # containers
 cask "docker-desktop"
 brew "dive" # inspect docker image layers
 brew "ctop" # htop for containers
 
-########
-# APPS #
-########
+# cli tools
+brew "nats-io/nats-tools/nats" # debug and manage nats
+brew "hashicorp/tap/vault"
+brew "istioctl"
 
-cask "google-chrome"
-cask "firefox"
-cask "1password"
-cask "1password-cli" # needed for Alfred integration
-cask "dropbox"
-cask "notion"
-cask "obsidian"
-cask "spotify"
-# do not update beyond anki 25.02. Keyboard Maestro does not work with newer version
-# https://github.com/ankitects/anki/releases?page=2
-# cask "anki" # learn.space.repeat
-cask "kap" # gif / creator / screen recorder
-cask "reminders-menubar" # quick add to reminders app
-cask "obs" # screen recording
 
-# comms
-cask "slack"
-cask "telegram"
-cask "discord"
-cask "zoom"
-
-# utils
-cask "alfred" # 100x better Spotlight
-cask "karabiner-elements" # remap everything!
-brew "yqrashawn/goku/goku" # helps remap everything!
-cask "keka" # work with archives
-cask "keyboard-maestro"
-cask "logi-options+" # configure logitech mouse and keyboard
-cask "jordanbaird-ice" # menu bar icon manager
-# cask "istat-menus" # cou, memory, temperature stats
-cask "stats" # free alternative to istat-menus
-cask "appcleaner" # cleanup all traces of uninstalled apps
-cask "keycombiner"
-cask "keyclu" # shortcut reference
-
-#######
-# DEV #
-#######
 cask "postman"
 brew "libyaml" # needed for ruby on apple silicon
+brew "gradle"
 cask "multipass" # vm, somewhat similar to virtual box. It is powered by qemu and made by Canonical (ubuntu)
 
 # terminal
@@ -178,10 +146,48 @@ cask "beekeeper-studio"
 # AI
 brew "ollama" # run, push, pull LLMs locally
 cask "chatgpt" # macOS app for ChatGPT
+cask "codex-app"
 # intellibar (manual install) - better ChatGPT interface + shortcuts
 cask "macwhisper" # macOS app to dictate and transcribe
 cask "claude-code"
 brew "opencode"
+cask "conductor"
+
+########
+# APPS #
+########
+
+cask "google-chrome"
+cask "firefox"
+cask "1password"
+cask "1password-cli" # needed for Alfred integration
+cask "notion"
+cask "obsidian"
+cask "spotify"
+
+# comms
+cask "slack"
+cask "discord"
+cask "zoom"
+
+# utils: keyboard
+cask "alfred" # 100x better Spotlight
+cask "keyboard-maestro"
+cask "karabiner-elements" # remap everything!
+brew "yqrashawn/goku/goku" # helps remap everything!
+
+# utils: mouse
+cask "logi-options+" # configure logitech mouse and keyboard
+cask "scroll-reverser"
+
+# utils: menubar
+cask "stats" # free alternative to istat-menus
+cask "jordanbaird-ice" # menu bar icon manager
+
+# utils: files
+cask "keka" # work with archives
+cask "appcleaner" # cleanup all traces of uninstalled apps
+
 
 #########
 # FONTS #
@@ -197,23 +203,3 @@ cask "font-hack-nerd-font"
 cask "font-meslo-lg-nerd-font"
 cask "font-meslo-for-powerlevel10k"
 cask "font-jetbrains-mono"
-
-############
-# OPTIONAL #
-############
-
-# media
-cask "affinity" # photo editor
-# cask "pinta" # simple oss image editor
-# cask "imageoptim"
-
-# gaming
-# cask "battle-net"
-# cask "epic-games"
-# cask "nvidia-geforce-now"
-# cask "steam"
-
-# utils
-# cask "calibre"
-# cask "ledger-live"
-# cask "onyx"

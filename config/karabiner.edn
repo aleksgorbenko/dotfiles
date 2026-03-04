@@ -105,7 +105,7 @@
 	:dot-mode {:key :period}
 	;; :section {:key :section} ;; ? key
 	;; :non-us-pound-mode {:key :section} ;; ? key
-	:non-us-backslash-mode {:key :non_us_backslash} ;; § key
+	;; :non-us-backslash-mode {:key :non_us_backslash} ;; § key
 
 	;; Other
 	:spacebar-mode {:key :spacebar}
@@ -118,26 +118,6 @@
 
 ; 2do lists
 
-{
-	:des "2-key - 2do lists"
-	:rules [
-		:2-mode
-		[:a [:km "open 2do all"]]
-		[:c [:km "open 2do completed"]]
-		[:d [:km "open 2do done"]]
-		[:i [:km "open 2do inbox"]]
-		[:j [:km "open 2do work"]] ; Job
-		[:n [:km "open 2do next"]]
-		[:p [:km "open 2do waiting"]]
-		[:r [:km "open 2do read"]]
-		[:s [:km "open 2do someday"]]
-		[:l [:km "open 2do music"]]
-		[:t [:km "open 2do today"]]
-		[:v [:km "open 2do watch"]]
-		[:period [:km "search 2do"]]
-	]
-
-}
 {
 	:des "2-key - 2do lists"
 	:rules [
@@ -172,7 +152,7 @@
 	]
 }
 
-; ctrl
+; Ask
 
 {
 	:des "a-key - "
@@ -196,7 +176,7 @@
 	]
 }
 
-; code
+; Case
 
 {
 	:des "c-key - text Case"
@@ -596,16 +576,16 @@
 	]
 }
 
-{
-	:des "section - experimental"
-	:rules [
-		:non-us-backslash-mode
-		;; [:c [:km "open: Contacts"]]
-		;; [:s [:km "open: Slack"]]
-		;; [:t [:km "open: Telegram"]]
-		;; [:d [:km "open: Discord"]]
-	]
-}
+;; {
+;; 	:des "section - experimental"
+;; 	:rules [
+;; 		:non-us-backslash-mode
+;; 		;; [:c [:km "open: Contacts"]]
+;; 		;; [:s [:km "open: Slack"]]
+;; 		;; [:t [:km "open: Telegram"]]
+;; 		;; [:d [:km "open: Discord"]]
+;; 	]
+;; }
 
 
 ;; OTHER
@@ -657,6 +637,21 @@
 		; [:h :close_bracket [:ru]] ;-> ж
 	]
 }
+
+; Bugs in Karabiner
+
+{
+	:des "Fix ISO non_us_backslash to grave_accent (post-update bug)"
+	:rules [
+		[:non_us_backslash :grave_accent_and_tilde]
+		[:grave_accent_and_tilde :non_us_backslash]
+		[:!Snon_us_backslash :!Sgrave_accent_and_tilde]
+		[:!Sgrave_accent_and_tilde :!Snon_us_backslash]
+		[:!Cnon_us_backslash :!Cgrave_accent_and_tilde]
+		[:!Cgrave_accent_and_tilde :!Cnon_us_backslash]
+	]
+}
+
 
 ] ; main end
 } ; end
