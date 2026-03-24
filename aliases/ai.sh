@@ -15,3 +15,4 @@ alias cma="claude mcp add"
 alias clss="ll ~/.claude/skills"
 alias clsc="ll ~/.claude/commands"
 alias clsp="ll ~/.claude/plugins"
+alias clsr="ll ~/.claude/rules" # modular CLAUDE.md file

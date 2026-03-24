@@ -66,6 +66,19 @@ echo "🤖 Configuring gitconfig"
   fi
 }
 
+function install_claude () {
+	echo "🤖 Configuring Claude Code"
+	mkdir -p "${HOME}/.claude"
+
+	$DOTS/bin/link-file "${DOTS}/claude/CLAUDE.md" "${HOME}/.claude/CLAUDE.md"
+
+	for dir in rules commands skills agents scripts; do
+		$DOTS/bin/link-file "${DOTS}/claude/${dir}" "${HOME}/.claude/${dir}"
+	done
+
+	ok "Claude Code configured"
+}
+
 function install_dotfiles () {
 	echo "🤖 Installing dotfiles"
 
@@ -246,6 +259,7 @@ install_homebrew
 install_brew_packages
 install_language_versions
 install_dotfiles
+install_claude
 
 install_fish
 install_fonts
