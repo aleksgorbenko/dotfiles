@@ -12,6 +12,7 @@ cd $DOTS
 # update brew itself
 brew update
 
+echo "🔴 Running brew bundle for Brewfile 🔴"
 # install/update packages from Brewfile
 brew bundle
 
@@ -21,8 +22,10 @@ if [ -f "$DOTS/Brewfile.local" ]; then
     brew bundle --file "$DOTS/Brewfile.local"
 fi
 
+# upgrade all packages
+brew upgrade
 # update all casks. Ignore anki, beyond 25.02 it breaks Keyboard Maestro key overrides
-brew upgrade && brew upgrade --cask
+brew list --cask | xargs brew upgrade
 
 # cleanup and make sure nothing is broken, symlinks, etc
 brew cleanup

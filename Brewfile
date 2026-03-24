@@ -65,6 +65,7 @@ brew "pstree" # better 'ps' process tree viewer
 brew "gdu" # better 'du': disk usage analyser
 brew "ripgrep" # better 'grep'
 brew "gotop" # better 'top'
+brew "codesnap" # screenshot code and generate images
 
 # langs
 brew "mise" # one version manager to rule them all
@@ -83,7 +84,8 @@ brew "clipboard" # terminal clipboard manager
 brew "watch" # similar to watch on linux
 brew "jq"
 brew "jc" # to-json parser of many cli tools, e.g jc -p dig cloudflare.com
-brew "cheat" # short 'man'
+brew "cheat" # short 'man' + personal commands
+brew "tlrc" # rust client for tldr - alternative to cheat + macOS specific commands
 # brew "tree"
 brew "gettext"
 brew "hugo" # work on my blog https://aleksgorbenko.dev
@@ -112,6 +114,7 @@ brew "derailed/k9s/k9s" # htop for k8s
 brew "kubectx" # switch context quickly
 brew "flux"
 brew "kubecolor"
+brew "operator-sdk"
 
 # containers
 cask "docker-desktop"
@@ -152,6 +155,7 @@ cask "macwhisper" # macOS app to dictate and transcribe
 cask "claude-code"
 brew "opencode"
 cask "conductor"
+brew "ctx7" # let AIs to remember latest API docsnotes
 
 ########
 # APPS #
