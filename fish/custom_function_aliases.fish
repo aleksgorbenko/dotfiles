@@ -33,6 +33,7 @@ alias gbda="git_delete_merged_branches"
 alias ggl="git_pull"
 alias gglp="git_pull_push"
 alias ggu="git_pull_rebase"
+alias gpr="github_pr"
 
 # Git stash shortcuts
 alias gstpu="git_stash_push"
@@ -43,6 +44,7 @@ alias gdtl="git_describe_latest_tag"
 alias groot="git_root"
 alias mkg="make_git_repo"
 alias mkgo="make_golang_git_repo"
+
 
 ################
 # GO FUNCTIONS #
