@@ -108,6 +108,11 @@ function install_dotfiles () {
 	$DOTS/bin/link-file "${DOTS}/config/ghostty" "${HOME}/.config/ghostty/config"
 	ok "Ghostty terminal configured"
 
+	# mise config
+	mkdir -p "${HOME}/.config/mise"
+	$DOTS/bin/link-file "${DOTS}/config/mise.toml" "${HOME}/.config/mise/config.toml"
+	ok "Mise configured"
+
 	# tmux config
 	$DOTS/bin/link-file "${DOTS}/config/tmux.conf" "${HOME}/.tmux.conf"
 	ok "tmux configured"
@@ -222,12 +227,7 @@ function install_fonts () {
 
 function install_language_versions () {
 	echo "🤖 Installing language versions"
-	mise use --global go@latest
-	mise use --global python@latest
-	mise use --global ruby@latest
-	mise use --global terraform@latest
-	mise use --global temurin@21
-	mise use --global node@24
+	mise install
 	ok "Language versions installed"
 }
 
@@ -257,8 +257,8 @@ DOTS=$(pwd -P)
 install_system_updates
 install_homebrew
 install_brew_packages
-install_language_versions
 install_dotfiles
+install_language_versions
 install_claude
 
 install_fish

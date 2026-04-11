@@ -1,0 +1,11 @@
+[tools]
+bun = "latest"
+go = "latest"
+java = "temurin-21.0.10+7.0.LTS"
+node = "24"
+python = "latest"
+ruby = "latest"
+terraform = "latest"
+
+[settings]
+experimental = false

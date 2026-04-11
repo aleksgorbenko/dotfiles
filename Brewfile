@@ -150,12 +150,12 @@ cask "beekeeper-studio"
 brew "ollama" # run, push, pull LLMs locally
 cask "chatgpt" # macOS app for ChatGPT
 cask "codex-app"
-# intellibar (manual install) - better ChatGPT interface + shortcuts
 cask "macwhisper" # macOS app to dictate and transcribe
 cask "claude-code"
 brew "opencode"
 cask "conductor"
 brew "ctx7" # let AIs to remember latest API docsnotes
+brew "hf" # hugging face cli
 
 ########
 # APPS #
@@ -183,6 +183,8 @@ brew "yqrashawn/goku/goku" # helps remap everything!
 # utils: mouse
 cask "logi-options+" # configure logitech mouse and keyboard
 cask "scroll-reverser"
+
+cask "jurplel/tap/instant-space-switcher"
 
 # utils: menubar
 cask "stats" # free alternative to istat-menus
