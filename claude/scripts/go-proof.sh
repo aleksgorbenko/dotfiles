@@ -34,15 +34,22 @@ fi
 TMP=$(mktemp /tmp/go-proof-XXXXXX.sh)
 echo "$SNIPPET" > "$TMP"
 
+PROOF_FILE="$HOME/.claude/tmp/go-proof.png"
+mkdir -p "$(dirname "$PROOF_FILE")"
+
+# Render to file
 codesnap \
   -f "$TMP" \
-  -o clipboard \
+  -o "$PROOF_FILE" \
   --language bash \
   --title "${MODULE} — ${TIMESTAMP}" \
   --mac-window-bar true \
   --margin-x 20 \
   --margin-y 20 \
   --silent
+
+# Also copy to clipboard
+osascript -e "set the clipboard to (read (POSIX file \"$PROOF_FILE\") as «class PNGf»)"
 
 rm -f "$TMP"
 
