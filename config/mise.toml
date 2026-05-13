@@ -6,6 +6,7 @@ node = "24"
 python = "latest"
 ruby = "latest"
 terraform = "latest"
+uv = "latest"
 
 [settings]
 experimental = false
