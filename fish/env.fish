@@ -17,3 +17,8 @@ set -gx MOSK "$HOME/Dropbox/mosk"
 ## PATH ##
 # Add dotfiles binaries
 set -gx PATH "$DOTS/bin:$PATH"
+
+# Added by LM Studio CLI (lms)
+set -gx PATH $PATH /Users/gbko/.lmstudio/bin
+# End of LM Studio CLI section
+
