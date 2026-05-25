@@ -134,8 +134,8 @@ alias grev="git revert"
 alias grsth="git reset --hard"
 alias grsts="git reset --soft main" # reset to main, keeping changes staged
 # alias grestho="git reset origin/$(current_branch) --hard" # reset to origin branch, discarding all local changes
-alias grst1="git reset --mixed HEAD~1" # uncommit last commit, but keep changes unstaged
-alias grst2="git reset --mixed HEAD~2" # uncommit last 2 commits, but keep changes unstaged
+alias gunc1="git reset --mixed HEAD~1" # uncommit last commit, but keep changes unstaged
+alias gunc2="git reset --mixed HEAD~2" # uncommit last 2 commits, but keep changes unstaged
 alias gpristine="git reset --hard && git clean -dfx"
 
 ### RESTORE
