@@ -154,7 +154,9 @@ defaults write com.apple.dock springboard-show-duration -float 0
 defaults write com.apple.dock springboard-hide-duration -float 0
 defaults write com.apple.dock springboard-page-duration -float 0
 defaults write com.apple.dock "mineffect" -string "genie" # it is faster than scale
-defaults write com.apple.finder DisableAllAnimations -bool true;ok
+defaults write com.apple.finder DisableAllAnimations -bool true
+defaults write com.apple.universalaccess reduceMotion -bool true
+defaults writecom.apple.universalaccess reduceTransparency -bool true;ok
 # not working it seems, probably blocked by newer macOS
 # defaults write com.apple.Mail DisableSendAnimations -bool true
 # defaults write com.apple.Mail DisableReplyAnimations -bool true;ok
