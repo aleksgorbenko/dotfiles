@@ -79,6 +79,9 @@ alias ekara="code ~/.dotfiles/config/karabiner.edn" # edit dotfiles karabiner co
 alias ebrew="code ~/.dotfiles/Brewfile" # edit brewfile
 alias edots="code ~/.dotfiles"
 
+# OBSIDIAN
+alias ob="obsidian"
+
 # Change Directory
 alias wd="cd $PROJECTS/chord"
 alias cdd="cd ~/.dotfiles"
