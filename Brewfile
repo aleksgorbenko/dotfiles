@@ -62,7 +62,7 @@ brew "zoxide" # better 'cd'
 brew "eza" # better 'ls'
 brew "bat" # better 'cat'
 brew "pstree" # better 'ps' process tree viewer
-brew "gdu" # better 'du': disk usage analyser
+brew "gdu" # better 'du': disk usage analyser gdu-go for TUI
 brew "ripgrep" # better 'grep'
 brew "gotop" # better 'top'
 brew "codesnap" # screenshot code and generate images
@@ -153,7 +153,7 @@ cask "chatgpt" # macOS app for ChatGPT
 cask "codex-app"
 cask "macwhisper" # macOS app to dictate and transcribe
 cask "handy" # OSS STT
-cask "buzz" # Transcribe audio and translate with Whisper
+# cask "buzz" # Transcribe audio and translate with Whisper
 cask "claude-code"
 brew "opencode"
 cask "conductor"
@@ -165,6 +165,7 @@ brew "hf" # hugging face cli
 ########
 
 cask "google-chrome"
+cask "brave-browser"
 cask "firefox"
 cask "1password"
 cask "1password-cli" # needed for Alfred integration
