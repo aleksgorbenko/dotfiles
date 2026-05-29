@@ -146,7 +146,6 @@ defaults write -g NSScrollViewRubberbanding -bool false
 defaults write -g NSDocumentRevisionsWindowTransformAnimation -bool false
 defaults write -g NSToolbarFullScreenAnimationDuration -float 0
 defaults write -g NSBrowserColumnAnimationSpeedMultiplier -float 0
-defaults write -g NSAutomaticWindowAnimationsEnabled -bool false
 defaults write com.apple.dock autohide-time-modifier -float 0
 defaults write com.apple.dock autohide-delay -float 0
 defaults write com.apple.dock expose-animation-duration -float 0
@@ -305,6 +304,7 @@ echo "🤖 Safari - not working any more"
 # defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
 # defaults write com.apple.Safari "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" -bool true
 # defaults write NSGlobalDomain WebKitDeveloperExtras -bool true;ok
+defaults write com.apple.Safari WebKitInitialTimedLayoutDelay -float 0.0;ok
 
 ###############################################################################
 echo "🤖 Mac App Store"
