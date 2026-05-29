@@ -128,11 +128,11 @@ alias grbm="git rebase master"
 alias grbs="git rebase --skip"
 
 ### REVERT
-alias grev="git revert"
+alias grev="git revert" # hash of the commit
 
 ### RESET
-alias grsth="git reset --hard"
-alias grsts="git reset --soft main" # reset to main, keeping changes staged
+alias gr-hard="git reset --hard"
+alias gr-soft="git reset --soft main" # reset to main, keeping changes staged
 # alias grestho="git reset origin/$(current_branch) --hard" # reset to origin branch, discarding all local changes
 alias gunc1="git reset --mixed HEAD~1" # uncommit last commit, but keep changes unstaged
 alias gunc2="git reset --mixed HEAD~2" # uncommit last 2 commits, but keep changes unstaged
