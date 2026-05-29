@@ -28,5 +28,6 @@ brew upgrade
 brew list --cask | xargs brew upgrade
 
 # cleanup and make sure nothing is broken, symlinks, etc
-brew cleanup
+# prune clears all old versions and saves disk space. Cache can easily grow to 100s of GB
+brew cleanup --prune=all
 brew doctor
