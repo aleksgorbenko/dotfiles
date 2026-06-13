@@ -29,3 +29,5 @@ Temporary Items
 
 # iCloud generated files
 *.icloud
+
+**/.claude/settings.local.json

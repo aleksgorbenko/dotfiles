@@ -1,13 +1,14 @@
 # Docs:
 # https://github.com/Homebrew/homebrew-bundle
 
-tap "yqrashawn/goku"
-tap "weaveworks/tap" # eksctl
+tap "yqrashawn/goku" # manage karabiner
+tap "candid82/brew" # goku depends on package from this tap
+# tap "weaveworks/tap" # eksctl
 tap "derailed/k9s"
-tap "romkatv/powerlevel10k"
+tap "romkatv/powerlevel10k" # zsh only
 tap "nats-io/nats-tools"
 tap "fluxcd/tap"
-tap "tsonglew/dutis"
+tap "tsonglew/dutis" # set default apps for file types (needed for Alfred Workflow)
 tap "hashicorp/tap"
 
 # set arguments for all 'brew install --cask' commands
@@ -94,7 +95,7 @@ brew "tsonglew/dutis/dutis" # set default apps for file types
 # cloud
 brew "awslogs"
 cask "gcloud-cli"
-brew "eksctl"
+# brew "eksctl"
 brew "awscli"
 
 # http
@@ -150,6 +151,7 @@ cask "beekeeper-studio"
 brew "ollama" # run, push, pull LLMs locally
 cask "lm-studio" # similar to ollama, but uses llama.cpp and has a GUI. also "lsm" CLI tool
 cask "chatgpt" # macOS app for ChatGPT
+cask "codex"
 cask "codex-app"
 cask "macwhisper" # macOS app to dictate and transcribe
 cask "handy" # OSS STT
@@ -158,6 +160,7 @@ cask "claude-code"
 brew "opencode"
 cask "conductor"
 brew "ctx7" # let AIs to remember latest API docsnotes
+cask "cc-switch" # manage AI harnesses, SKILLS
 brew "hf" # hugging face cli
 
 ########
@@ -188,8 +191,6 @@ brew "yqrashawn/goku/goku" # helps remap everything!
 cask "logi-options+" # configure logitech mouse and keyboard
 cask "scroll-reverser"
 
-cask "jurplel/tap/instant-space-switcher"
-
 # utils: menubar
 cask "stats" # free alternative to istat-menus
 cask "jordanbaird-ice" # menu bar icon manager
@@ -197,7 +198,6 @@ cask "jordanbaird-ice" # menu bar icon manager
 # utils: files
 cask "keka" # work with archives
 cask "appcleaner" # cleanup all traces of uninstalled apps
-
 
 #########
 # FONTS #
