@@ -303,6 +303,7 @@
 		[:c [:alfred "shortcuts" "com.alfredapp.vitor.shortcuts"]]
 		[:b [:alfred "search obsidian" "de.chris-grieser.shimmering-obsidian"]]
 		[:d [:alfred "search downloads" "dev.gbko.alfred.directories"]]
+		[:g [:alfred "ghostty tabs" "dev.gbko.alfred.ghostty-search-tabs"]]
 		[:f [:alfred "search desktop" "dev.gbko.alfred.directories"]]
 		[:v [:alfred "search icons" "dev.gbko.alfred.directories"]]
 		[:j [:alfred "search img" "dev.gbko.alfred.directories"]]
@@ -506,6 +507,7 @@
 		[:s [:km "open: Slack"]]
 		[:t [:km "open: Telegram"]]
 		[:d [:km "open: Discord"]]
+		[:m [:km "open: Messages"]]
 	]
 }
 
