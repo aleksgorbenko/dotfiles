@@ -88,15 +88,14 @@ brew "jc" # to-json parser of many cli tools, e.g jc -p dig cloudflare.com
 brew "cheat" # short 'man' + personal commands
 brew "tlrc" # rust client for tldr - alternative to cheat + macOS specific commands
 # brew "tree"
-brew "gettext"
 brew "hugo" # work on my blog https://aleksgorbenko.dev
-brew "tsonglew/dutis/dutis" # set default apps for file types
+brew "tsonglew/dutis/dutis" # set default apps for file types. Used in Alfred
 
-# cloud
-brew "awslogs"
-cask "gcloud-cli"
-# brew "eksctl"
+# aws
 brew "awscli"
+# brew "eksctl"
+# gcp
+cask "gcloud-cli"
 
 # http
 brew "httpie"
@@ -116,6 +115,7 @@ brew "kubectx" # switch context quickly
 brew "flux"
 brew "kubecolor"
 brew "operator-sdk"
+brew "istioctl"
 
 # containers
 cask "docker-desktop"
@@ -125,8 +125,6 @@ brew "ctop" # htop for containers
 # cli tools
 brew "nats-io/nats-tools/nats" # debug and manage nats
 brew "hashicorp/tap/vault"
-brew "istioctl"
-
 
 cask "postman"
 brew "libyaml" # needed for ruby on apple silicon
@@ -153,13 +151,13 @@ cask "lm-studio" # similar to ollama, but uses llama.cpp and has a GUI. also "ls
 cask "chatgpt" # macOS app for ChatGPT
 cask "codex"
 cask "codex-app"
-cask "macwhisper" # macOS app to dictate and transcribe
+# cask "macwhisper" # macOS app to dictate and transcribe
 cask "handy" # OSS STT
 # cask "buzz" # Transcribe audio and translate with Whisper
 cask "claude-code"
 brew "opencode"
 cask "conductor"
-brew "ctx7" # let AIs to remember latest API docsnotes
+brew "ctx7" # let AIs to remember latest API docs
 cask "cc-switch" # manage AI harnesses, SKILLS
 brew "hf" # hugging face cli
 
