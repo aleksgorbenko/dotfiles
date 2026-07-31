@@ -23,6 +23,12 @@ MANDATORY workflow:
 2. Check test isolation
 3. Verify mocks are correct
 4. Fix implementation, not tests (unless tests are wrong)
+5. Never modify production code solely to make a test pass
+
+## Verification Gates
+
+- Never use logs as a test assertion target or as a dependency-injection seam
+- For UI/UX changes, exercise the change in a real running instance before merge — golden path plus at least one edge case
 
 ## Agent Support
 

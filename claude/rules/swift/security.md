@@ -9,7 +9,7 @@ paths:
 
 ## Secret Management
 
-- Use **Keychain Services** for sensitive data (tokens, passwords, keys) — never `UserDefaults`
+- Use Keychain Services for sensitive data (tokens, passwords, keys) — never `UserDefaults`
 - Use environment variables or `.xcconfig` files for build-time secrets
 - Never hardcode secrets in source — decompilation tools extract them trivially
 

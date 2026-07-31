@@ -107,6 +107,28 @@ final class QuestionListViewModel {
 }
 ```
 
+## Producer / Consumer: Service + Store
+
+For data polled/produced in the background (browser tabs, feeds), split the actor into two:
+
+- **Service** (actor) — the *producer*: polls/syncs sources and writes per-key snapshots into
+  the Store (`start()`/`stop()`, a sync method). Owns "how data is fetched and kept fresh."
+- **Store** (actor) — the *cache*: holds `[Key: [Item]]` and answers reads/`search(query:)`.
+  Search/filter lives here, not on the data model.
+- The **ViewModel** depends on the Store (a protocol) and reads it.
+
+**Pull vs push** — how results reach the UI:
+
+| | Pull (preferred) | Push |
+|---|---|---|
+| Flow | VM calls `store.search()` per user action | Service notifies → VM caches a copy → filters locally |
+| Churn | None — results only change on user input | Background writes can reset list selection / diffs |
+| Cost | one `await` per keystroke (cheap) | needs change-gating + deterministic ordering to stay stable |
+
+Prefer **pull**: it has no VM-side copy, no notification wiring, and background syncs can't
+disturb what's on screen. Reach for push only when the UI must reflect background changes with
+no user action — and then gate notifications on an actual change.
+
 ## Key Design Decisions
 
 | Decision | Rationale |
@@ -128,7 +150,8 @@ final class QuestionListViewModel {
 
 ## Anti-Patterns to Avoid
 
-- Using `DispatchQueue` or `NSLock` instead of actors for new Swift concurrency code
+> Banned APIs (`DispatchQueue`, `NSLock`, …) live in `rules/swift/swift-anti-patterns.md`.
+
 - Exposing the internal cache dictionary to external callers
 - Making the file URL configurable without validation
 - Forgetting that all actor method calls are `await` — callers must handle async context

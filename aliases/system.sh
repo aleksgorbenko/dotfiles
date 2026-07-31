@@ -93,6 +93,10 @@ alias cdi="cd $SRC/iview"
 alias cddo="cd $HOME/Downloads"
 alias cdde="cd $HOME/Desktop"
 
+# Xcode
+# all build artifacts - for testing and debugging
+alias xcdata="cd $HOME/Library/Developer/Xcode/DerivedData/"
+
 # Golang toolchain
 alias gi="go install"
 alias gomv="go mod vendor"

@@ -168,6 +168,49 @@ To use `@concurrent`:
 3. Add `async` if not already asynchronous
 4. Add `await` at call sites
 
+## Core Pattern — Actor Wrapping a Blocking / Non-Thread-Safe System API
+
+Some system APIs are synchronous, blocking, and not thread-safe (e.g. `NSAppleScript`). Wrap
+them in an `actor` to get **off-main + serialized** execution for free — no `DispatchQueue`,
+no locks. Actor isolation guarantees no two calls overlap, and actor methods run off the main
+thread.
+
+```swift
+actor AppleScriptRunner {
+    func run(_ source: String) throws -> String {
+        // Runs on the actor's executor (off-main), serialized against other calls.
+        var err: NSDictionary?
+        let out = NSAppleScript(source: source)?.executeAndReturnError(&err)
+        // ... map err → throw ...
+        return out?.stringValue ?? ""
+    }
+}
+```
+
+### Keep task-group fan-out parallel with a `nonisolated` helper
+
+A `nonisolated` method may read the actor's **immutable `Sendable` `let`s** without hopping
+onto the actor, so per-item work in a `withTaskGroup` stays parallel:
+
+```swift
+actor Poller {
+    private let readers: [any Reader]          // immutable, Sendable
+    private let limit: Int
+
+    func refresh() async {
+        await withTaskGroup(of: Result?.self) { group in
+            for reader in readers {
+                group.addTask { await self.read(reader) }   // parallel: no actor hop
+            }
+            // collect...
+        }
+    }
+
+    // nonisolated: runs on the child task's executor, reads only immutable lets
+    private nonisolated func read(_ reader: any Reader) async -> Result? { /* ... */ }
+}
+```
+
 ## Key Design Decisions
 
 | Decision | Rationale |
@@ -200,9 +243,11 @@ To use `@concurrent`:
 
 ## Anti-Patterns to Avoid
 
+> Banned APIs (`DispatchQueue`, `NSLock`, `Thread.isMainThread`, …) live in
+> `rules/swift/swift-anti-patterns.md`.
+
 - Applying `@concurrent` to every async function (most don't need background execution)
 - Using `nonisolated` to suppress compiler errors without understanding isolation
-- Keeping legacy `DispatchQueue` patterns when actors provide the same safety
 - Skipping `model.availability` checks in concurrency-related Foundation Models code
 - Fighting the compiler — if it reports a data race, the code has a real concurrency issue
 - Assuming all async code runs in the background (Swift 6.2 default: stays on calling actor)

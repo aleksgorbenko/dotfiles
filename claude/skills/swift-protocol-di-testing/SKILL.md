@@ -172,12 +172,14 @@ func testReadError() async {
 - **Default parameters**: Let production code use real implementations by default; only tests need to specify mocks
 - **Error simulation**: Design mocks with configurable error properties for testing failure paths
 - **Only mock boundaries**: Mock external dependencies (file system, network, APIs), not internal types
+- **Model seams as types, not flags**: never add a `Bool`/closure parameter that steers behavior
+  (main-vs-background, prompt-vs-silent) or exists only for test substitution. Express the seam
+  as a protocol/actor with a live impl + a test double. (See `rules/swift/swift-anti-patterns.md`.)
 
 ## Anti-Patterns to Avoid
 
 - Creating a single large protocol that covers all external access
 - Mocking internal types that have no external dependencies
-- Using `#if DEBUG` conditionals instead of proper dependency injection
 - Forgetting `Sendable` conformance when used with actors
 - Over-engineering: if a type has no external dependencies, it doesn't need a protocol
 

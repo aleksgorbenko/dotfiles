@@ -252,9 +252,14 @@
 }
 
 {
-	:des "j-key - ?"
+	:des "j-key - Japanese (Language)"
 	:rules [
 		:j-mode
+		[:p [:km "sc: Save Jp Phrase"]]
+		[:n [:km "sc: Save Nami Lesson"]]
+		[:f [:km "sc: Save Jp Word no Furigana"]]
+		[:w [:km "sc: Save Jp Word"]]
+
 	]
 }
 

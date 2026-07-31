@@ -72,6 +72,7 @@ brew "codesnap" # screenshot code and generate images
 brew "mise" # one version manager to rule them all
 brew "cmake"
 brew "protobuf"
+brew "swiftlint"
 
 # utils
 brew "helix" # terminal code editor
@@ -148,9 +149,8 @@ cask "beekeeper-studio"
 # AI
 brew "ollama" # run, push, pull LLMs locally
 cask "lm-studio" # similar to ollama, but uses llama.cpp and has a GUI. also "lsm" CLI tool
-cask "chatgpt" # macOS app for ChatGPT
-cask "codex"
-cask "codex-app"
+cask "chatgpt" # macOS app for ChatGPT + Codex
+cask "codex" # cli tool
 # cask "macwhisper" # macOS app to dictate and transcribe
 cask "handy" # OSS STT
 # cask "buzz" # Transcribe audio and translate with Whisper

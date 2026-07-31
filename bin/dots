@@ -23,7 +23,7 @@ if [ -f "$DOTS/Brewfile.local" ]; then
 fi
 
 # upgrade all packages
-brew upgrade
+# brew upgrade
 # update all casks. Ignore anki, beyond 25.02 it breaks Keyboard Maestro key overrides
 brew list --cask | xargs brew upgrade
 

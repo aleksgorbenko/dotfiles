@@ -15,7 +15,7 @@ cursor-color = cyan
 window-padding-x = 4
 window-padding-y = 4
 
-background-opacity = 0.9
+background-opacity = 0.95
 background-blur = true
 
 ### KEY BINDINGS ###

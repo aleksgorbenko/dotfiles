@@ -40,6 +40,10 @@ func NewUserService(repo UserRepository, logger Logger) *UserService {
 }
 ```
 
+## Variable Naming
+
+- Do not use short variable names of 1-2 letters. Method receivers and loop index are exceptions to this rule
+
 ## Reference
 
 See skill: `golang-patterns` for comprehensive Go patterns including concurrency, error handling, and package organization.
