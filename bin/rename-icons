@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Ensure a prefix parameter was actually provided
+if [ -z "$1" ]; then
+    echo "Error: Please provide the prefix string to replace."
+    echo "Usage: ./rename_icons.sh <PREFIX>"
+    echo "Example: ./rename_icons.sh Bukku-iOS-Dark-"
+    exit 1
+fi
+
+PREFIX="$1"
+
+# Loop through all PNG files in the current working directory
+for file in "$PREFIX"*.png; do
+    # Check if files matching the pattern actually exist
+    [ -e "$file" ] || continue
+
+    # Strip the custom prefix and prepend 'icon_'
+    new_name="icon_${file#$PREFIX}"
+
+    # Strip the '@1x' string entirely if it exists in the name
+    new_name="${new_name//@1x/}"
+
+    # Rename the file physically
+    mv "$file" "$new_name"
+    echo "Renamed: $file -> $new_name"
+done
+
+echo "Done! All matching icons have been sanitized."
