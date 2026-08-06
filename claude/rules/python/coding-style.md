@@ -45,6 +45,7 @@ class Point(NamedTuple):
 - Combine multiple imports from the same module into one `from X import (...)` statement; never split across separate `from X import` lines
 - Never add a `# noqa: <code>` comment for a lint rule that isn't enabled in the project's own config; confirm the rule is active before suppressing it
 - Never write Python logic inline inside a Makefile recipe; put it in a `.py` script file instead
+- Never write a triple-quoted string as a mid-function comment; only a function/class/module's own leading docstring may use triple quotes, use `#` everywhere else
 
 ## Reference
 
