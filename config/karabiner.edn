@@ -410,8 +410,8 @@
 	:des "u-key - Url mode"
 	:rules [
 		:u-mode
-			[:c [:km "Open current url in Chrome"]]
-			[:s [:km "Open current url in Safari"]]
+			;; [:c [:km "Open current url in Chrome"]]
+			;; [:s [:km "Open current url in Safari"]]
 	]
 }
 

@@ -1,8 +1,9 @@
 [tools]
 bun = "latest"
 go = "latest"
-java = "temurin-21.0.10+7.0.LTS"
-node = "24"
+java = "temurin-21.0.12"
+node = "26"
+"npm:npm" = "latest"
 python = "latest"
 ruby = "latest"
 terraform = "latest"

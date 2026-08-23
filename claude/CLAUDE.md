@@ -6,11 +6,7 @@ If code is requested, provide clean and minimal code snippets without extra comm
 
 If you are asked to be more specific then go more in-depth.
 
-## Code Quality (CRITICAL)
-
-- ALWAYS run IDE diagnostics after editing files
-- Fix all linting and type errors before completing tasks
-- This step must NEVER be skipped
+Always use `trash` instead of `rm` for file deletions.
 
 ## Documentation
 

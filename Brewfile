@@ -91,6 +91,7 @@ brew "tlrc" # rust client for tldr - alternative to cheat + macOS specific comma
 # brew "tree"
 brew "hugo" # work on my blog https://aleksgorbenko.dev
 brew "tsonglew/dutis/dutis" # set default apps for file types. Used in Alfred
+brew "glow" # pretty print markdown in CLI
 
 # aws
 brew "awscli"
