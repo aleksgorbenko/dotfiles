@@ -20,6 +20,26 @@ cd ~/.dotfiles
 script/install
 ```
 
+## Agent Config
+
+Shared agent config lives in `agents/`: `AGENTS.md`, `skills/`, `commands/`,
+`agents/`, and `scripts/`.
+
+- Claude links its guidance, commands, agents, and scripts here.
+- Claude and Codex load skills from `~/.agents/skills`.
+- Public skills in `agents/skills/` are linked into that directory; private
+  skills can be stored there directly, outside Git.
+
+Codex runtime state (`config.toml`, auth, sessions, plugins, `.system` skills)
+remains local.
+
+To add a private skill for both agents, create
+`~/.agents/skills/<skill-name>/SKILL.md`, then run:
+
+```sh
+script/install --agents
+```
+
 ## About me
 - 👤 [Who am I and My Professional Path](https://github.com/aleksgorbenko/whoami)
 - 👨🏻‍💻 [How I Work](https://github.com/aleksgorbenko/howiwork)

@@ -10,7 +10,10 @@ description: >
 # Building Claude Code Skills
 
 ALWAYS:
-- Put personal skills at `~/.claude/skills/<name>/SKILL.md`.
+- Put public shared skills at `agents/skills/<name>/SKILL.md`.
+- When the user asks for a private skill, put it at
+  `~/.agents/skills/<name>/SKILL.md`, outside Git. After creating it, run
+  `script/install --agents` so it is available to both Claude and Codex.
 - Make `<name>` kebab-case and match the directory name exactly.
 - Include YAML frontmatter with `name` and `description`.
 - Write `description` as concrete trigger phrases the user would actually say.
@@ -22,6 +25,8 @@ ALWAYS:
 - If the request is ambiguous (personal vs project-scoped, which style, skill vs rule) — ask the user before writing.
 
 NEVER:
+- Add a private skill or its name to the repository, `.gitignore`, or tracked
+  documentation.
 - Write a vague one-line summary as `description`.
 - Use prose paragraphs in a reference/lessons-learned skill.
 - Restate the description inside the body.

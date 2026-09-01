@@ -27,6 +27,14 @@
 ;; [:n :volume_decrement]
 ;; [:m :volume_increment]
 
+;; Common Commands
+;; :!Cc                          cmd+c, send a copy keypress (e.g. before reading clipboard)
+;; [:!Cc [:shortcuts "Name"]]    copy selection, then pipe clipboard into an Apple Shortcut
+;; [:!Cc [:alfred-clip "trig" "bundle"]]  copy selection, then run an Alfred trigger with clipboard as argument
+;; [:alfred "trig" "bundle" "arg"]        run Alfred trigger with a literal argument
+;; [:km "macro name"]            run Keyboard Maestro macro by name
+;; [:open "path or url"]         open an app/file/url
+
 
 {
 
@@ -56,6 +64,8 @@
 
 :templates {
 	:alfred "osascript -e 'tell application \"Alfred 5\" to run trigger \"%s\" in workflow \"%s\" with argument \"%s\"'"
+	:alfred-clip "osascript -e 'delay 0.1' -e 'tell application \"Alfred 5\" to run trigger \"%s\" in workflow \"%s\" with argument (the clipboard as text)'"
+	:shortcuts "sleep 0.1 && LANG=en_US.UTF-8 pbpaste | shortcuts run \"%s\" -i -"
 	:km "osascript -e 'tell application \"Keyboard Maestro Engine\" to do script \"%s\"'"
 	:open "open \"%s\""
 }
@@ -255,6 +265,10 @@
 	:des "j-key - Japanese (Language)"
 	:rules [
 		:j-mode
+		; !Cc = cmd+c and the following actions uses clipbaord
+		[:1 [:!Cc [:alfred-clip "jisho-search" "dev.gbko.alfred.nihongo"]]]
+		[:2 [:!Cc [:alfred-clip "conjugate" "dev.gbko.alfred.nihongo"]]]
+		[:3 [:!Cc [:shortcuts "JP Generate Sentence"]]]
 		[:p [:km "sc: Save Jp Phrase"]]
 		[:n [:km "sc: Save Nami Lesson"]]
 		[:f [:km "sc: Save Jp Word no Furigana"]]
@@ -520,6 +534,7 @@
 	:des "backslash-key - Apps"
 	:rules [
 		:backslash-mode
+		[:1 [:km "open: 1Password"]]
 		[:2 [:km "open: 2Do"]]
 		[:a [:km "open: Anki"]]
 		[:c [:km "open: Chrome"]]

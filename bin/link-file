@@ -14,9 +14,11 @@ link_file () {
     if [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]
     then
 
-      local currentSrc="$(readlink $dst)"
+      local currentSrc="$(readlink "$dst")"
+      local currentResolved="$(realpath "$dst" 2>/dev/null || true)"
+      local sourceResolved="$(realpath "$src" 2>/dev/null || true)"
 
-      if [ "$currentSrc" == "$src" ]
+      if [ "$currentSrc" == "$src" ] || { [ -n "$currentResolved" ] && [ "$currentResolved" == "$sourceResolved" ]; }
       then
 
         skip=true;

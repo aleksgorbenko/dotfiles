@@ -66,17 +66,57 @@ echo "🤖 Configuring gitconfig"
   fi
 }
 
+function install_agent_skills () {
+	echo "🤖 Configuring shared agent skills"
+	mkdir -p "${HOME}/.agents"
+
+	local shared_skills="${HOME}/.agents/skills"
+	local public_skills="${DOTS}/agents/skills"
+
+	# Migrate the previous all-public symlink to a local directory. This lets
+	# private skills live alongside symlinked, repository-managed skills.
+	if [ -L "${shared_skills}" ] && [ "$(realpath "${shared_skills}")" == "$(realpath "${public_skills}")" ]; then
+		unlink "${shared_skills}"
+	fi
+
+	mkdir -p "${shared_skills}"
+
+	for skill in "${public_skills}"/*; do
+		[ -d "${skill}" ] || continue
+		$DOTS/bin/link-file "${skill}" "${shared_skills}/$(basename "${skill}")"
+	done
+
+	ok "shared agent skills configured"
+}
+
 function install_claude () {
 	echo "🤖 Configuring Claude Code"
 	mkdir -p "${HOME}/.claude"
 
-	$DOTS/bin/link-file "${DOTS}/claude/CLAUDE.md" "${HOME}/.claude/CLAUDE.md"
+	$DOTS/bin/link-file "${DOTS}/agents/AGENTS.md" "${HOME}/.claude/CLAUDE.md"
+	$DOTS/bin/link-file "${HOME}/.agents/skills" "${HOME}/.claude/skills"
 
-	for dir in rules commands skills agents scripts; do
+	for dir in rules commands agents scripts; do
 		$DOTS/bin/link-file "${DOTS}/claude/${dir}" "${HOME}/.claude/${dir}"
 	done
 
 	ok "Claude Code configured"
+}
+
+function install_codex () {
+	echo "🤖 Configuring Codex"
+	mkdir -p "${HOME}/.codex/skills"
+
+	# Keep Codex runtime state and bundled .system skills local. Only link
+	# portable guidance and personal skills managed by this repository.
+	$DOTS/bin/link-file "${DOTS}/agents/AGENTS.md" "${HOME}/.codex/AGENTS.md"
+
+	for skill in "${HOME}"/.agents/skills/*; do
+		[ -d "${skill}" ] || continue
+		$DOTS/bin/link-file "${skill}" "${HOME}/.codex/skills/$(basename "${skill}")"
+	done
+
+	ok "Codex configured"
 }
 
 function install_dotfiles () {
@@ -254,12 +294,22 @@ echo "🤖 Welcome aboard, I will turn your mac into a dev machine now"
 cd "$(dirname "$0")/.."
 DOTS=$(pwd -P)
 
+if [ "${1:-}" == "--agents" ]; then
+	install_agent_skills
+	install_claude
+	install_codex
+	ok "Agent configuration complete"
+	exit 0
+fi
+
 install_system_updates
 install_homebrew
 install_brew_packages
 install_dotfiles
 install_language_versions
+install_agent_skills
 install_claude
+install_codex
 
 install_fish
 install_fonts

@@ -38,6 +38,12 @@ Don't introduce these. Left = banned, right = use instead.
   first-party API for same job. Consult current docs for native API before hand-roll.
 - Clever/arcane concurrency bridge when plain standard idiom already works → keep
   standard idiom; don't gold-plate working code.
+- `Binding` over an `@Observable` property (computed `Binding`, or `@Bindable`)
+  passed to `MenuBarExtra(isInserted:)` or other `Scene`-level controls →
+  `@AppStorage` on the same raw `UserDefaults` key instead. Confirmed both
+  forms loop in a `Scene`: the control's own observer setup writes back
+  through the binding, which re-triggers Observation, forever — `@Bindable`
+  does not fix this in `Scene.body` the way it does in `View.body`.
 - Runtime type check (`as?`, `is`) used to decide what to do next → dispatch through
   protocol method, or single factory/router lookup, instead.
 - Production-only fake/dummy implementation of protocol that exists just to satisfy
