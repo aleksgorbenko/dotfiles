@@ -12,3 +12,4 @@
 - Never commit a user-facing behaviour change until the user has manually verified it running — a green build and passing tests are necessary but not sufficient
 - Diagnostics/compiler warnings must be clean before work is marked ready for review
 - Add and commit automatically when tasks complete
+- Run `git commit` with a 10s timeout. If it hangs (e.g. a stuck signing agent like 1Password), stop waiting, tell the user it's stuck, and ask them to run it themselves rather than retrying blindly

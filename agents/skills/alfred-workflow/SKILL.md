@@ -14,6 +14,7 @@ description: >
 
 ALWAYS:
 - Edit info.plist via python plistlib.
+- Package each customised Alfred canvas node icon as a root-level PNG named exactly `<node UID>.png`; `config.icon` controls result or placeholder icons, not the canvas node icon.
 - Run `plutil -lint` after editing info.plist, and diff before/after.
 - `readlink` a live workflow dir before assuming it's stale — it's a symlink into the repo.
 - Use Script Filter Argument "Optional" for live search-as-you-type.
@@ -54,6 +55,7 @@ NEVER:
 - Hardcode UI text inside .py scripts.
 - Treat plistlib's int→float canvas `<real>` diffs (235 → 235.0) as a real change.
 - Use literal `{query}` inside a Script Filter's `script` field in argv mode.
+- Assume a workflow icon or a Script Filter result icon supplies a canvas node icon; verify the UID-named PNG exists for every customised node.
 - Assume `{query}` fails everywhere — it substitutes fine in non-script fields (Open URL `url`, Conditional `inputstring`).
 - Rely on `alfred_workflow_cache` being present when running scripts outside Alfred.
 - Conflate "local personal tool over data you already have legitimate access to" with "redistributing a third party's proprietary content as a product" — the licensing caution from one doesn't automatically apply to the other.
