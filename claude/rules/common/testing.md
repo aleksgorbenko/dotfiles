@@ -29,6 +29,9 @@ MANDATORY workflow:
 
 - Never use logs as a test assertion target or as a dependency-injection seam
 - For UI/UX changes, exercise the change in a real running instance before merge — golden path plus at least one edge case
+- Run lint, format, test and build through the project's Makefile targets, never the underlying tool directly
+- Treat a linter or test run that reports no findings as unverified until it shows a non-zero count of files or tests checked
+- Run every test target through the build system that builds the shipped app, not only the package-level runner
 
 ## Agent Support
 

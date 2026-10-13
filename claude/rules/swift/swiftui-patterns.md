@@ -26,6 +26,13 @@ Smallest tool that fully expresses the role. Semantic token (one property) → `
 (font+color+spacing bundle) → custom `*Style` (interactive control state) → `@Entry`
 environment value (whole-subtree metric). Don't build modifiers/styles speculatively.
 
+Token scope, promoted only on an actual second consumer (never speculatively): private to
+one component (`*Style.swift`) → feature-shared (`*Palette.swift` colour, `*Metrics.swift`
+sizing) → app-global (`Tokens/*Primitives.swift` / role-named `*Metrics.swift`, created only
+once ≥2 features need the same value). `<Feature>UIConfiguration` is reserved for layout that
+needs runtime computation (row-count-dependent height), not plain constants. Full table +
+decision procedure: skill `swiftui-patterns`.
+
 ## Navigation
 
 `NavigationStack` + `NavigationPath`, `Destination: Hashable` enum, `.navigationDestination(for:)`.
@@ -35,6 +42,12 @@ environment value (whole-subtree metric). Don't build modifiers/styles speculati
 `LazyVStack`/`LazyHStack` for large collections. Stable `id` in `ForEach`, never array index.
 No I/O/network/heavy compute in `body` — use `.task {}`. `Equatable` conformance for
 expensive-body views to skip re-renders.
+
+## Fixed-row panels
+
+- Size a panel that shows N rows from the measured height of a rendered row (`onGeometryChange`), never from font-metric estimates.
+- Count N-1 gaps between N stacked rows.
+- Arrow Up from the first row selects the query text with no row selected; Down returns to the first row and collapses the text selection.
 
 ## AppKit hosting
 
