@@ -14,7 +14,8 @@ paths:
 
 ## Workspace
 
-- Make the repo root the first `FileRef` in the workspace (`location = "group:."`) so the navigator shows every file.
+- Give the workspace one `FileRef` per git-tracked top-level file and folder that no project or package already shows, so the navigator lists every non-generated file.
+- Never reference the repo root or a folder holding ignored output (build folders, `.build`, worktrees); Xcode ignores `.gitignore` and lists everything inside.
 
 ## Build
 
