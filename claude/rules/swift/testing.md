@@ -35,6 +35,7 @@ Each test gets a fresh instance — set up in `init`, tear down in `deinit`. No 
 - Run the full test suite locally on every change until CI is in place, not just the changed subset.
 - Delete a test-only protocol/double once nothing in the suite calls it anymore.
 - Pass an explicit UTC time zone (`TimeZone.gmt`) to date code under test; never rely on the machine's or the test plan's time zone.
+- Build fixture dates from ISO 8601 strings (`try Date("2026-02-09T23:00:00Z", strategy: .iso8601)`), never from raw epoch numbers.
 
 ## Tags
 

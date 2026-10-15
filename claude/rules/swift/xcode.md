@@ -12,12 +12,17 @@ paths:
 ---
 # Xcode
 
+## Workspace
+
+- Make the repo root the first `FileRef` in the workspace (`location = "group:."`) so the navigator shows every file.
+
 ## Build
 
 - Give Debug builds a bundle identifier suffix (`.debug`) and a display name suffix via the xcconfig.
 - Keep build, archive and export output in a `build.noindex/` folder and exclude it from SwiftLint.
 - Declare every module a package target uses, including modules referenced only through another module's default arguments.
 - Commit every `Package.resolved`, including `<Workspace>.xcworkspace/xcshareddata/swiftpm/Package.resolved`.
+- Never link a package product into a test target that does not import it.
 
 ## Install
 
@@ -35,3 +40,4 @@ paths:
 ## CI
 
 - Run on a pinned Xcode runner image, assert the Swift version before building, and pass `-skipPackagePluginValidation` to `xcodebuild`.
+- Pass ad-hoc signing overrides (`CODE_SIGN_IDENTITY=-`) only on CI runners, never on a developer's Mac.
