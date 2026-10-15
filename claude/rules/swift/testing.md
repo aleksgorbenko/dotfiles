@@ -38,9 +38,6 @@ Each test gets a fresh instance — set up in `init`, tear down in `deinit`. No 
 ## Tags
 
 - Mark every integration suite with a tag trait (`@Suite(.tags(.integration))`); tag every suite named `*IntegrationTests`.
-- Select or skip tagged tests through a test plan's Include/Exclude Tags (`selectedTags`/`skippedTags`), never by listing suite names in a Makefile or script.
-- Never pass `-skip-testing:<Target>/<Suite>` to exclude a category; a stale identifier silently skips nothing.
-- Pin the xcodebuild test destination to one architecture (`platform=macOS,arch=arm64`) so it never warns about multiple matching destinations.
 
 ## Parameterized Tests
 

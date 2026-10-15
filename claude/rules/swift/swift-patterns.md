@@ -118,14 +118,8 @@ KeyboardShortcuts.onKeyDown(for: .toggleApp) { [weak self] in … }
 - Give each distribution channel its own positive compilation condition (`APPSTORE`, `DIRECT`); never test the negation of another channel's flag.
 - Resolve the channel flag into a runtime value once at the composition root, guarded by `#error` unless exactly one flag is set; everything else reads that value.
 - Use `#if <CHANNEL>` only where code cannot exist in the other build (linking a framework, a process entry point).
-- Give Debug builds a bundle identifier suffix (`.debug`) and a display name suffix via the xcconfig.
-- Keep build, archive and export output in a `build.noindex/` folder and exclude it from SwiftLint.
-- Provide a `make unregister` target that removes every LaunchServices registration of the bundle ID outside `/Applications`, and run it after every install target.
-- Test App Intents and Shortcuts only against the copy installed in `/Applications`.
 - Decide CLI-versus-app launch by the invoked executable name (a lowercase CLI symlink), never by inspecting launch flags.
-- Declare every module a package target uses, including modules referenced only through another module's default arguments.
 - Inject any call that ends the process (`NSApplication.terminate`) through a protocol.
-- In CI, run on a pinned Xcode runner image, assert the Swift version before building, and pass `-skipPackagePluginValidation` to `xcodebuild`.
 
 ## References
 
