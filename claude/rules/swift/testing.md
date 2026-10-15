@@ -34,6 +34,7 @@ Each test gets a fresh instance — set up in `init`, tear down in `deinit`. No 
 - Compare paths through the same resolution/canonicalization function on both sides, or inject a fake path resolver — raw string path equality is flaky across symlinked locations.
 - Run the full test suite locally on every change until CI is in place, not just the changed subset.
 - Delete a test-only protocol/double once nothing in the suite calls it anymore.
+- Pass an explicit UTC time zone (`TimeZone.gmt`) to date code under test; never rely on the machine's or the test plan's time zone.
 
 ## Tags
 
