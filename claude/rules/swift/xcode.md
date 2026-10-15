@@ -29,6 +29,7 @@ paths:
 - Select or skip tagged tests through a test plan's Include/Exclude Tags (`selectedTags`/`skippedTags`), never by listing suite names in a Makefile or script.
 - Put a narrower run (unit only) in its own test plan referenced by the scheme, and pick it with `-testPlan`.
 - Check in a script that every test plan lists the same test targets.
+- Set `TZ=UTC` in every test plan's environment variables, and check it in the same script.
 - Never pass `-skip-testing:<Target>/<Suite>` to exclude a category; a stale identifier silently skips nothing.
 - Pin the xcodebuild test destination to one architecture (`platform=macOS,arch=arm64`) so it never warns about multiple matching destinations.
 
