@@ -1,14 +1,13 @@
-#!/usr/bin/env swift
 // Turn a flat, single-colour glyph (typically black-on-white) into a macOS menu-bar
 // TEMPLATE image set: a black silhouette + alpha channel that the system re-tints for
-// light/dark/active. Only the alpha matters — the RGB is forced to black.
+// light/dark/active. Only the alpha matters - the RGB is forced to black.
 //
 // Technique: luminance -> alpha (white background & interior gaps become transparent,
 // anti-aliased edges become partial alpha), then trim to the glyph, pad, and downscale
-// to 1x/2x/3x. Not for multi-colour art or photos — those aren't template material.
+// to 1x/2x/3x. Not for multi-colour art or photos - those aren't template material.
 //
 // Usage:
-//   make-menubar-template.swift <input.png> <output.imageset> [height=18]
+//   icon-menubar.sh <input.png> <output.imageset> [height=18]
 //
 // Writes icon.png / icon@2x.png / icon@3x.png + a template-rendering Contents.json into
 // the output image set directory (created if needed). Point NSImage(named:) at the set
@@ -26,7 +25,7 @@ func fail(_ message: String) -> Never {
 
 guard CommandLine.arguments.count >= 3 else {
     FileHandle.standardError.write(
-        Data("usage: make-menubar-template.swift <input.png> <output.imageset> [height=18]\n".utf8))
+        Data("usage: icon-menubar.sh <input.png> <output.imageset> [height=18]\n".utf8))
     exit(2)
 }
 let srcPath = CommandLine.arguments[1]

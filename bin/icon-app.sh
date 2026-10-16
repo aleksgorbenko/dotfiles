@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
-# extract-app-icons.sh — extract installed apps' icons by bundle ID.
+# icon-app.sh - extract installed apps' icons by bundle ID
 set -euo pipefail
 
 usage() {
   cat <<EOF
 Usage:
-  extract-app-icons.sh [--size N] <output-dir> <bundle-id>...
+  icon-app.sh [--size N] <output-dir> <bundle-id>...
 
   <output-dir>      *.xcassets -> <bundle-id>.imageset/icon.png + Contents.json
                     any other  -> <bundle-id>.png
   --size N          longest side in pixels (default 512)
 
 Example:
-  extract-app-icons.sh Resources/BrowserIcons.xcassets com.apple.Safari com.google.Chrome
+  icon-app.sh Resources/BrowserIcons.xcassets com.apple.Safari com.google.Chrome
 EOF
 }
 

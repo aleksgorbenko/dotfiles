@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# pack-icon.sh — convert a 1024x1024 source PNG into platform-specific icon format
+# icon-pack.sh - convert a 1024x1024 source PNG into platform-specific icon formats
 # Requires macOS (sips, iconutil).
 set -euo pipefail
 
 usage() {
   cat <<EOF
 Usage:
-  pack-icon.sh --input <source.png> --output ios|macos|alfred|all [--name NAME] [--keep-iconset]
+  icon-pack.sh --input <source.png> --output ios|macos|alfred|all [--name NAME] [--keep-iconset]
 
   ios     -> single 1024x1024 PNG, alpha stripped (Xcode 15+ single-asset icon; iOS/iPadOS/watchOS)
   macos   -> classic AppIcon.icns via iconutil (legacy format; may not apply on Tahoe/Xcode26 Icon Composer builds)
@@ -61,8 +61,7 @@ do_ios() {
 do_macos() {
   local iconset="${OUTDIR}/${NAME}.iconset"
   mkdir -p "$iconset"
-  declare -A sizes=( [16]=1 [32]=1 [128]=1 [256]=1 [512]=1 )
-  for s in "${!sizes[@]}"; do
+  for s in 16 32 128 256 512; do
     sips -z "$s" "$s" "$INPUT" --out "${iconset}/icon_${s}x${s}.png" >/dev/null
     d=$((s*2))
     sips -z "$d" "$d" "$INPUT" --out "${iconset}/icon_${s}x${s}@2x.png" >/dev/null
@@ -70,7 +69,7 @@ do_macos() {
   iconutil -c icns "$iconset" -o "${OUTDIR}/${NAME}.icns"
   [[ $KEEP -eq 0 ]] && rm -rf "$iconset"
   echo "macOS icon: ${OUTDIR}/${NAME}.icns"
-  echo "NOTE: this is the legacy .icns format. If your app targets macOS 26 (Tahoe) Icon Composer / Liquid Glass, Xcode may expect a .icon bundle instead — that requires the Icon Composer GUI, not scriptable here."
+  echo "NOTE: this is the legacy .icns format. If your app targets macOS 26 (Tahoe) Icon Composer / Liquid Glass, Xcode may expect a .icon bundle instead - that requires the Icon Composer GUI, not scriptable here."
 }
 
 do_alfred() {
