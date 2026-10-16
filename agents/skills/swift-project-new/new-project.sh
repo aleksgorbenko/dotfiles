@@ -16,7 +16,8 @@ fill() {
 
 mkdir -p "$dir/$slug/Assets.xcassets/AppIcon.appiconset" "$dir/${slug}Tests" "$dir/$app.xcworkspace"
 fill "$template/project.yml" "$dir/project.yml"
-fill "$template/Config.xcconfig" "$dir/Config.xcconfig"
+mkdir -p "$dir/xcconfigs"
+fill "$template/xcconfigs/Config.xcconfig" "$dir/xcconfigs/Config.xcconfig"
 fill "$template/Makefile" "$dir/Makefile"
 fill "$template/workspace.xcworkspacedata" "$dir/$app.xcworkspace/contents.xcworkspacedata"
 

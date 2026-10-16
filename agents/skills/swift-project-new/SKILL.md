@@ -8,14 +8,14 @@ description: Create a new macOS app Xcode project from an XcodeGen project.yml t
 1. Ask for app name, slug, bundle ID, team ID, owner and minimum macOS version.
 2. Run `~/.claude/skills/swift-project-new/new-project.sh <dir> <AppName> <slug> <bundle-id> <team-id> "<owner>" [macos]`.
 3. Run `git init`, then `make build` and `make test` in `<dir>`.
-4. Commit `project.yml`, `Config.xcconfig`, `Makefile`, the workspace, sources and the generated `.xcodeproj`.
+4. Commit `project.yml`, `xcconfigs/`, `Makefile`, the workspace, sources and the generated `.xcodeproj`.
 
 ## Template
 
 | File | Holds |
 |---|---|
 | `template/project.yml` | targets, configs, settings, schemes |
-| `template/Config.xcconfig` | name, bundle ID, version, team, deployment target |
+| `template/xcconfigs/Config.xcconfig` | name, bundle ID, version, team, deployment target |
 | `template/Makefile` | `generate-project`, `check-project`, `build`, `test` |
 | `template/workspace.xcworkspacedata` | workspace with project and top-level files |
 

@@ -19,7 +19,7 @@ paths:
 - Start a new project from the `swift-project-new` skill.
 - Set `settingPresets: none` and declare every build setting in `project.yml`: project-wide under `settings`, shared target settings in `settingGroups`.
 - Nest a setting group's keys under `base:` whenever the group also lists `groups:`.
-- Point every configuration at `Config.xcconfig` through `configFiles`, and keep values the Makefile or scripts read in that xcconfig.
+- Keep xcconfig files in an `xcconfigs/` folder, point every configuration at them through `configFiles`, and keep values the Makefile or scripts read there.
 - Use `syncedFolder` sources and exclude any `INFOPLIST_FILE` from the folder's membership.
 - Give local packages that the workspace already lists `excludeFromProject: true`.
 - Commit the generated `.xcodeproj` and provide `make generate-project` and `make check-project`, which fails when `.pbxproj` differs from `project.yml`; run `check-project` in CI.

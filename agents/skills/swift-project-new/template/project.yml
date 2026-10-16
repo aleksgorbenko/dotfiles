@@ -13,8 +13,8 @@ configs:
   Release: release
 
 configFiles:
-  Debug: Config.xcconfig
-  Release: Config.xcconfig
+  Debug: xcconfigs/Config.xcconfig
+  Release: xcconfigs/Config.xcconfig
 
 settings:
   base:

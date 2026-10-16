@@ -5,7 +5,7 @@
       location = "group:__SLUG__.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Config.xcconfig">
+      location = "group:xcconfigs">
    </FileRef>
    <FileRef
       location = "group:Makefile">
