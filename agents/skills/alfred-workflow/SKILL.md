@@ -21,6 +21,12 @@ ALWAYS:
 - Pass structured data via an item's `variables` dict, not `arg`/`{query}`.
 - Return at least 1 item from a Script Filter for "nothing to show" states.
 - Keep UI text (title/subtext/runningsubtext) in info.plist config or the Workflow Variables panel.
+- Set up tooling before writing any workflow code: `pyproject.toml` (pytest + ruff config matching sibling workflows), `Makefile`, shell linter - then write tests.
+- Give the `Makefile` the sibling target set: `setup test lint format format-check check clean build verify release sync-plist link-live`, plus project-specific ones (`vendor`, `icons`).
+- Manage Python dev tools (`pytest`, `pytest-cov`, `ruff`) as a `uv` dev group: `make setup` runs `uv sync` once, every other target uses `uv run --no-sync`.
+- Put `ruff check`, `shellcheck`/`zsh -n` and `plutil -lint info.plist` in `make lint`; set `--cov-fail-under=80` in pytest `addopts`.
+- Write action scripts in bash so `shellcheck` can lint them; lint any zsh script with `zsh -n` only - shellcheck rejects zsh (SC1071).
+- Render workflow and result icons with `icon-symbol.sh` (skill `icons`) from a repo `tools/icons.txt` (`<name> <symbol>` lines) behind `make icons`.
 - Run scripts standalone (`python3 script.py "arg"`) to check JSON output.
 - Have the user manually test real Alfred UI behavior (placeholders, fallback search, argument forwarding) in the app.
 - Use `$1`, not literal `{query}`, inside a Script Filter's `script` field in argv mode.
@@ -48,6 +54,8 @@ ALWAYS:
 - Use verbatim wording when the user dictates exact README text — no embellishing, no added justification/explanation sentences.
 
 NEVER:
+- Run `uv run` without `--no-sync` in `Makefile` targets - it re-syncs the environment on every call.
+- Assume older sibling workflows are the tooling reference - they predate `uv`/`shellcheck` (global `ruff`, `python3 -m pytest`); keep their target names, not their tool invocation.
 - Use Script Filter Argument "Required" when the next chained stage forwards an empty `arg`.
 - Use Script Filter Argument "No Argument" for a list needing live search-as-you-type.
 - Assume a chained Script Filter's `alfredfiltersresults=true` fuzzy match will hit — the forwarded box text can hide results.
