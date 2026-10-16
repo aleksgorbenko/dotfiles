@@ -16,7 +16,7 @@ paths:
 ## Project
 
 - Generate every Xcode project from `project.yml` with XcodeGen; never edit `.pbxproj` or `.xcscheme` files by hand.
-- Start a new project from the `xcode-project-new` skill.
+- Start a new project from the `swift-project-new` skill.
 - Set `settingPresets: none` and declare every build setting in `project.yml`: project-wide under `settings`, shared target settings in `settingGroups`.
 - Nest a setting group's keys under `base:` whenever the group also lists `groups:`.
 - Point every configuration at `Config.xcconfig` through `configFiles`, and keep values the Makefile or scripts read in that xcconfig.

@@ -1,6 +1,6 @@
 ---
-name: architecture-design
-description: Produce a visual, concrete design for a new feature or refactor before implementation — data model tables, a Mermaid relationship diagram, and signature-only interface blocks. Use when planning a new feature, planning a refactor, asked to "design the data model", "show the architecture", "map the relationships", or "create a design doc" for a feature. Works from inside plan-mode (feeds the Design section of the current plan) or standalone (writes/updates a repo doc file). NOT for APP.md/DOMAIN.md/PACKAGES.md — that's swift-project-init-docs. NOT for small fixes needing no real design.
+name: swift-feature-design
+description: Produce a visual, concrete design for a new feature or refactor before implementation — data model tables, a Mermaid relationship diagram, and signature-only interface blocks. Use when planning a new feature, planning a refactor, asked to "design the data model", "show the architecture", "map the relationships", or "create a design doc" for a feature. Works from inside plan-mode (feeds the Design section of the current plan) or standalone (writes/updates a repo doc file). NOT for APP.md/DOMAIN.md/PACKAGES.md — that's swift-project-docs. NOT for small fixes needing no real design.
 ---
 
 # Architecture Design
@@ -61,6 +61,6 @@ protocol BrowserHistorySearching: Sendable {
 
 ## Not this skill
 
-- APP.md / DOMAIN.md / PACKAGES.md content → `swift-project-init-docs`.
+- APP.md / DOMAIN.md / PACKAGES.md content → `swift-project-docs`.
 - Full UML (multiplicities, stereotypes beyond `<<actor>>`-style hints, formal notation) — deliberately not used here, Mermaid stays lightweight.
 - A fix small enough that no data model or relationship actually changes — skip this skill, plan normally.

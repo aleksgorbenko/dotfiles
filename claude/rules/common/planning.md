@@ -11,7 +11,7 @@ Default plan format in plan-mode:
 Each line:
 <action> <target>
 
-New feature or refactor (not a small fix): load skill `architecture-design` before writing Design — data model tables, a Mermaid relationship diagram, signature-only interface blocks.
+New feature or refactor (not a small fix): load skill `swift-feature-design` before writing Design — data model tables, a Mermaid relationship diagram, signature-only interface blocks.
 
 Formatting:
 

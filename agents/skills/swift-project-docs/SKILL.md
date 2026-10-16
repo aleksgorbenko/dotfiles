@@ -1,5 +1,5 @@
 ---
-name: swift-project-init-docs
+name: swift-project-docs
 description: Generate or refresh a project's APP.md, DOMAIN.md, and PACKAGES.md through guided clarification questions, and optionally scaffold SwiftLint, Config.xcconfig, and a fastlane App Store release pipeline
 ---
 
@@ -11,12 +11,12 @@ Generate three foundational reference docs for a project by asking the user targ
 
 Three files only:
 - **APP.md** — product identity: what the app is, philosophy/constraints, feature list + status.
-- **DOMAIN.md** — core domain objects: nouns, their key attributes/relationships, terminology.
+- **DOMAIN.md** — core domain objects only: nouns, their attributes, identity, invariants, terminology. No services, repositories, stores or protocols; those go in `docs/design/<context>.md` via `swift-feature-design`.
 - **PACKAGES.md** — package/module split: responsibility per package, dependency direction, placement rules.
 
 Optionally (macOS/SwiftPM projects, only if the user asks): scaffold project tooling — SwiftLint, `Config.xcconfig`, and a fastlane App Store release pipeline. See "Tooling scaffold" below.
 
-Out of scope (do not attempt): interface/protocol definitions, method signatures, function-level API contracts between packages, relationship diagrams. That belongs to `architecture-design` — invoke it separately once real code exists, don't pull that thread here even if the user starts describing methods.
+Out of scope (do not attempt): interface/protocol definitions, method signatures, function-level API contracts between packages, relationship diagrams. That belongs to `swift-feature-design` — invoke it separately once real code exists, don't pull that thread here even if the user starts describing methods.
 
 ## Mode detection
 
@@ -36,8 +36,9 @@ Ask in batches via clarifying questions, not all at once. Skip a round entirely 
 - Core features list with status (shipped / in progress / planned)
 
 **2. Domain objects (→ DOMAIN.md)**
-- Core nouns of the system (the things it models, not the UI screens)
-- Key attributes and relationships between them
+- Core nouns of the system (the things it models, not the UI screens or the services that move them)
+- Key attributes, identity and invariants
+- Relationships between objects only
 - Terminology to standardize (names that must be used consistently across code and docs)
 
 **3. Package split (→ PACKAGES.md)**
@@ -67,8 +68,9 @@ Ask in batches via clarifying questions, not all at once. Skip a round entirely 
 ```
 # Domain
 
-## <Object Name>
+## <Object Name> (Value Object | Entity | Aggregate Root)
 - attributes
+- identity, invariants
 - relationships to other objects
 
 (repeat per core object)
@@ -132,5 +134,5 @@ Central home for build settings that are duplicated across config blocks/targets
 3. Run question round 2, write/update DOMAIN.md.
 4. Run question round 3, write/update PACKAGES.md.
 5. Confirm file paths written and summarize what changed, in one or two sentences — don't repeat the full file content back.
-6. If the user starts describing package interfaces or method signatures during round 3, note that `architecture-design` handles that (invoke it if they want to go there now), and keep this round scoped to responsibility + dependency direction + placement.
+6. If the user starts describing package interfaces or method signatures during round 3, note that `swift-feature-design` handles that (invoke it if they want to go there now), and keep this round scoped to responsibility + dependency direction + placement.
 7. If the user asked for tooling, scaffold the requested pieces per "Tooling scaffold": get the linter clean and tests green before committing, and never commit secrets.

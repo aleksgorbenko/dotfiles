@@ -1,5 +1,5 @@
 ---
-name: macos-app-release
+name: swift-app-release
 description: Release a macOS app to TestFlight, the App Store and direct download (Gumroad + Sparkle) with Make targets, asc and one copy source. Use for "publish to TestFlight", "upload a new build", "submit for App Store review", "submit for Beta App Review", "TestFlight public link", "set up the release pipeline for a new app", "roll back a release", "write release notes", "App Store description from the blog". Not for single asc commands (use the asc-* skills) or app code patterns (rules/swift).
 ---
 
