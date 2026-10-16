@@ -1,1 +1,3 @@
-/Applications/SF Symbols.app/Contents/Executables/sfsymbols
+#!/usr/bin/env bash
+set -euo pipefail
+exec "/Applications/SF Symbols.app/Contents/Executables/sfsymbols" "$@"
