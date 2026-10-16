@@ -171,6 +171,13 @@ function install_dotfiles () {
 	$DOTS/bin/link-file "${DOTS}/config/ripgreprc" "${HOME}/.ripgreprc"
 	ok "ripgrep configured"
 
+	# SF Symbols CLI
+	if [ -x "/Applications/SF Symbols.app/Contents/Executables/sfsymbols" ]; then
+		mkdir -p "${HOME}/.local/bin"
+		$DOTS/bin/link-file "/Applications/SF Symbols.app/Contents/Executables/sfsymbols" "${HOME}/.local/bin/sfsymbols"
+		ok "sfsymbols linked"
+	fi
+
 	# editor key bindings
 	# Symlinks for app preferences are disabled since Sonoma.
 	# That's why this copies files after any changes in settings.
