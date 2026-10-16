@@ -77,7 +77,14 @@ Ask in batches via clarifying questions, not all at once. Skip a round entirely 
 
 ## Terminology
 - term → definition, only where a name could be ambiguous or is enforced project-wide
+
+### Enforced Vocabulary
+| Use | Never | Rule |
+|---|---|---|
+| preferred word | losing synonyms | `vocabulary_<word>` |
 ```
+
+Every Enforced Vocabulary row gets a SwiftLint `custom_rules` entry (`regex` on the losing word, `match_kinds: [identifier, typeidentifier]`, `severity: error`, `message` naming the preferred word); prove each rule fires on a throwaway probe file before committing.
 
 **PACKAGES.md**
 ```
