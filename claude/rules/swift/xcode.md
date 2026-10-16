@@ -1,5 +1,6 @@
 ---
 paths:
+  - "**/project.yml"
   - "**/*.xcodeproj/**"
   - "**/*.xcworkspace/**"
   - "**/*.xcscheme"
@@ -11,6 +12,19 @@ paths:
   - "**/ci_scripts/**"
 ---
 # Xcode
+
+## Project
+
+- Generate every Xcode project from `project.yml` with XcodeGen; never edit `.pbxproj` or `.xcscheme` files by hand.
+- Start a new project from the `xcode-project-new` skill.
+- Set `settingPresets: none` and declare every build setting in `project.yml`: project-wide under `settings`, shared target settings in `settingGroups`.
+- Nest a setting group's keys under `base:` whenever the group also lists `groups:`.
+- Point every configuration at `Config.xcconfig` through `configFiles`, and keep values the Makefile or scripts read in that xcconfig.
+- Use `syncedFolder` sources and exclude any `INFOPLIST_FILE` from the folder's membership.
+- Give local packages that the workspace already lists `excludeFromProject: true`.
+- Commit the generated `.xcodeproj` and provide `make generate-project` and `make check-project`, which fails when `.pbxproj` differs from `project.yml`; run `check-project` in CI.
+- Commit scheme files in the form Xcode re-saves them and leave them out of `check-project`.
+- Diff `xcodebuild -showBuildSettings` for every target and configuration before and after moving a project to XcodeGen.
 
 ## Workspace
 
