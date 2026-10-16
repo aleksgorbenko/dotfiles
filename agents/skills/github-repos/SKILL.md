@@ -10,14 +10,15 @@ description: >
 
 # GitHub Repos on This Machine
 
-Files: `/Users/gbko/Dropbox/src/proj/infra-github` — `repos.auto.tfvars` (repo list),
+Files: `/Users/gbko/src/proj/infra-github` — `repos.auto.tfvars` (repo list),
 `repos.tf` (for_each logic), `Makefile` (plan/apply/fmt/state-list). State in HCP
 Terraform, workspace `infra-github`.
 
 ALWAYS:
 - Add or edit a repo via `repos.auto.tfvars`.
 - Run `terraform fmt -recursive` before `make plan`.
-- Run `make plan` and read the full output before any apply.
+- Run `make plan` and read the full output before any apply; it saves `tfplan`, and `make apply` applies exactly that file.
+- Run every terraform command through `make` - it loads `.env` and `GITHUB_TOKEN`; plain `terraform` fails on missing credentials.
 - Show the plan to the user and get explicit approval before every apply, even a rerun of an already-approved plan.
 - Stop and explain exactly what would change if the plan shows anything beyond a clean `+ create` (destroy, in-place update, visibility→public, name change) — wait for confirmation naming that specific resource.
 - Add matching config to `repos.auto.tfvars` before importing a manually-created repo.
