@@ -45,7 +45,7 @@ expensive-body views to skip re-renders.
 
 ## Fixed-row panels
 
-- Size a panel that shows N rows from the measured height of a rendered row (`onGeometryChange`), never from font-metric estimates.
+- Give each row a fixed height constant and size a panel that shows N rows from it; never estimate from font metrics or measure rendered rows at runtime.
 - Count N-1 gaps between N stacked rows.
 - Arrow Up from the first row selects the query text with no row selected; Down returns to the first row and collapses the text selection.
 
