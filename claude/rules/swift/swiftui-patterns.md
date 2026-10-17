@@ -54,3 +54,13 @@ expensive-body views to skip re-renders.
 SwiftUI in manually-managed window (hotkey panel, custom `NSWindow`, status-bar popover) →
 AppKit coordinator (`NSWindowController`-style) owns window + `NSHostingView`, constructs
 and injects ViewModel. Not part of MVVM — hosts the stack.
+
+## macOS windows and Liquid Glass
+
+- Bring windows of an accessory (LSUIElement) app forward with `NSApp.activate()`, `orderFrontRegardless()` and `makeKey()` in a main-actor `Task` after SwiftUI opens them, and route every Settings entry point through one opener.
+- Give every window a title (hidden with `titleVisibility = .hidden` when the design has none) and mark decorative images `accessibilityHidden(true)`.
+- Put Liquid Glass (`glassEffect`, `.glass`, `.glassProminent`) behind `#available(macOS 26, *)` with the pre-26 look as the fallback.
+- Place panels at fractions of the screen's visible frame, never at fixed point offsets.
+- Offer picture tiles for few-choice visual settings (theme, position) and top-align the row label with them.
+- Preview a placement setting by showing the window there briefly without taking focus.
+

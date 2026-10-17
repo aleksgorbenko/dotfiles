@@ -1,0 +1,11 @@
+pre-commit:
+  parallel: true
+  commands:
+    lint:
+      run: make lint
+    fmt-check:
+      run: make fmt-check
+    check-project:
+      run: make check-project
+    scan-staged-secrets:
+      run: make scan-staged-secrets

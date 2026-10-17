@@ -37,6 +37,14 @@ Each test gets a fresh instance — set up in `init`, tear down in `deinit`. No 
 - Pass an explicit UTC time zone (`TimeZone.gmt`) to date code under test; never rely on the machine's or the test plan's time zone.
 - Build fixture dates from ISO 8601 strings (`try Date("2026-02-09T23:00:00Z", strategy: .iso8601)`), never from raw epoch numbers.
 
+## Coverage and Flakiness
+
+- Measure coverage on the full test plan, exclude SwiftUI view files and the `@main` App file, and fail below 80%.
+- Cover views with swift-snapshot-testing in light appearance at `perceptualPrecision: 0.98`, and skip snapshot suites where the `__Snapshots__` folder is absent or `SKIP_SNAPSHOTS=1`.
+- Repeat a suspect test with `make test-until-failure TESTS=<target/suite>` before calling it fixed.
+- Run `performAccessibilityAudit()` in a UI test and ignore issues whose element lies outside the app's window.
+- Re-post a notification inside the wait loop when the observer under test subscribes asynchronously.
+
 ## Tags
 
 - Mark every integration suite with a tag trait (`@Suite(.tags(.integration))`); tag every suite named `*IntegrationTests`.

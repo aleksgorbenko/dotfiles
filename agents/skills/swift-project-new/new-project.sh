@@ -11,7 +11,7 @@ template="$(cd "$(dirname "$0")" && pwd)/template"
 fill() {
   sed -e "s|__APP__|$app|g" -e "s|__SLUG__|$slug|g" -e "s|__BUNDLE_ID__|$bundle|g" \
     -e "s|__TEAM_ID__|$team|g" -e "s|__OWNER__|$owner|g" -e "s|__MACOS__|$macos|g" \
-    -e "s|__YEAR__|$(date +%Y)|g" "$1" > "$2"
+    -e "s|__YEAR__|$(date +%Y)|g" -e "s|__DATE__|$(date +%Y-%m-%d)|g" "$1" > "$2"
 }
 
 mkdir -p "$dir/$slug/Assets.xcassets/AppIcon.appiconset" "$dir/${slug}Tests" "$dir/$app.xcworkspace"
@@ -21,11 +21,20 @@ fill "$template/xcconfigs/Config.xcconfig" "$dir/xcconfigs/Config.xcconfig"
 fill "$template/Makefile" "$dir/Makefile"
 fill "$template/workspace.xcworkspacedata" "$dir/$app.xcworkspace/contents.xcworkspacedata"
 
+files=$(cd "$template" && ls AGENTS.md CLAUDE.md README.md .swiftlint.yml .swift-format lefthook.yml .gitleaks.toml   .github/dependabot.yml .github/workflows/ci.yml docs/adr/*.md scripts/*.py scripts/*.sh scripts/tests/*.py)
+for relative in $files; do
+  mkdir -p "$dir/$(dirname "$relative")"
+  fill "$template/$relative" "$dir/$relative"
+done
+chmod +x "$dir"/scripts/*.py "$dir"/scripts/*.sh
+cp "$template/gitignore" "$dir/.gitignore"
+fill "$template/PrivacyInfo.xcprivacy" "$dir/$slug/PrivacyInfo.xcprivacy"
+
 cat > "$dir/$slug/${app}App.swift" <<EOF
 import SwiftUI
 
 @main
-struct ${app}App: App {
+internal struct ${app}App: App {
     var body: some Scene {
         WindowGroup {
             Text("$app")

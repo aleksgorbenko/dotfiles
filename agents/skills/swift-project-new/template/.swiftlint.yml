@@ -1,0 +1,149 @@
+# SwiftLint configuration for Bukku.
+# Layout/whitespace is `xcrun swift-format` (.swift-format), not SwiftLint.
+
+excluded:
+  - build.noindex
+  - "**/.build"
+  - "Packages/**/.build"
+  - "**/worktrees"
+
+opt_in_rules:
+  - empty_count
+  - first_where
+  - contains_over_filter_count
+  - contains_over_first_not_nil
+  - explicit_init
+  - redundant_nil_coalescing
+  - toggle_bool
+  - closure_spacing
+  - collection_alignment
+  - fatal_error_message
+  - overridden_super_call
+  - prefer_self_in_static_references
+  - identical_operands
+  - unowned_variable_capture
+  - unhandled_throwing_task
+  - private_swiftui_state
+  - direct_return
+  - self_binding
+  - shorthand_optional_binding
+  - yoda_condition
+  - convenience_type
+  - unneeded_parentheses_in_closure_argument
+  - untyped_error_in_catch
+  - discouraged_none_name
+  - empty_string
+  - empty_collection_literal
+  - prefer_zero_over_explicit_init
+  - reduce_into
+  - legacy_multiple
+  - weak_delegate
+  - prefer_key_path
+  - unneeded_throws_rethrows
+  - variable_shadowing
+  - number_separator
+  - force_unwrapping
+  - implicitly_unwrapped_optional
+  - implicit_return
+  - unused_parameter
+  - type_contents_order
+  - discouraged_optional_boolean
+  - discouraged_optional_collection
+  - flatmap_over_map_reduce
+  - contains_over_filter_is_empty
+  - contains_over_range_nil_comparison
+  - last_where
+  - sorted_first_last
+  - return_value_from_void_function
+  - redundant_type_annotation
+  - sorted_imports
+  - array_init
+  - unneeded_escaping
+  - lower_acl_than_parent
+  - explicit_top_level_acl
+  - file_name
+  - one_declaration_per_file
+
+# opening_brace/trailing_comma/closure_parameter_position: swift-format actively
+# disagrees with SwiftLint's defaults here (own-line brace after a wrapped
+# multi-line condition/closure signature, trailing comma on wrapped collections)
+# — ceded to swift-format so the two tools stop fighting.
+disabled_rules:
+  - opening_brace
+  - trailing_comma
+  - closure_parameter_position
+
+identifier_name:
+  min_length: 2
+  excluded: [id, io, os, x, y, a, b, ok, to]
+
+# 120 matches .swift-format's lineLength — swift-format already wraps
+# anything wrappable; this only catches what it structurally can't
+# (comments, URLs, interpolated strings are exempted below).
+line_length:
+  warning: 120
+  ignores_comments: true
+  ignores_interpolated_strings: true
+  ignores_urls: true
+
+# 500: default 400 is tight for an @Observable view-model file split into
+# same-file MARK extensions — splitting across files would force several
+# private(set) stored properties to plain internal (Swift has no
+# same-type-across-files access level), a real encapsulation loss for a
+# non-functional rule.
+file_length:
+  warning: 500
+
+# file_name: our convention names the file after the protocol/type plus a
+# role suffix (`WindowOpeningProtocol.swift` declares `protocol WindowOpening`)
+# — extend the default suffix_pattern to also allow a literal "Protocol" suffix.
+file_name:
+  suffix_pattern: "(\\+.*|Protocol)"
+
+# Requires a compiler log (`swiftlint analyze`, not plain `lint`) — CI runs
+# `make lint-analyze` for this after a clean build.
+# unused_import/unused_declaration: real value, hand-fixed a batch of genuine
+# hits (dead code, dead imports) this way. But given the SAME compiler log,
+# results are deterministic — the violation SET changes between separate
+# clean builds, because SPM's file-compile ordering isn't stable run to run
+# and these two rules depend on cross-file reference order. That makes them
+# unsuitable for a --strict gate (flaky red builds), not a false-positive
+# problem to fix with more disable comments. Run manually and review by hand
+# when auditing dead code; don't wire into CI.
+analyzer_rules:
+  - explicit_self
+  - capture_variable
+  - typesafe_array_init
+
+# One word per concept; DOMAIN.md "Enforced Vocabulary" lists the preferred terms.
+custom_rules:
+  vocabulary_fake:
+    name: "Vocabulary: Fake"
+    regex: "[Ff]ixture"
+    match_kinds: [identifier, typeidentifier]
+    message: "Name test doubles and test data Fake, not Fixture."
+    severity: error
+  vocabulary_service:
+    name: "Vocabulary: Service"
+    regex: "(?<!File|Undo|Layout)Manag(er|ing)\\b"
+    match_kinds: [identifier, typeidentifier]
+    message: "Use the Service suffix, not Manager."
+    severity: error
+  vocabulary_read:
+    name: "Vocabulary: Read"
+    regex: "[Ff]etch"
+    match_kinds: [identifier, typeidentifier]
+    message: "Use read (readAll, *Reader, *Reading), not fetch."
+    severity: error
+  vocabulary_configuration:
+    name: "Vocabulary: Configuration"
+    regex: "(?<!Match)[Cc]onfig\\b"
+    match_kinds: [identifier, typeidentifier]
+    message: "Spell out configuration (userConfiguration, AppInternalConfiguration)."
+    severity: error
+  vocabulary_british:
+    name: "Vocabulary: British spelling"
+    regex: "[Nn]ormaliz|(?<!collection)(?<!scrollBounce)Behavior|\\bbehavior|[Ii]nitializ|[Ff]avorite|[Cc]anceled"
+    match_kinds: [identifier, typeidentifier]
+    message: "Use British spelling in our own names: normalise, behaviour, initialise, favourite, cancelled."
+    severity: error

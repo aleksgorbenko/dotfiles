@@ -26,6 +26,17 @@ paths:
 - Commit scheme files in the form Xcode re-saves them and leave them out of `check-project`.
 - Diff `xcodebuild -showBuildSettings` for every target and configuration before and after moving a project to XcodeGen.
 
+## Checks
+
+- Make every `package-*` target depend on `make check-release`: project check, lint, analyzer, format, script tests, secret and dependency scans, full tests with coverage, and the warnings check.
+- Fail on any warning in project sources by scanning the raw xcodebuild log (`make check-warnings`), on top of `SWIFT_TREAT_WARNINGS_AS_ERRORS`.
+- Verify the signed app's entitlements against the source entitlements file after every export.
+- Build local packages in parallel for `make lint-analyze` locally, and analyze the test build's raw log in CI.
+- Pipe xcodebuild through xcbeautify only through an opt-in Makefile variable, with `set -o pipefail` and the raw log kept by `tee`.
+- Provide `make profile-memory`: the Release build recorded with Instruments' Leaks template, printing peak and final memory, the leak count and the `.trace` path.
+- Provide `make status-appstore`: App Store versions, latest builds, Beta App Review state, groups and the public link from `asc`.
+- Keep `.github/dependabot.yml` with `open-pull-requests-limit: 0` until the repository is public.
+
 ## Workspace
 
 - Give the workspace one `FileRef` per git-tracked top-level file and folder that no project or package already shows, so the navigator lists every non-generated file.
@@ -50,9 +61,16 @@ paths:
 - Put a narrower run (unit only) in its own test plan referenced by the scheme, and pick it with `-testPlan`.
 - Check in a script that every test plan lists the same test targets.
 - Never pass `-skip-testing:<Target>/<Suite>` to exclude a category; a stale identifier silently skips nothing.
+- Set an environment variable in every test plan that starts the test host app in a demo or hermetic mode.
+- Keep UI tests in their own test plan run by `make test-ui`, not in the plans CI runs.
 - Pin the xcodebuild test destination to one architecture (`platform=macOS,arch=arm64`) so it never warns about multiple matching destinations.
 
 ## CI
+
+- Run macOS CI on Xcode Cloud while the repository is private; keep GitHub's macOS jobs in the workflow behind `if: vars.MACOS_CI == 'true' || github.event_name == 'workflow_dispatch'`.
+- Trigger GitHub CI on `pull_request` and `workflow_dispatch` only, never also on branch `push`.
+- Run secret and dependency scans in an `ubuntu-latest` job.
+- Diagnose Xcode Cloud failures with `asc xcode-cloud build-runs` and `asc xcode-cloud doctor --run-id`.
 
 - Run on a pinned Xcode runner image, assert the Swift version before building, and pass `-skipPackagePluginValidation` to `xcodebuild`.
 - Pass ad-hoc signing overrides (`CODE_SIGN_IDENTITY=-`) only on CI runners, never on a developer's Mac.

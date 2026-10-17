@@ -1,0 +1,71 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  scans:
+    name: Secret and dependency scans
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install gitleaks and OSV-Scanner
+        run: |
+          eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+          brew install gitleaks osv-scanner
+          echo "/home/linuxbrew/.linuxbrew/bin" >> "$GITHUB_PATH"
+
+      - name: make scan-secrets
+        run: make scan-secrets
+
+      - name: make scan-dependencies
+        run: make scan-dependencies
+
+  lint:
+    name: Lint
+    if: vars.MACOS_CI == 'true' || github.event_name == 'workflow_dispatch'
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install SwiftLint and XcodeGen
+        run: brew install swiftlint xcodegen
+
+      - name: make check-project
+        run: make check-project
+
+      - name: make lint
+        run: make lint
+
+      - name: make fmt-check
+        run: make fmt-check
+
+  test:
+    name: Tests
+    if: vars.MACOS_CI == 'true' || github.event_name == 'workflow_dispatch'
+    runs-on: macos-26
+    env:
+      TEST_RUNNER_SKIP_SNAPSHOTS: "1"
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install xcbeautify and SwiftLint
+        run: brew install xcbeautify swiftlint
+
+      - name: make test-coverage
+        run: make test-coverage XCODEBUILD_LOG=build.noindex/xcodebuild.log XCBEAUTIFY="xcbeautify --renderer github-actions" XCODEBUILD_FLAGS="CODE_SIGN_IDENTITY=- CODE_SIGN_STYLE=Manual DEVELOPMENT_TEAM= PROVISIONING_PROFILE_SPECIFIER="
+
+      - name: make check-warnings
+        run: make check-warnings XCODEBUILD_LOG=build.noindex/xcodebuild.log
+
+      - name: make lint-analyze
+        run: make lint-analyze COMPILER_LOG=build.noindex/xcodebuild.log

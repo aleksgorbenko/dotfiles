@@ -5,12 +5,42 @@
       location = "group:__SLUG__.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:xcconfigs">
+      location = "group:AGENTS.md">
+   </FileRef>
+   <FileRef
+      location = "group:CLAUDE.md">
+   </FileRef>
+   <FileRef
+      location = "group:README.md">
    </FileRef>
    <FileRef
       location = "group:Makefile">
    </FileRef>
    <FileRef
       location = "group:project.yml">
+   </FileRef>
+   <FileRef
+      location = "group:xcconfigs">
+   </FileRef>
+   <FileRef
+      location = "group:scripts">
+   </FileRef>
+   <FileRef
+      location = "group:docs">
+   </FileRef>
+   <FileRef
+      location = "group:.github">
+   </FileRef>
+   <FileRef
+      location = "group:.swiftlint.yml">
+   </FileRef>
+   <FileRef
+      location = "group:.swift-format">
+   </FileRef>
+   <FileRef
+      location = "group:lefthook.yml">
+   </FileRef>
+   <FileRef
+      location = "group:.gitleaks.toml">
    </FileRef>
 </Workspace>

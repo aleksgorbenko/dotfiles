@@ -20,6 +20,8 @@ description: Release a macOS app to TestFlight, the App Store and direct downloa
 - Script steps carry the exact name of the target that calls them.
 - Builds go through Make (`archive-*`, `export-*`), never raw `xcodebuild` in scripts.
 - Submission is always a separate, deliberate run.
+- `package-*` depends on `make check-release`; packaging verifies signed entitlements against the source file.
+- `make status-appstore` prints versions, builds, Beta App Review state, groups and the public link.
 - CI release workflow: `workflow_dispatch` only; `vX.Y.Z` tags belong to the direct release.
 
 ## Order for a new version
@@ -59,7 +61,7 @@ description: Release a macOS app to TestFlight, the App Store and direct downloa
 ## TestFlight
 
 - Internal group `Team`: internal, access to all builds, every App Store Connect user; no review.
-- External group `Public Beta`: public link + feedback; first build per version needs Beta App Review.
+- External group `Public Beta`: public link + feedback; every build needs its own Beta App Review submission (`make submit-testflight`); later builds are approved within minutes.
 - What to Test per build = release notes + the WHAT TO TRY section of the review notes + feedback line.
 - Review notes sections: ABOUT, WHAT TO TRY (first launch, each permission with the real button labels, shortcut, core actions), ACCOUNT, ENTITLEMENTS, CONTACT.
 - Visual assets are not needed for Beta App Review; they are for App Store submission.
