@@ -82,9 +82,14 @@ Ask in batches via clarifying questions, not all at once. Skip a round entirely 
 | Use | Never | Rule |
 |---|---|---|
 | preferred word | losing synonyms | `vocabulary_<word>` |
+
+## String Keys
+- shape: window + subject + role (`settingsLaunchAtLoginLabel`)
+- roles: the `ROLES` list in `scripts/check_strings.py` (`Title`, `Subtitle`, `Label`, `Button`, `Message`, `Hint`, …)
+- checked by `scripts/check_strings.py` in `make lint`
 ```
 
-Every Enforced Vocabulary row gets a SwiftLint `custom_rules` entry (`regex` on the losing word, `match_kinds: [identifier, typeidentifier]`, `severity: error`, `message` naming the preferred word); prove each rule fires on a throwaway probe file before committing.
+Every Enforced Vocabulary row gets a SwiftLint `custom_rules` entry (`regex` on the losing word, `match_kinds: [identifier, typeidentifier]`, `severity: error`, `message` naming the preferred word) and, when the word can reach UI text, a `BANNED` entry in `scripts/check_strings.py`; prove each rule fires on a throwaway probe file before committing.
 
 **PACKAGES.md**
 ```

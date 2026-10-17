@@ -15,6 +15,6 @@
 | Vocabulary and string keys | `make lint` | On, pre-commit and macOS CI |
 | Secret and dependency scans | `make scan-secrets`, `make scan-dependencies` | On, every pull request (Linux) |
 | Thread Sanitizer | `make test-tsan` | Manual |
-| Memory profile | `make profile-memory` | Manual |
+| Memory profile (peak, final, leaks, top classes, growth, .trace, .memgraph) | `make profile-memory` | Manual |
 | macOS CI on GitHub | `gh variable set MACOS_CI --body true` | Off ([ADR 0008](docs/adr/0008-ci-providers.md)) |
 | Dependabot | remove `open-pull-requests-limit: 0` | Off |

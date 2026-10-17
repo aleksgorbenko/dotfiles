@@ -18,6 +18,7 @@ COVERAGE_MIN := 80
 ITERATIONS ?= 100
 TESTS ?=
 PROFILE_SECONDS ?= 60
+PROFILE_TOP ?= 20
 
 .PHONY: help generate-project check-project build run test test-coverage test-tsan test-until-failure \
         check-warnings check-release lint lint-analyze fmt fmt-check test-scripts \
@@ -40,7 +41,7 @@ help:
 	@echo "scan-dependencies  - OSV-Scanner over every Package.resolved"
 	@echo "install-hooks      - Install the lefthook pre-commit hook"
 	@echo "generate-licences  - Third-party licence acknowledgements, fail on a missing licence"
-	@echo "profile-memory     - Release build under Instruments (Leaks): peak, final, leaks, .trace (PROFILE_SECONDS=60)"
+	@echo "profile-memory     - Release build under Instruments (Leaks): peak, final, leaks, top classes, growth, .trace, .memgraph (PROFILE_SECONDS=60, PROFILE_TOP=20)"
 
 generate-project:
 	xcodegen generate --spec project.yml --quiet
@@ -121,4 +122,4 @@ generate-licences:
 
 profile-memory:
 	xcodebuild -workspace $(WORKSPACE) -scheme $(SCHEME) -configuration Release -destination '$(DESTINATION)' $(XCODEBUILD_FLAGS) build
-	scripts/profile-memory.sh "$$(xcodebuild -workspace $(WORKSPACE) -scheme $(SCHEME) -configuration Release -showBuildSettings 2>/dev/null | awk -F'= ' '/ BUILT_PRODUCTS_DIR /{print $$2; exit}')/$(APP_NAME).app" $(PROFILE_SECONDS)
+	scripts/profile-memory.sh "$$(xcodebuild -workspace $(WORKSPACE) -scheme $(SCHEME) -configuration Release -showBuildSettings 2>/dev/null | awk -F'= ' '/ BUILT_PRODUCTS_DIR /{print $$2; exit}')/$(APP_NAME).app" $(PROFILE_SECONDS) $(PROFILE_TOP)
