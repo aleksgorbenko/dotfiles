@@ -2,8 +2,9 @@
 
 ## Setup
 
-- `brew install xcodegen swiftlint gitleaks osv-scanner lefthook xcbeautify licenseplist`
+- `brew install xcodegen swiftlint gitleaks osv-scanner lefthook xcbeautify licenseplist asc`
 - `make install-hooks` installs the pre-commit hook: lint, format check, project check, staged-secret scan.
+- App Store Connect API key in the Keychain (`asc:key-id`, `asc:issuer-id`, `asc:key-p8`) or `ASC_KEY_ID`, `ASC_ISSUER_ID`, `ASC_KEY_P8`.
 - `make run` builds and opens the app; `make help` lists every target.
 
 | Check | Command | State |
@@ -15,6 +16,9 @@
 | Vocabulary and string keys | `make lint` | On, pre-commit and macOS CI |
 | Secret and dependency scans | `make scan-secrets`, `make scan-dependencies` | On, every pull request (Linux) |
 | Thread Sanitizer | `make test-tsan` | Manual |
-| Memory profile (peak, final, leaks, top classes, growth, .trace, .memgraph) | `make profile-memory` | Manual |
+| Memory profile (peak, final, leaks, top classes, growth, .trace, .memgraph; `PROFILE_STACKS=1` names allocations by function) | `make profile-memory` | Manual |
+| CPU profile (top functions by self and total time, .trace) | `make profile-cpu` | Manual |
+| Launch time (phases, median of 5 runs, fails over 500 ms) | `make profile-launch` | Manual |
+| App Store and TestFlight status | `make status-appstore` | Manual, once `APP_STORE_APP_ID` is set |
 | macOS CI on GitHub | `gh variable set MACOS_CI --body true` | Off ([ADR 0008](docs/adr/0008-ci-providers.md)) |
 | Dependabot | remove `open-pull-requests-limit: 0` | Off |

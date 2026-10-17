@@ -33,7 +33,9 @@ paths:
 - Verify the signed app's entitlements against the source entitlements file after every export.
 - Build local packages in parallel for `make lint-analyze` locally, and analyze the test build's raw log in CI.
 - Pipe xcodebuild through xcbeautify only through an opt-in Makefile variable, with `set -o pipefail` and the raw log kept by `tee`.
-- Provide `make profile-memory`: the Release build recorded with Instruments' Leaks template, printing peak and final memory, the leak count and the `.trace` path.
+- Provide `make profile-memory`: the Release build recorded with Instruments' Leaks template, printing peak and final memory, the leak count, the largest classes, growth since launch, the `.trace` and the `.memgraph`; `PROFILE_STACKS=1` names allocations by function.
+- Provide `make profile-cpu`: the Release build recorded with Time Profiler, printing the top functions by self and total CPU.
+- Provide `make profile-launch`: the Release build launched several times under the App Launch template, failing when the median launch exceeds the budget.
 - Provide `make status-appstore`: App Store versions, latest builds, Beta App Review state, groups and the public link from `asc`.
 - Keep `.github/dependabot.yml` with `open-pull-requests-limit: 0` until the repository is public.
 

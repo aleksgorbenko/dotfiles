@@ -6,6 +6,7 @@ SCHEME := __SLUG__
 DESTINATION := platform=macOS,arch=arm64
 STRINGS_CATALOG := __SLUG__/Localizable.xcstrings
 ANALYZE_PACKAGES :=
+APP_STORE_APP_ID := $(shell awk -F' *= *' '/^APP_STORE_APP_ID *=/{print $$2}' xcconfigs/Config.xcconfig)
 
 XCODEBUILD_FLAGS ?=
 XCBEAUTIFY ?=
@@ -19,15 +20,19 @@ ITERATIONS ?= 100
 TESTS ?=
 PROFILE_SECONDS ?= 60
 PROFILE_TOP ?= 20
+PROFILE_STACKS ?= 0
+LAUNCH_RUNS ?= 5
+LAUNCH_BUDGET_MS ?= 500
+STATUS_BUILDS ?= 5
 
-.PHONY: help generate-project check-project build run test test-coverage test-tsan test-until-failure \
+.PHONY: help generate-project check-project build build-release run test test-coverage test-tsan test-until-failure \
         check-warnings check-release lint lint-analyze fmt fmt-check test-scripts \
-        scan-secrets scan-staged-secrets scan-dependencies install-hooks generate-licences profile-memory
+        scan-secrets scan-staged-secrets scan-dependencies install-hooks generate-licences profile-memory profile-cpu profile-launch status-appstore
 
 help:
 	@echo "generate-project   - xcodegen generate from project.yml"
 	@echo "check-project      - Fail if the committed .pbxproj differs from project.yml"
-	@echo "build / run        - Debug build / build and open the app"
+	@echo "build / build-release / run - Debug build / Release build / build and open the app"
 	@echo "test               - Full test plan"
 	@echo "test-coverage      - Full tests with coverage, fail below COVERAGE_MIN%"
 	@echo "test-tsan          - Tests under Thread Sanitizer, fail on any race"
@@ -41,7 +46,10 @@ help:
 	@echo "scan-dependencies  - OSV-Scanner over every Package.resolved"
 	@echo "install-hooks      - Install the lefthook pre-commit hook"
 	@echo "generate-licences  - Third-party licence acknowledgements, fail on a missing licence"
-	@echo "profile-memory     - Release build under Instruments (Leaks): peak, final, leaks, top classes, growth, .trace, .memgraph (PROFILE_SECONDS=60, PROFILE_TOP=20)"
+	@echo "profile-memory     - Release build under Instruments (Leaks): peak, final, leaks, top classes, growth, .trace, .memgraph (PROFILE_SECONDS=60, PROFILE_TOP=20, PROFILE_STACKS=1)"
+	@echo "profile-cpu        - Release build under Time Profiler: top functions by self and total CPU, .trace (PROFILE_SECONDS=60, PROFILE_TOP=20)"
+	@echo "profile-launch     - Release build launched LAUNCH_RUNS=5 times under App Launch: phases, fail if median > LAUNCH_BUDGET_MS=500"
+	@echo "status-appstore    - App Store versions, latest builds, Beta App Review state, groups, public link (STATUS_BUILDS=5)"
 
 generate-project:
 	xcodegen generate --spec project.yml --quiet
@@ -120,6 +128,20 @@ generate-licences:
 	license-plist --xcworkspace-path $(WORKSPACE) --output-path build.noindex/licences \
 		--markdown-path build.noindex/licences/Acknowledgements.md --fail-if-missing-license --suppress-opening-directory --silence-mode
 
-profile-memory:
+PROFILE_APP = "$$(xcodebuild -workspace $(WORKSPACE) -scheme $(SCHEME) -configuration Release -showBuildSettings 2>/dev/null | awk -F'= ' '/ BUILT_PRODUCTS_DIR /{print $$2; exit}')/$(APP_NAME).app"
+
+build-release:
 	xcodebuild -workspace $(WORKSPACE) -scheme $(SCHEME) -configuration Release -destination '$(DESTINATION)' $(XCODEBUILD_FLAGS) build
-	scripts/profile-memory.sh "$$(xcodebuild -workspace $(WORKSPACE) -scheme $(SCHEME) -configuration Release -showBuildSettings 2>/dev/null | awk -F'= ' '/ BUILT_PRODUCTS_DIR /{print $$2; exit}')/$(APP_NAME).app" $(PROFILE_SECONDS) $(PROFILE_TOP)
+
+profile-memory: build-release
+	scripts/profile-memory.sh $(PROFILE_APP) $(PROFILE_SECONDS) $(PROFILE_TOP) $(PROFILE_STACKS)
+
+profile-cpu: build-release
+	scripts/profile-cpu.sh $(PROFILE_APP) $(PROFILE_SECONDS) $(PROFILE_TOP)
+
+profile-launch: build-release
+	scripts/profile-launch.sh $(PROFILE_APP) $(LAUNCH_RUNS) $(LAUNCH_BUDGET_MS)
+
+status-appstore:
+	@test -n "$(APP_STORE_APP_ID)" || { echo "set APP_STORE_APP_ID in xcconfigs/Config.xcconfig"; exit 1; }
+	@scripts/asc.sh python3 scripts/appstore_status.py $(APP_STORE_APP_ID) $(STATUS_BUILDS)

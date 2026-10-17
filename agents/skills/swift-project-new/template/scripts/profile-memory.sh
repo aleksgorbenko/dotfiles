@@ -3,14 +3,15 @@ set -euo pipefail
 
 app_path="$1"
 seconds="${2:-60}"
+top="${3:-20}"
+stacks="${4:-0}"
 process="$(basename "$app_path" .app)"
-out_dir="build.noindex/profile"
-mkdir -p "$out_dir"
-stamp="$(cd "$out_dir" && pwd)/memory-$(date +%Y%m%d-%H%M%S)"
+# shellcheck source=scripts/profile-common.sh
+source "$(dirname "$0")/profile-common.sh"
+stamp="$out_dir/memory-$(date +%Y%m%d-%H%M%S)"
 trace="$stamp.trace"
 baseline="$stamp-start.memgraph"
 graph="$stamp.memgraph"
-top="${3:-20}"
 
 footprint_mb() {
   footprint "$1" 2>/dev/null | awk '/phys_footprint:/ && !found { size = $2; unit = $3; if (unit == "KB") size /= 1024; if (unit == "GB") size *= 1024; print int(size); found = 1 }' || true
@@ -20,15 +21,7 @@ class_table() {
   awk -v top="$top" '/^ *COUNT +BYTES/ { rows = top + 2 } rows > 0 { print; rows-- }'
 }
 
-pkill -x "$process" 2>/dev/null || true
-sleep 1
-open -a "$app_path"
-for _ in $(seq 1 20); do
-  pid="$(pgrep -nx "$process" || true)"
-  [ -n "$pid" ] && break
-  sleep 0.5
-done
-[ -n "${pid:-}" ] || { echo "error: $process did not start" >&2; exit 1; }
+if [ "$stacks" = 1 ]; then launch_app "$app_path" --env MallocStackLogging=1; else launch_app "$app_path"; fi
 
 for _ in $(seq 1 10); do
   sleep 1

@@ -17,9 +17,9 @@ description: Create a new macOS app from an XcodeGen project.yml template with t
 
 | File | Holds |
 |---|---|
-| `project.yml`, `xcconfigs/Config.xcconfig` | targets, settings (warnings as errors, MainActor default), name, bundle ID, version, team |
-| `Makefile` | build, run, test, coverage, TSan, flaky hunting, warnings check, release gate, lint, analyzer, format, scans, hooks, licences, memory profile |
-| `scripts/` | `check_coverage.py`, `check_warnings.py`, `check_entitlements.py`, `check_strings.py`, `lint-analyze.sh`, `profile-memory.sh`, with tests |
+| `project.yml`, `xcconfigs/Config.xcconfig` | targets, settings (warnings as errors, MainActor default), name, bundle ID, version, team, `APP_STORE_APP_ID` |
+| `Makefile` | build, run, test, coverage, TSan, flaky hunting, warnings check, release gate, lint, analyzer, format, scans, hooks, licences, memory, CPU and launch profiles, App Store status |
+| `scripts/` | `check_coverage.py`, `check_warnings.py`, `check_entitlements.py`, `check_strings.py`, `lint-analyze.sh`, `profile-*.sh`, `cpu_profile_top.py`, `launch_time.py`, `appstore_status.py`, `asc.sh`, with tests |
 | `.swiftlint.yml`, `.swift-format` | lint rules and vocabulary rules (Fake, Service, read, configuration, British spelling) |
 | `lefthook.yml`, `.gitleaks.toml` | pre-commit lint, format, project and secret checks |
 | `.github/workflows/ci.yml` | Linux scans on every pull request; macOS jobs behind `vars.MACOS_CI` |
