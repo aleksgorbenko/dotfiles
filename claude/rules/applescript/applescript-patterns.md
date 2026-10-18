@@ -26,6 +26,13 @@ paths:
 - Separate records with `character id 30` and fields with `character id 31`; never use tabs, commas or newlines.
 - Strip only `\r\n ` from script output in Python; plain `str.strip()` also removes the `\x1e`/`\x1f` separators and drops empty trailing fields.
 
+## Output Pitfalls
+
+- Coerce every returned value with `as text` before `return`; a non-text result gives a nil string in `NSAppleScript`.
+- Return integers with `as text` and anything else (dates, decimals) as an epoch number or a hand-built string; `as text` follows the user's locale.
+- Wrap `count of`, `item n of` and every property read of an app object in `try`; a closed window or a blank tab makes them fail mid-script.
+- Never return one value per line; app-supplied titles can contain newlines, tabs and the delimiter itself, so strip `RS`/`US` from titles inside the script when they might appear.
+
 ## Compilation
 
 - Keep a polled script's source constant per target; never interpolate per-call data into it.

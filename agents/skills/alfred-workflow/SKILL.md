@@ -52,10 +52,23 @@ ALWAYS:
 - Re-tag and re-cut the GitHub release after any `git commit --amend` on a repo's history — the old tag stays pointed at the now-orphaned pre-amend commit.
 - When wiping a repo to single-commit history: `rm -rf .git && git init`, one commit `feat: Add initial workflow files`, force-push, delete+recreate any existing release tags on the new commit.
 - Use verbatim wording when the user dictates exact README text — no embellishing, no added justification/explanation sentences.
+- Treat the repository README and Alfred's embedded `info.plist` `readme` as separate documents. The embedded readme follows the Gallery style guide and must not depend on repository-only content.
+- Keep the repository README and the embedded readme at the same content, but format each for its renderer: tables in the repository README, `*` bullet lists (e.g. `* Name `code` - detail`) in the embedded readme.
+- Store embedded-readme screenshots under `images/` in the workflow root, reference them with relative paths such as `![Description](images/about/main.png)`, and copy them into the exported bundle.
+- Put a short explanatory sentence immediately before each embedded-readme screenshot. Captions must say what the screenshot demonstrates, especially for summary or dashboard views.
+- Add `images/` to `link-live` and verify every referenced screenshot exists through the live workflow directory before claiming it is visible in Alfred.
+- When adding screenshots to several workflows, use the same filenames and relative location only when the screenshots belong to the same documented role. Run each workflow's own `link-live` target from that workflow repository; never run one repository's target against another repository's live directory.
+- Before release, inspect the exported archive with `unzip -l` and confirm every embedded-readme image path is present alongside the plist.
+- For public workflows, expose the primary keyword in `userconfigurationconfig`, use `{var:VARIABLE}` in every related Keyword or Script Filter node, and include the default keyword and purpose in both READMEs.
+- If a configurable primary keyword prefixes maintenance commands, derive those command keywords from the same variable so changing the keyword does not leave stale commands behind.
+- Remove private bundle IDs, local paths, example workflow names, and personal setup details from public READMEs and embedded workflow metadata before forum or Gallery publication.
+- Do not rewrite or clean a user-authored repository README when the request targets Alfred's embedded `info.plist` `readme`; preserve its wording and structure unless repository README changes are explicitly requested.
+- Name every workflow variable (UI text, labels, config) with letters, digits and underscores only; a hyphen is not a valid environment variable name and breaks shell `export`.
 
 NEVER:
 - Run `uv run` without `--no-sync` in `Makefile` targets - it re-syncs the environment on every call.
 - Assume older sibling workflows are the tooling reference - they predate `uv`/`shellcheck` (global `ruff`, `python3 -m pytest`); keep their target names, not their tool invocation.
+- Put Markdown tables in Alfred's embedded `info.plist` `readme` - Alfred's About view does not render them.
 - Use Script Filter Argument "Required" when the next chained stage forwards an empty `arg`.
 - Use Script Filter Argument "No Argument" for a list needing live search-as-you-type.
 - Assume a chained Script Filter's `alfredfiltersresults=true` fuzzy match will hit — the forwarded box text can hide results.
@@ -68,3 +81,4 @@ NEVER:
 - Rely on `alfred_workflow_cache` being present when running scripts outside Alfred.
 - Conflate "local personal tool over data you already have legitimate access to" with "redistributing a third party's proprietary content as a product" — the licensing caution from one doesn't automatically apply to the other.
 - Force-push a history reset over an already-public repo without a fresh explicit confirmation, even right after doing the same reset on a sibling repo.
+- Put the user's personal or business data (bundle IDs, company names, app IDs, real commit SHAs, branch names) in tests, fixtures or docs of a public workflow - use neutral examples such as `com.example.Sample`, and grep tracked files before the first commit.
