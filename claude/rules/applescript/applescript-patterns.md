@@ -24,6 +24,7 @@ paths:
 - Collect output in a list and join it once with `AppleScript's text item delimiters`; reset the delimiters to `""` afterwards.
 - Never build output with repeated `set output to output & …`.
 - Separate records with `character id 30` and fields with `character id 31`; never use tabs, commas or newlines.
+- Strip only `\r\n ` from script output in Python; plain `str.strip()` also removes the `\x1e`/`\x1f` separators and drops empty trailing fields.
 
 ## Compilation
 
