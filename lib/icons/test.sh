@@ -101,6 +101,10 @@ printf 'one bell\n# comment\n\ntwo house\n' >"$WORK/symbols.txt"
 check "symbol: batch" icon-symbol.sh --batch "$WORK/symbols.txt" --outdir "$WORK/batch" --size 64
 check "symbol: batch outputs" test -f "$WORK/batch/one.png" -a -f "$WORK/batch/two.png"
 check "symbol: batch skips comments" test "$(find "$WORK/batch" -name '*.png' | wc -l | tr -d ' ')" = 2
+printf 'blue bell #0A84FF\nplain bell\n' >"$WORK/colours.txt"
+check "symbol: batch with per-line background" icon-symbol.sh --batch "$WORK/colours.txt" --outdir "$WORK/colours" --size 64
+check "symbol: per-line background colour" pixel_is "$WORK/colours/blue.png" 1 32 0A84FFFF
+check "symbol: default background without colour column" pixel_is "$WORK/colours/plain.png" 1 32 FF0033FF
 
 check "emoji: transparent background" icon-emoji.sh "🍣" "$WORK/sushi.png" --bg none --size 128
 check "emoji: corner transparent" pixel_is "$WORK/sushi.png" 0 0 00000000

@@ -9,7 +9,8 @@ Usage:
   icon-symbol.sh <symbol> <output.png> [options]
   icon-symbol.sh --batch <file.txt> [--outdir DIR] [options]
 
-Batch file: one "<name> <symbol>" pair per line; writes DIR/<name>.png (default DIR: ./icons).
+Batch file: one "<name> <symbol> [#RRGGBB]" line per icon; writes DIR/<name>.png (default DIR: ./icons).
+             The optional colour overrides --bg for that icon.
 Blank lines and lines starting with # are skipped.
 
 Options:
@@ -57,18 +58,18 @@ WORK="$(mktemp -d)"
 trap 'rm -rf "$WORK"' EXIT
 
 render() {
-  local symbol="$1" output="$2"
+  local symbol="$1" output="$2" background="${3:-$BG}"
   "$SFSYMBOLS" export "$symbol" --format png --output "$WORK/glyph.png" \
     --point-size 512 --weight "$WEIGHT" --rendering-mode monochrome --color "$FG" \
     >/dev/null 2>"$WORK/error.log" || { cat "$WORK/error.log" >&2; exit 1; }
-  icon-compose.sh "$WORK/glyph.png" "$output" --bg "$BG" ${COMPOSE[@]+"${COMPOSE[@]}"}
+  icon-compose.sh "$WORK/glyph.png" "$output" --bg "$background" ${COMPOSE[@]+"${COMPOSE[@]}"}
 }
 
 if [[ -n "$BATCH" ]]; then
   [[ -f "$BATCH" ]] || { echo "Batch file not found: $BATCH"; exit 1; }
-  while read -r name symbol _; do
+  while read -r name symbol background _; do
     [[ -z "${name:-}" || "$name" == \#* ]] && continue
-    render "$symbol" "$OUTDIR/$name.png"
+    render "$symbol" "$OUTDIR/$name.png" "${background:-}"
   done < "$BATCH"
 else
   [[ ${#POSITIONAL[@]} -eq 2 ]] || usage
