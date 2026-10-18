@@ -42,12 +42,12 @@ All scripts live in `~/.dotfiles/bin`, share the `icon-<job>.sh` naming, print t
 
 Shared options on every renderer: `--size N`, `--bg #RRGGBB|none`, `--radius F` (0.2237), `--inset F` (0), `--glyph F` (0.56 with a background, 1.0 without).
 
-Batch files hold one `<name> <source>` pair per line; `#` lines and blank lines are skipped.
+Batch files hold one `<name> <source>` pair per line (`icon-symbol.sh` also takes an optional third `#RRGGBB` background column); `#` lines and blank lines are skipped.
 
 ## ALWAYS
 
 - Check names before rendering: `sfsymbols search <term>` for SF Symbols, `icon-iconify.sh --search <query> --set <sets>` for Iconify.
-- Keep one `--bg`/`--fg`/`--weight` across every icon in a set.
+- Keep one `--fg`/`--weight` across every icon in a set; vary the background only to group related items (e.g. one colour per section), via the batch file's colour column.
 - Keep a repo's icon list in a batch file (e.g. `tools/icons.txt`) behind a `make icons` target, so icons rebuild with one command.
 - Look at rendered icons (contact sheet or Read) before shipping - check centring and that each item is distinguishable.
 - Feed `icon-pack.sh` a 1024x1024 source; it warns but still runs on other sizes.
