@@ -5,18 +5,19 @@ overwrite_all=false backup_all=false skip_all=false
 link_file () {
   local src=$1 dst=$2
 
-  local overwrite= backup= skip=
+  local overwrite='' backup='' skip=''
   local action=
 
-  if [ -f "$dst" -o -d "$dst" -o -L "$dst" ]
+  if [ -f "$dst" ] || [ -d "$dst" ] || [ -L "$dst" ]
   then
 
     if [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]
     then
 
-      local currentSrc="$(readlink "$dst")"
-      local currentResolved="$(realpath "$dst" 2>/dev/null || true)"
-      local sourceResolved="$(realpath "$src" 2>/dev/null || true)"
+      local currentSrc currentResolved sourceResolved
+      currentSrc="$(readlink "$dst")"
+      currentResolved="$(realpath "$dst" 2>/dev/null || true)"
+      sourceResolved="$(realpath "$src" 2>/dev/null || true)"
 
       if [ "$currentSrc" == "$src" ] || { [ -n "$currentResolved" ] && [ "$currentResolved" == "$sourceResolved" ]; }
       then

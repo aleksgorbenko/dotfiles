@@ -73,7 +73,7 @@ alias gpoat="git push origin --all && git push origin --tags"
 alias gpv="git push -v"
 
 # PULL
-alias gunwip="git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1"
+alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
 alias gup="git pull --rebase"
 alias gupv="git pull --rebase -v"
 alias gupa="git pull --rebase --autostash"
