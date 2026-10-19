@@ -10,11 +10,11 @@
 # Run ./set-macos-defaults.sh and you'll be good to go.
 
 ok () {
-  echo "✅ "$1""
+  echo "✅"
 }
 
 running() {
-    echo -n "=> "$1": "
+    echo -n "=> $1: "
 }
 
 echo "=== Setting MacOS defaults that make sense ==="
@@ -51,7 +51,7 @@ echo "🤖 Configuring Finder"
 running "Keep folders on top when sorting by name (version 10.12 and later)"
 defaults write com.apple.finder _FXSortFoldersFirst -bool true;ok
 
-running "Expand the following File Info panes: “General”, “Open with”, and “Sharing & Permissions”"
+running "Expand the following File Info panes: 'General', 'Open with', and 'Sharing & Permissions'"
 defaults write com.apple.finder FXInfoPanesExpanded -dict \
   General -bool true \
   OpenWith -bool true \
@@ -68,12 +68,17 @@ defaults write com.apple.NetworkBrowser BrowseAllInterfaces 1;ok
 running "Always open everything in Finder's list view. This is important"
 defaults write com.apple.Finder FXPreferredViewStyle Nlsv;ok
 
+running "Arrange Finder items by name, without grouping"
+defaults write com.apple.finder FXArrangeGroupViewBy -string "Name"
+defaults write com.apple.finder FXPreferredGroupBy -string "None";ok
+
 running "Show the ~/Library folder"
 chflags nohidden ~/Library;ok
 
 running "Set the Finder prefs for showing a few different volumes on the Desktop"
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
-defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true;ok
+defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+defaults write com.apple.finder ShowHardDrivesOnDesktop -bool false;ok
 
 running "Show hidden files by default"
 defaults write com.apple.finder AppleShowAllFiles -bool true;ok
@@ -126,6 +131,15 @@ defaults write com.apple.dock "show-recents" -bool false;ok
 
 running "Only show active applications in Dock"
 defaults write com.apple.dock "static-only" -bool true;ok
+
+running "Set Dock icon size"
+defaults write com.apple.dock tilesize -float 36;ok
+
+running "Disable Dock launch animation"
+defaults write com.apple.dock launchanim -bool false;ok
+
+running "Hot corner: bottom right opens Quick Note"
+defaults write com.apple.dock wvous-br-corner -int 14;ok
 
 ###############################################################################
 echo "🤖 Animation"
@@ -183,7 +197,7 @@ defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true;ok
 # Disable Resume system-wide
 # defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false
 
-running "Disable the “Are you sure you want to open this application?” dialog"
+running "Disable the 'Are you sure you want to open this application?' dialog"
 defaults write com.apple.LaunchServices LSQuarantine -bool false;ok
 
 # Disable Notification Center and remove the menu bar icon
@@ -221,6 +235,22 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool
 defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1;ok
 
+running "Built-in trackpad: tap to click, secondary click, no drag, no three finger drag"
+defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
+defaults write com.apple.AppleMultitouchTrackpad TrackpadRightClick -bool true
+defaults write com.apple.AppleMultitouchTrackpad Dragging -int 0
+defaults write com.apple.AppleMultitouchTrackpad DragLock -int 0
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool false;ok
+
+running "Natural scrolling"
+defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true;ok
+
+running "Swipe between pages with scroll gestures"
+defaults write NSGlobalDomain AppleEnableSwipeNavigateWithScrolls -bool true;ok
+
+running "Click in the scroll bar jumps to the clicked spot"
+defaults write NSGlobalDomain AppleScrollerPagingBehavior -bool true;ok
+
 # https://www.howtogeek.com/267463/how-to-enable-key-repeating-in-macos.
 running "Disable press-and-hold for keys in favor of key repeat"
 defaults write -g ApplePressAndHoldEnabled -bool false;ok
@@ -228,6 +258,54 @@ defaults write -g ApplePressAndHoldEnabled -bool false;ok
 running "Set a blazingly fast keyboard repeat rate"
 defaults write NSGlobalDomain KeyRepeat -int 2
 defaults write NSGlobalDomain InitialKeyRepeat -int 10;ok
+
+running "Capitalise words automatically"
+defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool true;ok
+
+running "Add full stop with double-space"
+defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool true;ok
+
+###############################################################################
+echo "🤖 Windows, appearance and menu bar"
+###############################################################################
+
+running "Disable Stage Manager"
+defaults write com.apple.WindowManager GloballyEnabled -bool false;ok
+
+running "Disable click wall to show desktop"
+defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -bool false;ok
+
+running "Disable window tiling by edge drag and tiled window margins"
+defaults write com.apple.WindowManager EnableTilingByEdgeDrag -bool false
+defaults write com.apple.WindowManager EnableTopTilingByEdgeDrag -bool false
+defaults write com.apple.WindowManager EnableTiledWindowMargins -bool false;ok
+
+running "Double-click on window title bar does not minimise"
+defaults write NSGlobalDomain AppleMiniaturizeOnDoubleClick -bool false;ok
+
+running "Reduce desktop tinting in windows"
+defaults write NSGlobalDomain AppleReduceDesktopTinting -bool true;ok
+
+running "Keep windows when quitting an app"
+defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool true;ok
+
+running "Switch appearance automatically between light and dark"
+defaults write NSGlobalDomain AppleInterfaceStyleSwitchesAutomatically -bool true;ok
+
+running "Menu bar clock: day of week, seconds, AM/PM, date when space allows"
+defaults write com.apple.menuextra.clock ShowDayOfWeek -bool true
+defaults write com.apple.menuextra.clock ShowSeconds -bool true
+defaults write com.apple.menuextra.clock ShowAMPM -bool true
+defaults write com.apple.menuextra.clock ShowDate -int 0;ok
+
+running "Control Center: battery percentage and module visibility"
+defaults -currentHost write com.apple.controlcenter BatteryShowPercentage -bool true
+defaults -currentHost write com.apple.controlcenter Bluetooth -int 2
+defaults -currentHost write com.apple.controlcenter Sound -int 18
+defaults -currentHost write com.apple.controlcenter ScreenMirroring -int 18
+defaults -currentHost write com.apple.controlcenter KeyboardBrightness -int 8
+defaults -currentHost write com.apple.controlcenter VoiceControl -int 8
+defaults -currentHost write com.apple.controlcenter MusicRecognition -int 9;ok
 
 ###############################################################################
 echo "=== Configuring Applications ==="
@@ -240,9 +318,6 @@ echo "🤖 Activity Monitor"
 running "Show the main window when launching Activity Monitor"
 defaults write com.apple.ActivityMonitor OpenMainWindow -bool true;ok
 
-running "Visualize CPU usage in the Activity Monitor Dock icon"
-defaults write com.apple.ActivityMonitor IconType -int 5;ok
-
 running "Show all processes in Activity Monitor"
 defaults write com.apple.ActivityMonitor ShowCategory -int 100;ok
 
@@ -253,7 +328,6 @@ defaults write com.apple.ActivityMonitor ShowCategory -int 100;ok
 # 103: System Processes
 # 104: Other User Processes
 # 105: Active Processes
-# 106: Inactive Processes
 # 106: Inactive Processes
 # 107: Windowed Processes
 running "Sort Activity Monitor results by CPU usage"
@@ -401,6 +475,26 @@ running "Disable App Nap for AnkiConnect to work"
 defaults write net.ankiweb.dtop NSAppSleepDisabled -bool true
 defaults write net.ichi2.anki NSAppSleepDisabled -bool true
 defaults write org.qt-project.Qt.QtWebEngineCore NSAppSleepDisabled -bool true;ok
+
+###############################################################################
+echo "🤖 System (needs sudo, run with --system)"
+###############################################################################
+
+if [ "${1:-}" = "--system" ]; then
+  running "Power: display sleep and low power mode on battery"
+  sudo pmset -b displaysleep 2 lowpowermode 1 lessbright 1 womp 0;ok
+
+  running "Power: display sleep, low power mode and wake for network access on AC"
+  sudo pmset -c displaysleep 10 lowpowermode 0 womp 1;ok
+
+  running "Enable the application firewall"
+  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on;ok
+
+  running "Touch ID for sudo"
+  if ! grep -qs '^auth[[:space:]]\+sufficient[[:space:]]\+pam_tid.so' /etc/pam.d/sudo_local; then
+    echo "auth       sufficient     pam_tid.so" | sudo tee /etc/pam.d/sudo_local > /dev/null
+  fi;ok
+fi
 
 ###############################################################################
 # Kill affected applications                                                  #
