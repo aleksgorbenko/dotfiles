@@ -1,0 +1,6 @@
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Editor keymaps hold shortcut names under a key field, not secrets"
+paths = ['''^config/(vscode-keybindings|zed-keymap)(\.backup)?\.json$''']
