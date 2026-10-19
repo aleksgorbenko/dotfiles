@@ -7,7 +7,7 @@
 # The original idea (and a couple settings) were grabbed from:
 #   https://github.com/mathiasbynens/dotfiles/blob/master/.macos
 #
-# Run ./set-defaults.sh and you'll be good to go.
+# Run ./set-macos-defaults.sh and you'll be good to go.
 
 ok () {
   echo "✅ "$1""
@@ -22,10 +22,10 @@ echo "=== Setting MacOS defaults that make sense ==="
 ###############################################################################
 echo "🤖 Configuring General System UI/UX..."
 ###############################################################################
-# Close any open System Preferences panes, to prevent them from overriding
+# Close any open System Settings panes, to prevent them from overriding
 # settings we’re about to change
-running "Closing any system preferences to prevent issues with automated changes"
-osascript -e 'tell application "System Preferences" to quit';ok
+running "Closing any System Settings to prevent issues with automated changes"
+osascript -e 'tell application "System Settings" to quit';ok
 
 ###############################################################################
 echo "🤖 Configuring Languages"
@@ -41,6 +41,8 @@ running "Use centimeters"
 defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters";ok
 running "Use metric units"
 defaults write NSGlobalDomain AppleMetricUnits -bool true;ok
+running "Translation - on-device mode only"
+defaults write "$HOME/Library/Group Containers/group.com.apple.private.translation/Library/Preferences/group.com.apple.private.translation" OnDeviceOnly -bool true;ok
 
 ###############################################################################
 echo "🤖 Configuring Finder"
@@ -107,7 +109,7 @@ running "Avoid creating .DS_Store files on network or USB volumes"
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true;ok
 
-running "Disable the warning before emptying the Trash"
+running "Enable the warning before emptying the Trash"
 defaults write com.apple.finder WarnOnEmptyTrash -bool true;ok
 
 running "Display App Switcher on both monitors"
@@ -155,7 +157,7 @@ defaults write com.apple.dock springboard-page-duration -float 0
 defaults write com.apple.dock "mineffect" -string "genie" # it is faster than scale
 defaults write com.apple.finder DisableAllAnimations -bool true
 defaults write com.apple.universalaccess reduceMotion -bool true
-defaults writecom.apple.universalaccess reduceTransparency -bool true;ok
+defaults write com.apple.universalaccess reduceTransparency -bool true;ok
 # not working it seems, probably blocked by newer macOS
 # defaults write com.apple.Mail DisableSendAnimations -bool true
 # defaults write com.apple.Mail DisableReplyAnimations -bool true;ok
@@ -194,15 +196,21 @@ running "Require password immediately after sleep or screen saver begins"
 defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 0;ok
 
-running "Save screenshots to the Downloads"
-defaults write com.apple.screencapture location -string "${HOME}/Downloads";ok
+running "Save screenshots to ~/Pictures/screenshots"
+mkdir -p ~/Pictures/screenshots
+defaults write com.apple.screencapture location -string "${HOME}/Pictures/screenshots";ok
 
 running "Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)"
 defaults write com.apple.screencapture type -string "png";ok
 
-running "Require password immediately after sleep or screen saver begins"
-defaults write com.apple.screensaver askForPassword -int 1
-defaults write com.apple.screensaver askForPasswordDelay -int 0;ok
+running "Show preview of the screenshots in the lower-right corner of the screen"
+defaults write com.apple.screencapture show-thumbnail -bool true;ok
+
+running "Save screenshots as 'screenshot {date} {time}'"
+defaults write com.apple.screencapture name "screenshot";ok
+
+running "Save screenshots with date and time in filename"
+defaults write com.apple.screencapture include-date -bool true;ok
 
 ###############################################################################
 echo "🤖 Trackpad, mouse, keyboard, Bluetooth accessories, and input"
