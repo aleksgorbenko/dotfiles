@@ -63,4 +63,8 @@ and injects ViewModel. Not part of MVVM — hosts the stack.
 - Place panels at fractions of the screen's visible frame, never at fixed point offsets.
 - Offer picture tiles for few-choice visual settings (theme, position) and top-align the row label with them.
 - Preview a placement setting by showing the window there briefly without taking focus.
+- Clip the content view of a transparent borderless window to its corner radius (`wantsLayer`, `layer.cornerRadius`, `cornerCurve = .continuous`, `masksToBounds`) so the system shadow follows the rounded shape.
+- Call `invalidateShadow()` after every frame change of a transparent window that has `hasShadow`.
+- Keep system Liquid Glass under Reduce Transparency and Increase Contrast; never replace it with a solid fill.
+- Swap only custom materials, blurs and translucent fills for solid backgrounds when `accessibilityReduceTransparency` is on.
 
