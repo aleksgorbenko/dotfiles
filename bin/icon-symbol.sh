@@ -18,7 +18,7 @@ Options:
   --bg COLOUR     background #RRGGBB, or "none" (default: #FF0033)
   --fg COLOUR     symbol #RRGGBB (default: #1C1C1E)
   --weight NAME   ultralight ... black (default: semibold)
-  --radius, --inset, --glyph   passed to icon-compose.sh
+  --radius, --inset, --glyph, --style   passed to icon-compose.sh
 
 Examples:
   icon-symbol.sh bell bell.png
@@ -46,7 +46,7 @@ while [[ $# -gt 0 ]]; do
     --bg) BG="$2"; shift 2 ;;
     --fg) FG="$2"; shift 2 ;;
     --weight) WEIGHT="$2"; shift 2 ;;
-    --size|--radius|--inset|--glyph) COMPOSE+=("$1" "$2"); shift 2 ;;
+    --size|--radius|--inset|--glyph|--style) COMPOSE+=("$1" "$2"); shift 2 ;;
     -h|--help) usage ;;
     -*) echo "Unknown arg: $1"; usage ;;
     *) POSITIONAL+=("$1"); shift ;;

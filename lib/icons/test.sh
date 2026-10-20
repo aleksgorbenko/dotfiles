@@ -72,6 +72,13 @@ PY
 
 pixel_is() { [[ "$(pixel "$1" "$2" "$3")" == "$4" ]]; }
 
+alpha_is() { [[ "$(pixel "$1" "$2" "$3" | cut -c7-8)" == "$4" ]]; }
+
+lighter_above() {
+  local file="$1" x="$2" top="$3" bottom="$4"
+  (( 16#$(pixel "$file" "$x" "$top" | cut -c5-6) > 16#$(pixel "$file" "$x" "$bottom" | cut -c5-6) ))
+}
+
 packs() {
   local target="$1" expected="$2"
   (cd "$WORK" && icon-pack.sh --input "$WORK/bell.png" --output "$target" --name T >/dev/null) &&
@@ -92,6 +99,19 @@ check "compose: corner outside rounded background is transparent" pixel_is "$WOR
 check "compose: edge midpoint is background colour" pixel_is "$WORK/emoji-text.png" 0 64 FF0033FF
 check "compose: missing input fails" fails icon-compose.sh "$WORK/nope.png" "$WORK/x.png"
 check "compose: bad colour fails" fails icon-compose.sh --text "🎵" "$WORK/x.png" --bg red
+check "compose: unknown style fails" fails icon-compose.sh --text "🎵" "$WORK/x.png" --style glossy
+
+check "macos: renders" icon-compose.sh --text "🎵" "$WORK/macos.png" --size 128 --bg "#0A84FF" --style macos
+check "macos: corner outside grid is transparent" pixel_is "$WORK/macos.png" 0 0 00000000
+check "macos: edge midpoint outside grid is transparent" pixel_is "$WORK/macos.png" 64 4 00000000
+check "macos: shape edge is opaque" alpha_is "$WORK/macos.png" 64 16 FF
+check "macos: gradient lighter at top than bottom" lighter_above "$WORK/macos.png" 20 40 108
+
+check "polish: restyles logo" icon-polish.sh "$WORK/emoji-text.png" "$WORK/polished.png" --size 128
+check "polish: corner transparent" pixel_is "$WORK/polished.png" 0 0 00000000
+check "polish: centre opaque" alpha_is "$WORK/polished.png" 64 64 FF
+check "polish: whole keeps shape" icon-polish.sh "$WORK/emoji-text.png" "$WORK/whole.png" --size 128 --whole
+check "polish: whole edge outside grid is transparent" pixel_is "$WORK/whole.png" 64 4 00000000
 
 check "symbol: renders" icon-symbol.sh bell "$WORK/bell.png" --size 256
 check "symbol: 256px square" size_is "$WORK/bell.png" 256

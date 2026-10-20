@@ -16,6 +16,8 @@ Options:
   --inset F       background inset from the edge as a fraction of the size (default: 0)
   --glyph F       content's longest side as a fraction of the size
                   (default: 0.56 with a background, 1.0 without)
+  --style S       flat, or macos: 824/1024 grid squircle, gradient, rim, shadow (default: flat)
+  --source S      macos only: glyph, logo (restyle a full-bleed icon), whole (fit as is) (default: glyph)
 
 Examples:
   icon-compose.sh logo.svg icon.png --bg "#FFFFFF"
@@ -32,6 +34,8 @@ BG=none
 RADIUS=0.2237
 INSET=0
 GLYPH=""
+STYLE=flat
+ORIGIN=glyph
 TEXT=""
 POSITIONAL=()
 
@@ -43,6 +47,8 @@ while [[ $# -gt 0 ]]; do
     --radius) RADIUS="$2"; shift 2 ;;
     --inset) INSET="$2"; shift 2 ;;
     --glyph) GLYPH="$2"; shift 2 ;;
+    --style) STYLE="$2"; shift 2 ;;
+    --source) ORIGIN="$2"; shift 2 ;;
     -h|--help) usage ;;
     -*) echo "Unknown arg: $1"; usage ;;
     *) POSITIONAL+=("$1"); shift ;;
@@ -72,5 +78,6 @@ if [[ ! -x "$COMPOSER" ]]; then
 fi
 
 "$COMPOSER" "${SOURCE[@]}" --output "$OUTPUT" --size "$SIZE" --bg "$BG" \
-  --radius "$RADIUS" --inset "$INSET" --glyph "$GLYPH"
+  --radius "$RADIUS" --inset "$INSET" --glyph "$GLYPH" \
+  --style "$STYLE" --source "$ORIGIN"
 echo "$OUTPUT"
