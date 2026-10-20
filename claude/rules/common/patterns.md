@@ -17,4 +17,5 @@ Every `{lang}-patterns.md` extends this file. Do not repeat this content there.
 13. Enforce every vocabulary choice with a lint rule and list it in DOMAIN.md under "Enforced Vocabulary".
 14. Name localisation keys window + subject + role (`settingsLaunchAtLoginLabel`) and check the shape in `make lint`.
 15. Make every CI check a Make target, so either CI provider can run it and the inactive one stays switched off in place.
+16. Create each stateful service or view model once at the composition root and inject that one instance everywhere; never construct a second instance in a consumer, a factory helper or a default parameter.
 
