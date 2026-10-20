@@ -67,4 +67,9 @@ and injects ViewModel. Not part of MVVM — hosts the stack.
 - Call `invalidateShadow()` after every frame change of a transparent window that has `hasShadow`.
 - Keep system Liquid Glass under Reduce Transparency and Increase Contrast; never replace it with a solid fill.
 - Swap only custom materials, blurs and translucent fills for solid backgrounds when `accessibilityReduceTransparency` is on.
+- Switch an accessory (LSUIElement) app to `.regular` while any standard window is open and back to `.accessory` when the last closes, from the one window opener.
+- Activate the app in the next main-actor turn after changing the activation policy; an app already active as an accessory still lands last in Cmd-Tab, accept it.
+- Use a button, not a link, in a macOS SwiftUI `.alert` message; alert text is never clickable.
+- Give a tab that scrolls one inner list a non-scrolling container; a `ScrollView` nested in a scrolling container grows to full height.
+- Reserve a 16 pt trailing gutter in a scrolling list whose trailing column holds controls, so the always-shown scroller never covers them.
 

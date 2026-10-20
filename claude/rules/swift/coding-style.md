@@ -11,6 +11,7 @@ paths:
 
 - SwiftFormat for auto-formatting, SwiftLint for style enforcement
 - `swift-format` is bundled with Xcode 16+ as an alternative
+- Put each argument on its own line when a call wraps (`lineBreakBeforeEachArgument` in swift-format, `multiline_arguments` in SwiftLint)
 
 ## Immutability
 
@@ -38,9 +39,6 @@ Follow [Apple API Design Guidelines](https://www.swift.org/documentation/api-des
 
 ## Comments
 
-- Default: no comments
-- Never explain WHAT the code does — clear naming already does that
-- Only comment the WHY when non-obvious: a hidden constraint, an invariant, a workaround for a specific bug
 - Never reference the current task/fix/caller in a comment — that belongs in the commit message
 
 ## Defaults

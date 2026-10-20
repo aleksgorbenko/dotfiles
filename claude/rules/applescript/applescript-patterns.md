@@ -52,4 +52,5 @@ paths:
 ## Native Apps
 
 - Run AppleScript off the main thread, serialised through one actor-owned executor.
+- Call `AEDeterminePermissionToAutomateTarget` only through one shared actor instance; it blocks while a consent prompt is open, and parallel detached calls exhaust the cooperative pool and freeze `NSOpenPanel`.
 - In a headless CLI process, run one neutral script on the main thread before any off-main execution.

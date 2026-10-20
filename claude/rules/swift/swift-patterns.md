@@ -115,6 +115,10 @@ KeyboardShortcuts.onKeyDown(for: .toggleApp) { [weak self] in … }
 
 ## macOS App Projects
 
+- Resolve the user's real home with `getpwuid(getuid()).pw_dir` in a sandboxed app; `homeDirectoryForCurrentUser` is the container.
+- Validate a folder chosen in a sandboxed `NSOpenPanel` after the panel returns; before that the app can't read inside the folder.
+- Detect a downloaded app the user has never opened by the missing `0x40` flag in its `com.apple.quarantine` attribute; treat no attribute as opened.
+- Run `sample <pid>` on a hung app and check the cooperative-pool threads before guessing at the cause.
 - Give each distribution channel its own positive compilation condition (`APPSTORE`, `DIRECT`); never test the negation of another channel's flag.
 - Resolve the channel flag into a runtime value once at the composition root, guarded by `#error` unless exactly one flag is set; everything else reads that value.
 - Use `#if <CHANNEL>` only where code cannot exist in the other build (linking a framework, a process entry point).

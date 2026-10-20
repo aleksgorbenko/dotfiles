@@ -38,6 +38,7 @@ description: Capture clean screenshots of a running macOS app window with the Sn
 - A black band around an exported shot is the shadow margin flattened without alpha.
 - A thin light rim on Liquid Glass under Reduce Transparency is the system's accessible glass; leave it.
 - Captures are at the backing scale: points × 2 on Retina.
+- Ask before driving the app with System Events UI scripting; it makes macOS prompt the terminal for Accessibility, and a pending prompt can stall the app under test.
 
 ## Alpha check
 
