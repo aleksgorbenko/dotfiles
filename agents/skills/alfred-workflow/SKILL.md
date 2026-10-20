@@ -22,9 +22,15 @@ ALWAYS:
 - Return at least 1 item from a Script Filter for "nothing to show" states.
 - Keep UI text (title/subtext/runningsubtext) in info.plist config or the Workflow Variables panel.
 - Set up tooling before writing any workflow code: `pyproject.toml` (pytest + ruff config matching sibling workflows), `Makefile`, shell linter - then write tests.
-- Give the `Makefile` the sibling target set: `setup test lint format format-check check clean build verify release sync-plist link-live`, plus project-specific ones (`vendor`, `icons`).
-- Manage Python dev tools (`pytest`, `pytest-cov`, `ruff`) as a `uv` dev group: `make setup` runs `uv sync` once, every other target uses `uv run --no-sync`.
-- Put `ruff check`, `shellcheck`/`zsh -n` and `plutil -lint info.plist` in `make lint`; set `--cov-fail-under=80` in pytest `addopts`.
+- Copy `templates/` into every workflow repo: `github/` as `.github/`, `Brewfile`, `.markdownlint-cli2.yaml`, `.editorconfig`; use `ci-private.yml` as `.github/workflows/ci.yml` in a private repo, and drop the `uv` block of `dependabot.yml` when there is no `pyproject.toml`.
+- Give the `Makefile` the target set of `templates/Makefile`: `setup test lint lint-* format format-check audit check ci clean build verify release sync-plist link-live`, plus project-specific ones (`vendor`, `icons`); drop `lint-*`/`audit` parts for file types the repo has none of.
+- Keep every CI step a Make target: the workflow runs only `make setup` and `make ci`; releases run only from the terminal via `make release VERSION=vX.Y.Z`.
+- Make `make setup` install dev tools from the repo `Brewfile` (`brew bundle`) and the Python environment (`uv sync --group dev`).
+- Manage Python dev tools (`pytest`, `pytest-cov`, `ruff`, `pip-audit`) as a `uv` dev group: `make setup` runs `uv sync` once, every other target uses `uv run --no-sync`.
+- Lint every file type the repo has: `ruff` (Python), `shellcheck` (bash), `zsh -n` (zsh), `osacompile` (AppleScript, local only - CI lacks the target app), `plutil -lint` (plist), `jq empty` (JSON), `markdownlint-cli2` (Markdown), `actionlint` (workflows); set `--cov-fail-under=80` in pytest `addopts`.
+- Run `make audit` (`pip-audit`) in CI for every repo with a `pyproject.toml`; pin third-party actions by commit SHA with the tag in a trailing comment.
+- Render the workflow `icon.png` at 1024px with `icon-polish.sh` (brand logo) or `icon-symbol.sh --style macos` (glyph), so every workflow matches the app-icon grid in Alfred results.
+- Capture README and embedded-readme screenshots with `screencapture -o -l <Alfred window id>` while driving Alfred via `tell application id "com.runningwithcrayons.Alfred" to search "<keyword> "`; one screenshot per main keyword, named `images/about/<keyword-role>.png`.
 - Write action scripts in bash so `shellcheck` can lint them; lint any zsh script with `zsh -n` only - shellcheck rejects zsh (SC1071).
 - Render workflow and result icons with `icon-symbol.sh` (skill `icons`) from a repo `tools/icons.txt` (`<name> <symbol>` lines) behind `make icons`.
 - Run scripts standalone (`python3 script.py "arg"`) to check JSON output.
@@ -44,8 +50,10 @@ ALWAYS:
 - Use `ln -sfn`, not `ln -sf`, when scripting live-workflow symlinks — plain `-sf` nests a new symlink inside an existing symlinked directory instead of replacing it, and is silently non-idempotent on rerun.
 - Symlink the dev repo straight into Alfred's live workflow folder for hot-reload dev (`src/`, `icons/`, `icon.png`) — this is the documented community-standard pattern (deanishe/alfred-workflow, alfred-link, awf), not a shortcut.
 - Suspect the repo's `info.plist` has drifted from the live workflow after any live-UI edit or debugging session — re-run `sync-plist` before trusting either copy.
-- Structure a workflow README as: title+one-line description, `## Commands` (keyword as `### heading`, one line per row-shape/behavior), `## Install` (numbered: download release, double-click, Powerpack requirement), `## Setup` only if config/token needed, `## Development` (terse `make` targets with inline `#` comments), `## My Other Workflows` (bullet links to sibling repos).
+- Open a workflow README with the `templates/README.md` header: centred 128px icon, `<h1>` "<Name> for Alfred", one-line tagline, badges (CI, release, licence, macOS minimum, Alfred 5 Powerpack), section links, main screenshot.
+- Structure the rest of a workflow README as: `## Commands` (keyword as `### heading`, one line per row-shape/behavior), `## Install` (numbered: download release, double-click, Powerpack requirement), `## Setup` only if config/token needed, `## Development` (terse `make` targets with inline `#` comments), `## My Other Workflows` (bullet links to sibling repos).
 - Link only already-public sibling repos in a "My Other Workflows" section — a link to a still-private repo 404s for outside viewers; add it once that repo is flipped public.
+- List every public workflow in the `config` repo README (`~/src/proj/config`) under `## Alfred` and its category heading (`### Reference`, `### Utilities`, `### Media`), with its 32px icon; update the row whenever the workflow changes.
 - Add a new small workflow to the blog homepage's `### projects` bullet list (`content/_index.md`, one line: emoji + `[Name](repo url)` - one-line description) — not a dedicated app landing page, that tier is reserved for full native apps.
 - Grep every tracked file for other private-repo names/links before flipping a repo public — a README mentioning an internal/private project by name is a real leak even with no secrets involved.
 - `make build` → `make verify` (bundle audit: no local paths, no baked-in token/secret defaults, no junk files, plist script refs resolve, modules import clean) → tag + push + `gh release create`, in that order.
@@ -66,6 +74,8 @@ ALWAYS:
 - Name every workflow variable (UI text, labels, config) with letters, digits and underscores only; a hyphen is not a valid environment variable name and breaks shell `export`.
 
 NEVER:
+- Use Snapline for Alfred screenshots - opening it hides Alfred's window.
+- Run anything in CI except Make targets, or trigger a release from CI.
 - Run `uv run` without `--no-sync` in `Makefile` targets - it re-syncs the environment on every call.
 - Assume older sibling workflows are the tooling reference - they predate `uv`/`shellcheck` (global `ruff`, `python3 -m pytest`); keep their target names, not their tool invocation.
 - Put Markdown tables in Alfred's embedded `info.plist` `readme` - Alfred's About view does not render them.
