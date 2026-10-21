@@ -11,10 +11,13 @@ dev = ["pip-audit", "pyright[nodejs]", "pytest", "pytest-cov", "ruff"]
 pythonpath = ["src"]
 testpaths = ["tests"]
 addopts = "--cov --cov-report=term-missing --cov-fail-under=80"
-filterwarnings = ["error"]
+filterwarnings = ["error", "ignore:Implicitly cleaning up <HTTPError:ResourceWarning"]
 
 [tool.coverage.run]
 source = ["src"]
+
+[tool.coverage.report]
+exclude_also = ['if __name__ == "__main__":']
 
 [tool.ruff]
 line-length = 88
@@ -25,7 +28,7 @@ select = ["ALL"]
 ignore = ["COM812", "CPY", "D"]
 
 [tool.ruff.lint.per-file-ignores]
-"tests/**" = ["S101"]
+"tests/**" = ["S101", "S105", "S106"]
 
 [tool.ruff.format]
 quote-style = "double"

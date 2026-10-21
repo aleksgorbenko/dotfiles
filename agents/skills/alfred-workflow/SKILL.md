@@ -27,8 +27,11 @@ ALWAYS:
 - Keep every CI step a Make target: the workflow runs only `make setup` and `make ci`; releases run only from the terminal via `make release VERSION=vX.Y.Z`.
 - Make `make setup` install dev tools from the repo `Brewfile` (`brew bundle`) and the Python environment (`uv sync --group dev`).
 - Manage Python dev tools (`pytest`, `pytest-cov`, `ruff`, `pyright[nodejs]`, `pip-audit`) as a `uv` dev group: `make setup` runs `uv sync` once, every other target uses `uv run --no-sync`.
-- Lint Python at the strictest level: ruff `select = ["ALL"]` (ignore only `COM812`, `CPY`, `D`; tests also `S101`) plus pyright `typeCheckingMode = "strict"`, both in `lint-python`; zero findings.
-- Write every cache and data file with mode 0600 in a 0700 folder, atomically (temp file, then rename).
+- Lint Python at the strictest level: ruff `select = ["ALL"]` (ignore only `COM812`, `CPY`, `D`; tests also `S101`, `S105`, `S106`) plus pyright `typeCheckingMode = "strict"`, both in `lint-python`; zero findings.
+- Write every cache and data file with mode 0600 in a 0700 folder, atomically (temp file, then rename); set `os.umask(0o077)` in the entry script so SQLite and other files are private too.
+- Give every test fake the full protocol it stands in for (unused methods raise `AssertionError`); never pass `None` for a dependency.
+- Run `ruff check --fix` only with safe fixes; never `--unsafe-fixes` without a `--select` list (it deletes `print` calls and comments).
+- Close SQLite connections explicitly (`contextlib.closing` or a `@contextmanager` returning `Generator`); `with sqlite3.connect()` only commits.
 - Lint every file type the repo has: `ruff` + `pyright` (Python), `shellcheck` (bash), `zsh -n` (zsh), `osacompile` (AppleScript, local only - CI lacks the target app), `plutil -lint` (plist), `jq empty` (JSON), `markdownlint-cli2` (Markdown), `actionlint` (workflows); set `--cov-fail-under=80` in pytest `addopts`.
 - Run `make audit` (`pip-audit`) in CI for every repo with a `pyproject.toml`; pin third-party actions by commit SHA with the tag in a trailing comment.
 - Render the workflow `icon.png` at 1024px with `icon-polish.sh` (brand logo) or `icon-symbol.sh --style macos` (glyph), so every workflow matches the app-icon grid in Alfred results.
