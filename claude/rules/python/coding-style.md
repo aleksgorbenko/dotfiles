@@ -38,7 +38,7 @@ class Point(NamedTuple):
 ## Strict Linting Standard
 
 - Lint with ruff `select = ["ALL"]`; ignore only `D` and `CPY` (no docstrings or header comments) and `COM812` (conflicts with `ruff format`)
-- Type-check with pyright `typeCheckingMode = "strict"`, installed as `pyright[nodejs]` in the uv dev group; never mypy
+- Type-check with pyright `typeCheckingMode = "strict"`, installed as `pyright` in the uv dev group; never mypy
 - Run both in `make lint` and `make ci`; zero findings; suppress only a third-party typing gap, with a rule-scoped `# pyright: ignore[rule]`
 - Per-file ignores only for tests: `S101`, `S105`, `S106` (asserts and fake credentials)
 

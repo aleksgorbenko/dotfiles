@@ -2,6 +2,10 @@
 set -euo pipefail
 
 cache="${alfred_workflow_cache:?}"
+name="${alfred_workflow_name:-Workflow}"
+name="${name#.}"
+
+contents="${2:-cached data}"
 
 case "${1:-}" in
   --clear)
@@ -33,7 +37,7 @@ noun=$([[ "$files" == 1 ]] && printf 'file' || printf 'files')
 
 cat <<JSON
 {"items": [
-  {"title": "Cache: $size", "subtitle": "${files} ${noun}・Enter reveals the folder in Finder", "arg": "--reveal", "icon": {"path": "icons/maintenance_cache.png"}},
-  {"title": "Empty Cache", "subtitle": "Delete cached data; it is fetched again when needed", "arg": "--clear", "icon": {"path": "icons/maintenance_clear.png"}}
+  {"title": "${name} cache: ${size}", "subtitle": "${contents}・${files} ${noun}・Enter reveals the folder in Finder", "arg": "--reveal", "icon": {"path": "icon.png"}},
+  {"title": "Empty ${name} Cache", "subtitle": "Delete ${contents}; fetched again when needed", "arg": "--clear", "icon": {"path": "icons/maintenance_clear.png"}}
 ]}
 JSON

@@ -11,6 +11,7 @@ def run(cache: Path, *args: str) -> str:
         ["/bin/bash", str(SCRIPT), *args],
         env={
             "alfred_workflow_cache": str(cache),
+            "alfred_workflow_name": ".Sample",
             "PATH": "/usr/bin:/bin",
             "LANG": "en_US.UTF-8",
         },
@@ -23,16 +24,19 @@ def run(cache: Path, *args: str) -> str:
 def test_menu_shows_cache_size_and_file_count(tmp_path: Path) -> None:
     (tmp_path / "a.json").write_text("x" * 2048)
     (tmp_path / "b.json").write_text("y")
-    rows = json.loads(run(tmp_path))["items"]
-    assert rows[0]["title"].startswith("Cache: ")
-    assert rows[0]["subtitle"].startswith(f"{FILE_COUNT} files・")
+    rows = json.loads(run(tmp_path, "--menu", "feeds"))["items"]
+    assert rows[0]["title"].startswith("Sample cache: ")
+    assert rows[0]["subtitle"].startswith(f"feeds・{FILE_COUNT} files・")
+    assert rows[0]["icon"] == {"path": "icon.png"}
+    assert rows[1]["title"] == "Empty Sample Cache"
+    assert rows[1]["subtitle"] == "Delete feeds; fetched again when needed"
     assert [row["arg"] for row in rows] == ["--reveal", "--clear"]
 
 
 def test_missing_cache_is_empty(tmp_path: Path) -> None:
     rows = json.loads(run(tmp_path / "missing"))["items"]
-    assert rows[0]["title"] == "Cache: 0 KB"
-    assert rows[0]["subtitle"].startswith("0 files")
+    assert rows[0]["title"] == "Sample cache: 0 KB"
+    assert rows[0]["subtitle"].startswith("cached data・0 files")
 
 
 def test_clear_empties_the_cache_and_keeps_the_folder(tmp_path: Path) -> None:

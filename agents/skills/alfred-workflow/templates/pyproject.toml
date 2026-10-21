@@ -5,7 +5,7 @@ requires-python = ">=3.11"
 dependencies = []
 
 [dependency-groups]
-dev = ["pip-audit", "pyright[nodejs]", "pytest", "pytest-cov", "ruff"]
+dev = ["pip-audit", "pyright", "pytest", "pytest-cov", "ruff"]
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]

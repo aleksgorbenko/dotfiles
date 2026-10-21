@@ -26,7 +26,7 @@ ALWAYS:
 - Give the `Makefile` the target set of `templates/Makefile`: `setup test lint lint-* format format-check audit check ci clean build verify release sync-plist link-live`, plus project-specific ones (`vendor`, `icons`); drop `lint-*`/`audit` parts for file types the repo has none of.
 - Keep every CI step a Make target: the workflow runs only `make setup` and `make ci`; releases run only from the terminal via `make release VERSION=vX.Y.Z`.
 - Make `make setup` install dev tools from the repo `Brewfile` (`brew bundle`) and the Python environment (`uv sync --group dev`).
-- Manage Python dev tools (`pytest`, `pytest-cov`, `ruff`, `pyright[nodejs]`, `pip-audit`) as a `uv` dev group: `make setup` runs `uv sync` once, every other target uses `uv run --no-sync`.
+- Manage Python dev tools (`pytest`, `pytest-cov`, `ruff`, `pyright`, `pip-audit`) as a `uv` dev group: `make setup` runs `uv sync` once, every other target uses `uv run --no-sync`.
 - Lint Python at the strictest level: ruff `select = ["ALL"]` (ignore only `COM812`, `CPY`, `D`; tests also `S101`, `S105`, `S106`) plus pyright `typeCheckingMode = "strict"`, both in `lint-python`; zero findings.
 - Give every workflow a maintenance menu on `:<main keyword>` (variable-based when the keyword is configurable, e.g. `:{var:keyword}`): copy `templates/src/maintenance.sh`, `templates/icons/maintenance_*.png` and `templates/tests/test_maintenance.py`; rows are `Cache: <size>` (Enter reveals the folder) and `Empty Cache`, then workflow-specific rows; set `skipuniversalaction`; route the action through a Post Notification with `onlyshowifquerypopulated`.
 - Never use `<keyword>:<command>` keywords; maintenance commands are rows under `:<keyword>`.
