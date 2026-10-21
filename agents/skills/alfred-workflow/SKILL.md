@@ -21,13 +21,15 @@ ALWAYS:
 - Pass structured data via an item's `variables` dict, not `arg`/`{query}`.
 - Return at least 1 item from a Script Filter for "nothing to show" states.
 - Keep UI text (title/subtext/runningsubtext) in info.plist config or the Workflow Variables panel.
-- Set up tooling before writing any workflow code: `pyproject.toml` (pytest + ruff config matching sibling workflows), `Makefile`, shell linter - then write tests.
+- Set up tooling before writing any workflow code: `pyproject.toml` from `templates/pyproject.toml`, `Makefile`, shell linter - then write tests.
 - Copy `templates/` into every workflow repo: `github/` as `.github/`, `Brewfile`, `.markdownlint-cli2.yaml`, `.editorconfig`; use `ci-private.yml` as `.github/workflows/ci.yml` in a private repo, and drop the `uv` block of `dependabot.yml` when there is no `pyproject.toml`.
 - Give the `Makefile` the target set of `templates/Makefile`: `setup test lint lint-* format format-check audit check ci clean build verify release sync-plist link-live`, plus project-specific ones (`vendor`, `icons`); drop `lint-*`/`audit` parts for file types the repo has none of.
 - Keep every CI step a Make target: the workflow runs only `make setup` and `make ci`; releases run only from the terminal via `make release VERSION=vX.Y.Z`.
 - Make `make setup` install dev tools from the repo `Brewfile` (`brew bundle`) and the Python environment (`uv sync --group dev`).
-- Manage Python dev tools (`pytest`, `pytest-cov`, `ruff`, `pip-audit`) as a `uv` dev group: `make setup` runs `uv sync` once, every other target uses `uv run --no-sync`.
-- Lint every file type the repo has: `ruff` (Python), `shellcheck` (bash), `zsh -n` (zsh), `osacompile` (AppleScript, local only - CI lacks the target app), `plutil -lint` (plist), `jq empty` (JSON), `markdownlint-cli2` (Markdown), `actionlint` (workflows); set `--cov-fail-under=80` in pytest `addopts`.
+- Manage Python dev tools (`pytest`, `pytest-cov`, `ruff`, `pyright[nodejs]`, `pip-audit`) as a `uv` dev group: `make setup` runs `uv sync` once, every other target uses `uv run --no-sync`.
+- Lint Python at the strictest level: ruff `select = ["ALL"]` (ignore only `COM812`, `CPY`, `D`; tests also `S101`) plus pyright `typeCheckingMode = "strict"`, both in `lint-python`; zero findings.
+- Write every cache and data file with mode 0600 in a 0700 folder, atomically (temp file, then rename).
+- Lint every file type the repo has: `ruff` + `pyright` (Python), `shellcheck` (bash), `zsh -n` (zsh), `osacompile` (AppleScript, local only - CI lacks the target app), `plutil -lint` (plist), `jq empty` (JSON), `markdownlint-cli2` (Markdown), `actionlint` (workflows); set `--cov-fail-under=80` in pytest `addopts`.
 - Run `make audit` (`pip-audit`) in CI for every repo with a `pyproject.toml`; pin third-party actions by commit SHA with the tag in a trailing comment.
 - Render the workflow `icon.png` at 1024px with `icon-polish.sh` (brand logo) or `icon-symbol.sh --style macos` (glyph), so every workflow matches the app-icon grid in Alfred results.
 - Capture README and embedded-readme screenshots with `screencapture -o -l <Alfred window id>` while driving Alfred via `tell application id "com.runningwithcrayons.Alfred" to search "<keyword> "`; one screenshot per main keyword, named `images/about/<keyword-role>.png`.

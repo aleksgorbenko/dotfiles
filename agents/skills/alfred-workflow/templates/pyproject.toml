@@ -1,0 +1,37 @@
+[project]
+name = "alfred-workflow-NAME"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = []
+
+[dependency-groups]
+dev = ["pip-audit", "pyright[nodejs]", "pytest", "pytest-cov", "ruff"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "--cov --cov-report=term-missing --cov-fail-under=80"
+filterwarnings = ["error"]
+
+[tool.coverage.run]
+source = ["src"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = ["COM812", "CPY", "D"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.pyright]
+include = ["src", "tests"]
+extraPaths = ["src"]
+pythonVersion = "3.11"
+typeCheckingMode = "strict"

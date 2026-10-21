@@ -5,8 +5,6 @@ paths:
 ---
 # Python Security
 
-> This file extends [common/security.md](../common/security.md) with Python specific content.
-
 ## Secret Management
 
 ```python
@@ -20,11 +18,5 @@ api_key = os.environ["OPENAI_API_KEY"]  # Raises KeyError if missing
 
 ## Security Scanning
 
-- Use **bandit** for static security analysis:
-  ```bash
-  bandit -r src/
-  ```
-
-## Reference
-
-See skill: `django-security` for Django-specific security guidelines (if applicable).
+- Use ruff's `S` rules (enabled by `select = ["ALL"]`) for static security analysis; never a separate bandit run
+- Audit dependencies with `pip-audit` in `make audit`

@@ -24,6 +24,7 @@ lint: lint-python lint-shell lint-applescript lint-data lint-md lint-actions
 
 lint-python:
 	$(RUN) ruff check .
+	$(RUN) pyright
 
 lint-shell:
 	$(if $(SHELL_SCRIPTS),shellcheck $(SHELL_SCRIPTS))
