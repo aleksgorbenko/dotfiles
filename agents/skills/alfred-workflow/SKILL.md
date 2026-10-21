@@ -28,6 +28,10 @@ ALWAYS:
 - Make `make setup` install dev tools from the repo `Brewfile` (`brew bundle`) and the Python environment (`uv sync --group dev`).
 - Manage Python dev tools (`pytest`, `pytest-cov`, `ruff`, `pyright[nodejs]`, `pip-audit`) as a `uv` dev group: `make setup` runs `uv sync` once, every other target uses `uv run --no-sync`.
 - Lint Python at the strictest level: ruff `select = ["ALL"]` (ignore only `COM812`, `CPY`, `D`; tests also `S101`, `S105`, `S106`) plus pyright `typeCheckingMode = "strict"`, both in `lint-python`; zero findings.
+- Give every workflow a maintenance menu on `:<main keyword>` (variable-based when the keyword is configurable, e.g. `:{var:keyword}`): copy `templates/src/maintenance.sh`, `templates/icons/maintenance_*.png` and `templates/tests/test_maintenance.py`; rows are `Cache: <size>` (Enter reveals the folder) and `Empty Cache`, then workflow-specific rows; set `skipuniversalaction`; route the action through a Post Notification with `onlyshowifquerypopulated`.
+- Never use `<keyword>:<command>` keywords; maintenance commands are rows under `:<keyword>`.
+- Run tool-only dependencies (Pillow for icon generators) with `uv run --with <package>`; never add them to the dev group.
+- Brace shell variables next to non-ASCII text (`${noun}・`); under a UTF-8 locale bash reads the bytes as part of the name.
 - Write every cache and data file with mode 0600 in a 0700 folder, atomically (temp file, then rename); set `os.umask(0o077)` in the entry script so SQLite and other files are private too.
 - Give every test fake the full protocol it stands in for (unused methods raise `AssertionError`); never pass `None` for a dependency.
 - Run `ruff check --fix` only with safe fixes; never `--unsafe-fixes` without a `--select` list (it deletes `print` calls and comments).
