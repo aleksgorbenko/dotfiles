@@ -38,3 +38,4 @@ zsh/zshrc.local
 zsh/zsh_plugins.sh
 fish/config.local.fish
 Brewfile.local
+backup/

@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+db="$HOME/Library/Group Containers/EKT6323JY3.com.guidedways/2do.db"
+out="${1:-$(cd "$(dirname "$0")/.." && pwd)/backup/2do-smart-lists.json}"
+
+if [[ ! -f "$db" ]]; then
+  echo "2Do database not found: $db" >&2
+  exit 1
+fi
+
+mkdir -p "$(dirname "$out")"
+
+sqlite3 -readonly -json "$db" "
+  SELECT
+    COALESCE(g.groupname, c.parentname) AS list_group,
+    g.displayorder AS list_group_order,
+    c.displayorder AS display_order,
+    c.title,
+    c.smartsearch AS smart_search,
+    c.colorhex AS colour,
+    c.tasksortfield AS sort_field,
+    c.tasksortorder AS sort_order,
+    c.excludecompleted AS exclude_completed,
+    c.combineresults AS combine_results,
+    c.smartsearchsoundex AS sounds_like,
+    c.smartrangefrom AS range_from,
+    c.smartrangeto AS range_to,
+    c.smartrangeexcludesstart AS range_excludes_start,
+    c.focusfilterstring AS focus_filter,
+    c.canshowinall AS show_in_all,
+    c.canshowintoday AS show_in_today,
+    c.showindone AS show_in_done,
+    c.ishidden AS hidden,
+    c.uid
+  FROM calendars c
+  LEFT JOIN calgroups g ON g.uid = c.parentuid AND g.isdeleted = 0
+  WHERE c.isdeleted = 0 AND c.smartsearch IS NOT NULL AND c.smartsearch != ''
+  ORDER BY g.displayorder, c.displayorder
+" | jq '{exported_at: (now | todate), smart_lists: .}' >"$out"
+
+echo "exported $(jq '.smart_lists | length' "$out") smart lists to $out"
