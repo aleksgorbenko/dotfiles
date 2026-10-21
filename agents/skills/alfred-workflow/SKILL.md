@@ -28,6 +28,8 @@ ALWAYS:
 - Make `make setup` install dev tools from the repo `Brewfile` (`brew bundle`) and the Python environment (`uv sync --group dev`).
 - Manage Python dev tools (`pytest`, `pytest-cov`, `ruff`, `pyright`, `pip-audit`) as a `uv` dev group: `make setup` runs `uv sync` once, every other target uses `uv run --no-sync`.
 - Lint Python at the strictest level: ruff `select = ["ALL"]` (ignore only `COM812`, `CPY`, `D`; tests also `S101`, `S105`, `S106`) plus pyright `typeCheckingMode = "strict"`, both in `lint-python`; zero findings.
+- Render every generated row and node icon (SF Symbols, emoji, glyphs, maintenance) on the same macOS grid as `icon.png`: `icon-symbol.sh --style macos` or `icon-polish.sh` after a generator; content images (cover art, thumbnails, avatars) and their colour placeholders stay full-bleed.
+- Never polish an icon that is already on the macOS grid (a vendor app icon); it shrinks twice.
 - Give every workflow a maintenance menu on `:<main keyword>` (variable-based when the keyword is configurable, e.g. `:{var:keyword}`): copy `templates/src/maintenance.sh`, `templates/icons/maintenance_*.png` and `templates/tests/test_maintenance.py`; rows are `Cache: <size>` (Enter reveals the folder) and `Empty Cache`, then workflow-specific rows; set `skipuniversalaction`; route the action through a Post Notification with `onlyshowifquerypopulated`.
 - Never use `<keyword>:<command>` keywords; maintenance commands are rows under `:<keyword>`.
 - Run tool-only dependencies (Pillow for icon generators) with `uv run --with <package>`; never add them to the dev group.
