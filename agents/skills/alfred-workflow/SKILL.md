@@ -18,6 +18,8 @@ ALWAYS:
 - Run `plutil -lint` after editing info.plist, and diff before/after.
 - `readlink` a live workflow dir before assuming it's stale — it's a symlink into the repo.
 - Use Script Filter Argument "Optional" for live search-as-you-type.
+- Navigate fixed sections with space-separated words (`<keyword> <section> [filter]`); drill into a picked item with ` > ` written by the row's `autocomplete`; never use `@` or another separator.
+- Fetch network pages in a detached `--refresh <page>` process: show a `Loading <Page>…` row with `rerun` 0.5 while uncached, cached rows with `rerun` 1.0 while stale, and retry a cached error on the next open.
 - Pass structured data via an item's `variables` dict, not `arg`/`{query}`.
 - Return at least 1 item from a Script Filter for "nothing to show" states.
 - Keep UI text (title/subtext/runningsubtext) in info.plist config or the Workflow Variables panel.
