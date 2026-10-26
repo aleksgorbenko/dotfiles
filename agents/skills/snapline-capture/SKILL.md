@@ -5,6 +5,17 @@ description: Capture clean screenshots of a running macOS app window with the Sn
 
 # Snapline Capture
 
+## Product marketing views (brand-assets-kit)
+
+- Capture every marketing view yourself; never ask the user to change a setting or open a window.
+- Capture Liquid Glass only, dark and light; the kit turns Reduce Transparency off with `defaults` and restores it.
+- `bun src/cli.ts launch <product>/marketing <view> <light|dark>` opens the backdrop and the view, prints bounds.
+- Call `capture_region` (bounds) and `capture_window` (`title`, `shadow: false`) in the same turn.
+- `bun src/cli.ts store <product>/marketing <view> <appearance> <region png> <window png>` masks the glass to the window shape.
+- Views with `"capture": "glass"` keep the backdrop: `capture_region` only, no window png.
+- `bun src/cli.ts restore <product>/marketing` when done; then `make render PRODUCT=<absolute path>`.
+- `capture_window` alone flattens Liquid Glass to an opaque fill; it is only the alpha mask.
+
 ## Tools
 
 | Tool | Use |
@@ -21,7 +32,7 @@ description: Capture clean screenshots of a running macOS app window with the Sn
 
 1. Find the app's display name and bundle ID: `osascript -e 'tell application "System Events" to get {name, bundle identifier} of (every process whose name contains "<App>")'`.
 2. Pass the bundle ID to `capture_window`; a debug build has a different display name (e.g. "<App> Debug") and bundle ID.
-3. Show a transient window (launcher, popover, panel) from the shell right before capturing: `osascript -e 'tell application "System Events" to key code <code> using <modifier> down'`.
+3. Show a transient window (launcher, popover, panel) through the app's own launch command (e.g. `BUKKU_DEMO_OPEN`), not keystrokes.
 4. Capture immediately in the next tool call; any focus change back to the terminal hides a window that closes on deactivate.
 5. Call `get_capture` first, then `get_capture_image` only when the pixels are needed.
 6. Check transparency at the corners and margin before calling a capture clean (script below).
@@ -36,7 +47,6 @@ description: Capture clean screenshots of a running macOS app window with the Sn
 - Snapline app setting "Include window shadow" matches the `shadow` parameter.
 - Square shadow corners mean a stale or unclipped window shadow in the app, not a capture fault.
 - A black band around an exported shot is the shadow margin flattened without alpha.
-- A thin light rim on Liquid Glass under Reduce Transparency is the system's accessible glass; leave it.
 - Captures are at the backing scale: points × 2 on Retina.
 - Ask before driving the app with System Events UI scripting; it makes macOS prompt the terminal for Accessibility, and a pending prompt can stall the app under test.
 
