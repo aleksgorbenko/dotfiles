@@ -7,14 +7,10 @@ description: Capture clean screenshots of a running macOS app window with the Sn
 
 ## Product marketing views (brand-assets-kit)
 
-- Capture every marketing view yourself; never ask the user to change a setting or open a window.
-- Capture Liquid Glass only, dark and light; the kit turns Reduce Transparency off with `defaults` and restores it.
-- `bun src/cli.ts launch <product>/marketing <view> <light|dark>` opens the backdrop and the view, prints bounds.
-- Call `capture_region` (bounds) and `capture_window` (`title`, `shadow: false`) in the same turn.
-- `bun src/cli.ts store <product>/marketing <view> <appearance> <region png> <window png>` masks the glass to the window shape.
-- Views with `"capture": "glass"` keep the backdrop: `capture_region` only, no window png.
-- `bun src/cli.ts restore <product>/marketing` when done; then `make render PRODUCT=<absolute path>`.
-- `capture_window` alone flattens Liquid Glass to an opaque fill; it is only the alpha mask.
+- Never capture marketing views one by one with Snapline; run `make assets PRODUCT=<product>/marketing` in brand-assets-kit (`SCENES="a b"` for a subset).
+- Never ask the user to change a setting; the kit sets Reduce Transparency off and the glass tint itself, then restores them.
+- Liquid Glass only, dark and light; light variants keep the same background so only the app changes.
+- Glass shows what is behind it: the kit captures each scene over a backdrop of that scene; never composite a plain window capture.
 
 ## Tools
 
