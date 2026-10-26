@@ -1,18 +1,9 @@
 ---
 name: snapline
-description: See and read this Mac's screen with the Snapline MCP, and capture app windows for checks, demos, README shots or marketing. Trigger on "look at the app", "screenshot the app", "capture the launcher", "the screenshot I just took", "read the error on screen", "check how the window looks", "capture without shadow", "make demo materials", "regenerate marketing images". Product marketing assets go through brand-assets-kit `make assets`, not one-by-one captures. Not for screen recordings (ScreenKite) or icons (use icons).
+description: See and read this Mac's screen with the Snapline MCP, and capture app windows for UI checks and README shots. Trigger on "look at the app", "screenshot the app", "capture the launcher", "the screenshot I just took", "read the error on screen", "check how the window looks", "capture without shadow". Not for marketing images (use brand-assets), screen recordings (ScreenKite) or icons (use icons).
 ---
 
 # Snapline
-
-## Product marketing assets (brand-assets-kit)
-
-- Run `make assets PRODUCT=<product>/marketing` in brand-assets-kit; `SCENES="a b"` for a subset; never capture marketing views one by one.
-- Never ask the user to change a setting; the kit sets Reduce Transparency off and the glass tint (`glassTint` in `views.json`), then restores both.
-- Liquid Glass only, dark and light; light variants keep the same background so only the app changes.
-- Glass shows what is behind it: the kit captures each scene over a backdrop of that scene; never composite a plain window capture.
-- The app opens its own views from a launch variable (e.g. `BUKKU_DEMO_OPEN`); never drive it with keystrokes.
-- The user must leave the Mac alone during a run.
 
 ## Habits
 
@@ -78,7 +69,7 @@ description: See and read this Mac's screen with the Snapline MCP, and capture a
 ## Window captures
 
 1. Pass the bundle ID to `capture_window`; a debug build has its own name and bundle ID.
-2. Open a transient window through the app's own launch command, then capture in the next call.
+2. Open a transient window through the app's own launch command (never keystrokes), then capture in the next call.
 3. Check alpha at the corners before calling a capture clean (script below).
 
 | `shadow` | Result |
