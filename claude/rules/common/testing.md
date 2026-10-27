@@ -32,6 +32,7 @@ MANDATORY workflow:
 - Run lint, format, test and build through the project's Makefile targets, never the underlying tool directly
 - Treat a linter or test run that reports no findings as unverified until it shows a non-zero count of files or tests checked
 - Run every test target through the build system that builds the shipped app, not only the package-level runner
+- While iterating, run only the UI tests that cover the change (a `TESTS=` filter); run the full UI suite once, before merging
 
 ## Agent Support
 
