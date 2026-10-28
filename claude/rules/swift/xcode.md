@@ -38,7 +38,7 @@ paths:
 - Provide `make profile-launch`: the Release build launched several times under the App Launch template, failing when the median launch exceeds the budget.
 - Provide `make status-appstore`: App Store versions, latest builds, Beta App Review state, groups and the public link from `asc`.
 - Keep App Store listing text in asc's metadata JSON layout (`metadata/app-info/<locale>.json`, `metadata/version/<version>/<locale>.json`), write it from generators directly and upload it unchanged with `asc metadata push`.
-- Keep every other App Store Connect setting (price, availability, in-app purchases, screenshots order, accessibility) in committed files applied by `setup-appstore-*` Make targets, never by one-off `asc` commands.
+- Keep in-app purchases in `asc iap import` JSON and every other App Store Connect setting (copyright, categories, review contact, price, availability, in-app purchase prices, accessibility, screenshot order) in one `appstore/app.json`, applied by a single `make setup-appstore`; never one-off `asc` commands.
 - Keep `.github/dependabot.yml` with `open-pull-requests-limit: 0` until the repository is public.
 
 ## Workspace
