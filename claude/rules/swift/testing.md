@@ -40,7 +40,7 @@ Each test gets a fresh instance — set up in `init`, tear down in `deinit`. No 
 
 ## Coverage and Flakiness
 
-- Measure coverage on the full test plan, exclude SwiftUI view files, the `@main` App file and thin `Live…` system adapters, and fail below 80%.
+- Measure coverage on the full test plan, exclude SwiftUI view files and the `@main` App file, and fail below 80%.
 - Cover views with swift-snapshot-testing in light appearance at `perceptualPrecision: 0.98`, and skip snapshot suites where the `__Snapshots__` folder is absent or `SKIP_SNAPSHOTS=1`.
 - Repeat a suspect test with `make test-until-failure TESTS=<target/suite>` before calling it fixed.
 - Run `performAccessibilityAudit()` in a UI test and ignore issues whose element lies outside the app's window.
