@@ -28,6 +28,7 @@ MANDATORY workflow:
 ## Verification Gates
 
 - Never use logs as a test assertion target or as a dependency-injection seam
+- Never exclude source files from coverage to reach the floor; add tests instead
 - Never call a live SDK, payment or network adapter from a test; test the logic through its protocol fake and check the live adapter in the running app
 - For UI/UX changes, exercise the change in a real running instance before merge — golden path plus at least one edge case
 - Run lint, format, test and build through the project's Makefile targets, never the underlying tool directly
