@@ -33,6 +33,7 @@ Each test gets a fresh instance — set up in `init`, tear down in `deinit`. No 
 - Tests never depend on the state of the machine running them (real files, real installed apps, real network) — inject protocol doubles so tests are hermetic and deterministic.
 - Compare paths through the same resolution/canonicalization function on both sides, or inject a fake path resolver — raw string path equality is flaky across symlinked locations.
 - Run the full test suite locally on every change until CI is in place, not just the changed subset.
+- Never call StoreKit `purchase()`, `AppStore.sync()` or `SKTestSession` purchases in automated tests; on macOS they reach the real App Store and show an Apple Account sign-in.
 - Delete a test-only protocol/double once nothing in the suite calls it anymore.
 - Pass an explicit UTC time zone (`TimeZone.gmt`) to date code under test; never rely on the machine's or the test plan's time zone.
 - Build fixture dates from ISO 8601 strings (`try Date("2026-02-09T23:00:00Z", strategy: .iso8601)`), never from raw epoch numbers.
