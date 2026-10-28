@@ -29,7 +29,7 @@ MANDATORY workflow:
 
 - Never use logs as a test assertion target or as a dependency-injection seam
 - Never exclude source files from coverage to reach the floor; add tests instead
-- Never call a live SDK, payment or network adapter from a test; test the logic through its protocol fake and check the live adapter in the running app
+- Test logic through protocol fakes; test a live system adapter only in an app-hosted integration test against a local system store (data protection Keychain), never against a production service, payment flow or network API
 - For UI/UX changes, exercise the change in a real running instance before merge — golden path plus at least one edge case
 - Run lint, format, test and build through the project's Makefile targets, never the underlying tool directly
 - Treat a linter or test run that reports no findings as unverified until it shows a non-zero count of files or tests checked
