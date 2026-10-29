@@ -57,7 +57,12 @@ and injects ViewModel. Not part of MVVM — hosts the stack.
 
 ## macOS windows and Liquid Glass
 
-- Bring windows of an accessory (LSUIElement) app forward with `NSApp.activate()`, `orderFrontRegardless()` and `makeKey()` in a main-actor `Task` after SwiftUI opens them, and route every Settings entry point through one opener.
+- Build every summoned surface of a background menu bar app (launcher, edge slide-out, HUD) as an `NSPanel` with `.nonactivatingPanel`, `canBecomeKey` true, `becomesKeyOnlyIfNeeded = false` and `hidesOnDeactivate = false`, the way Spotlight and Alfred work.
+- Show a summoned panel with `orderFrontRegardless()` and `makeKey()` only; never call `NSApp.activate()` for it.
+- Hide a summoned panel on `NSWindow.didResignKeyNotification`, never on `NSApplication.didResignActiveNotification`.
+- Keep standard windows (Settings, About, onboarding, activation) for everything that is not summoned, and route every Settings entry point through one opener.
+- Request `NSApp.activate()` synchronously inside the user action that opens a standard window; never defer it into a `Task` or a delay to fix focus, because since macOS 14 activation is cooperative and a late request can be refused.
+- Query a non-activating panel in UI tests through `app.dialogs`, not `app.windows`.
 - Give every window a title (hidden with `titleVisibility = .hidden` when the design has none) and mark decorative images `accessibilityHidden(true)`.
 - Put Liquid Glass (`glassEffect`, `.glass`, `.glassProminent`) behind `#available(macOS 26, *)` with the pre-26 look as the fallback.
 - Place panels at fractions of the screen's visible frame, never at fixed point offsets.
