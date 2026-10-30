@@ -65,6 +65,7 @@ and injects ViewModel. Not part of MVVM — hosts the stack.
 - Query a non-activating panel in UI tests through `app.dialogs`, not `app.windows`.
 - Give every window a title (hidden with `titleVisibility = .hidden` when the design has none) and mark decorative images `accessibilityHidden(true)`.
 - Put Liquid Glass (`glassEffect`, `.glass`, `.glassProminent`) behind `#available(macOS 26, *)` with the pre-26 look as the fallback.
+- Set `.buttonBorderShape(.capsule)` once at each window's root view, and give every primary action in every window (including reusable packages) the same style: `.glassProminent` on macOS 26, `.borderedProminent` before.
 - Place panels at fractions of the screen's visible frame, never at fixed point offsets.
 - Offer picture tiles for few-choice visual settings (theme, position) and top-align the row label with them.
 - Preview a placement setting by showing the window there briefly without taking focus.
