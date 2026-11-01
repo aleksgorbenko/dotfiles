@@ -1,6 +1,7 @@
 ## Git Workflow
 
 - Create feature branches for all changes
+- Never create a git worktree or a second checkout folder; switch branches in the one checkout (stash or commit first)
 - Commit frequently with descriptive messages
 - When the user asks to commit code, use the "git-commit" skill
 - NEVER commit changes that don't compile or don't pass tests

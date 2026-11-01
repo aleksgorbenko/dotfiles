@@ -36,6 +36,9 @@ Each test gets a fresh instance — set up in `init`, tear down in `deinit`. No 
 - Never call StoreKit `purchase()` or `AppStore.sync()` in automated tests; `SKTestSession` does not reach StoreKit in command-line `xcodebuild` runs, so test purchases from Xcode with a `.storekit` file and in TestFlight.
 - Use the data protection Keychain (`kSecUseDataProtectionKeychain`) and test it in app-hosted tests; the file-based login keychain is missing on CI runners.
 - Delete a test-only protocol/double once nothing in the suite calls it anymore.
+- Serialise every suite that runs `NSAppleScript` (`@Suite(.serialized)`); separate executor instances running in parallel corrupt each other's error info.
+- Run `make reset-storekit` (delete `~/Library/Group Containers/group.com.apple.storekit/Documents/Persistence/Octane/<bundle ID>`) when a Debug purchase fails with `ASDServerErrorDomain Code=2010`; Xcode-run builds use that local store, not the sandbox.
+- Run `make clean` once when a test build reports a missing member that exists in the source; a stale package module causes it.
 - Pass an explicit UTC time zone (`TimeZone.gmt`) to date code under test; never rely on the machine's or the test plan's time zone.
 - Build fixture dates from ISO 8601 strings (`try Date("2026-02-09T23:00:00Z", strategy: .iso8601)`), never from raw epoch numbers.
 

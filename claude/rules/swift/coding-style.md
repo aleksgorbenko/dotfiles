@@ -59,6 +59,19 @@ func load(id: String) throws(LoadError) -> Item {
 }
 ```
 
+- Convert every Apple API failure (thrown error, `OSStatus`, `Bool` result, AppleScript error number) to a typed error in its live adapter.
+- Give each failure a caller handles differently its own case; send the rest to one `failed(reason:)` case that keeps the code and message.
+- Log every error an adapter collapses or swallows with its code: `SecCopyErrorMessageString` for `OSStatus`, `URLError.code`, the AppleScript error number, `sqlite3_errmsg`.
+- Check the `Bool` from `NSWorkspace.shared.open` and `startAccessingSecurityScopedResource()`; log a `false`.
+- Keep a value that resolved when a follow-up step fails (a stale bookmark that can't be refreshed); log the follow-up failure, don't throw.
+- Return a distinct failure result to the UI when saving a user's choice fails; never report it as cancelled.
+- Show nothing for a user cancellation (StoreKit `userCancelled`, AppleScript `-128`, `URLError.cancelled`).
+- Delete and recreate an app-owned SQLite cache (with its `-wal` and `-shm` files) that fails to open, once; crash only if the second open fails.
+- Map every `StoreKitError` and `Product.PurchaseError` case to an app error with its own message, gating newer cases with `#available`.
+- Check ownership before showing the StoreKit payment sheet, and re-read `Transaction.currentEntitlements` after a failed purchase before reporting the failure.
+- Map AppleScript `-600`/`-609` to app not running, `-1728`/`-1719` to object not found and `-1712` to timed out; a tab reader returns no tabs when its browser quit mid-read.
+- Never add an error code field or case that no caller branches on.
+
 ## Concurrency
 
 Enable Swift 6 strict concurrency checking. Prefer:

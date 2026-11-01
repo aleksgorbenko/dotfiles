@@ -57,6 +57,10 @@ description: Release a macOS app to TestFlight, the App Store and direct downloa
 - Builds are immutable: upload a new build number, expire the old one; the version string stays.
 - Take the next build number from `asc builds next-build-number`; App Store numbering is separate from Sparkle's.
 - Set `ASC_TELEMETRY_DISABLED=1`; read the API key from Keychain locally, from secrets on CI.
+- `make setup-appstore` is the one command for everything App Store: listing, prices, in-app purchases and their review screenshots; never add a second setup target.
+- Keep in-app purchase prices in the app config as a schedule (`price`, optional `startDate`); a launch price is the first entry, the full price starts on its date.
+- Give each in-app purchase review screenshot its own brand-assets channel and scene; `setup-appstore` stops when one is missing.
+- Xcode Cloud compute usage has no App Store Connect API endpoint (checked API 4.5.1) and no `asc` command; it shows only in App Store Connect and the Apple Developer app.
 
 ## TestFlight
 

@@ -31,3 +31,5 @@ description: Make product marketing images (App Store screenshots, website image
 - Never rerun every scene for a change to one; pass `SCENES`.
 - The user must leave the Mac alone during a capture run (~7 s per scene); say so before starting.
 - Demo data lives in the product repo; keep each query's results unique to its file.
+- `make render` fails with `view <id> (light) not captured` for a new or renamed view; run `make assets` for that scene first.
+- Check every capture shows an active window before uploading; a binary started directly can be refused activation.

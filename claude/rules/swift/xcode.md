@@ -53,6 +53,7 @@ paths:
 - Declare every module a package target uses, including modules referenced only through another module's default arguments.
 - Commit every `Package.resolved`, including `<Workspace>.xcworkspace/xcshareddata/swiftpm/Package.resolved`.
 - Never link a package product into a test target that does not import it.
+- Quit the built app yourself with the project's Make target (`make quit-built-app`) before a run or test; never ask the user to quit it.
 
 ## Install
 
