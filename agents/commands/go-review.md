@@ -66,67 +66,6 @@ go build -race ./...
 govulncheck ./...
 ```
 
-## Example Usage
-
-```text
-User: /go-review
-
-Agent:
-# Go Code Review Report
-
-## Files Reviewed
-- internal/handler/user.go (modified)
-- internal/service/auth.go (modified)
-
-## Static Analysis Results
-✓ go vet: No issues
-✓ staticcheck: No issues
-
-## Issues Found
-
-[CRITICAL] Race Condition
-File: internal/service/auth.go:45
-Issue: Shared map accessed without synchronization
-```go
-var cache = map[string]*Session{}  // Concurrent access!
-
-func GetSession(id string) *Session {
-    return cache[id]  // Race condition
-}
-```
-Fix: Use sync.RWMutex or sync.Map
-```go
-var (
-    cache   = map[string]*Session{}
-    cacheMu sync.RWMutex
-)
-
-func GetSession(id string) *Session {
-    cacheMu.RLock()
-    defer cacheMu.RUnlock()
-    return cache[id]
-}
-```
-
-[HIGH] Missing Error Context
-File: internal/handler/user.go:28
-Issue: Error returned without context
-```go
-return err  // No context
-```
-Fix: Wrap with context
-```go
-return fmt.Errorf("get user %s: %w", userID, err)
-```
-
-## Summary
-- CRITICAL: 1
-- HIGH: 1
-- MEDIUM: 0
-
-Recommendation: ❌ Block merge until CRITICAL issue is fixed
-```
-
 ## Approval Criteria
 
 | Status | Condition |

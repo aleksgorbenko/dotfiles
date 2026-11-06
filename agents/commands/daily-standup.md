@@ -20,7 +20,7 @@ Structure the output exactly like this:
 
 ---
 
-# Standup — {today's date in "27 Jan 2026" format}
+# Standup - {today's date in "27 Jan 2026" format}
 
 ## 🗓 Yesterday
 
@@ -35,7 +35,7 @@ Based on the commits, uncommitted changes, and open TODOs, identify anything tha
 
 ## 🎯 Today's Priorities
 
-Based on what was in progress (uncommitted changes, recent work direction), suggest 2–4 concrete tasks to focus on today. Be specific — reference actual files, features, or issues where possible.
+Based on what was in progress (uncommitted changes, recent work direction), suggest 2–4 concrete tasks to focus on today. Be specific - reference actual files, features, or issues where possible.
 
 ---
 

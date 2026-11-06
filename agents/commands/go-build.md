@@ -41,108 +41,6 @@ go mod verify
 go mod tidy -v
 ```
 
-## Example Session
-
-```text
-User: /go-build
-
-Agent:
-# Go Build Resolution
-
-## Initial Diagnostics
-
-```bash
-$ go build ./...
-internal/service/user.go:25:15: undefined: UserRepository
-internal/handler/api.go:42:9: cannot use x (type string) as type int
-internal/handler/api.go:58:2: missing return at end of function
-```
-
-Errors found: 3
-
-## Fix 1: Undefined Identifier
-
-File: internal/service/user.go:25
-Error: undefined: UserRepository
-Cause: Missing import
-
-```go
-// Added import
-import "project/internal/repository"
-
-// Changed
-var repo UserRepository
-// To
-var repo repository.UserRepository
-```
-
-```bash
-$ go build ./...
-# 2 errors remaining
-```
-
-## Fix 2: Type Mismatch
-
-File: internal/handler/api.go:42
-Error: cannot use x (type string) as type int
-
-```go
-// Changed
-count := params.Get("count")
-// To
-countStr := params.Get("count")
-count, _ := strconv.Atoi(countStr)
-```
-
-```bash
-$ go build ./...
-# 1 error remaining
-```
-
-## Fix 3: Missing Return
-
-File: internal/handler/api.go:58
-Error: missing return at end of function
-
-```go
-func GetUser(id string) (*User, error) {
-    if id == "" {
-        return nil, ErrInvalidID
-    }
-    user := findUser(id)
-    // Added missing return
-    return user, nil
-}
-```
-
-```bash
-$ go build ./...
-# Build successful!
-```
-
-## Final Verification
-
-```bash
-$ go vet ./...
-# No issues
-
-$ go test ./...
-ok      project/internal/service   0.015s
-ok      project/internal/handler   0.023s
-```
-
-## Summary
-
-| Metric | Count |
-|--------|-------|
-| Build errors fixed | 3 |
-| Vet warnings fixed | 0 |
-| Files modified | 2 |
-| Remaining issues | 0 |
-
-Build Status: ✅ SUCCESS
-```
-
 ## Common Errors Fixed
 
 | Error | Typical Fix |
@@ -175,7 +73,7 @@ The agent will stop and report if:
 
 - `/go-test` - Run tests after build succeeds
 - `/go-review` - Review code quality
-- `/verify` - Full verification loop
+- `/verify-build` - Full verification loop
 
 ## Related
 

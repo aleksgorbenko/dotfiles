@@ -57,16 +57,16 @@ Group findings by category. Use this format:
 
 ```
 ## Duplicate logic
-- path/to/file.go:42 — [brief description, e.g. "same validation as path/to/other.go:17"]
+- path/to/file.go:42 - [brief description, e.g. "same validation as path/to/other.go:17"]
 
 ## Dead code
-- path/to/file.go:88 — [brief description, e.g. "function `parseOld` is never called"]
+- path/to/file.go:88 - [brief description, e.g. "function `parseOld` is never called"]
 
 ## TODO/FIXME
-- path/to/file.go:12 — TODO: [comment text]
+- path/to/file.go:12 - TODO: [comment text]
 
 ## Complexity
-- path/to/file.go:200 — [brief description, e.g. "function `handleRequest` is 90 lines, consider splitting"]
+- path/to/file.go:200 - [brief description, e.g. "function `handleRequest` is 90 lines, consider splitting"]
 
 ## Summary
 X issues found across Y categories.
