@@ -14,13 +14,11 @@ Create a draft GitHub Pull Request using the `gh` CLI and open it in the browser
 1. **Gather state** — run these in parallel:
    - `git rev-parse --show-toplevel` — project root
    - `git rev-parse --abbrev-ref HEAD` — current branch
-   - `git log main...HEAD --oneline` — commits since branching from main
-   - `git diff main...HEAD --stat` — files changed
+   - `gh repo view --json defaultBranchRef -q .defaultBranchRef.name` — base branch
 
-2. **Determine the base branch** — default to `main`. If the repo uses a different default branch, detect it with:
-   ```bash
-   gh repo view --json defaultBranchRef -q .defaultBranchRef.name
-   ```
+2. **Collect changes** against that base:
+   - `git log <base>...HEAD --oneline` — commits since branching
+   - `git diff <base>...HEAD --stat` — files changed
 
 3. **Find the PR template:**
    - Check if `<project-root>/.github/pull_request_template.md` exists → use it
@@ -56,7 +54,7 @@ Create a draft GitHub Pull Request using the `gh` CLI and open it in the browser
 
 - Always create as `--draft`. Never create a ready-for-review PR unless the user explicitly asks.
 - Always pass `--web` to open the browser.
-- If the branch has no commits ahead of main, warn the user before proceeding.
+- If the branch has no commits ahead of the base branch, warn the user before proceeding.
 - If the branch is not pushed to remote yet, push it first: `git push -u origin <branch>`.
 - Do not include raw diff output in the PR body — use the stat summary instead.
 - If the user provides a title or description, prefer their wording over the generated one.

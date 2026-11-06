@@ -85,6 +85,7 @@ ALWAYS:
 - Remove private bundle IDs, local paths, example workflow names, and personal setup details from public READMEs and embedded workflow metadata before forum or Gallery publication.
 - Do not rewrite or clean a user-authored repository README when the request targets Alfred's embedded `info.plist` `readme`; preserve its wording and structure unless repository README changes are explicitly requested.
 - Name every workflow variable (UI text, labels, config) with letters, digits and underscores only; a hyphen is not a valid environment variable name and breaks shell `export`.
+- Follow `standards.md` (modifier keys, subtitle hints, navigation, README, embedded readme, CLAUDE.md) in every workflow; start a repo's `CLAUDE.md` from `templates/CLAUDE.md`.
 
 NEVER:
 - Use Snapline for Alfred screenshots - opening it hides Alfred's window.

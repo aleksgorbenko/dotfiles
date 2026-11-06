@@ -223,6 +223,42 @@ extension EnvironmentValues {
 Don't build modifiers/styles speculatively — font-only role fully served by token. Promote to
 next tier only when role actually needs more reach.
 
+### Token reuse scope — where the file lives
+
+A token (colour, spacing, radius — not just `Font`) lives at exactly one of three scopes.
+Promotion is a one-way door triggered by an actual second call site, never speculative —
+same rule as everywhere else (`swift-anti-patterns.md`: no fields/params added for future
+use with no current caller).
+
+| Scope | Trigger | File | Suffix |
+|---|---|---|---|
+| **Component-private** | Used by exactly one component | Private `enum`/section at top of the component's own `*Style.swift` | `*Style` |
+| **Feature-shared** | Reused by ≥2 components in one feature | `<Feature>Palette.swift` (colour) / `<Feature>Metrics.swift` (sizing) in the DesignSystem package | `*Palette`, `*Metrics` |
+| **App-global** | Reused across ≥2 features | `Tokens/<Role>Primitives.swift` (colour) / `Tokens/<Role>Metrics.swift` (sizing) in the DesignSystem package, named by role not app (e.g. `WindowChromeMetrics`) — create only once this actually happens, most apps never populate this tier | — |
+
+Decision procedure, in order — stop at the first that fits:
+1. Apple system token already expresses it (`.primary`, `.secondary`, a standard `Font` text
+   style)? Use it directly, no wrapper.
+2. Custom value, one consumer? Component-private.
+3. A second, unrelated consumer needs the identical value? Promote to the feature's `*Palette`.
+4. A second *feature* needs it? Promote to app-global `Tokens/`.
+
+A component never reads a lower tier's raw value when a higher tier already named that role
+— always go through the nearest named tier above it, never skip past it.
+
+Applies identically to layout/spacing, not just colour: a fixed-point type/spacing scale
+(base unit + ratios, e.g. `LauncherTypeScale`) is the Tier-1-equivalent. For static sizing
+constants (corner radius, fixed spacing, fixed window size) reused by ≥2 components, use
+`<Feature>Metrics` (`SettingsMetrics`, `WelcomeMetrics`) — the direct sizing counterpart to
+`*Palette`; when the same constant is needed by ≥2 *features* (e.g. Settings' and Welcome's
+windows sharing one chrome size/padding), promote it to an app-global, role-named metrics
+file (e.g. `WindowChromeMetrics`) rather than leaving each feature to keep a comment
+promising to match the other by hand.
+Reach for `<Feature>UIConfiguration` (a struct, not just constants — e.g.
+`LauncherUIConfiguration`) only when the layout needs runtime computation (row-count-dependent
+height, resizing math), not for plain fixed values — never a single app-wide "AppUIConfiguration"
+unless the computation is genuinely shared by ≥2 windows.
+
 ## Navigation
 
 ### Type-Safe NavigationStack

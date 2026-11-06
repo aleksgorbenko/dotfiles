@@ -27,13 +27,6 @@ and viewing history.
    it creates a machine-readable, human-scannable history that makes projects easier to
    maintain over time.
 
-3. Use emojis at the end of commit message from [gitmoji](https://gitmoji.dev/) if the user seems open to it and it fits the commit type. For
-   example, `feat` could use ✨, `fix` could use 🐛, `docs` could use 📚, etc. This is optional
-   but can make the commit history more visually engaging.
-
-4. **Explain what you're doing.** Git can feel opaque. Briefly tell the user what each
-   command does and why, especially if they seem new to git.
-
 ## Conventional Commits Format
 
 Every commit message follows this structure:
