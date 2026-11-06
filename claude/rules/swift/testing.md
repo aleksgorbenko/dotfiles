@@ -36,6 +36,9 @@ Each test gets a fresh instance — set up in `init`, tear down in `deinit`. No 
 - Never call StoreKit `purchase()` or `AppStore.sync()` in automated tests; `SKTestSession` does not reach StoreKit in command-line `xcodebuild` runs, so test purchases from Xcode with a `.storekit` file and in TestFlight.
 - Use the data protection Keychain (`kSecUseDataProtectionKeychain`) and test it in app-hosted tests; the file-based login keychain is missing on CI runners.
 - Delete a test-only protocol/double once nothing in the suite calls it anymore.
+- Create every test temp folder and `UserDefaults` suite through one shared Swift Testing scoping trait that deletes them after each test; never clean up per test with `defer` or `deinit`.
+- Name a test `UserDefaults` suite by a file path inside the test's temp folder; a named suite leaves a plist in `~/Library/Preferences` that `cfprefsd` rewrites after `removePersistentDomain` and file deletion.
+- Check `~/Library/Preferences`, the temp folder and the app container's `tmp` for leftovers after a full test run.
 - Serialise every suite that runs `NSAppleScript` (`@Suite(.serialized)`); separate executor instances running in parallel corrupt each other's error info.
 - Never delete Xcode's local StoreKit store (`group.com.apple.storekit/.../Octane/<bundle ID>`); a `.debug` build then falls back to the sandbox, which has no products for that bundle ID. Clear test purchases in Xcode with Debug › StoreKit › Manage Transactions.
 - Run `make clean` once when a test build reports a missing member that exists in the source; a stale package module causes it.

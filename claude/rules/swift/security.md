@@ -5,8 +5,6 @@ paths:
 ---
 # Swift Security
 
-> This file extends [common/security.md](../common/security.md) with Swift specific content.
-
 ## Secret Management
 
 - Use Keychain Services for sensitive data (tokens, passwords, keys) — never `UserDefaults`

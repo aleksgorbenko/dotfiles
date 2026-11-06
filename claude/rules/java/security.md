@@ -4,8 +4,6 @@ paths:
 ---
 # Java Security
 
-> This file extends [common/security.md](../common/security.md) with Java-specific content.
-
 ## Secrets Management
 
 - Never hardcode API keys, tokens, or credentials in source code
