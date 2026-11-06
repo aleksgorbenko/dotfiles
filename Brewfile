@@ -10,6 +10,8 @@ tap "nats-io/nats-tools"
 tap "fluxcd/tap"
 tap "tsonglew/dutis" # set default apps for file types (needed for Alfred Workflow)
 tap "hashicorp/tap"
+tap "hotchpotch/trn"
+tap "openai/tools"
 
 # set arguments for all 'brew install --cask' commands
 cask_args appdir: "/Applications", require_sha: true
@@ -24,10 +26,12 @@ cask_args appdir: "/Applications", require_sha: true
 # perplexity ai - 6714467650
 # Xcode - 497799835
 # Apple Developer - 640199958
+# TestFlight - 899247664
 # Pixelmator Pro 1289583905
 # Photomator 1444636541
+# GarageBand 682658836
 
-# mas install 441258766 1278508951 477670270 6714467650 497799835 640199958
+# mas install 441258766 1278508951 477670270 6714467650 497799835 640199958 899247664
 brew "mas"
 
 #######
@@ -67,6 +71,12 @@ brew "gdu" # better 'du': disk usage analyser gdu-go for TUI
 brew "ripgrep" # better 'grep'
 brew "gotop" # better 'top'
 brew "codesnap" # screenshot code and generate images
+brew "shellcheck"
+brew "shfmt"
+brew "actionlint"
+brew "yamllint"
+brew "taplo"
+brew "blueutil" # bluetooth connect and disconnect
 
 # langs
 brew "mise" # one version manager to rule them all
@@ -92,6 +102,7 @@ brew "tlrc" # rust client for tldr - alternative to cheat + macOS specific comma
 brew "hugo" # work on my blog https://aleksgorbenko.dev
 brew "tsonglew/dutis/dutis" # set default apps for file types. Used in Alfred
 brew "glow" # pretty print markdown in CLI
+brew "hotchpotch/trn/trn" # translate via Apple on-device translation
 
 # aws
 brew "awscli"
@@ -130,8 +141,23 @@ brew "hashicorp/tap/vault"
 
 cask "postman"
 brew "libyaml" # needed for ruby on apple silicon
-brew "gradle"
 cask "multipass" # vm, somewhat similar to virtual box. It is powered by qemu and made by Canonical (ubuntu)
+
+# apple developer
+brew "asc" # Appstore Connect CLI
+brew "xcodegen" # generate xcode projects from yaml spec
+brew "xcode-build-server" # lsp for xcodeprojects
+brew "periphery" # swift dead code detector
+brew "gitleaks" # secret scanner
+brew "osv-scanner" # dependency vulnerability scanner
+brew "lefthook" # git hooks manager
+brew "xcbeautify" # readable xcodebuild output
+brew "licenseplist" # third-party licence acknowledgements
+brew "openai/tools/tart" # macOS virtualisation for testing backwards compatibility
+brew "xctesthtmlreport" # generates html reports from xcodebuild logs
+
+# selling digital products
+brew "antiwork/cli/gumroad"
 
 # terminal
 cask "ghostty" # minimal terminal
@@ -152,7 +178,6 @@ brew "ollama" # run, push, pull LLMs locally
 cask "lm-studio" # similar to ollama, but uses llama.cpp and has a GUI. also "lsm" CLI tool
 cask "chatgpt" # macOS app for ChatGPT + Codex
 cask "codex" # cli tool
-# cask "macwhisper" # macOS app to dictate and transcribe
 cask "handy" # OSS STT
 # cask "buzz" # Transcribe audio and translate with Whisper
 cask "claude-code"
@@ -185,6 +210,8 @@ cask "alfred" # 100x better Spotlight
 cask "keyboard-maestro"
 cask "karabiner-elements" # remap everything!
 brew "yqrashawn/goku/goku" # helps remap everything!
+cask "harper-desktop" # grammar checker. No more grammarly!
+brew "harper"
 
 # utils: mouse
 cask "logi-options+" # configure logitech mouse and keyboard
@@ -192,7 +219,7 @@ cask "scroll-reverser"
 
 # utils: menubar
 cask "stats" # free alternative to istat-menus
-cask "jordanbaird-ice" # menu bar icon manager
+cask "teddychan/tap/ice-2" # menu bar icon manager
 
 # utils: files
 cask "keka" # work with archives

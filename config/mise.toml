@@ -1,13 +1,15 @@
 [tools]
 bun = "latest"
 go = "latest"
-java = "temurin-21.0.12"
+golangci-lint = "latest"
+java = "temurin-25.0.4+101.0.LTS"
+gradle = "latest"
 node = "26"
-"npm:npm" = "latest"
 python = "latest"
+ruff = "latest"
 ruby = "latest"
 terraform = "latest"
 uv = "latest"
 
 [settings]
-experimental = false
+lockfile = true

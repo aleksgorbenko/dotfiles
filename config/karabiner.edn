@@ -266,8 +266,8 @@
 	:rules [
 		:j-mode
 		; !Cc = cmd+c and the following actions uses clipbaord
-		[:1 [:!Cc [:alfred-clip "jisho-search" "dev.gbko.alfred.nihongo"]]]
-		[:2 [:!Cc [:alfred-clip "conjugate" "dev.gbko.alfred.nihongo"]]]
+		[:1 [:!Cc [:alfred-clip "jisho-search" "dev.aleksgorbenko.alfred.nihongo"]]]
+		[:2 [:!Cc [:alfred-clip "conjugate" "dev.aleksgorbenko.alfred.nihongo"]]]
 		[:3 [:!Cc [:shortcuts "JP Generate Sentence"]]]
 		[:p [:km "sc: Save Jp Phrase"]]
 		[:n [:km "sc: Save Nami Lesson"]]
@@ -322,7 +322,7 @@
 		[:c [:alfred "shortcuts" "com.alfredapp.vitor.shortcuts"]]
 		[:b [:alfred "search obsidian" "de.chris-grieser.shimmering-obsidian"]]
 		[:d [:alfred "search downloads" "dev.gbko.alfred.directories"]]
-		[:g [:alfred "ghostty tabs" "dev.gbko.alfred.ghostty-search-tabs"]]
+		[:g [:alfred "ghostty tabs" "dev.aleksgorbenko.alfred.ghostty"]]
 		[:f [:alfred "search desktop" "dev.gbko.alfred.directories"]]
 		[:v [:alfred "search icons" "dev.gbko.alfred.directories"]]
 		[:j [:alfred "search img" "dev.gbko.alfred.directories"]]
