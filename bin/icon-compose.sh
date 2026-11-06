@@ -12,6 +12,7 @@ Usage:
 Options:
   --size N        output width/height in px (default: 1024)
   --bg COLOUR     background #RRGGBB, or "none" for transparent (default: none)
+  --fg COLOUR     text colour #RRGGBB for --text; emoji keep their own colours (default: black)
   --radius F      corner radius as a fraction of the size (default: 0.2237)
   --inset F       background inset from the edge as a fraction of the size (default: 0)
   --glyph F       content's longest side as a fraction of the size
@@ -31,6 +32,7 @@ USAGE
 LIB="$(cd "$(dirname "$(readlink -f "$0")")/../lib/icons" && pwd)"
 SIZE=1024
 BG=none
+FG=""
 RADIUS=0.2237
 INSET=0
 GLYPH=""
@@ -44,6 +46,7 @@ while [[ $# -gt 0 ]]; do
     --text) TEXT="$2"; shift 2 ;;
     --size) SIZE="$2"; shift 2 ;;
     --bg) BG="$2"; shift 2 ;;
+    --fg) FG="$2"; shift 2 ;;
     --radius) RADIUS="$2"; shift 2 ;;
     --inset) INSET="$2"; shift 2 ;;
     --glyph) GLYPH="$2"; shift 2 ;;
@@ -77,7 +80,10 @@ if [[ ! -x "$COMPOSER" ]]; then
   swiftc -O -o "$COMPOSER" "$LIB/compose.swift"
 fi
 
-"$COMPOSER" "${SOURCE[@]}" --output "$OUTPUT" --size "$SIZE" --bg "$BG" \
+FG_ARGS=()
+[[ -n "$FG" ]] && FG_ARGS=(--fg "$FG")
+
+"$COMPOSER" "${SOURCE[@]}" --output "$OUTPUT" --size "$SIZE" --bg "$BG" "${FG_ARGS[@]+"${FG_ARGS[@]}"}" \
   --radius "$RADIUS" --inset "$INSET" --glyph "$GLYPH" \
   --style "$STYLE" --source "$ORIGIN"
 echo "$OUTPUT"

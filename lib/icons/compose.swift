@@ -6,6 +6,7 @@ struct Options {
     var output = ""
     var size = 1024
     var background: CGColor?
+    var foreground: CGColor?
     var radius = 0.2237
     var inset = 0.0
     var glyph = 0.56
@@ -50,6 +51,7 @@ func parse(_ arguments: [String]) -> Options {
         case "--output": options.output = value()
         case "--size": options.size = Int(number(value()))
         case "--bg": options.background = colour(value())
+        case "--fg": options.foreground = colour(value())
         case "--radius": options.radius = number(value())
         case "--inset": options.inset = number(value())
         case "--glyph": options.glyph = number(value())
@@ -62,7 +64,7 @@ func parse(_ arguments: [String]) -> Options {
     guard !options.output.isEmpty, (options.input == nil) != (options.text == nil),
           ["flat", "macos"].contains(options.style), ["glyph", "logo", "whole"].contains(options.source)
     else {
-        fail("usage: compose (--input FILE | --text STRING) --output FILE [--size N] [--bg COLOUR] [--radius F] [--inset F] [--glyph F] [--style flat|macos] [--source glyph|logo|whole]")
+        fail("usage: compose (--input FILE | --text STRING) --output FILE [--size N] [--bg COLOUR] [--fg COLOUR] [--radius F] [--inset F] [--glyph F] [--style flat|macos] [--source glyph|logo|whole]")
     }
     return options
 }
@@ -93,7 +95,11 @@ func sourceImage(_ options: Options) -> CGImage {
     if let text = options.text {
         return rasterise { rect in
             let font = NSFont(name: "Apple Color Emoji", size: rect.height * 0.7) ?? .systemFont(ofSize: rect.height * 0.7)
-            let string = NSAttributedString(string: text, attributes: [.font: font])
+            var attributes: [NSAttributedString.Key: Any] = [.font: font]
+            if let foreground = options.foreground, let tint = NSColor(cgColor: foreground) {
+                attributes[.foregroundColor] = tint
+            }
+            let string = NSAttributedString(string: text, attributes: attributes)
             let bounds = string.size()
             string.draw(at: NSPoint(x: (rect.width - bounds.width) / 2, y: (rect.height - bounds.height) / 2))
         }
