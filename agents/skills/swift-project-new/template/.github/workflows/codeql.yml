@@ -1,0 +1,40 @@
+---
+name: CodeQL
+
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: codeql-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  analyze:
+    name: Analyse Swift
+    runs-on: xcode-27
+    permissions:
+      contents: read  # check out the code
+      security-events: write  # upload CodeQL results
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Trust package plugins and macros
+        run: sh ci_scripts/ci_post_clone.sh
+
+      - uses: github/codeql-action/init@9b3254085494b55a0f7c4c2b3d2d52cc712ce370  # v4.39.1
+        with:
+          languages: swift
+          build-mode: manual
+
+      - name: make build
+        run: >-
+          make build XCODEBUILD_FLAGS="CODE_SIGN_IDENTITY=- CODE_SIGN_STYLE=Manual
+          DEVELOPMENT_TEAM= PROVISIONING_PROFILE_SPECIFIER="
+
+      - uses: github/codeql-action/analyze@9b3254085494b55a0f7c4c2b3d2d52cc712ce370  # v4.39.1
+        with:
+          category: "/language:swift"

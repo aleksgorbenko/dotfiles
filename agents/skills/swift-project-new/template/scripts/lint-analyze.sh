@@ -1,21 +1,24 @@
 #!/bin/bash
 set -uo pipefail
 
-log_dir="${TMPDIR:-/tmp}/analyze-$(basename "$PWD")"
+log_dir="${TMPDIR:-/tmp}/__SLUG__-analyze"
 mkdir -p "$log_dir"
 
+mode="${ANALYZE_MODE:-changed}"
+
 if [ -n "${COMPILER_LOG:-}" ]; then
-  swiftlint analyze --compiler-log-path "$COMPILER_LOG" --config .swiftlint.yml --strict --quiet
+  swiftlint analyze --compiler-log-path "$COMPILER_LOG" --config .swiftlint.yml --strict --quiet Packages/*/Sources
   exit $?
 fi
 
-if [ $# -eq 0 ]; then
-  log="$log_dir/app.log"
-  xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" -destination "$DESTINATION" clean build > "$log" 2>&1 \
-    || { tail -40 "$log"; exit 1; }
-  swiftlint analyze --compiler-log-path "$log" --config .swiftlint.yml --strict --quiet
-  exit $?
-fi
+changed_files() {
+  local base
+  base="$(command git merge-base HEAD "${ANALYZE_BASE:-main}")"
+  {
+    command git diff --name-only --diff-filter=d "$base"
+    command git ls-files --others --exclude-standard
+  } | grep -E '^Packages/[^/]+/Sources/.*\.swift$' | sort -u
+}
 
 run_parallel() {
   local step=$1
@@ -38,7 +41,11 @@ run_parallel() {
 }
 
 build() {
-  rm -rf "Packages/$1/.build"
+  if [ "$mode" = full ]; then
+    rm -rf "Packages/$1/.build"
+  else
+    grep "^Packages/$1/" "$log_dir/files" | xargs touch
+  fi
   (cd "Packages/$1" && swift build -v) > "$log_dir/compile-$1.log" 2>&1 || { cat "$log_dir/compile-$1.log"; return 1; }
 }
 
@@ -46,6 +53,19 @@ analyze() {
   swiftlint analyze --compiler-log-path "$log_dir/compile-$1.log" --config .swiftlint.yml --strict --quiet
 }
 
+if [ "$mode" != full ]; then
+  changed_files > "$log_dir/files"
+  packages=()
+  for pkg in "$@"; do
+    grep -q "^Packages/$pkg/" "$log_dir/files" && packages+=("$pkg")
+  done
+  if [ "${#packages[@]}" -eq 0 ]; then
+    echo "Analyzed: no changed package sources"
+    exit 0
+  fi
+  set -- "${packages[@]}"
+fi
+
 run_parallel build "$@" || exit 1
 run_parallel analyze "$@" || exit 1
-echo "Analyzed: $*"
+echo "Analyzed ($mode): $*"

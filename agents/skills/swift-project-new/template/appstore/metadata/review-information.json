@@ -1,0 +1,8 @@
+{
+  "contactEmail": "__CONTACT_EMAIL__",
+  "contactFirstName": "__CONTACT_FIRST_NAME__",
+  "contactLastName": "__CONTACT_LAST_NAME__",
+  "contactPhone": "__CONTACT_PHONE__",
+  "demoAccountRequired": false,
+  "notes": "ABOUT\n\nWHAT TO TRY\n1. \n\nACCOUNT\nNo account is needed.\n\nENTITLEMENTS\n\nCONTACT\n__CONTACT_EMAIL__"
+}

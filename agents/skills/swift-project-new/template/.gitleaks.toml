@@ -1,2 +1,7 @@
 [extend]
 useDefault = true
+
+[[allowlists]]
+description = "Sparkle EdDSA public key, shipped in Info.plist by design"
+regexTarget = "line"
+regexes = ['''SPARKLE_PUBLIC_ED_KEY\s*=''']

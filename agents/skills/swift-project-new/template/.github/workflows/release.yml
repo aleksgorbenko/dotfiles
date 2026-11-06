@@ -1,0 +1,43 @@
+---
+name: Release
+
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Publish to the App Store
+    runs-on: xcode-27
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Require Swift 6.4
+        run: |
+          xcodebuild -version
+          swift --version 2>&1 | tee /dev/stderr | grep -q "Swift version 6\.4"
+
+      - name: Install asc
+        run: brew install asc
+
+      - name: Metadata, build, upload, submit
+        env:
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
+        run: |
+          key="$RUNNER_TEMP/AuthKey.p8"
+          printf '%s' "$ASC_KEY_P8" | base64 -D > "$key"
+          auth="-authenticationKeyPath $key -authenticationKeyID $ASC_KEY_ID"
+          auth="$auth -authenticationKeyIssuerID $ASC_ISSUER_ID"
+          make publish-appstore XCODE_AUTH="$auth"
+          make submit-appstore

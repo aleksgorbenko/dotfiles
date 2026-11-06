@@ -1,0 +1,30 @@
+{
+  "products": [
+    {
+      "type": "NON_CONSUMABLE",
+      "referenceName": "14-day Trial",
+      "productId": "__BUNDLE_ID__.trial",
+      "familySharable": false,
+      "localizations": [
+        {
+          "locale": "__LOCALE__",
+          "name": "14-day Trial",
+          "description": "Try every __APP__ feature free for 14 days."
+        }
+      ]
+    },
+    {
+      "type": "NON_CONSUMABLE",
+      "referenceName": "Activate __APP__",
+      "productId": "__BUNDLE_ID__.activation",
+      "familySharable": false,
+      "localizations": [
+        {
+          "locale": "__LOCALE__",
+          "name": "Activate __APP__",
+          "description": "Keep using __APP__ after the trial ends."
+        }
+      ]
+    }
+  ]
+}

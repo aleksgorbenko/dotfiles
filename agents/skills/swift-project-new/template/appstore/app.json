@@ -1,0 +1,52 @@
+{
+  "copyright": "__YEAR__ __OWNER__",
+  "contentRights": "DOES_NOT_USE_THIRD_PARTY_CONTENT",
+  "pricing": {
+    "baseTerritory": "__BASE_TERRITORY__",
+    "free": true,
+    "availableInAllTerritories": true
+  },
+  "inAppPurchasePrices": {
+    "baseTerritory": "__BASE_TERRITORY__",
+    "prices": {
+      "__BUNDLE_ID__.trial": [
+        {
+          "price": "0"
+        }
+      ],
+      "__BUNDLE_ID__.activation": [
+        {
+          "price": "4.99"
+        }
+      ]
+    }
+  },
+  "inAppPurchaseOfferCodes": {
+    "__BUNDLE_ID__.activation": [
+      {
+        "name": "Full Version",
+        "price": "0"
+      }
+    ]
+  },
+  "accessibility": {
+    "deviceFamily": "MAC",
+    "publish": false,
+    "supports": {
+      "darkInterface": true,
+      "differentiateWithoutColorAlone": false,
+      "reducedMotion": true,
+      "sufficientContrast": false,
+      "voiceControl": true,
+      "voiceover": true,
+      "captions": false,
+      "audioDescriptions": false
+    }
+  },
+  "screenshots": [],
+  "inAppPurchaseReviewScreenshots": {
+    "__BUNDLE_ID__.trial": "iap-review-trial",
+    "__BUNDLE_ID__.activation": "iap-review-activation"
+  },
+  "sandboxEntitlements": {}
+}
