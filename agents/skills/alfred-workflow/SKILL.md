@@ -24,10 +24,10 @@ ALWAYS:
 - Return at least 1 item from a Script Filter for "nothing to show" states.
 - Keep UI text (title/subtext/runningsubtext) in info.plist config or the Workflow Variables panel.
 - Set up tooling before writing any workflow code: `pyproject.toml` from `templates/pyproject.toml`, `Makefile`, shell linter - then write tests.
-- Copy `templates/` into every workflow repo: `github/` as `.github/`, `Brewfile`, `.markdownlint-cli2.yaml`, `.editorconfig`; use `ci-private.yml` as `.github/workflows/ci.yml` in a private repo, and drop the `uv` block of `dependabot.yml` when there is no `pyproject.toml`.
+- Copy `templates/` into every workflow repo: `github/` as `.github/`, `.markdownlint-cli2.yaml`, `.editorconfig`; use `ci-private.yml` as `.github/workflows/ci.yml` in a private repo, and drop the `uv` block of `dependabot.yml` when there is no `pyproject.toml`.
 - Give the `Makefile` the target set of `templates/Makefile`: `setup test lint lint-* format format-check audit check ci clean build verify release sync-plist link-live`, plus project-specific ones (`vendor`, `icons`); drop `lint-*`/`audit` parts for file types the repo has none of.
-- Keep every CI step a Make target: the workflow runs only `make setup` and `make ci`; releases run only from the terminal via `make release VERSION=vX.Y.Z`.
-- Make `make setup` install dev tools from the repo `Brewfile` (`brew bundle`) and the Python environment (`uv sync --group dev`).
+- Keep every CI step a Make target: after installing tools (`astral-sh/setup-uv` pinned to a SHA, `brew install actionlint markdownlint-cli2`) the workflow runs only `make setup` and `make ci`; releases run only from the terminal via `make release VERSION=vX.Y.Z`.
+- Make `make setup` create the Python environment only (`uv sync --group dev`); never use a `Brewfile` or `brew bundle` in a project.
 - Manage Python dev tools (`pytest`, `pytest-cov`, `ruff`, `pyright`, `pip-audit`) as a `uv` dev group: `make setup` runs `uv sync` once, every other target uses `uv run --no-sync`.
 - Lint Python at the strictest level: ruff `select = ["ALL"]` (ignore only `COM812`, `CPY`, `D`; tests also `S101`, `S105`, `S106`) plus pyright `typeCheckingMode = "strict"`, both in `lint-python`; zero findings.
 - Render every generated row and node icon (SF Symbols, emoji, glyphs, maintenance) on the same macOS grid as `icon.png`: `icon-symbol.sh --style macos` or `icon-polish.sh` after a generator; content images (cover art, thumbnails, avatars) and their colour placeholders stay full-bleed.

@@ -11,7 +11,6 @@ export HOMEBREW_NO_AUTO_UPDATE := 1
 .PHONY: setup icons test lint lint-python lint-shell lint-applescript lint-data lint-md lint-actions format format-check audit check ci clean build verify release sync-plist link-live
 
 setup:
-	brew bundle --quiet
 	uv sync --group dev
 
 icons:
