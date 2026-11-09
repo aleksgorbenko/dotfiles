@@ -13,13 +13,13 @@ description: Create a new macOS app from an XcodeGen project.yml template with t
 6. Commit everything, including the generated `.xcodeproj` and test plans.
 7. Run `swift-project-docs` for APP.md and DOMAIN.md; add each enforced word to `.swiftlint.yml` `custom_rules` and `scripts/check_strings.py` `BANNED`.
 8. Propose ADRs for the project's decisions; write each only after the owner agrees.
-9. Create the Xcode Cloud workflow (test action on `main`) in Xcode; leave GitHub's macOS jobs off (`MACOS_CI` unset).
+9. Create the Xcode Cloud workflow (test action on `main`) in Xcode and grant it the private SwiftKit repo in App Store Connect; leave GitHub's macOS jobs off (`MACOS_CI` unset).
 
 ## What the script makes
 
 | Part | Holds |
 |---|---|
-| `project.yml`, `xcconfigs/Config.xcconfig` | App Store and Direct targets (`APPSTORE`/`DIRECT` flags), Sparkle, unit and UI test targets, settings from the owner profile |
+| `project.yml`, `xcconfigs/Config.xcconfig` | App Store and Direct targets (`APPSTORE`/`DIRECT` flags), SwiftKit products per channel (Sparkle in Direct only), unit and UI test targets, settings from the owner profile |
 | Test plans | full, unit, UI and Keychain plans written from the generated target IDs; demo variable `<APP>_DEMO=1` |
 | `Makefile`, `scripts/` | build, run, install, tests, coverage, TSan, profiles, release gate, lint, scans, and every `package-*`, `preflight-*`, `setup-*`, `publish-*`, `submit-*` and `unpublish-direct` step, with script tests |
 | `appstore/` | asc metadata, `app.json`, trial and activation in-app purchases, privacy answers |
@@ -30,4 +30,4 @@ description: Create a new macOS app from an XcodeGen project.yml template with t
 
 - Set `SPARKLE_PUBLIC_ED_KEY`, `APP_STORE_APP_ID`, `LEMON_SQUEEZY_PRODUCT_ID` and `LEMON_SQUEEZY_CHECKOUT_URL` once they exist.
 - Add packages and targets by editing `project.yml`, then `make generate-project`; set `ANALYZE_PACKAGES` once local packages exist.
-- Reusable code lives in SwiftKit (`git@github.com:aleksgorbenko/SwiftKit.git`).
+- Reusable code lives in SwiftKit (`https://github.com/aleksgorbenko/SwiftKit`): `SystemKit`, `FuzzyRank`, `UpdaterInterface`, `SparkleUpdater`, `LicenceKit`, `LicenceKitAppStore`, `LicenceKitDirect`, `LicenceKitUI`.

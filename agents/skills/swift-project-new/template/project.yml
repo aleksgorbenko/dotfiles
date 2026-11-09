@@ -24,9 +24,9 @@ fileGroups:
   - __APP__.xctestplan
 
 packages:
-  Sparkle:
-    url: https://github.com/sparkle-project/Sparkle
-    from: 2.9.6
+  SwiftKit:
+    url: https://github.com/aleksgorbenko/SwiftKit
+    majorVersion: 1.0.0
 
 settings:
   base:
@@ -127,10 +127,16 @@ targetTemplates:
     sources:
       - path: __APP__
         excludes: [__APP__-Direct-Info.plist]
+    dependencies:
+      - package: SwiftKit
+        products: [SystemKit, UpdaterInterface, LicenceKit, LicenceKitUI]
 
 targets:
   __APP__:
     templates: [__APP__App]
+    dependencies:
+      - package: SwiftKit
+        product: LicenceKitAppStore
     settings:
       groups: [app]
       base:
@@ -149,7 +155,8 @@ targets:
   __APP__-Direct:
     templates: [__APP__App]
     dependencies:
-      - package: Sparkle
+      - package: SwiftKit
+        products: [SparkleUpdater, LicenceKitDirect]
     settings:
       groups: [app]
       base:
