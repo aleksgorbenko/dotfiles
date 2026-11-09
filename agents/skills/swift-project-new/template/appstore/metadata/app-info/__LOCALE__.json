@@ -1,0 +1,5 @@
+{
+  "name": "__APP__",
+  "subtitle": "",
+  "privacyPolicyUrl": "https://__FEED_HOST__/apps/__SLUG__/privacy-policy/"
+}

@@ -2,23 +2,36 @@
 
 ## Setup
 
-- `brew install xcodegen swiftlint gitleaks osv-scanner lefthook xcbeautify licenseplist asc`
-- `make install-hooks` installs the pre-commit hook: lint, format check, project check, staged-secret scan.
-- App Store Connect API key in the Keychain (`asc:key-id`, `asc:issuer-id`, `asc:key-p8`) or `ASC_KEY_ID`, `ASC_ISSUER_ID`, `ASC_KEY_P8`.
+- `make install-hooks`: pre-commit lint, format check, project check, staged-secret scan.
+- App Store Connect API key in the Keychain (`asc:key-id`, `asc:issuer-id`, `asc:key-p8`).
+- Notarisation: `xcrun notarytool store-credentials notary --key AuthKey_XXXX.p8 --key-id <id> --issuer <issuer>`.
+- Sparkle: build `__APP__-Direct` once, run Sparkle's `generate_keys -p`, put the key in `SPARKLE_PUBLIC_ED_KEY`.
 - `make run` builds and opens the app; `make help` lists every target.
+
+## Checks
 
 | Check | Command | State |
 |---|---|---|
-| Release gate (all checks + full tests) | `make check-release` | On, before every package |
-| Coverage floor 80% (views excluded) | `make test-coverage` | On, macOS CI |
-| No warnings in project sources | `make check-warnings XCODEBUILD_LOG=…` | On, macOS CI and release gate |
-| Analyzer rules | `make lint-analyze` | On, macOS CI |
-| Vocabulary and string keys | `make lint` | On, pre-commit and macOS CI |
-| Secret and dependency scans | `make scan-secrets`, `make scan-dependencies` | On, every pull request (Linux) |
-| Thread Sanitizer | `make test-tsan` | Manual |
-| Memory profile (peak, final, leaks, top classes, growth, .trace, .memgraph; `PROFILE_STACKS=1` names allocations by function) | `make profile-memory` | Manual |
-| CPU profile (top functions by self and total time, .trace) | `make profile-cpu` | Manual |
-| Launch time (phases, median of 5 runs, fails over 500 ms) | `make profile-launch` | Manual |
-| App Store and TestFlight status | `make status-appstore` | Manual, once `APP_STORE_APP_ID` is set |
-| macOS CI on GitHub | `gh variable set MACOS_CI --body true` | Off ([ADR 0008](docs/adr/0008-ci-providers.md)) |
-| Dependabot | remove `open-pull-requests-limit: 0` | Off |
+| Release gate | `make check-release` | Before every package |
+| Coverage floor 80% (views excluded) | `make test-coverage` | Xcode Cloud, release gate |
+| Keychain tests | `make test-keychain` | Release gate, local only |
+| No warnings | `make check-warnings XCODEBUILD_LOG=…` | Release gate |
+| Analyzer rules | `make lint-analyze` | Release gate |
+| Lint, prose, spelling, vocabulary | `make lint` | Pre-commit |
+| Secret and dependency scans | `make scan-secrets`, `make scan-dependencies` | Every pull request (Linux) |
+| Thread Sanitizer | `make test-unit-tsan` | Pull requests on macOS CI |
+| Memory, CPU, launch profiles | `make profile-memory`, `make profile-cpu`, `make profile-launch` | Manual |
+| macOS CI on GitHub | `gh variable set MACOS_CI --body true` | Off |
+
+## Release
+
+| Step | Direct | App Store | TestFlight |
+|---|---|---|---|
+| version | `make bump NEW_VERSION=X.Y.Z` | | |
+| setup | | `make setup-appstore` | `make setup-testflight` |
+| publish | `make publish-direct` | `make publish-appstore` | `make publish-testflight` |
+| submit | | `make submit-appstore` | `make submit-testflight` |
+| rollback | `make unpublish-direct` | | |
+
+- Every step takes `DRY_RUN=1`; publish steps take `SKIP_BUILD=1`.
+- Release notes: `release-notes/X.Y.Z.md`.

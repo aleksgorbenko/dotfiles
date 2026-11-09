@@ -1,6 +1,6 @@
 ---
 name: swift-app-release
-description: Release a macOS app to TestFlight, the App Store and direct download (Gumroad + Sparkle) with Make targets, asc and one copy source. Use for "publish to TestFlight", "upload a new build", "submit for App Store review", "submit for Beta App Review", "TestFlight public link", "set up the release pipeline for a new app", "roll back a release", "write release notes", "App Store description from the blog". Not for single asc commands (use the asc-* skills) or app code patterns (rules/swift).
+description: Release a macOS app to TestFlight, the App Store and direct download (Lemon Squeezy, Gumroad and Sparkle) with Make targets, asc and one copy source. Use for "publish to TestFlight", "upload a new build", "submit for App Store review", "submit for Beta App Review", "TestFlight public link", "set up the release pipeline for a new app", "roll back a release", "write release notes", "App Store description from the blog". Not for single asc commands (use the asc-* skills) or app code patterns (rules/swift).
 ---
 
 # macOS App Release
@@ -31,7 +31,7 @@ description: Release a macOS app to TestFlight, the App Store and direct downloa
 3. `make publish-testflight`; check the build in App Store Connect.
 4. `make submit-testflight` when external testers need it.
 5. `make publish-appstore`, then `make submit-appstore`.
-6. `make publish-direct` for the Gumroad/Sparkle build.
+6. `make publish-direct` for the Direct build (GitHub Release, Sparkle, Gumroad, Lemon Squeezy, Homebrew).
 
 ## Release notes
 
@@ -42,7 +42,7 @@ description: Release a macOS app to TestFlight, the App Store and direct downloa
 
 ## Copy
 
-- Blog page is the source of truth; generate Gumroad and App Store copy from it.
+- Blog page is the source of truth; generate Gumroad, Lemon Squeezy and App Store copy from it.
 - Mark direct-only features with `†` plus an italic note; the App Store generator drops them.
 - App Store limits: subtitle 30 chars, promotional text 170, description 4000; no `␣` glyph (spell "+ space").
 - Use capitalised headings and `•` bullets in App Store text, not Markdown `#`.
@@ -75,3 +75,14 @@ description: Release a macOS app to TestFlight, the App Store and direct downloa
 - `publish-direct`: GitHub Release, appcast + blog release notes, Gumroad file + page, tag; `unpublish-direct` reverses it in that order.
 - Gumroad cannot delete files; on detach restore only an older version, never a later hidden one.
 - Sparkle compares build numbers: never reuse or go below a build number testers have installed.
+
+## Lemon Squeezy
+
+- Products live in `~/src/proj/storefronts/lemonsqueezy/products/<slug>/` (`product.json`, `description.html`, `media/`); every action is a Make target there, never the API, `curl` or a hand edit of the live store.
+- New app: `make -C ~/src/proj/storefronts new-product APP= SLUG=`, then create the product in the dashboard (the API cannot create products) and put its IDs in `product.json`.
+- Copy: `make generate SLUG=` from the blog page, `make copy-description SLUG=` pastes it as HTML; Lemon Squeezy strips `<code>` and `<pre>`.
+- The product name is the SEO title; there are no separate SEO fields.
+- `publish-direct` runs `make file SLUG= FILE=`: checks the DMG is notarised and reveals it; the upload itself is by hand.
+- After the upload, `make check-file SLUG= FILE=` confirms every variant serves only the new DMG.
+- App config: `LEMON_SQUEEZY_STORE_ID`, `LEMON_SQUEEZY_PRODUCT_ID`, `LEMON_SQUEEZY_CHECKOUT_URL` in `Config.xcconfig`; a live product has new IDs and a new checkout URL, and release builds reject test-mode keys.
+- Price changes (launch offer end) are made by hand in the dashboard; `storefronts/pricing` compares net revenue per store.

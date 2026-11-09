@@ -4,12 +4,16 @@ import re
 import sys
 
 WARNING = re.compile(r"^(/[^:]+\.swift):\d+:\d+: warning: ")
+MISSING_DEPENDENCY = re.compile(r"^warning: '[^']+' is missing a dependency on '[^']+'")
 EXCLUDED_PARTS = ("/SourcePackages/", "/.build/")
 
 
 def project_warnings(log, root):
     found = set()
     for line in log.splitlines():
+        if MISSING_DEPENDENCY.match(line):
+            found.add(line.strip())
+            continue
         match = WARNING.match(line)
         if not match:
             continue

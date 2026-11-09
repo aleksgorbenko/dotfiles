@@ -6,7 +6,7 @@ import sys
 
 ROLES = ("TabLabel", "ColumnHeader", "PaneName", "Subtitle", "Title", "Label", "Button", "Item", "Link",
          "Message", "Hint", "Subject")
-BANNED = {}
+BANNED = {"hotkey": "global shortcut", "welcome": "onboarding"}
 
 
 def key_problems(keys):

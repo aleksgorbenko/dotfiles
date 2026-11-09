@@ -1,0 +1,6 @@
+extends: existence
+message: "Use a plain hyphen instead of an en dash."
+level: error
+nonword: true
+tokens:
+  - " – "

@@ -1,4 +1,4 @@
-name: __SLUG__
+name: __APP__
 
 options:
   minimumXcodeGenVersion: 2.46.0
@@ -6,40 +6,93 @@ options:
   xcodeVersion: "27.0"
   settingPresets: none
   developmentLanguage: en
+  useBaseInternationalization: true
   defaultSourceDirectoryType: syncedFolder
+  schemePathPrefix: "../"
 
 configs:
   Debug: debug
-  Release: release
+  Release-AppStore: release
+  Release-Direct: release
 
 configFiles:
   Debug: xcconfigs/Config.xcconfig
-  Release: xcconfigs/Config.xcconfig
+  Release-AppStore: xcconfigs/Config.xcconfig
+  Release-Direct: xcconfigs/Config.xcconfig
+
+fileGroups:
+  - __APP__.xctestplan
+
+packages:
+  Sparkle:
+    url: https://github.com/sparkle-project/Sparkle
+    from: 2.9.6
 
 settings:
   base:
     ALWAYS_SEARCH_USER_PATHS: NO
     ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS: YES
+    CLANG_ANALYZER_NONNULL: YES
+    CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION: YES_AGGRESSIVE
+    CLANG_CXX_LANGUAGE_STANDARD: gnu++20
     CLANG_ENABLE_MODULES: YES
     CLANG_ENABLE_OBJC_ARC: YES
+    CLANG_ENABLE_OBJC_WEAK: YES
+    CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING: YES
+    CLANG_WARN_BOOL_CONVERSION: YES
+    CLANG_WARN_COMMA: YES
+    CLANG_WARN_CONSTANT_CONVERSION: YES
+    CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS: YES
+    CLANG_WARN_DIRECT_OBJC_ISA_USAGE: YES_ERROR
+    CLANG_WARN_DOCUMENTATION_COMMENTS: YES
+    CLANG_WARN_EMPTY_BODY: YES
+    CLANG_WARN_ENUM_CONVERSION: YES
+    CLANG_WARN_INFINITE_RECURSION: YES
+    CLANG_WARN_INT_CONVERSION: YES
+    CLANG_WARN_NON_LITERAL_NULL_CONVERSION: YES
+    CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF: YES
+    CLANG_WARN_OBJC_LITERAL_CONVERSION: YES
+    CLANG_WARN_OBJC_ROOT_CLASS: YES_ERROR
+    CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER: YES
+    CLANG_WARN_RANGE_LOOP_ANALYSIS: YES
+    CLANG_WARN_STRICT_PROTOTYPES: YES
+    CLANG_WARN_SUSPICIOUS_MOVE: YES
+    CLANG_WARN_UNGUARDED_AVAILABILITY: YES_AGGRESSIVE
+    CLANG_WARN_UNREACHABLE_CODE: YES
+    CLANG_WARN__DUPLICATE_METHOD_MATCH: YES
     COPY_PHASE_STRIP: NO
+    DEAD_CODE_STRIPPING: YES
     ENABLE_STRICT_OBJC_MSGSEND: YES
     ENABLE_USER_SCRIPT_SANDBOXING: YES
+    GCC_C_LANGUAGE_STANDARD: gnu17
+    GCC_NO_COMMON_BLOCKS: YES
     GCC_TREAT_WARNINGS_AS_ERRORS: YES
+    GCC_WARN_64_TO_32_BIT_CONVERSION: YES
+    GCC_WARN_ABOUT_RETURN_TYPE: YES_ERROR
+    GCC_WARN_UNDECLARED_SELECTOR: YES
+    GCC_WARN_UNINITIALIZED_AUTOS: YES_AGGRESSIVE
+    GCC_WARN_UNUSED_FUNCTION: YES
+    GCC_WARN_UNUSED_VARIABLE: YES
     LOCALIZATION_PREFERS_STRING_CATALOGS: YES
+    MTL_FAST_MATH: YES
     SDKROOT: macosx
+    STRING_CATALOG_GENERATE_SYMBOLS: YES
     SWIFT_TREAT_WARNINGS_AS_ERRORS: YES
   configs:
     Debug:
       DEBUG_INFORMATION_FORMAT: dwarf
       ENABLE_TESTABILITY: YES
+      GCC_DYNAMIC_NO_PIC: NO
       GCC_OPTIMIZATION_LEVEL: 0
+      GCC_PREPROCESSOR_DEFINITIONS: ["DEBUG=1", "$(inherited)"]
+      MTL_ENABLE_DEBUG_INFO: INCLUDE_SOURCE
       ONLY_ACTIVE_ARCH: YES
       SWIFT_ACTIVE_COMPILATION_CONDITIONS: DEBUG $(inherited)
       SWIFT_OPTIMIZATION_LEVEL: -Onone
     Release:
       DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
       ENABLE_NS_ASSERTIONS: NO
+      MTL_ENABLE_DEBUG_INFO: NO
       SWIFT_COMPILATION_MODE: wholemodule
 
 settingGroups:
@@ -47,60 +100,138 @@ settingGroups:
     SWIFT_APPROACHABLE_CONCURRENCY: YES
     SWIFT_DEFAULT_ACTOR_ISOLATION: MainActor
     SWIFT_STRICT_CONCURRENCY: complete
+  app:
+    groups: [swiftConcurrency]
+    base:
+      ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+      ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+      CODE_SIGN_STYLE: Automatic
+      COMBINE_HIDPI_IMAGES: YES
+      ENABLE_PREVIEWS: YES
+      LD_RUNPATH_SEARCH_PATHS: ["$(inherited)", "@executable_path/../Frameworks"]
+      PRODUCT_BUNDLE_IDENTIFIER: $(APP_BUNDLE_ID)$(APP_BUNDLE_ID_SUFFIX)
+      REGISTER_APP_GROUPS: YES
+      SWIFT_EMIT_LOC_STRINGS: YES
+  testBundle:
+    groups: [swiftConcurrency]
+    base:
+      CODE_SIGN_STYLE: Automatic
+      GENERATE_INFOPLIST_FILE: YES
+      PRODUCT_NAME: $(TARGET_NAME)
+      SWIFT_EMIT_LOC_STRINGS: NO
 
-targets:
-  __SLUG__:
+targetTemplates:
+  __APP__App:
     type: application
     platform: macOS
     sources:
-      - path: __SLUG__
+      - path: __APP__
+        excludes: [__APP__-Direct-Info.plist]
+
+targets:
+  __APP__:
+    templates: [__APP__App]
     settings:
-      groups: [swiftConcurrency]
+      groups: [app]
       base:
-        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
-        CODE_SIGN_ENTITLEMENTS: __SLUG__/__SLUG__.entitlements
-        CODE_SIGN_STYLE: Automatic
-        ENABLE_HARDENED_RUNTIME: YES
-        ENABLE_PREVIEWS: YES
+        CODE_SIGN_ENTITLEMENTS: __APP__/__APP__.entitlements
         GENERATE_INFOPLIST_FILE: YES
         INFOPLIST_KEY_NSHumanReadableCopyright: $(APP_COPYRIGHT)
-        LD_RUNPATH_SEARCH_PATHS: ["$(inherited)", "@executable_path/../Frameworks"]
-        PRODUCT_BUNDLE_IDENTIFIER: $(APP_BUNDLE_ID)$(APP_BUNDLE_ID_SUFFIX)
         PRODUCT_NAME: $(APP_NAME)
-        SWIFT_EMIT_LOC_STRINGS: YES
+        SWIFT_ACTIVE_COMPILATION_CONDITIONS: APPSTORE $(inherited)
+      configs:
+        Debug:
+          CODE_SIGN_ENTITLEMENTS: __APP__/__APP__-Debug.entitlements
+        Release-Direct:
+          CODE_SIGN_ENTITLEMENTS: __APP__/__APP__-Direct.entitlements
+          ENABLE_HARDENED_RUNTIME: YES
 
-  __SLUG__Tests:
+  __APP__-Direct:
+    templates: [__APP__App]
+    dependencies:
+      - package: Sparkle
+    settings:
+      groups: [app]
+      base:
+        CODE_SIGN_ENTITLEMENTS: __APP__/__APP__-Direct.entitlements
+        ENABLE_HARDENED_RUNTIME: YES
+        GENERATE_INFOPLIST_FILE: NO
+        INFOPLIST_FILE: __APP__/__APP__-Direct-Info.plist
+        PRODUCT_NAME: $(APP_NAME)-Direct
+        SWIFT_ACTIVE_COMPILATION_CONDITIONS: DIRECT $(inherited)
+      configs:
+        Debug:
+          APP_BUNDLE_ID_SUFFIX: .direct.debug
+        Release-Direct:
+          PRODUCT_NAME: $(APP_NAME)
+
+  __APP__Tests:
     type: bundle.unit-test
     platform: macOS
     sources:
-      - path: __SLUG__Tests
+      - path: __APP__Tests
     dependencies:
-      - target: __SLUG__
+      - target: __APP__
     settings:
-      groups: [swiftConcurrency]
+      groups: [testBundle]
       base:
         BUNDLE_LOADER: $(TEST_HOST)
-        CODE_SIGN_STYLE: Automatic
-        GENERATE_INFOPLIST_FILE: YES
         PRODUCT_BUNDLE_IDENTIFIER: $(APP_BUNDLE_ID)Tests
-        PRODUCT_NAME: $(TARGET_NAME)
         TEST_HOST: $(BUILT_PRODUCTS_DIR)/$(APP_NAME).app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/$(APP_NAME)
 
-schemes:
-  __SLUG__:
+  __APP__UITests:
+    type: bundle.ui-testing
+    platform: macOS
+    sources:
+      - path: __APP__UITests
+    dependencies:
+      - target: __APP__
+    settings:
+      groups: [testBundle]
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: $(APP_BUNDLE_ID)UITests
+        TEST_TARGET_NAME: __APP__
+
+schemeTemplates:
+  __APP__Scheme:
     build:
       targets:
-        __SLUG__: all
+        ${app}: all
     run:
       config: Debug
     test:
       config: Debug
       targets:
-        - name: __SLUG__Tests
+        - name: __APP__Tests
           parallelizable: true
+        - name: __APP__UITests
+          parallelizable: true
+          skipped: true
+      testPlans:
+        - path: __APP__.xctestplan
+          defaultPlan: true
     profile:
-      config: Release
+      config: ${release}
     analyze:
       config: Debug
     archive:
-      config: Release
+      config: ${release}
+      revealArchiveInOrganizer: true
+
+schemes:
+  __APP__:
+    templates: [__APP__Scheme]
+    templateAttributes:
+      app: __APP__
+      release: Release-AppStore
+    test:
+      testPlans:
+        - path: __APP__-Unit.xctestplan
+        - path: __APP__-UI.xctestplan
+        - path: __APP__-Keychain.xctestplan
+
+  __APP__-Direct:
+    templates: [__APP__Scheme]
+    templateAttributes:
+      app: __APP__-Direct
+      release: Release-Direct

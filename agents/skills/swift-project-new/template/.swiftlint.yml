@@ -1,11 +1,7 @@
-# SwiftLint configuration for Bukku.
-# Layout/whitespace is `xcrun swift-format` (.swift-format), not SwiftLint.
-
 excluded:
   - build.noindex
   - "**/.build"
   - "Packages/**/.build"
-  - "**/worktrees"
 
 opt_in_rules:
   - empty_count
@@ -63,11 +59,8 @@ opt_in_rules:
   - explicit_top_level_acl
   - file_name
   - one_declaration_per_file
+  - multiline_arguments
 
-# opening_brace/trailing_comma/closure_parameter_position: swift-format actively
-# disagrees with SwiftLint's defaults here (own-line brace after a wrapped
-# multi-line condition/closure signature, trailing comma on wrapped collections)
-# — ceded to swift-format so the two tools stop fighting.
 disabled_rules:
   - opening_brace
   - trailing_comma
@@ -77,45 +70,20 @@ identifier_name:
   min_length: 2
   excluded: [id, io, os, x, y, a, b, ok, to]
 
-# 120 matches .swift-format's lineLength — swift-format already wraps
-# anything wrappable; this only catches what it structurally can't
-# (comments, URLs, interpolated strings are exempted below).
 line_length:
   warning: 120
   ignores_comments: true
   ignores_interpolated_strings: true
   ignores_urls: true
 
-# 500: default 400 is tight for an @Observable view-model file split into
-# same-file MARK extensions — splitting across files would force several
-# private(set) stored properties to plain internal (Swift has no
-# same-type-across-files access level), a real encapsulation loss for a
-# non-functional rule.
-file_length:
-  warning: 500
-
-# file_name: our convention names the file after the protocol/type plus a
-# role suffix (`WindowOpeningProtocol.swift` declares `protocol WindowOpening`)
-# — extend the default suffix_pattern to also allow a literal "Protocol" suffix.
 file_name:
   suffix_pattern: "(\\+.*|Protocol)"
 
-# Requires a compiler log (`swiftlint analyze`, not plain `lint`) — CI runs
-# `make lint-analyze` for this after a clean build.
-# unused_import/unused_declaration: real value, hand-fixed a batch of genuine
-# hits (dead code, dead imports) this way. But given the SAME compiler log,
-# results are deterministic — the violation SET changes between separate
-# clean builds, because SPM's file-compile ordering isn't stable run to run
-# and these two rules depend on cross-file reference order. That makes them
-# unsuitable for a --strict gate (flaky red builds), not a false-positive
-# problem to fix with more disable comments. Run manually and review by hand
-# when auditing dead code; don't wire into CI.
 analyzer_rules:
   - explicit_self
   - capture_variable
   - typesafe_array_init
 
-# One word per concept; DOMAIN.md "Enforced Vocabulary" lists the preferred terms.
 custom_rules:
   vocabulary_fake:
     name: "Vocabulary: Fake"
@@ -139,7 +107,7 @@ custom_rules:
     name: "Vocabulary: Configuration"
     regex: "(?<!Match)[Cc]onfig\\b"
     match_kinds: [identifier, typeidentifier]
-    message: "Spell out configuration (userConfiguration, AppInternalConfiguration)."
+    message: "Spell out configuration."
     severity: error
   vocabulary_british:
     name: "Vocabulary: British spelling"

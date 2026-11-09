@@ -1,0 +1,73 @@
+generate-project - Generate __APP__.xcodeproj from project.yml (XcodeGen)
+check-project    - Fail if __APP__.xcodeproj differs from project.yml
+build            - Debug build (appstore scheme)
+build-appstore   - Release-AppStore build
+build-direct     - Release-Direct build
+run              - Debug build + launch (appstore scheme)
+run-direct       - Debug build + launch (direct scheme)
+run-demo         - Debug build + launch with demo data (<APP>_DEMO=1)
+demo-app-path    - Print the Debug app path for brand-assets-kit captures
+install-direct   - Build, install to /Applications, relaunch (Direct) - for Shortcuts/App Intents testing
+install-appstore - Build, install to /Applications, relaunch (AppStore) - for Shortcuts/App Intents testing
+test              - Full test plan (unit + integration)
+test-unit         - Unit tests only (skip integration-tagged suite)
+test-coverage     - Full test plan with coverage, fail below COVERAGE_MIN%
+test-unit-tsan    - Unit tests under Thread Sanitizer, fail on any race
+test-keychain     - Data protection Keychain tests (__APP__-Keychain plan; needs this Mac's development profile, not run in CI)
+test-ui           - UI tests including accessibility audit (__APP__-UI plan; not run in CI) (TESTS=__APP__UITests/__APP__UITests/testName for one)
+test-until-failure - Repeat tests until one fails, to hunt flaky ones (TESTS=<target/suite>, ITERATIONS=100)
+profile-memory    - Optimised Direct build under Instruments (Leaks) while you use it: peak/final memory, leaks, top classes, growth, .trace, .memgraph (PROFILE_SECONDS=60, PROFILE_TOP=20, PROFILE_STACKS=1 names allocations by function)
+profile-cpu       - Optimised Direct build under Time Profiler while you use it: top functions by self and total CPU, .trace (PROFILE_SECONDS=60, PROFILE_TOP=20)
+profile-launch    - Optimised Direct build launched LAUNCH_RUNS=5 times under App Launch: phases, fail if median > LAUNCH_BUDGET_MS=500
+check-test-plan   - Fail if a package test target is missing from __APP__.xctestplan or the workspace
+check-release     - Release gate: project, lint, analyzer, format, scripts, secrets, dependencies, full tests + coverage, warnings
+check-warnings    - Fail on any warning in project sources (XCODEBUILD_LOG=<raw xcodebuild log>)
+test-scripts      - Unit tests for scripts/
+test-result       - Full tests, print pass/fail summary only
+test-unit-result  - Unit tests, print pass/fail summary only
+test-failures     - Full tests, print only failed/error lines
+test-unit-failures - Unit tests, print only failed/error lines
+archive-direct     - Release-Direct archive (build.noindex/release)
+export-direct      - Export archive signed with Developer ID Application
+notarize-direct    - Notarise + staple __APP__.app (needs notarytool profile 'notary')
+dmg-direct         - Build, sign, notarise + staple __APP__-<version>.dmg
+verify-direct      - codesign/spctl/stapler checks on the exported app and DMG, entitlements match the source
+sign-update-direct - Sparkle EdDSA signature + length for the DMG (key from Keychain)
+package-direct     - check-release, archive, export, notarise, DMG, verify, Sparkle signature
+preflight-direct   - checks before publish-direct
+publish-direct     - preflight, package, GitHub Release, blog (appcast + release notes), Gumroad, tag (DRY_RUN=1, SKIP_BUILD=1, GUMROAD_SLUG=)
+unpublish-direct   - rollback: tag, blog, Gumroad, GitHub Release (VERSION=, DRY_RUN=1, GUMROAD_SLUG=)
+archive-appstore   - Release-AppStore archive (build.noindex/appstore, APPSTORE_BUILD=<n>, XCODE_AUTH= on CI)
+export-appstore    - Export the archive to __APP__.pkg for App Store Connect
+package-appstore   - check-release, archive + export + verify; build number from App Store Connect unless APPSTORE_BUILD=
+verify-appstore    - codesign check on the archived app, entitlements match the source
+preflight-appstore - checks before any App Store / TestFlight step
+status-appstore    - App Store versions, latest builds, Beta App Review state, groups, public link (STATUS_BUILDS=5)
+status-xcode-cloud - Latest Xcode Cloud builds per workflow: result, commit, finish time (STATUS_BUILDS=5)
+generate-appstore  - description + promotional text from the blog page (BLOG_DIR=)
+setup-appstore     - everything in appstore/: listing (asc metadata push), app.json settings, review notes, in-app purchases, screenshots (DRY_RUN=1)
+generate-storekit  - __APP__.storekit for local purchases from appstore/in-app-purchases.json and app.json
+publish-appstore   - setup-appstore, package, upload, attach the build to the version (DRY_RUN=1, SKIP_BUILD=1)
+submit-appstore    - submit the attached build for App Review (DRY_RUN=1)
+setup-testflight   - TestFlight test information, review contact, 'Public Beta' group with public link (DRY_RUN=1)
+publish-testflight - package, upload, What to Test, add to 'Public Beta' (DRY_RUN=1, SKIP_BUILD=1)
+submit-testflight  - submit the build for Beta App Review (DRY_RUN=1)
+bump               - make bump NEW_VERSION=x.y.z (also increments the build number)
+unregister         - Forget every __APP__ copy outside /Applications (DerivedData, archives, DMGs, Trash) so Shortcuts and permissions use the installed app (DRY_RUN=1)
+uninstall          - Quit __APP__, delete the /Applications copy (any build, including TestFlight), unregister stale copies; PURGE=1 also deletes its data, preferences and Automation permission
+clean             - xcodebuild clean
+clean-all         - quit app, unregister + delete /Applications copy and all DerivedData, reset Shortcuts daemons
+lint              - SwiftLint (--strict), Vale dash rules, cspell en-GB
+lint-prose        - Vale: no em dashes or spaced en dashes in docs and comments
+lint-spelling     - cspell en-GB on docs, App Store copy and the string catalog
+lint-workflows    - yamllint, actionlint and zizmor (pedantic) on .github
+audit-images      - fail on images with location or camera metadata (exiftool)
+lint-analyze      - SwiftLint analyzer_rules on package sources changed since main, incremental builds
+lint-analyze-full - SwiftLint analyzer_rules: clean package builds in parallel, or COMPILER_LOG=<xcodebuild log> (CI, check-release)
+fmt               - swift-format, rewrites files in place
+fmt-check         - swift-format lint (--strict), no changes written
+scan-secrets      - gitleaks over the full git history
+scan-staged-secrets - gitleaks over staged changes (pre-commit)
+scan-dependencies - OSV-Scanner over every Package.resolved
+install-hooks     - Install lefthook git hooks
+generate-licences - Third-party licence acknowledgements (build.noindex/licences), fail on a missing licence
