@@ -152,7 +152,6 @@ brew "ollama" # run, push, pull LLMs locally
 cask "lm-studio" # similar to ollama, but uses llama.cpp and has a GUI. also "lsm" CLI tool
 cask "chatgpt" # macOS app for ChatGPT + Codex
 cask "codex" # cli tool
-# cask "macwhisper" # macOS app to dictate and transcribe
 cask "handy" # OSS STT
 # cask "buzz" # Transcribe audio and translate with Whisper
 cask "claude-code"
@@ -192,7 +191,7 @@ cask "scroll-reverser"
 
 # utils: menubar
 cask "stats" # free alternative to istat-menus
-cask "jordanbaird-ice" # menu bar icon manager
+cask "teddychan/tap/ice-2" # menu bar icon manager
 
 # utils: files
 cask "keka" # work with archives
