@@ -17,6 +17,9 @@
   "words": [
     "__APP__",
     "__SLUG__",
+    "Humor",
+    "__CONTACT_LAST_NAME__",
+    "__CONTACT_FIRST_NAME__",
     "tccutil",
     "lemonsqueezy",
     "actionlint",
