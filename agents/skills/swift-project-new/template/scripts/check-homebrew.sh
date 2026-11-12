@@ -8,7 +8,9 @@ tap="__SLUG__-local/check"
 appdir="$(mktemp -d)"
 
 cleanup() {
-  brew uninstall --cask "$tap/$token" --appdir="$appdir" >/dev/null 2>&1 || true
+  brew uninstall --cask "$tap/$token" >/dev/null 2>&1 || true
+  brew untrust --cask "$tap/$token" >/dev/null 2>&1 || true
+  brew untrust --tap "$tap" >/dev/null 2>&1 || true
   brew untap "$tap" >/dev/null 2>&1 || true
   rm -rf "$appdir"
 }
@@ -18,6 +20,7 @@ brew tap-new --no-git "$tap" >/dev/null
 tap_dir="$(brew --repository "$tap")"
 mkdir -p "$tap_dir/Casks"
 cp "$cask_file" "$tap_dir/Casks/$token.rb"
+brew trust --quiet --tap "$tap"
 
 echo "== brew style"
 brew style --cask "$tap/$token"
@@ -26,5 +29,5 @@ brew audit --cask --new --online "$tap/$token"
 echo "== brew install (into a temporary folder, not /Applications)"
 HOMEBREW_NO_INSTALL_FROM_API=1 brew install --cask --appdir="$appdir" "$tap/$token"
 echo "== brew uninstall"
-brew uninstall --cask --appdir="$appdir" "$tap/$token"
+brew uninstall --cask "$tap/$token"
 echo "== $token passes every Homebrew check"
