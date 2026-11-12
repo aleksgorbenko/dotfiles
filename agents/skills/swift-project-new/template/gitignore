@@ -4,3 +4,4 @@ build.noindex/
 DerivedData/
 xcuserdata/
 *.xcuserstate
+.asc/reports/

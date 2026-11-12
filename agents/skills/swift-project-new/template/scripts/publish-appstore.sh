@@ -61,6 +61,19 @@ version_id() {
     | jq -r --arg version "$VERSION" '.data[] | select(.attributes.versionString == $version) | .id'
 }
 
+version_state() {
+  asc versions list --app "$APP_STORE_APP_ID" --platform MAC_OS --paginate --output json \
+    | jq -r --arg version "$VERSION" '.data[] | select(.attributes.versionString == $version) | .attributes.appStoreState'
+}
+
+live_listing_dir() {
+  local dir
+  dir="$(mktemp -d)"
+  mkdir -p "$dir/version/$VERSION"
+  jq '{promotionalText}' "$listing" > "$dir/version/$VERSION/$LOCALE.json"
+  echo "$dir"
+}
+
 setup_appstore() {
   log "App Store $VERSION from appstore/"
   local copyright listing
@@ -82,9 +95,15 @@ setup_appstore() {
     echo "[dry-run] asc metadata push --version $VERSION --dir $LISTING_DIR"
   else
     local push_flags=(--confirm)
+    local push_dir="$LISTING_DIR" push_scopes=localizations,categories,age-rating,review-information
     [ "$DRY_RUN" = 1 ] && push_flags=(--dry-run)
-    asc metadata push --app "$APP_STORE_APP_ID" --version "$VERSION" --platform MAC_OS --dir "$LISTING_DIR" \
-      --include localizations,categories,age-rating,review-information "${push_flags[@]}" --output table
+    if [ "$(version_state)" = READY_FOR_SALE ]; then
+      log "$VERSION is live: only promotional text can change without review"
+      push_dir="$(live_listing_dir)"
+      push_scopes=localizations
+    fi
+    asc metadata push --app "$APP_STORE_APP_ID" --version "$VERSION" --platform MAC_OS --dir "$push_dir" \
+      --include "$push_scopes" "${push_flags[@]}" --output table
     setup_sandbox_entitlements
   fi
   setup_content_rights

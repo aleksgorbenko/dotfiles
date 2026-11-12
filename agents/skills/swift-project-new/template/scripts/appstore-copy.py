@@ -98,9 +98,9 @@ def description_text(front_matter: dict) -> str:
 
 
 def promotional_text(front_matter: dict) -> str:
-    text = front_matter.get("description", "").strip()
+    text = (front_matter.get("promotional_text") or front_matter.get("description", "")).strip()
     if not text:
-        raise ValueError("blog front matter has no description for the promotional text")
+        raise ValueError("blog front matter has no promotional_text or description for the promotional text")
     if len(text) > PROMOTIONAL_TEXT_LIMIT:
         raise ValueError(f"promotional text is {len(text)} characters, App Store limit is {PROMOTIONAL_TEXT_LIMIT}")
     return text + "\n"

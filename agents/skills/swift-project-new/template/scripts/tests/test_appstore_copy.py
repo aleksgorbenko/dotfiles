@@ -142,6 +142,15 @@ class AppStoreCopyTests(unittest.TestCase):
             "__APP__ is a launcher for your browser tabs. Everything local - no cloud.",
         )
 
+    def test_promotional_text_prefers_front_matter_promotional_text(self):
+        self.page.write_text(
+            PAGE.replace('requirement = "', 'promotional_text = "Early-bird price: 43% off."\nrequirement = "', 1)
+        )
+
+        self.generate()
+
+        self.assertEqual(self.read_listing()["promotionalText"], "Early-bird price: 43% off.")
+
     def test_rejects_promotional_text_over_170_characters(self):
         self.page.write_text(PAGE.replace("Everything local - no cloud.", "x" * 170))
 
