@@ -80,7 +80,7 @@ description: Release a macOS app to TestFlight, the App Store and direct downloa
 - Gumroad is out of `publish-direct`; `make publish-gumroad` runs it on its own.
 - A Direct release whose code must match an App Store build: branch `release/X.Y.Z` from the submitted commit and cherry-pick only config and tooling commits; publish from that branch.
 - `export-direct` passes `-allowProvisioningUpdates`: a Keychain access group needs a Developer ID provisioning profile.
-- Homebrew: an official cask in `Homebrew/homebrew-cask`, no own tap. First release: `make prepare-homebrew`, then `make check-homebrew` once the DMG is online, then open the pull request from `homebrew/PULL_REQUEST.md`; answer reviewers yourself. Later versions usually arrive through Homebrew's automatic bump from the appcast; otherwise `brew bump-cask-pr <token> --version X.Y.Z`.
+- Homebrew: one public self-hosted tap `<owner>/homebrew-tap` for every app (official `homebrew-cask` refuses new apps without notability). `make publish-direct` runs `publish-homebrew`: renders `homebrew/<slug>.rb` with the DMG's version and checksum, runs `check-homebrew` (style, `audit --new --online --strict`, livecheck, install and uninstall in a temporary tap) and pushes `Casks/<slug>.rb`. Users run `brew install --cask <owner>/tap/<slug>`.
 - Clean-machine test: move a TestFlight or App Store copy to the Bin first (root owns it), then `make uninstall PURGE=1`; it does not clear Keychain trial records.
 - Gumroad cannot delete files; on detach restore only an older version, never a later hidden one.
 - Sparkle compares build numbers: never reuse or go below a build number testers have installed.

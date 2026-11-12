@@ -6,6 +6,10 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))
 
 from distribution_status import Check, appcast_check, homebrew_check, status_lines, website_check
 
+def cask(version):
+    return f'cask "sample" do\n  version "{version}"\n  sha256 "0"\nend\n'
+
+
 DOWNLOAD = "https://example.com/apps/sample/download/v1.2.0/Sample-1.2.0.dmg"
 APPCAST = f"""<?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
@@ -65,13 +69,13 @@ class WebsiteCheckTests(unittest.TestCase):
 
 class HomebrewCheckTests(unittest.TestCase):
     def test_same_version_is_ok(self):
-        self.assertEqual(homebrew_check({"version": "1.2.0"}, "1.2.0"), Check("ok", "Homebrew", "1.2.0"))
+        self.assertEqual(homebrew_check(cask("1.2.0"), "1.2.0"), Check("ok", "Homebrew", "1.2.0"))
 
     def test_older_version_is_a_problem(self):
-        self.assertEqual(homebrew_check({"version": "1.1.0"}, "1.2.0"), Check("problem", "Homebrew", "has 1.1.0"))
+        self.assertEqual(homebrew_check(cask("1.1.0"), "1.2.0"), Check("problem", "Homebrew", "has 1.1.0"))
 
-    def test_missing_cask_is_a_note(self):
-        self.assertEqual(homebrew_check(None, "1.2.0"), Check("note", "Homebrew", "no cask yet"))
+    def test_missing_cask_is_a_problem(self):
+        self.assertEqual(homebrew_check(None, "1.2.0"), Check("problem", "Homebrew", "no cask in the tap"))
 
 
 class StatusLinesTests(unittest.TestCase):

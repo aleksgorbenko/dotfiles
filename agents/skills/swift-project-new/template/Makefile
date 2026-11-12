@@ -203,7 +203,7 @@ bump:
 preflight-direct:
 	$(PUBLISH) preflight
 
-PUBLISH_DIRECT_STEPS := publish-github-release publish-appcast publish-blog publish-lemonsqueezy publish-tag
+PUBLISH_DIRECT_STEPS := publish-github-release publish-appcast publish-blog publish-lemonsqueezy publish-homebrew publish-tag
 
 .PHONY: publish-direct
 publish-direct:
@@ -217,14 +217,10 @@ $(PUBLISH_DIRECT_STEPS) publish-gumroad:
 	$(PUBLISH) verify-artifacts
 	$(PUBLISH) $@
 
-.PHONY: prepare-homebrew
-prepare-homebrew:
-	python3 scripts/homebrew_cask.py --cask homebrew/$(APP_SLUG).rb --version $(VERSION) \
-		--sha256 "$$(shasum -a 256 $(DMG_DIRECT) | cut -d' ' -f1)"
-
 .PHONY: check-homebrew
 check-homebrew:
-	scripts/check-homebrew.sh homebrew/$(APP_SLUG).rb
+	$(PUBLISH) verify-artifacts
+	$(PUBLISH) $@
 
 .PHONY: unpublish-direct
 unpublish-direct:

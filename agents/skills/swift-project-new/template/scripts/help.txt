@@ -40,10 +40,10 @@ publish-github-release - DMG as a GitHub Release on the releases repo
 publish-appcast    - appcast item in the releases repo
 publish-blog       - release notes on the blog
 publish-lemonsqueezy - DMG upload step for Lemon Squeezy
+publish-homebrew   - cask for VERSION into the RELEASES_OWNER/homebrew-tap repo, after check-homebrew
+check-homebrew     - Homebrew style, audit, livecheck, install and uninstall of the cask for the built DMG
 publish-tag        - vX.Y.Z tag on this commit, pushed
 publish-gumroad    - DMG and release notes on Gumroad, not part of publish-direct (GUMROAD_SLUG=)
-prepare-homebrew   - version and DMG checksum into homebrew/__SLUG__.rb for the Homebrew pull request
-check-homebrew     - Homebrew style, new-cask audit, install and uninstall of homebrew/__SLUG__.rb (needs the published DMG)
 unpublish-direct   - rollback: tag, blog, Gumroad, GitHub Release (VERSION=, DRY_RUN=1, GUMROAD_SLUG=)
 archive-appstore   - Release-AppStore archive (build.noindex/appstore, APPSTORE_BUILD=<n>, XCODE_AUTH= on CI)
 export-appstore    - Export the archive to __APP__.pkg for App Store Connect

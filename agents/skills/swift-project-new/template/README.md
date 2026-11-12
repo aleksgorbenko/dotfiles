@@ -37,4 +37,4 @@
 - Every step takes `DRY_RUN=1`; publish steps take `SKIP_BUILD=1`.
 - Release notes: `release-notes/X.Y.Z.md`.
 - Each `publish-direct` step is its own target (`make publish-lemonsqueezy`); Gumroad runs only with `make publish-gumroad`.
-- Homebrew, first release: `make prepare-homebrew`, `make check-homebrew` once the DMG is online, then a pull request to `Homebrew/homebrew-cask` with `homebrew/PULL_REQUEST.md`.
+- Homebrew: `make publish-direct` pushes the cask to `<owner>/homebrew-tap` after `check-homebrew`; users install with `brew install --cask <owner>/tap/__SLUG__`.

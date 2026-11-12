@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import json
 import os
+import re
 import subprocess
 import sys
 import urllib.error
@@ -13,6 +14,7 @@ LABELS = {"ok": "ok", "problem": "PROBLEM", "note": "note"}
 LABEL_WIDTH = 8
 CHANNEL_WIDTH = 14
 TIMEOUT_SECONDS = 20
+CASK_VERSION = re.compile(r'^  version "(.+)"$', re.MULTILINE)
 
 
 @dataclass(frozen=True)
@@ -45,11 +47,13 @@ def website_check(page: str, links: list[str]) -> Check:
     return Check("ok", "Website", "checkout, App Store and download links present")
 
 
-def homebrew_check(cask: dict | None, version: str) -> Check:
+def homebrew_check(cask: str | None, version: str) -> Check:
     if cask is None:
-        return Check("note", "Homebrew", "no cask yet")
-    if cask.get("version") != version:
-        return Check("problem", "Homebrew", f"has {cask.get('version')}")
+        return Check("problem", "Homebrew", "no cask in the tap")
+    match = CASK_VERSION.search(cask)
+    cask_version = match.group(1) if match else "?"
+    if cask_version != version:
+        return Check("problem", "Homebrew", f"has {cask_version}")
     return Check("ok", "Homebrew", version)
 
 
@@ -128,9 +132,9 @@ def _lemon_squeezy(directory: str, slug: str, dmg: str) -> Check:
     return Check("ok", "Lemon Squeezy", f"product matches, serves {os.path.basename(dmg)}")
 
 
-def _homebrew(token: str, version: str) -> Check:
-    status, body = _fetch(f"https://formulae.brew.sh/api/cask/{token}.json")
-    return homebrew_check(json.loads(body) if status == 200 else None, version)
+def _homebrew(owner: str, token: str, version: str) -> Check:
+    status, body = _fetch(f"https://raw.githubusercontent.com/{owner}/homebrew-tap/main/Casks/{token}.rb")
+    return homebrew_check(body if status == 200 else None, version)
 
 
 def main() -> int:
@@ -152,7 +156,7 @@ def main() -> int:
     page_ok = page_status == 200
     checks.append(website_check(page, [checkout_url, app_store_url, download_url]) if page_ok else Check("problem", "Website", f"returns {page_status}"))
     checks.append(_lemon_squeezy(env["LEMONSQUEEZY_DIR"], slug, env["DMG"]))
-    checks.append(_homebrew(slug, version))
+    checks.append(_homebrew(env["RELEASES_OWNER"], slug, version))
     checks.append(_tag(version))
 
     sys.stdout.write("\n".join(status_lines(app_name, version, checks)) + "\n")

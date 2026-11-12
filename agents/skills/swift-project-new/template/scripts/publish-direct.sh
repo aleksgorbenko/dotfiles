@@ -84,6 +84,30 @@ tag() {
   run git push origin "v$VERSION"
 }
 
+render_cask() {
+  mkdir -p "$(dirname "$1")"
+  cp "homebrew/$APP_SLUG.rb" "$1"
+  python3 scripts/homebrew_cask.py --cask "$1" --version "$VERSION" --sha256 "$(shasum -a 256 "$DMG" | cut -d' ' -f1)"
+}
+
+check_homebrew() {
+  cask_dir="$(mktemp -d)"
+  render_cask "$cask_dir/$APP_SLUG.rb"
+  scripts/check-homebrew.sh "$cask_dir/$APP_SLUG.rb"
+  rm -rf "$cask_dir"
+}
+
+homebrew() {
+  log "Homebrew cask $APP_SLUG $VERSION in $TAP_REPO"
+  clone_repo "$TAP_REPO" "$TAP_DIR"
+  render_cask "$TAP_DIR/$CASK_PATH"
+  scripts/check-homebrew.sh "$TAP_DIR/$CASK_PATH"
+  git -C "$TAP_DIR" --no-pager diff --stat
+  run git -C "$TAP_DIR" add "$CASK_PATH"
+  run git -C "$TAP_DIR" commit -m "$APP_SLUG $VERSION"
+  run git -C "$TAP_DIR" push origin HEAD:main
+}
+
 lemonsqueezy_file() {
   log "Lemon Squeezy $APP_SLUG: upload $DMG_NAME by hand"
   make -C "$LEMONSQUEEZY_DIR" file SLUG="$APP_SLUG" FILE="$PWD/$DMG"
@@ -97,6 +121,8 @@ case "${1:-}" in
   publish-blog) blog ;;
   publish-gumroad) gumroad_file ;;
   publish-lemonsqueezy) lemonsqueezy_file ;;
+  check-homebrew) check_homebrew ;;
+  publish-homebrew) homebrew ;;
   publish-tag) tag ;;
-  *) fail "usage: $0 preflight|verify-artifacts|publish-github-release|publish-appcast|publish-blog|publish-gumroad|publish-lemonsqueezy|publish-tag" ;;
+  *) fail "usage: $0 preflight|verify-artifacts|publish-github-release|publish-appcast|publish-blog|publish-gumroad|publish-lemonsqueezy|check-homebrew|publish-homebrew|publish-tag" ;;
 esac

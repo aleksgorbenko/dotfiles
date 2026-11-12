@@ -6,6 +6,9 @@ APPCAST_PATH="appcast.xml"
 RELEASE_NOTES_PAGE="content/apps/$APP_SLUG/release-notes.md"
 FEED_DIR="build.noindex/release/feed-repo"
 RELEASES_DIR="build.noindex/release/releases-repo"
+TAP_REPO="$RELEASES_OWNER/homebrew-tap"
+TAP_DIR="build.noindex/release/tap-repo"
+CASK_PATH="Casks/$APP_SLUG.rb"
 DMG_NAME="$(basename "$DMG")"
 
 log() { printf '== %s\n' "$*"; }
