@@ -8,14 +8,23 @@ LSREGISTER=/System/Library/Frameworks/CoreServices.framework/Versions/A/Framewor
 PURGE="${PURGE:-}"
 DRY_RUN="${DRY_RUN:-}"
 
+run() {
+  if [ "$DRY_RUN" = 1 ]; then echo "[dry-run] $*"; else "$@"; fi
+}
+
+if [ -e "$INSTALLED_APP" ] && [ ! -w "$INSTALLED_APP" ]; then
+  echo "error: ${INSTALLED_APP} belongs to root (an App Store or TestFlight install); move it to the Bin in Finder, then run this again" >&2
+  exit 1
+fi
+
 echo "== Quit ${APP_NAME}"
-pkill -f "MacOS/${APP_NAME}$" && echo "quit running ${APP_NAME}" || echo "${APP_NAME} was not running"
+run pkill -f "MacOS/${APP_NAME}$" && echo "quit running ${APP_NAME}" || echo "${APP_NAME} was not running"
 
 echo "== Remove ${INSTALLED_APP}"
 if [ -e "$INSTALLED_APP" ]; then
-  "$LSREGISTER" -u "$INSTALLED_APP"
+  run "$LSREGISTER" -u "$INSTALLED_APP"
   echo "unregistered ${INSTALLED_APP}"
-  rm -rf "$INSTALLED_APP"
+  run rm -rf "$INSTALLED_APP"
   echo "deleted ${INSTALLED_APP}"
 else
   echo "${INSTALLED_APP} is not installed"
@@ -33,5 +42,5 @@ fi
 
 echo "== Restart Shortcuts, linkd and duetexpertd"
 for process in Shortcuts linkd duetexpertd; do
-  killall "$process" 2>/dev/null && echo "restarted ${process}" || echo "${process} was not running"
+  run killall "$process" 2>/dev/null && echo "restarted ${process}" || echo "${process} was not running"
 done

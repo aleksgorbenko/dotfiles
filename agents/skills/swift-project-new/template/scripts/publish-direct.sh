@@ -12,18 +12,15 @@ warn_or_fail() {
 
 preflight() {
   log "preflight $APP_NAME $VERSION (build $BUILD)"
-  for tool in gh gumroad jq python3 git curl; do
+  for tool in gh jq python3 git curl; do
     command -v "$tool" >/dev/null || fail "missing tool: $tool"
   done
   [ -x "$SPARKLE_BIN/sign_update" ] || fail "Sparkle tools not found - build __APP__-Direct once so SPM fetches them"
   [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || fail "version $VERSION is not semver X.Y.Z"
   [ -f "$NOTES" ] || fail "missing release notes: $NOTES"
   python3 scripts/release-notes.py check "$NOTES"
-  [ -z "$(git -C "$GUMROAD_DIR" status --porcelain -- products)" ] || warn_or_fail "$GUMROAD_DIR/products has uncommitted changes"
-  [ -f "$HOMEBREW_TAP/Casks/$APP_SLUG.rb" ] || fail "missing Homebrew cask $HOMEBREW_TAP/Casks/$APP_SLUG.rb"
-  [ -z "$(git -C "$HOMEBREW_TAP" status --porcelain)" ] || warn_or_fail "$HOMEBREW_TAP has uncommitted changes"
   [ -z "$(git status --porcelain)" ] || warn_or_fail "working tree is not clean"
-  [ "$(git rev-parse --abbrev-ref HEAD)" = main ] || warn_or_fail "not on main"
+  [[ "$(git rev-parse --abbrev-ref HEAD)" =~ ^(main|release/.+)$ ]] || warn_or_fail "not on main or a release/ branch"
   git rev-parse -q --verify "refs/tags/v$VERSION" >/dev/null && fail "tag v$VERSION already exists locally"
   app_repo="$(gh repo view --json nameWithOwner --jq .nameWithOwner)" || fail "cannot reach GitHub with gh"
   remote_tags="$(gh api "repos/$app_repo/git/matching-refs/tags/v$VERSION" --jq '.[].ref')" || fail "cannot list tags of $app_repo"
@@ -32,8 +29,6 @@ preflight() {
   latest_build="$(curl -fsS "$FEED_URL" | grep -o '<sparkle:version>[0-9]*' | sed 's/.*>//' | sort -n | tail -1 || true)"
   latest_build="${latest_build:-0}"
   [ "$BUILD" -gt "$latest_build" ] || fail "build $BUILD must be greater than the appcast's latest ($latest_build) - run make bump"
-  gumroad_product="$GUMROAD_DIR/products/$GUMROAD_SLUG/product.json"
-  [ -n "$(jq -r '.product_id // ""' "$gumroad_product" 2>/dev/null)" ] || fail "no published Gumroad product in $gumroad_product"
   log "preflight ok (appcast latest build: $latest_build)"
 }
 
@@ -72,18 +67,16 @@ blog() {
 }
 
 gumroad_file() {
+  command -v gumroad >/dev/null || fail "missing tool: gumroad"
+  [ -z "$(git -C "$GUMROAD_DIR" status --porcelain -- products)" ] || warn_or_fail "$GUMROAD_DIR/products has uncommitted changes"
+  gumroad_product="$GUMROAD_DIR/products/$GUMROAD_SLUG/product.json"
+  [ -n "$(jq -r '.product_id // ""' "$gumroad_product" 2>/dev/null)" ] || fail "no published Gumroad product in $gumroad_product"
   log "Gumroad $GUMROAD_SLUG: attach $DMG_NAME"
   gumroad_make attach FILE="$PWD/$DMG" DESCRIPTION="$APP_NAME $VERSION for macOS $MIN_OS or later"
   log "Gumroad $GUMROAD_SLUG: release notes"
   gumroad_refresh_page "Release notes for $APP_NAME $VERSION"
 }
 
-homebrew() {
-  log "Homebrew cask $APP_SLUG $VERSION (local commit, not pushed)"
-  run python3 scripts/homebrew_cask.py --cask "$HOMEBREW_TAP/Casks/$APP_SLUG.rb" \
-    --version "$VERSION" --sha256 "$(shasum -a 256 "$DMG" | cut -d' ' -f1)"
-  run git -C "$HOMEBREW_TAP" commit -q -m "$APP_SLUG $VERSION" -- "Casks/$APP_SLUG.rb"
-}
 
 tag() {
   log "tag v$VERSION"
@@ -99,12 +92,11 @@ lemonsqueezy_file() {
 case "${1:-}" in
   preflight) preflight ;;
   verify-artifacts) verify_artifacts ;;
-  github-release) github_release ;;
-  appcast) appcast ;;
-  blog) blog ;;
-  gumroad) gumroad_file ;;
-  lemonsqueezy) lemonsqueezy_file ;;
-  homebrew) homebrew ;;
-  tag) tag ;;
-  *) fail "usage: $0 preflight|verify-artifacts|github-release|appcast|blog|gumroad|lemonsqueezy|homebrew|tag" ;;
+  publish-github-release) github_release ;;
+  publish-appcast) appcast ;;
+  publish-blog) blog ;;
+  publish-gumroad) gumroad_file ;;
+  publish-lemonsqueezy) lemonsqueezy_file ;;
+  publish-tag) tag ;;
+  *) fail "usage: $0 preflight|verify-artifacts|publish-github-release|publish-appcast|publish-blog|publish-gumroad|publish-lemonsqueezy|publish-tag" ;;
 esac

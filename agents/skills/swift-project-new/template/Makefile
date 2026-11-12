@@ -143,7 +143,7 @@ export-direct:
 	rm -rf $(EXPORT_DIRECT) $(EXPORT_OPTIONS)
 	/usr/libexec/PlistBuddy -c 'Add :method string developer-id' $(EXPORT_OPTIONS)
 	xcodebuild -exportArchive -archivePath $(ARCHIVE_DIRECT) -exportPath $(EXPORT_DIRECT) \
-		-exportOptionsPlist $(EXPORT_OPTIONS)
+		-exportOptionsPlist $(EXPORT_OPTIONS) -allowProvisioningUpdates
 
 .PHONY: notarize-direct
 notarize-direct:
@@ -190,7 +190,7 @@ package-direct: check-release archive-direct export-direct notarize-direct dmg-d
 
 RELEASE_ENV = APP_NAME=$(APP_NAME) APP_SLUG=$(APP_SLUG) VERSION=$(VERSION) BUILD=$(BUILD) MIN_OS=$(MIN_OS) \
 	RELEASES_OWNER=$(RELEASES_OWNER) FEED_HOST=$(FEED_HOST) FEED_REPO=$(FEED_REPO) DMG=$(DMG_DIRECT) APP_PATH=$(APP_DIRECT) SPARKLE_BIN=$(SPARKLE_BIN) \
-	DRY_RUN=$(DRY_RUN) GUMROAD_SLUG=$(GUMROAD_SLUG) GUMROAD_DIR=$(GUMROAD_DIR) LEMONSQUEEZY_DIR=$(LEMONSQUEEZY_DIR) HOMEBREW_TAP=$(HOMEBREW_TAP)
+	DRY_RUN=$(DRY_RUN) GUMROAD_SLUG=$(GUMROAD_SLUG) GUMROAD_DIR=$(GUMROAD_DIR) LEMONSQUEEZY_DIR=$(LEMONSQUEEZY_DIR)
 PUBLISH = $(RELEASE_ENV) scripts/publish-direct.sh
 UNPUBLISH = $(RELEASE_ENV) scripts/unpublish-direct.sh
 
@@ -203,12 +203,28 @@ bump:
 preflight-direct:
 	$(PUBLISH) preflight
 
+PUBLISH_DIRECT_STEPS := publish-github-release publish-appcast publish-blog publish-lemonsqueezy publish-tag
+
 .PHONY: publish-direct
 publish-direct:
 	$(PUBLISH) preflight
 	@if [ "$(SKIP_BUILD)" != 1 ]; then $(MAKE) package-direct; fi
 	$(PUBLISH) verify-artifacts
-	set -e; for step in github-release appcast blog gumroad lemonsqueezy homebrew tag; do $(PUBLISH) $$step; done
+	set -e; for step in $(PUBLISH_DIRECT_STEPS); do $(PUBLISH) $$step; done
+
+.PHONY: $(PUBLISH_DIRECT_STEPS) publish-gumroad
+$(PUBLISH_DIRECT_STEPS) publish-gumroad:
+	$(PUBLISH) verify-artifacts
+	$(PUBLISH) $@
+
+.PHONY: prepare-homebrew
+prepare-homebrew:
+	python3 scripts/homebrew_cask.py --cask homebrew/$(APP_SLUG).rb --version $(VERSION) \
+		--sha256 "$$(shasum -a 256 $(DMG_DIRECT) | cut -d' ' -f1)"
+
+.PHONY: check-homebrew
+check-homebrew:
+	scripts/check-homebrew.sh homebrew/$(APP_SLUG).rb
 
 .PHONY: unpublish-direct
 unpublish-direct:
@@ -222,7 +238,6 @@ unpublish-direct:
 APPSTORE_LOCALE := en-GB
 APPSTORE_LISTING = appstore/metadata/version/$(VERSION)/$(APPSTORE_LOCALE).json
 BLOG_DIR ?= $(HOME)/src/proj/aleksgorbenko.dev
-HOMEBREW_TAP ?= $(HOME)/src/proj/homebrew-tap
 APPSTORE = APP_NAME=$(APP_NAME) VERSION=$(VERSION) APP_STORE_APP_ID=$(APP_STORE_APP_ID) LOCALE=$(APPSTORE_LOCALE) \
 	ARCHIVE=$(ARCHIVE_APPSTORE) PKG=$(PKG_APPSTORE) DRY_RUN=$(DRY_RUN) scripts/publish-appstore.sh
 
@@ -258,6 +273,16 @@ preflight-appstore:
 .PHONY: status-appstore
 status-appstore:
 	@STATUS_BUILDS=$(STATUS_BUILDS) $(APPSTORE) status
+
+.PHONY: status-distribution
+status-distribution:
+	APP_NAME=$(APP_NAME) APP_SLUG=$(APP_SLUG) VERSION=$(VERSION) FEED_HOST=$(FEED_HOST) RELEASES_OWNER=$(RELEASES_OWNER) \
+		APP_STORE_APP_ID=$(APP_STORE_APP_ID) CHECKOUT_URL='$(call xcconfig,LEMON_SQUEEZY_CHECKOUT_URL)' \
+		LEMONSQUEEZY_DIR=$(LEMONSQUEEZY_DIR) DMG=$(DMG_DIRECT) python3 scripts/distribution_status.py
+
+.PHONY: validate-appstore
+validate-appstore:
+	$(APPSTORE) validate-appstore
 
 .PHONY: status-xcode-cloud
 status-xcode-cloud:

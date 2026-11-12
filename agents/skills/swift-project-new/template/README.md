@@ -32,6 +32,9 @@
 | publish | `make publish-direct` | `make publish-appstore` | `make publish-testflight` |
 | submit | | `make submit-appstore` | `make submit-testflight` |
 | rollback | `make unpublish-direct` | | |
+| check | `make status-distribution` | `make validate-appstore` | `make status-appstore` |
 
 - Every step takes `DRY_RUN=1`; publish steps take `SKIP_BUILD=1`.
 - Release notes: `release-notes/X.Y.Z.md`.
+- Each `publish-direct` step is its own target (`make publish-lemonsqueezy`); Gumroad runs only with `make publish-gumroad`.
+- Homebrew, first release: `make prepare-homebrew`, `make check-homebrew` once the DMG is online, then a pull request to `Homebrew/homebrew-cask` with `homebrew/PULL_REQUEST.md`.

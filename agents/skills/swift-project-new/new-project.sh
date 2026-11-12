@@ -40,6 +40,7 @@ destination() {
     app/app-Debug.entitlements) echo "$app/$app-Debug.entitlements" ;;
     app/app-Direct.entitlements) echo "$app/$app-Direct.entitlements" ;;
     app/Direct-Info.plist) echo "$app/$app-Direct-Info.plist" ;;
+    homebrew/cask.rb) echo "homebrew/$slug.rb" ;;
     *) printf '%s' "$1" | sed "s|__LOCALE__|$LOCALE|g" ;;
   esac
 }

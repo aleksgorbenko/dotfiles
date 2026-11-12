@@ -36,9 +36,9 @@ for path in "${paths[@]}"; do
 done
 
 if [ "$DRY_RUN" = 1 ]; then
-  echo "[dry-run] tccutil reset AppleEvents $bundle_id"
-elif tccutil reset AppleEvents "$bundle_id" >/dev/null 2>&1; then
-  echo "reset Automation permission for $bundle_id"
+  echo "[dry-run] tccutil reset All $bundle_id"
+elif tccutil reset All "$bundle_id" >/dev/null 2>&1; then
+  echo "reset every privacy permission for $bundle_id"
 else
-  echo "no Automation permission to reset for $bundle_id"
+  echo "no privacy permission to reset for $bundle_id"
 fi

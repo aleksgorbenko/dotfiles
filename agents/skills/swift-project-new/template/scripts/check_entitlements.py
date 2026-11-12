@@ -7,7 +7,28 @@ import sys
 ADDED_BY_SIGNING = {"com.apple.application-identifier", "com.apple.developer.team-identifier"}
 
 
+def _build_variables(actual):
+    team = actual.get("com.apple.developer.team-identifier", "")
+    application = actual.get("com.apple.application-identifier", "")
+    prefix = f"{team}." if team else ""
+    bundle = application.removeprefix(prefix)
+    return {"$(AppIdentifierPrefix)": prefix, "$(PRODUCT_BUNDLE_IDENTIFIER)": bundle}
+
+
+def _expanded(value, variables):
+    if isinstance(value, str):
+        for name, replacement in variables.items():
+            value = value.replace(name, replacement)
+        return value
+    if isinstance(value, list):
+        return [_expanded(item, variables) for item in value]
+    if isinstance(value, dict):
+        return {key: _expanded(item, variables) for key, item in value.items()}
+    return value
+
+
 def entitlement_differences(expected, actual):
+    expected = _expanded(expected, _build_variables(actual))
     actual = {key: value for key, value in actual.items() if key not in ADDED_BY_SIGNING}
     added = [f"added: {key}" for key in sorted(actual.keys() - expected.keys())]
     removed = [f"removed: {key}" for key in sorted(expected.keys() - actual.keys())]

@@ -436,6 +436,10 @@ review_draft() {
       | {id, version: .relationships.appStoreVersionForReview.data.id?}][0] // empty'
 }
 
+validate_appstore() {
+  python3 scripts/appstore_validate.py "$APP_STORE_APP_ID" "$VERSION"
+}
+
 submit_appstore() {
   local draft draft_version product_id
   build_number="$(archive_build_number)"
@@ -459,7 +463,7 @@ submit_appstore() {
     run_quiet asc web review iaps attach --app "$APP_STORE_APP_ID" --iap-id "$product_id" --submission "$draft" --confirm --output json
   done < <(jq -r '.products[].productId' "$PURCHASES")
   log "App Store readiness of $VERSION"
-  asc validate --app "$APP_STORE_APP_ID" --version "$VERSION" --platform MAC_OS --output table
+  validate_appstore
   log "App Review submission of $VERSION ($build_number) with its in-app purchases"
   run asc review submissions-submit --id "$draft" --confirm --output json
 }
@@ -474,6 +478,7 @@ case "${1:-}" in
   publish-testflight) publish_testflight ;;
   submit-testflight) submit_testflight ;;
   publish-appstore) publish_appstore ;;
+  validate-appstore) validate_appstore ;;
   submit-appstore) submit_appstore ;;
-  *) fail "usage: $0 preflight|status|status-xcode-cloud|next-build-number|setup-appstore|setup-testflight|publish-testflight|submit-testflight|publish-appstore|submit-appstore" ;;
+  *) fail "usage: $0 preflight|status|status-xcode-cloud|next-build-number|setup-appstore|setup-testflight|publish-testflight|submit-testflight|publish-appstore|validate-appstore|submit-appstore" ;;
 esac

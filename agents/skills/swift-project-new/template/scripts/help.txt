@@ -35,13 +35,23 @@ verify-direct      - codesign/spctl/stapler checks on the exported app and DMG, 
 sign-update-direct - Sparkle EdDSA signature + length for the DMG (key from Keychain)
 package-direct     - check-release, archive, export, notarise, DMG, verify, Sparkle signature
 preflight-direct   - checks before publish-direct
-publish-direct     - preflight, package, GitHub Release, blog (appcast + release notes), Gumroad, tag (DRY_RUN=1, SKIP_BUILD=1, GUMROAD_SLUG=)
+publish-direct     - preflight, package, then every publish-* step below in order (DRY_RUN=1, SKIP_BUILD=1)
+publish-github-release - DMG as a GitHub Release on the releases repo
+publish-appcast    - appcast item in the releases repo
+publish-blog       - release notes on the blog
+publish-lemonsqueezy - DMG upload step for Lemon Squeezy
+publish-tag        - vX.Y.Z tag on this commit, pushed
+publish-gumroad    - DMG and release notes on Gumroad, not part of publish-direct (GUMROAD_SLUG=)
+prepare-homebrew   - version and DMG checksum into homebrew/__SLUG__.rb for the Homebrew pull request
+check-homebrew     - Homebrew style, new-cask audit, install and uninstall of homebrew/__SLUG__.rb (needs the published DMG)
 unpublish-direct   - rollback: tag, blog, Gumroad, GitHub Release (VERSION=, DRY_RUN=1, GUMROAD_SLUG=)
 archive-appstore   - Release-AppStore archive (build.noindex/appstore, APPSTORE_BUILD=<n>, XCODE_AUTH= on CI)
 export-appstore    - Export the archive to __APP__.pkg for App Store Connect
 package-appstore   - check-release, archive + export + verify; build number from App Store Connect unless APPSTORE_BUILD=
 verify-appstore    - codesign check on the archived app, entitlements match the source
 preflight-appstore - checks before any App Store / TestFlight step
+status-distribution - every channel for VERSION: App Store, GitHub release, download link, appcast, website links, Lemon Squeezy, Homebrew, tag
+validate-appstore  - asc submission readiness report for VERSION; blocks while a version is in review
 status-appstore    - App Store versions, latest builds, Beta App Review state, groups, public link (STATUS_BUILDS=5)
 status-xcode-cloud - Latest Xcode Cloud builds per workflow: result, commit, finish time (STATUS_BUILDS=5)
 generate-appstore  - description + promotional text from the blog page (BLOG_DIR=)
@@ -54,7 +64,7 @@ publish-testflight - package, upload, What to Test, add to 'Public Beta' (DRY_RU
 submit-testflight  - submit the build for Beta App Review (DRY_RUN=1)
 bump               - make bump NEW_VERSION=x.y.z (also increments the build number)
 unregister         - Forget every __APP__ copy outside /Applications (DerivedData, archives, DMGs, Trash) so Shortcuts and permissions use the installed app (DRY_RUN=1)
-uninstall          - Quit __APP__, delete the /Applications copy (any build, including TestFlight), unregister stale copies; PURGE=1 also deletes its data, preferences and Automation permission
+uninstall          - Quit __APP__, delete the /Applications copy (any build, including TestFlight), unregister stale copies; PURGE=1 also deletes its data, preferences and every privacy permission (tccutil reset All)
 clean             - xcodebuild clean
 clean-all         - quit app, unregister + delete /Applications copy and all DerivedData, reset Shortcuts daemons
 lint              - SwiftLint (--strict), Vale dash rules, cspell en-GB

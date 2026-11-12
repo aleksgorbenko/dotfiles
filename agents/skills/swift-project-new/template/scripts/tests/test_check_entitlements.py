@@ -8,6 +8,7 @@ from check_entitlements import entitlement_differences
 
 SANDBOX = "com.apple.security.app-sandbox"
 EVENTS = "com.apple.security.temporary-exception.apple-events"
+KEYCHAIN = "keychain-access-groups"
 
 
 class EntitlementDifferencesTests(unittest.TestCase):
@@ -34,6 +35,24 @@ class EntitlementDifferencesTests(unittest.TestCase):
                 f"changed: {EVENTS}",
             ],
         )
+
+    def test_expands_build_variables_from_the_signed_identifiers(self):
+        expected = {KEYCHAIN: ["$(AppIdentifierPrefix)$(PRODUCT_BUNDLE_IDENTIFIER)"]}
+        actual = {
+            KEYCHAIN: ["TEAM.dev.example"],
+            "com.apple.application-identifier": "TEAM.dev.example",
+            "com.apple.developer.team-identifier": "TEAM",
+        }
+        self.assertEqual(entitlement_differences(expected, actual), [])
+
+    def test_reports_a_keychain_group_for_another_app(self):
+        expected = {KEYCHAIN: ["$(AppIdentifierPrefix)$(PRODUCT_BUNDLE_IDENTIFIER)"]}
+        actual = {
+            KEYCHAIN: ["TEAM.dev.other"],
+            "com.apple.application-identifier": "TEAM.dev.example",
+            "com.apple.developer.team-identifier": "TEAM",
+        }
+        self.assertEqual(entitlement_differences(expected, actual), [f"changed: {KEYCHAIN}"])
 
 
 if __name__ == "__main__":

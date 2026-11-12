@@ -26,7 +26,7 @@ fileGroups:
 packages:
   SwiftKit:
     url: https://github.com/aleksgorbenko/SwiftKit
-    majorVersion: 1.0.0
+    majorVersion: 1.1.0
 
 settings:
   base:
@@ -129,7 +129,7 @@ targetTemplates:
         excludes: [__APP__-Direct-Info.plist]
     dependencies:
       - package: SwiftKit
-        products: [SystemKit, UpdaterInterface, LicenceKit, LicenceKitUI]
+        products: [SystemKit, UpdaterInterface, LicenceKit, LicenceKitUI, SettingsKit]
 
 targets:
   __APP__:
