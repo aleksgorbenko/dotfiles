@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+set -euo pipefail
+exec bun "${BRAND_ASSETS_KIT:-$HOME/src/proj/brand-assets-kit}/src/cli.ts" "$@"
