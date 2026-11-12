@@ -22,6 +22,14 @@ ALWAYS:
 - Fetch network pages in a detached `--refresh <page>` process: show a `Loading <Page>…` row with `rerun` 0.5 while uncached, cached rows with `rerun` 1.0 while stale, and retry a cached error on the next open.
 - Pass structured data via an item's `variables` dict, not `arg`/`{query}`.
 - Return at least 1 item from a Script Filter for "nothing to show" states.
+- Align subtitles across rows: put fixed-width fields first (state, event, date as `09 Nov 05:28`, duration as `mm:ss`, counts) padded with U+2007 figure spaces, and variable-length fields (repo, branch, author, description) last; never lead a subtitle with a variable-length field.
+- Fill every fixed-width subtitle column on every row (use `-` as placeholder); a blank column renders as a gap and looks broken. Cover every page with a layout test that fails on an empty column.
+- Give every row kind its own icon and colour (repo, issue, pull request, run outcome, folder, file, shortcut, and so on) via the row's `icon.path`; render them from `tools/icons.txt` and test that each referenced icon file exists.
+- Treat a user cancelling an action (Esc, a cancelled shortcut prompt) as silence, never as an error notification; show no notification for an action whose result is already visible (opening an app or page).
+- Run `make link-live` against the imported workflow folder as soon as a new workflow is imported, so every edit is hot-reloaded; use literal absolute paths in the command and never leave a real `src/` copy in the live folder.
+- Rank rows the user runs by frecency (run count with a 7-day half-life) so used items rise to the top; store usage in `alfred_workflow_data`, never in the cache that maintenance empties.
+- Serve the last cached view at once with `rerun` and refresh it in a background job (stale-while-revalidate); show a loading row only when no earlier view exists.
+- Time the data source before blaming caching: a JXA or Apple-event loop over many items costs seconds, the equivalent CLI (`shortcuts list`) costs milliseconds.
 - Keep UI text (title/subtext/runningsubtext) in info.plist config or the Workflow Variables panel.
 - Set up tooling before writing any workflow code: `pyproject.toml` from `templates/pyproject.toml`, `Makefile`, shell linter - then write tests.
 - Copy `templates/` into every workflow repo: `github/` as `.github/`, `.markdownlint-cli2.yaml`, `.editorconfig`; use `ci-private.yml` as `.github/workflows/ci.yml` in a private repo, and drop the `uv` block of `dependabot.yml` when there is no `pyproject.toml`.
