@@ -87,7 +87,7 @@ EOF
 cat > "$dir/${app}UITests/${app}UITests.swift" <<EOF
 import XCTest
 
-internal final class ${app}UITests: XCTestCase {
+internal nonisolated final class ${app}UITests: XCTestCase {
     @MainActor
     func testLaunches() {
         let app = XCUIApplication()

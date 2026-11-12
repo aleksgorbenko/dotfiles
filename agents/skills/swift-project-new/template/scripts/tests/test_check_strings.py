@@ -19,7 +19,7 @@ class KeyProblemsTests(unittest.TestCase):
     def test_reports_banned_words(self):
         self.assertEqual(
             key_problems(["welcomeHotkeyTitle"]),
-            ["welcomeHotkeyTitle: use 'global shortcut', not 'hotkey'",
+            ["welcomeHotkeyTitle: use 'keyboard shortcut', not 'hotkey'",
              "welcomeHotkeyTitle: use 'onboarding', not 'welcome'"],
         )
 

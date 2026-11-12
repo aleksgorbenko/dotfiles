@@ -4,7 +4,7 @@
 
 1. `command git status`; never start on a dirty tree or on `main`; branch first.
 2. `make help` lists every task; run nothing outside Make.
-3. Read `APP.md` and `DOMAIN.md` before changing behaviour or names.
+3. Read `APP.md`, `DOMAIN.md` and `PACKAGES.md` before changing behaviour, names or where code lives.
 4. Propose an ADR in `docs/adr/` for each decision; write it only after the owner agrees.
 
 ## Never break
@@ -25,6 +25,7 @@
 |---|---|
 | What the app is, feature status | `APP.md` |
 | Domain objects and vocabulary | `DOMAIN.md` |
+| Packages, targets and where new code goes | `PACKAGES.md` |
 | Decisions and their reasons | `docs/adr/` |
 | App Store files | `appstore/README.md` |
 | Setup, checks, release steps | `README.md`, `make help` |
