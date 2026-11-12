@@ -15,6 +15,7 @@ description: Release a macOS app to TestFlight, the App Store and direct downloa
 | ship build | `publish-direct` | `publish-appstore` (upload + attach, no submit) | `publish-testflight` (upload, What to Test, add to group) |
 | Apple review | | `submit-appstore` | `submit-testflight` |
 | rollback | `unpublish-direct` | | |
+| check | `status-distribution` | `validate-appstore` | `status-appstore` |
 
 - Every target supports `DRY_RUN=1`; publish targets support `SKIP_BUILD=1`.
 - Script steps carry the exact name of the target that calls them.
@@ -22,6 +23,8 @@ description: Release a macOS app to TestFlight, the App Store and direct downloa
 - Submission is always a separate, deliberate run.
 - `package-*` depends on `make check-release`; packaging verifies signed entitlements against the source file.
 - `make status-appstore` prints versions, builds, Beta App Review state, groups and the public link.
+- `make validate-appstore` prints asc submission readiness as a short list; `submit-appstore` runs it first.
+- `make status-distribution` checks every channel for `VERSION`: App Store state, GitHub release and DMG, website download link, appcast, website buy links, Lemon Squeezy product and file, Homebrew cask, `vX.Y.Z` tag.
 - CI release workflow: `workflow_dispatch` only; `vX.Y.Z` tags belong to the direct release.
 
 ## Order for a new version
@@ -31,7 +34,8 @@ description: Release a macOS app to TestFlight, the App Store and direct downloa
 3. `make publish-testflight`; check the build in App Store Connect.
 4. `make submit-testflight` when external testers need it.
 5. `make publish-appstore`, then `make submit-appstore`.
-6. `make publish-direct` for the Direct build (GitHub Release, Sparkle, Gumroad, Lemon Squeezy, Homebrew).
+6. `make publish-direct` for the Direct build (GitHub Release, appcast, blog notes, Lemon Squeezy, tag).
+7. `make status-distribution` until every channel is ok.
 
 ## Release notes
 
@@ -70,14 +74,20 @@ description: Release a macOS app to TestFlight, the App Store and direct downloa
 - Review notes sections: ABOUT, WHAT TO TRY (first launch, each permission with the real button labels, shortcut, core actions), ACCOUNT, ENTITLEMENTS, CONTACT.
 - Visual assets are not needed for Beta App Review; they are for App Store submission.
 
-## Direct (Gumroad + Sparkle)
+## Direct (Sparkle, Homebrew, Gumroad)
 
-- `publish-direct`: GitHub Release, appcast + blog release notes, Gumroad file + page, tag; `unpublish-direct` reverses it in that order.
+- `publish-direct` runs `publish-github-release`, `publish-appcast`, `publish-blog`, `publish-lemonsqueezy`, `publish-tag`; each is also its own target. `unpublish-direct` reverses them.
+- Gumroad is out of `publish-direct`; `make publish-gumroad` runs it on its own.
+- A Direct release whose code must match an App Store build: branch `release/X.Y.Z` from the submitted commit and cherry-pick only config and tooling commits; publish from that branch.
+- `export-direct` passes `-allowProvisioningUpdates`: a Keychain access group needs a Developer ID provisioning profile.
+- Homebrew: an official cask in `Homebrew/homebrew-cask`, no own tap. First release: `make prepare-homebrew`, then `make check-homebrew` once the DMG is online, then open the pull request from `homebrew/PULL_REQUEST.md`; answer reviewers yourself. Later versions usually arrive through Homebrew's automatic bump from the appcast; otherwise `brew bump-cask-pr <token> --version X.Y.Z`.
+- Clean-machine test: move a TestFlight or App Store copy to the Bin first (root owns it), then `make uninstall PURGE=1`; it does not clear Keychain trial records.
 - Gumroad cannot delete files; on detach restore only an older version, never a later hidden one.
 - Sparkle compares build numbers: never reuse or go below a build number testers have installed.
 
 ## Lemon Squeezy
 
+- Targets use the live API key `LEMON_SQUEEZY_API_KEY`; add `MODE=test` for `LEMON_SQUEEZY_API_KEY_TEST`. `make check SLUG=` compares the product with the live store.
 - Products live in `~/src/proj/storefronts/lemonsqueezy/products/<slug>/` (`product.json`, `description.html`, `media/`); every action is a Make target there, never the API, `curl` or a hand edit of the live store.
 - New app: `make -C ~/src/proj/storefronts new-product APP= SLUG=`, then create the product in the dashboard (the API cannot create products) and put its IDs in `product.json`.
 - Copy: `make generate SLUG=` from the blog page, `make copy-description SLUG=` pastes it as HTML; Lemon Squeezy strips `<code>` and `<pre>`.
