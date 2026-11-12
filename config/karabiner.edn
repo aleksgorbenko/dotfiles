@@ -319,7 +319,7 @@
 		;; [:4 :!C4]
 		;; [:5 :!C5]
 		;; [:6 :!C6]
-		[:c [:alfred "shortcuts" "com.alfredapp.vitor.shortcuts"]]
+		[:c [:alfred "shortcuts" "dev.aleksgorbenko.alfred.shortcuts"]]
 		[:b [:alfred "search obsidian" "de.chris-grieser.shimmering-obsidian"]]
 		[:d [:alfred "search downloads" "dev.gbko.alfred.directories"]]
 		[:g [:alfred "ghostty tabs" "dev.aleksgorbenko.alfred.ghostty"]]
