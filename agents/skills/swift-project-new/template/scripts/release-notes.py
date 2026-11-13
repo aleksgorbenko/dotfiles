@@ -102,7 +102,7 @@ def blog_add(page_path, version, date, notes_path):
     day = datetime.date.fromisoformat(date)
     front_matter, preamble, sections = split_page(open(page_path, encoding="utf-8").read())
     sections = [section for section in sections if section_version(section) != version]
-    entry = f"## {version}\n\n*{day.day} {day:%B %Y}*\n\n{notes.strip()}\n"
+    entry = f"## {version}\n\n{day.day} {day:%B %Y}\n\n{notes.strip()}\n"
     open(page_path, "w", encoding="utf-8").write(join_page(front_matter, preamble, [entry] + sections))
 
 

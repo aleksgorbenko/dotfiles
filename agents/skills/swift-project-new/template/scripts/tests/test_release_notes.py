@@ -110,7 +110,7 @@ class ReleaseNotesTests(unittest.TestCase):
     def test_blog_add_puts_version_and_date_above_notes(self):
         self.blog_add("1.0.1", "2026-10-13")
 
-        self.assertEqual(self.page.read_text(), FRONT_MATTER + "\n## 1.0.1\n\n*13 October 2026*\n\n" + NOTES)
+        self.assertEqual(self.page.read_text(), FRONT_MATTER + "\n## 1.0.1\n\n13 October 2026\n\n" + NOTES)
 
     def test_blog_add_puts_newest_version_first(self):
         self.blog_add("1.0.0", "2026-10-01")
@@ -124,7 +124,7 @@ class ReleaseNotesTests(unittest.TestCase):
 
         self.blog_add("1.0.0", "2026-10-13")
 
-        self.assertEqual(self.page.read_text(), FRONT_MATTER + "\n## 1.0.0\n\n*13 October 2026*\n\n" + NOTES)
+        self.assertEqual(self.page.read_text(), FRONT_MATTER + "\n## 1.0.0\n\n13 October 2026\n\n" + NOTES)
 
     def test_blog_remove_restores_previous_page(self):
         self.blog_add("1.0.0", "2026-10-01")

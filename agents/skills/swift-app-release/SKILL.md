@@ -40,7 +40,7 @@ description: Release a macOS app to TestFlight, the App Store and direct downloa
 ## Release notes
 
 - One source: `release-notes/X.Y.Z.md`; sections `### New`, `### Improved`, `### Fixed` in that order, bullets only; first release is the single line `Initial release.`.
-- Rendered per channel: GitHub as-is, Sparkle `<h3>`+`<ul>`, blog `## X.Y.Z` + italic date, App Store plain text with `•`.
+- Rendered per channel: GitHub as-is, Sparkle `<h3>`+`<ul>`, blog `## X.Y.Z` + the date as plain text (an italic-only line fails markdownlint MD036), App Store plain text with `•`.
 - Versions are semver `X.Y.Z` everywhere.
 - The App Store shows no What's New for a first version; skip it for 1.0.0.
 
