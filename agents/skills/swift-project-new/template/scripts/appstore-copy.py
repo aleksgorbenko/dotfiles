@@ -60,6 +60,8 @@ def paragraphs(text: str) -> list[str]:
                 blocks.append("\n".join(current))
                 current = []
             continue
+        if line.startswith(">"):
+            continue
         if line.startswith("- "):
             current.append("• " + plain(line[2:]))
         else:

@@ -36,7 +36,12 @@ The icon shows the scope. [[sf:magnifyingglass]] means everywhere. Press [[⌫]]
 [[features]]
 title = "Browser Support"
 summary = "Works with the browsers you use."
-body = "Firefox: history and bookmarks only."
+body = '''
+Firefox: history and bookmarks only.
+
+> [!TIP]
+> Messy bookmarks? [Organise them](/guide/) first.
+'''
 browsers = [
   { id = "safari", name = "Safari" },
   { id = "firefox", name = "Firefox" },
@@ -118,6 +123,13 @@ class AppStoreCopyTests(unittest.TestCase):
         self.assertNotIn("COMMAND LINE", text)
         self.assertNotIn("check-updates", text)
         self.assertNotIn("Tips go here", text)
+
+    def test_callouts_are_left_out(self):
+        self.generate()
+
+        text = self.read_listing()["description"]
+        self.assertNotIn("[!TIP]", text)
+        self.assertNotIn("Messy bookmarks", text)
 
     def test_whats_new_comes_from_the_release_notes(self):
         notes = self.root / "1.1.0.md"
