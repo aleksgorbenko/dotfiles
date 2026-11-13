@@ -1,7 +1,49 @@
-.DS_Store
-build.noindex/
-.build/
-DerivedData/
+# Xcode
 xcuserdata/
 *.xcuserstate
+**/xcshareddata/WorkspaceSettings.xcsettings
+DerivedData/
+*.hmap
+*.ipa
+*.dSYM
+*.dSYM.zip
+*.profraw
+timeline.xctimeline
+playground.xcworkspace
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# Build output
+build.noindex/
+
+# Generated
+appstore/screenshots/**/*.png
+marketing/output/
+marketing/views/
 .asc/reports/
+
+# Python
+__pycache__/
+*.pyc
+
+# Machine-specific
+.DS_Store
+buildServer.json
+.vscode/
+.claire/
+.claude/settings.local.json
+.claude/worktrees/
+
+# Local agent notes
+docs/*
+!docs/design/
+!docs/adr/
+
+# Secrets
+.env
+*.p8
+*.p12
+*.mobileprovision
+*.provisionprofile

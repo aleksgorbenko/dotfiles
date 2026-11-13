@@ -5,7 +5,7 @@
       "macOsVersion": "Latest Release",
       "attributes": {
         "name": "Default",
-        "description": "Run the {app} test plan on every push to main",
+        "description": "",
         "branchStartCondition": {
           "source": { "patterns": [{ "pattern": "main" }] },
           "autoCancel": true
