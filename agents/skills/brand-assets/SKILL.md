@@ -21,6 +21,11 @@ description: Make product marketing images (App Store screenshots, website image
 7. Website: `make sync-assets` in the site repo, then its `make check`.
 8. App Store: `asc screenshots upload` only when the user asks.
 
+## LinkedIn
+
+- Banner variants and profile photo: `make linkedin PRODUCT=~/src/proj/aleksgorbenko.dev/brand` in the kit; edit `brand/linkedin.json`, never the output.
+- Personal brand sources (photos, favicon set, old banners) live in the website repo `brand/sources/`.
+
 ## Rules
 
 - Never capture views one by one with Snapline or `screencapture`; the kit does it.
