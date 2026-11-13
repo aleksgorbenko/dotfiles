@@ -81,6 +81,7 @@ description: Release a macOS app to TestFlight, the App Store and direct downloa
 - `publish-direct` runs `publish-github-release`, `publish-appcast`, `publish-blog`, `publish-lemonsqueezy`, `publish-tag`; each is also its own target. `unpublish-direct` reverses them.
 - Gumroad is out of `publish-direct`; `make publish-gumroad` runs it on its own.
 - A Direct release whose code must match an App Store build: branch `release/X.Y.Z` from the submitted commit and cherry-pick only config and tooling commits; publish from that branch.
+- After publishing from `release/X.Y.Z`, run `git merge -s ours release/X.Y.Z` on `main` (its changes are already there), then `git branch -d release/X.Y.Z`; the `vX.Y.Z` tag stays reachable from `main`.
 - `export-direct` passes `-allowProvisioningUpdates`: a Keychain access group needs a Developer ID provisioning profile.
 - Homebrew: one public self-hosted tap `<owner>/homebrew-tap` for every app (official `homebrew-cask` refuses new apps without notability). `make publish-direct` runs `publish-homebrew`: renders `homebrew/<slug>.rb` with the DMG's version and checksum, runs `check-homebrew` (style, `audit --new --online --strict`, livecheck, install and uninstall in a temporary tap) and pushes `Casks/<slug>.rb`. Users run `brew install --cask <owner>/tap/<slug>`.
 - Clean-machine test: move a TestFlight or App Store copy to the Bin first (root owns it), then `make uninstall PURGE=1`; it does not clear Keychain trial records.
