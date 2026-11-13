@@ -22,6 +22,7 @@ GUMROAD_DIR ?= $(HOME)/src/proj/storefronts/gumroad
 LEMONSQUEEZY_DIR ?= $(HOME)/src/proj/storefronts/lemonsqueezy
 
 WORKSPACE := __APP__.xcworkspace
+XCODE_CLOUD_CONTAINER := __APP__.xcodeproj
 SCHEME_APPSTORE := __APP__
 SCHEME_DIRECT := __APP__-Direct
 DESTINATION := platform=macOS,arch=arm64
@@ -234,7 +235,8 @@ unpublish-direct:
 APPSTORE_LOCALE := en-GB
 APPSTORE_LISTING = appstore/metadata/version/$(VERSION)/$(APPSTORE_LOCALE).json
 BLOG_DIR ?= $(HOME)/src/proj/aleksgorbenko.dev
-APPSTORE = APP_NAME=$(APP_NAME) VERSION=$(VERSION) APP_STORE_APP_ID=$(APP_STORE_APP_ID) LOCALE=$(APPSTORE_LOCALE) \
+APPSTORE = APP_NAME=$(APP_NAME) APP_BUNDLE_ID=$(APP_BUNDLE_ID) APP_SLUG=$(APP_SLUG) XCODE_CLOUD_CONTAINER=$(XCODE_CLOUD_CONTAINER) \
+	VERSION=$(VERSION) APP_STORE_APP_ID=$(APP_STORE_APP_ID) LOCALE=$(APPSTORE_LOCALE) \
 	ARCHIVE=$(ARCHIVE_APPSTORE) PKG=$(PKG_APPSTORE) DRY_RUN=$(DRY_RUN) scripts/publish-appstore.sh
 
 .PHONY: archive-appstore
@@ -288,6 +290,14 @@ status-xcode-cloud:
 generate-appstore:
 	python3 scripts/appstore-copy.py --blog-page $(BLOG_DIR)/content/apps/$(APP_SLUG)/_index.md \
 		--listing $(APPSTORE_LISTING) $(if $(filter-out 1.0.0,$(VERSION)),--whats-new release-notes/$(VERSION).md)
+
+.PHONY: create-appstore
+create-appstore:
+	$(APPSTORE) $@
+
+.PHONY: setup-xcode-cloud
+setup-xcode-cloud:
+	$(APPSTORE) $@
 
 .PHONY: setup-appstore
 setup-appstore:

@@ -13,7 +13,9 @@ description: Create a new macOS app from an XcodeGen project.yml template with t
 6. Commit everything, including the generated `.xcodeproj` and test plans.
 7. Run `swift-project-docs` for APP.md and DOMAIN.md; add each enforced word to `.swiftlint.yml` `custom_rules` and `scripts/check_strings.py` `BANNED`.
 8. Propose ADRs for the project's decisions; write each only after the owner agrees.
-9. Create the Xcode Cloud workflow (test action, full test plan, on `main`) with the `.xcodeproj` opened directly, never the root `.xcworkspace` (its loose file references fail onboarding with "Could not determine project name"), and grant it the private SwiftKit repo in App Store Connect; leave GitHub's macOS jobs off (`MACOS_CI` unset).
+9. Run `make create-appstore` (once per Mac: `asc web auth login --apple-id EMAIL`): it registers the bundle ID, applies capabilities, creates the App Store app and writes `APP_STORE_APP_ID`.
+10. Run the `open -a … <App>.xcodeproj` line it prints; the `.xcodeproj`, never the root `.xcworkspace` (its loose file references fail onboarding with "Could not determine project name"). Choose Integrate > Create Workflow, grant the private SwiftKit repo in App Store Connect, and commit `xcshareddata/xcodecloud/manifest.json`.
+11. Run `make setup-xcode-cloud`: it turns the workflow Xcode made into the one in `appstore/xcode-cloud.json`; leave GitHub's macOS jobs off (`MACOS_CI` unset).
 
 ## What the script makes
 

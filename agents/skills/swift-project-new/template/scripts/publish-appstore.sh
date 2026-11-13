@@ -7,6 +7,9 @@ APP_CONFIG="appstore/app.json"
 LISTING_DIR="appstore/metadata"
 REVIEW_INFORMATION="appstore/metadata/review-information.json"
 PURCHASES="appstore/in-app-purchases.json"
+XCCONFIG="xcconfigs/Config.xcconfig"
+ENTITLEMENTS="$APP_NAME/$APP_NAME.entitlements"
+XCODE_CLOUD="appstore/xcode-cloud.json"
 PRIVACY="appstore/privacy.json"
 SCREENSHOT_SOURCE="marketing/output/appstore-mac"
 REVIEW_SCREENSHOT_SOURCE="marketing/output/appstore-iap-review"
@@ -64,6 +67,64 @@ version_id() {
 version_state() {
   asc versions list --app "$APP_STORE_APP_ID" --platform MAC_OS --paginate --output json \
     | jq -r --arg version "$VERSION" '.data[] | select(.attributes.versionString == $version) | .attributes.appStoreState'
+}
+
+bundle_resource_id() {
+  asc bundle-ids list --identifier "$APP_BUNDLE_ID" --platform MAC_OS --output json \
+    | jq -r --arg identifier "$APP_BUNDLE_ID" '.data[] | select(.attributes.identifier == $identifier) | .id'
+}
+
+app_id_for_bundle() {
+  asc apps list --bundle-id "$APP_BUNDLE_ID" --output json | jq -r '.data[0].id // empty'
+}
+
+create_appstore() {
+  log "App Store app $APP_NAME ($APP_BUNDLE_ID)"
+  [ -f "$ENTITLEMENTS" ] || fail "missing $ENTITLEMENTS"
+  local bundle app_id xcode
+  bundle="$(bundle_resource_id)"
+  if [ -n "$bundle" ]; then
+    unchanged "bundle ID $APP_BUNDLE_ID"
+  else
+    log "bundle ID $APP_BUNDLE_ID"
+    run_quiet asc bundle-ids create --identifier "$APP_BUNDLE_ID" --name "$APP_NAME" --platform MAC_OS --output json
+    bundle="$(bundle_resource_id)"
+  fi
+  if [ -n "$bundle" ]; then
+    log "capabilities from $ENTITLEMENTS"
+    asc bundle-ids capabilities reconcile plan --bundle "$bundle" --entitlements "$ENTITLEMENTS" --ignore-unknown --output table
+    run_quiet asc bundle-ids capabilities reconcile apply --bundle "$bundle" --entitlements "$ENTITLEMENTS" --ignore-unknown --confirm --output json
+  fi
+  app_id="$(app_id_for_bundle)"
+  if [ -n "$app_id" ]; then
+    unchanged "App Store app $app_id"
+  else
+    web_session || fail "creating the app needs the Apple web session: run asc web auth login --apple-id EMAIL"
+    log "App Store app record"
+    run_quiet asc web apps create --name "$APP_NAME" --bundle-id "$APP_BUNDLE_ID" --sku "$APP_SLUG" --platform MAC_OS \
+      --primary-locale "$LOCALE" --if-exists skip --auto-rename=false --output json
+    app_id="$(app_id_for_bundle)"
+  fi
+  if [ -n "$app_id" ] && [ "$APP_STORE_APP_ID" != "$app_id" ]; then
+    log "APP_STORE_APP_ID = $app_id in $XCCONFIG"
+    run sed -i '' "s/^APP_STORE_APP_ID *=.*/APP_STORE_APP_ID = $app_id/" "$XCCONFIG"
+  fi
+  xcode="$(xcode-select -p)"
+  xcode="${xcode%/Contents/Developer}"
+  if [ -n "$app_id" ] && [ "$(asc xcode-cloud products list --app "$app_id" --output json | jq '.data | length')" != 0 ]; then
+    printf '\nXcode Cloud is connected: run make setup-xcode-cloud to apply %s.\n\n' "$XCODE_CLOUD"
+  else
+    printf '\nNext: in Xcode choose Integrate > Create Workflow to connect %s to Xcode Cloud, commit the manifest it writes, then run make setup-xcode-cloud.\n\n' "$APP_NAME"
+  fi
+  printf 'open -a %q %q\n' "$xcode" "$PWD/$XCODE_CLOUD_CONTAINER"
+}
+
+setup_xcode_cloud() {
+  [ -n "$APP_STORE_APP_ID" ] || fail "no APP_STORE_APP_ID in $XCCONFIG: run make create-appstore"
+  local flags=()
+  [ "$DRY_RUN" = 1 ] && flags=(--dry-run)
+  python3 scripts/xcode_cloud.py setup --app-id "$APP_STORE_APP_ID" --app "$APP_NAME" --container "$XCODE_CLOUD_CONTAINER" \
+    --config "$XCODE_CLOUD" "${flags[@]}"
 }
 
 setup_appstore_promotional_text() {
@@ -499,7 +560,9 @@ case "${1:-}" in
   status) python3 scripts/appstore_status.py "$APP_STORE_APP_ID" "${STATUS_BUILDS:-5}" ;;
   status-xcode-cloud) python3 scripts/xcode_cloud_status.py "$APP_STORE_APP_ID" "${STATUS_BUILDS:-5}" ;;
   next-build-number) next_build_number ;;
+  create-appstore) create_appstore ;;
   setup-appstore) setup_appstore ;;
+  setup-xcode-cloud) setup_xcode_cloud ;;
   setup-appstore-promotional-text) setup_appstore_promotional_text ;;
   setup-testflight) setup_testflight ;;
   publish-testflight) publish_testflight ;;
@@ -507,5 +570,5 @@ case "${1:-}" in
   publish-appstore) publish_appstore ;;
   validate-appstore) validate_appstore ;;
   submit-appstore) submit_appstore ;;
-  *) fail "usage: $0 preflight|status|status-xcode-cloud|next-build-number|setup-appstore|setup-appstore-promotional-text|setup-testflight|publish-testflight|submit-testflight|publish-appstore|validate-appstore|submit-appstore" ;;
+  *) fail "usage: $0 preflight|status|status-xcode-cloud|next-build-number|create-appstore|setup-appstore|setup-xcode-cloud|setup-appstore-promotional-text|setup-testflight|publish-testflight|submit-testflight|publish-appstore|validate-appstore|submit-appstore" ;;
 esac

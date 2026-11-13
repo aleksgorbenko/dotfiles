@@ -1,0 +1,44 @@
+{
+  "workflows": [
+    {
+      "xcodeVersion": "Latest Release",
+      "macOsVersion": "Latest Release",
+      "attributes": {
+        "name": "Default",
+        "description": "Run the {app} test plan on every push to main",
+        "branchStartCondition": {
+          "source": { "patterns": [{ "pattern": "main" }] },
+          "autoCancel": true
+        },
+        "manualBranchStartCondition": {
+          "source": { "isAllMatch": true }
+        },
+        "actions": [
+          {
+            "name": "{app} - macOS",
+            "actionType": "TEST",
+            "testConfiguration": {
+              "kind": "SPECIFIC_TEST_PLANS",
+              "testPlanName": "{app}",
+              "testDestinations": [
+                {
+                  "deviceTypeName": "Mac",
+                  "deviceTypeIdentifier": "mac",
+                  "runtimeName": "Same As Selected macOS Version",
+                  "runtimeIdentifier": "builder",
+                  "kind": "MAC"
+                }
+              ]
+            },
+            "scheme": "{app}",
+            "platform": "MACOS",
+            "isRequiredToPass": true
+          }
+        ],
+        "isEnabled": true,
+        "clean": true,
+        "containerFilePath": "{container}"
+      }
+    }
+  ]
+}

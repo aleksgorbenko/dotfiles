@@ -54,6 +54,8 @@ status-distribution - every channel for VERSION: App Store, GitHub release, down
 validate-appstore  - asc submission readiness report for VERSION; blocks while a version is in review
 status-appstore    - App Store versions, latest builds, Beta App Review state, groups, public link (STATUS_BUILDS=5)
 status-xcode-cloud - Latest Xcode Cloud builds per workflow: result, commit, finish time (STATUS_BUILDS=5)
+create-appstore    - new app: bundle ID, capabilities from the entitlements, App Store app record, APP_STORE_APP_ID; prints the Xcode command (DRY_RUN=1)
+setup-xcode-cloud  - Xcode Cloud workflows from appstore/xcode-cloud.json, after Xcode created the product (DRY_RUN=1)
 generate-appstore  - description + promotional text from the blog page (BLOG_DIR=)
 setup-appstore     - everything in appstore/: listing (asc metadata push), app.json settings, review notes, in-app purchases, screenshots; stops on a live version (DRY_RUN=1)
 setup-appstore-promotional-text - only the promotional text, the one field a live version accepts (DRY_RUN=1)
