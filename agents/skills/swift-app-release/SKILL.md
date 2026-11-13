@@ -50,6 +50,8 @@ description: Release a macOS app to TestFlight, the App Store and direct downloa
 - Mark direct-only features with `†` plus an italic note; the App Store generator drops them.
 - App Store limits: subtitle 30 chars, promotional text 170, description 4000; no `␣` glyph (spell "+ space").
 - Use capitalised headings and `•` bullets in App Store text, not Markdown `#`.
+- Promotional text comes from the blog front matter `promotional_text`, falling back to `description`; website callouts (`> [!TIP]`) stay out of the App Store description.
+- A live version accepts only promotional text: `make setup-appstore` stops on it; run `make setup-appstore-promotional-text`.
 
 ## App Store Connect (asc) lessons
 

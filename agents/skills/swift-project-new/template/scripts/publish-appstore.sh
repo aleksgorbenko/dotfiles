@@ -66,16 +66,30 @@ version_state() {
     | jq -r --arg version "$VERSION" '.data[] | select(.attributes.versionString == $version) | .attributes.appStoreState'
 }
 
-live_listing_dir() {
-  local dir
+setup_appstore_promotional_text() {
+  log "App Store $VERSION promotional text"
+  local listing dir push_flags=(--confirm)
+  listing="$(listing_path)"
+  [ -n "$(version_id)" ] || fail "no App Store version $VERSION: run make setup-appstore"
+  [ "$DRY_RUN" = 1 ] && push_flags=(--dry-run)
   dir="$(mktemp -d)"
   mkdir -p "$dir/version/$VERSION"
   jq '{promotionalText}' "$listing" > "$dir/version/$VERSION/$LOCALE.json"
-  echo "$dir"
+  asc metadata push --app "$APP_STORE_APP_ID" --version "$VERSION" --platform MAC_OS --dir "$dir" \
+    --include localizations "${push_flags[@]}" --output table
+  rm -rf "$dir"
+}
+
+listing_path() {
+  local listing="$LISTING_DIR/version/$VERSION/$LOCALE.json"
+  [ -f "$listing" ] || fail "missing $listing: git mv the previous version folder, then make generate-appstore"
+  echo "$listing"
 }
 
 setup_appstore() {
   log "App Store $VERSION from appstore/"
+  [ "$(version_state)" != READY_FOR_SALE ] \
+    || fail "$VERSION is live: Apple accepts only promotional text until the next version; run make setup-appstore-promotional-text"
   local copyright listing
   copyright="$(config .copyright)"
   if [ "$(version_copyright)" = "$copyright" ]; then
@@ -86,8 +100,7 @@ setup_appstore() {
   fi
   version="$(version_id)"
   [ -n "$version" ] || [ "$DRY_RUN" = 1 ] || fail "App Store version $VERSION was not created"
-  listing="$LISTING_DIR/version/$VERSION/$LOCALE.json"
-  [ -f "$listing" ] || fail "missing $listing: git mv the previous version folder, then make generate-appstore"
+  listing="$(listing_path)"
   if [ "$VERSION" != 1.0.0 ] && [ "$(jq -r '.whatsNew // empty' "$listing")" = "" ]; then
     fail "$listing has no whatsNew: run make generate-appstore"
   fi
@@ -95,15 +108,9 @@ setup_appstore() {
     echo "[dry-run] asc metadata push --version $VERSION --dir $LISTING_DIR"
   else
     local push_flags=(--confirm)
-    local push_dir="$LISTING_DIR" push_scopes=localizations,categories,age-rating,review-information
     [ "$DRY_RUN" = 1 ] && push_flags=(--dry-run)
-    if [ "$(version_state)" = READY_FOR_SALE ]; then
-      log "$VERSION is live: only promotional text can change without review"
-      push_dir="$(live_listing_dir)"
-      push_scopes=localizations
-    fi
-    asc metadata push --app "$APP_STORE_APP_ID" --version "$VERSION" --platform MAC_OS --dir "$push_dir" \
-      --include "$push_scopes" "${push_flags[@]}" --output table
+    asc metadata push --app "$APP_STORE_APP_ID" --version "$VERSION" --platform MAC_OS --dir "$LISTING_DIR" \
+      --include localizations,categories,age-rating,review-information "${push_flags[@]}" --output table
     setup_sandbox_entitlements
   fi
   setup_content_rights
@@ -493,11 +500,12 @@ case "${1:-}" in
   status-xcode-cloud) python3 scripts/xcode_cloud_status.py "$APP_STORE_APP_ID" "${STATUS_BUILDS:-5}" ;;
   next-build-number) next_build_number ;;
   setup-appstore) setup_appstore ;;
+  setup-appstore-promotional-text) setup_appstore_promotional_text ;;
   setup-testflight) setup_testflight ;;
   publish-testflight) publish_testflight ;;
   submit-testflight) submit_testflight ;;
   publish-appstore) publish_appstore ;;
   validate-appstore) validate_appstore ;;
   submit-appstore) submit_appstore ;;
-  *) fail "usage: $0 preflight|status|status-xcode-cloud|next-build-number|setup-appstore|setup-testflight|publish-testflight|submit-testflight|publish-appstore|validate-appstore|submit-appstore" ;;
+  *) fail "usage: $0 preflight|status|status-xcode-cloud|next-build-number|setup-appstore|setup-appstore-promotional-text|setup-testflight|publish-testflight|submit-testflight|publish-appstore|validate-appstore|submit-appstore" ;;
 esac

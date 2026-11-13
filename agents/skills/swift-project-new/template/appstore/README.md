@@ -11,7 +11,8 @@ Both channels: **setup** (app / version information) -> **publish** (upload the 
 | `make preflight-appstore` | Tools, semver, release notes format, App Store Connect access |
 | `make generate-appstore` | `description` + `promotionalText` in `appstore/metadata/version/<version>/__LOCALE__.json` from the blog page (blog is the source of truth; features marked † are Direct-only and left out); `whatsNew` from `release-notes/<version>.md` |
 | `make package-appstore` | `archive-appstore` + `export-appstore` to `build.noindex/appstore/export/__APP__.pkg`, no upload |
-| `make setup-appstore` | Everything in this folder: version, listing, `app.json` settings, review notes, in-app purchases and prices, screenshots; each step reads App Store Connect first and sends only what differs |
+| `make setup-appstore` | Everything in this folder: version, listing, `app.json` settings, review notes, in-app purchases and prices, screenshots; each step reads App Store Connect first and sends only what differs; stops on a live version |
+| `make setup-appstore-promotional-text` | Only `promotionalText`, the one field Apple accepts on a live version |
 | `make generate-storekit` | `__APP__.storekit` for local purchases, from `in-app-purchases.json` and `app.json` |
 | `make publish-appstore` | Preflight, setup-appstore, package, upload, attach the build to the version |
 | `make submit-appstore` | Submit the attached build for App Review |

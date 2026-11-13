@@ -55,7 +55,8 @@ validate-appstore  - asc submission readiness report for VERSION; blocks while a
 status-appstore    - App Store versions, latest builds, Beta App Review state, groups, public link (STATUS_BUILDS=5)
 status-xcode-cloud - Latest Xcode Cloud builds per workflow: result, commit, finish time (STATUS_BUILDS=5)
 generate-appstore  - description + promotional text from the blog page (BLOG_DIR=)
-setup-appstore     - everything in appstore/: listing (asc metadata push), app.json settings, review notes, in-app purchases, screenshots (DRY_RUN=1)
+setup-appstore     - everything in appstore/: listing (asc metadata push), app.json settings, review notes, in-app purchases, screenshots; stops on a live version (DRY_RUN=1)
+setup-appstore-promotional-text - only the promotional text, the one field a live version accepts (DRY_RUN=1)
 generate-storekit  - __APP__.storekit for local purchases from appstore/in-app-purchases.json and app.json
 publish-appstore   - setup-appstore, package, upload, attach the build to the version (DRY_RUN=1, SKIP_BUILD=1)
 submit-appstore    - submit the attached build for App Review (DRY_RUN=1)

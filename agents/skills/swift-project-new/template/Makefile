@@ -294,6 +294,11 @@ setup-appstore:
 	$(APPSTORE) preflight
 	$(APPSTORE) setup-appstore
 
+.PHONY: setup-appstore-promotional-text
+setup-appstore-promotional-text:
+	$(APPSTORE) preflight
+	$(APPSTORE) $@
+
 .PHONY: generate-storekit
 generate-storekit:
 	python3 scripts/storekit_config.py --products appstore/in-app-purchases.json \
