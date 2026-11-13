@@ -1,0 +1,6 @@
+extends: existence
+message: "Never use an Apple product name as a style for the app: '%s'."
+level: error
+ignorecase: true
+tokens:
+  - 'Spotlight[- ](?:style|like|native)'
