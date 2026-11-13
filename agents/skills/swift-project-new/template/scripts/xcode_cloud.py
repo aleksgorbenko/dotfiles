@@ -62,6 +62,13 @@ def existing_ids(listed):
     return {workflow["attributes"]["name"]: workflow["id"] for workflow in listed["data"]}
 
 
+def existing_id(existing, workflow):
+    for name in [workflow["attributes"]["name"], *workflow.get("replaces", [])]:
+        if name in existing:
+            return existing[name]
+    return None
+
+
 def _asc(*arguments):
     result = subprocess.run(["asc", *arguments, "--output", "json"], capture_output=True, text=True, check=False)
     if result.returncode != 0:
@@ -93,13 +100,14 @@ def setup(app_id, app, container, config_path, dry_run):
         xcode = version_id(xcode_versions, workflow["xcodeVersion"])
         macos = version_id(macos_versions, workflow["macOsVersion"])
         name = attributes["name"]
-        if name in existing:
-            payload = update_payload(existing[name], attributes, xcode, macos)
+        workflow_id = existing_id(existing, workflow)
+        if workflow_id is not None:
+            payload = update_payload(workflow_id, attributes, xcode, macos)
             print(f"== Xcode Cloud workflow {name}: update")
             if dry_run:
                 print(json.dumps(payload, indent=2))
             else:
-                _send("update", payload, "--id", existing[name])
+                _send("update", payload, "--id", workflow_id)
         else:
             payload = create_payload(attributes, product, repositories[0]["id"], xcode, macos)
             print(f"== Xcode Cloud workflow {name}: create")

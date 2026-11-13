@@ -17,7 +17,7 @@ class XcodeCloudTests(unittest.TestCase):
         workflow = xcode_cloud.render(CONFIG, "Sample", "Sample.xcworkspace")[0]
 
         attributes = workflow["attributes"]
-        self.assertEqual(attributes["name"], "Default")
+        self.assertEqual(attributes["name"], "Test macOS")
         self.assertEqual(attributes["containerFilePath"], "Sample.xcworkspace")
         self.assertEqual(attributes["actions"][0]["name"], "Sample - macOS")
         self.assertEqual(attributes["actions"][0]["scheme"], "Sample")
@@ -39,7 +39,7 @@ class XcodeCloudTests(unittest.TestCase):
         payload = xcode_cloud.create_payload(workflow["attributes"], "product-1", "repo-1", "xcode-1", "macos-1")
 
         self.assertEqual(payload["data"]["type"], "ciWorkflows")
-        self.assertEqual(payload["data"]["attributes"]["name"], "Default")
+        self.assertEqual(payload["data"]["attributes"]["name"], "Test macOS")
         self.assertEqual(
             {name: link["data"] for name, link in payload["data"]["relationships"].items()},
             {
@@ -75,6 +75,20 @@ class XcodeCloudTests(unittest.TestCase):
         listed = {"data": [{"id": "w1", "attributes": {"name": "Default"}}]}
 
         self.assertEqual(xcode_cloud.existing_ids(listed), {"Default": "w1"})
+
+    def test_a_renamed_workflow_is_found_by_a_name_it_replaces(self):
+        existing = {"Default": "w1", "Nightly": "w2"}
+
+        self.assertEqual(xcode_cloud.existing_id(existing, {"attributes": {"name": "Test macOS"}, "replaces": ["Default"]}), "w1")
+        self.assertEqual(xcode_cloud.existing_id(existing, {"attributes": {"name": "Nightly"}}), "w2")
+        self.assertIsNone(xcode_cloud.existing_id(existing, {"attributes": {"name": "Test iOS"}}))
+
+    def test_workflow_name_says_what_runs_where(self):
+        workflow = xcode_cloud.render(CONFIG, "Sample", "Sample.xcworkspace")[0]
+
+        self.assertEqual(workflow["attributes"]["name"], "Test macOS")
+        self.assertEqual(workflow["replaces"], ["Default"])
+        self.assertEqual(workflow["attributes"]["description"], "Runs the Sample test plan on macOS for every push to main")
 
 
 if __name__ == "__main__":

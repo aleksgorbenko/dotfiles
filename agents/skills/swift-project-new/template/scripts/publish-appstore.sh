@@ -124,7 +124,7 @@ setup_xcode_cloud() {
   local flags=()
   [ "$DRY_RUN" = 1 ] && flags=(--dry-run)
   python3 scripts/xcode_cloud.py setup --app-id "$APP_STORE_APP_ID" --app "$APP_NAME" --container "$XCODE_CLOUD_CONTAINER" \
-    --config "$XCODE_CLOUD" "${flags[@]}"
+    --config "$XCODE_CLOUD" ${flags[@]+"${flags[@]}"}
 }
 
 setup_appstore_promotional_text() {

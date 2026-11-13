@@ -3,9 +3,10 @@
     {
       "xcodeVersion": "Latest Release",
       "macOsVersion": "Latest Release",
+      "replaces": ["Default"],
       "attributes": {
-        "name": "Default",
-        "description": "",
+        "name": "Test macOS",
+        "description": "Runs the {app} test plan on macOS for every push to main",
         "branchStartCondition": {
           "source": { "patterns": [{ "pattern": "main" }] },
           "autoCancel": true

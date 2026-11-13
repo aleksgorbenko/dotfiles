@@ -10,7 +10,7 @@ Both channels: **setup** (app / version information) -> **publish** (upload the 
 |---|---|
 | `make preflight-appstore` | Tools, semver, release notes format, App Store Connect access |
 | `make create-appstore` | New app only: registers the bundle ID, applies capabilities from the entitlements, creates the App Store app record (Apple web session), writes `APP_STORE_APP_ID`; prints the command that opens the project in Xcode |
-| `make setup-xcode-cloud` | Creates or updates the Xcode Cloud workflows in `xcode-cloud.json` (`{app}`, `{container}` filled from the Makefile); needs the Xcode Cloud product Xcode creates |
+| `make setup-xcode-cloud` | Creates or updates the Xcode Cloud workflows in `xcode-cloud.json` (`{app}`, `{container}` filled from the Makefile; `replaces` lists old names so a rename updates the same workflow); needs the Xcode Cloud product Xcode creates |
 | `make generate-appstore` | `description` + `promotionalText` in `appstore/metadata/version/<version>/__LOCALE__.json` from the blog page (blog is the source of truth; features marked † are Direct-only and left out); `whatsNew` from `release-notes/<version>.md` |
 | `make package-appstore` | `archive-appstore` + `export-appstore` to `build.noindex/appstore/export/__APP__.pkg`, no upload |
 | `make setup-appstore` | Everything in this folder: version, listing, `app.json` settings, review notes, in-app purchases and prices, screenshots; each step reads App Store Connect first and sends only what differs; stops on a live version |
