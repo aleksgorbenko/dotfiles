@@ -46,6 +46,8 @@ expensive-body views to skip re-renders.
 ## Fixed-row panels
 
 - Give each row a fixed height constant and size a panel that shows N rows from it; never estimate from font metrics or measure rendered rows at runtime.
+- Use whole points for every size, padding, spacing and position, including partial-row peeks; only ratios of the screen may be fractional, and round what they compute.
+- Enforce whole points with a `whole_point_size` SwiftLint custom rule and a test that every computed panel height is a whole number.
 - Count N-1 gaps between N stacked rows.
 - Arrow Up from the first row selects the query text with no row selected; Down returns to the first row and collapses the text selection.
 
