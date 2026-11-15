@@ -22,6 +22,8 @@ paths:
 - Keep xcconfig files in an `xcconfigs/` folder, point every configuration at them through `configFiles`, and keep values the Makefile or scripts read there.
 - Use `syncedFolder` sources and exclude any `INFOPLIST_FILE` from the folder's membership.
 - Give local packages that the workspace already lists `excludeFromProject: true`.
+- Commit only the workspace `Package.resolved`; gitignore `Packages/*/Package.resolved`, since local packages are libraries.
+- Change package versions only through `make update-packages`, which edits the manifests and `project.yml`, regenerates the project and resolves the workspace.
 - Commit the generated `.xcodeproj` and provide `make generate-project` and `make check-project`, which fails when `.pbxproj` differs from `project.yml`; run `check-project` in CI.
 - Commit scheme files in the form Xcode re-saves them and leave them out of `check-project`.
 - Diff `xcodebuild -showBuildSettings` for every target and configuration before and after moving a project to XcodeGen.
