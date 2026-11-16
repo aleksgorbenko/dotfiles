@@ -27,6 +27,8 @@ SCHEME_APPSTORE := __APP__
 SCHEME_DIRECT := __APP__-Direct
 DESTINATION := platform=macOS,arch=arm64
 TEST_LOG := /tmp/__SLUG__-test.log
+TEST_DERIVED_DATA := build.noindex/DerivedData-tests
+UI_TEST_DERIVED_DATA := build.noindex/DerivedData-ui-tests
 XCODEBUILD_FLAGS ?=
 XCBEAUTIFY ?=
 XCODEBUILD_LOG ?=
@@ -346,7 +348,7 @@ submit-testflight:
 
 .PHONY: test
 test: check-test-plan
-	set -o pipefail; $(XCODEBUILD_PREPARE) xcodebuild -workspace $(WORKSPACE) -scheme $(SCHEME_APPSTORE) -destination '$(DESTINATION)' $(XCODEBUILD_FLAGS) test $(XCODEBUILD_OUTPUT)
+	set -o pipefail; $(XCODEBUILD_PREPARE) xcodebuild -workspace $(WORKSPACE) -scheme $(SCHEME_APPSTORE) -destination '$(DESTINATION)' -derivedDataPath $(TEST_DERIVED_DATA) $(XCODEBUILD_FLAGS) test $(XCODEBUILD_OUTPUT)
 
 .PHONY: quit-built-app
 quit-built-app:
@@ -354,33 +356,33 @@ quit-built-app:
 
 .PHONY: test-unit
 test-unit: check-test-plan quit-built-app
-	set -o pipefail; $(XCODEBUILD_PREPARE) xcodebuild -workspace $(WORKSPACE) -scheme $(SCHEME_APPSTORE) -destination '$(DESTINATION)' -testPlan __APP__-Unit $(XCODEBUILD_FLAGS) test $(XCODEBUILD_OUTPUT)
+	set -o pipefail; $(XCODEBUILD_PREPARE) xcodebuild -workspace $(WORKSPACE) -scheme $(SCHEME_APPSTORE) -destination '$(DESTINATION)' -testPlan __APP__-Unit -derivedDataPath $(TEST_DERIVED_DATA) $(XCODEBUILD_FLAGS) test $(XCODEBUILD_OUTPUT)
 
 .PHONY: test-coverage test-keychain
 test-coverage: check-test-plan quit-built-app
-	WORKSPACE=$(WORKSPACE) SCHEME=$(SCHEME_APPSTORE) DESTINATION='$(DESTINATION)' XCODEBUILD_FLAGS='$(XCODEBUILD_FLAGS)' \
+	WORKSPACE=$(WORKSPACE) SCHEME=$(SCHEME_APPSTORE) DESTINATION='$(DESTINATION)' XCODEBUILD_FLAGS='-derivedDataPath $(TEST_DERIVED_DATA) $(XCODEBUILD_FLAGS)' \
 		XCODEBUILD_LOG=$(XCODEBUILD_LOG) RESULT=$(COVERAGE_RESULT) COVERAGE_MIN=$(COVERAGE_MIN) scripts/test-coverage.sh
 
 .PHONY: test-unit-tsan
 test-unit-tsan: check-test-plan quit-built-app
 	set -o pipefail; $(XCODEBUILD_PREPARE) TEST_RUNNER_TSAN_OPTIONS=halt_on_error=1 xcodebuild -workspace $(WORKSPACE) -scheme $(SCHEME_APPSTORE) -destination '$(DESTINATION)' \
-		-testPlan __APP__-Unit -enableThreadSanitizer YES $(XCODEBUILD_FLAGS) test $(XCODEBUILD_OUTPUT)
+		-testPlan __APP__-Unit -enableThreadSanitizer YES -derivedDataPath $(TEST_DERIVED_DATA) $(XCODEBUILD_FLAGS) test $(XCODEBUILD_OUTPUT)
 
 .PHONY: test-keychain
 test-keychain: check-test-plan quit-built-app
 	set -o pipefail; $(XCODEBUILD_PREPARE) xcodebuild -workspace $(WORKSPACE) -scheme $(SCHEME_APPSTORE) -destination '$(DESTINATION)' \
-		-testPlan __APP__-Keychain $(XCODEBUILD_FLAGS) test $(XCODEBUILD_OUTPUT)
+		-testPlan __APP__-Keychain -derivedDataPath $(TEST_DERIVED_DATA) $(XCODEBUILD_FLAGS) test $(XCODEBUILD_OUTPUT)
 
 .PHONY: test-ui
 test-ui: quit-built-app
 	set -o pipefail; $(XCODEBUILD_PREPARE) xcodebuild -workspace $(WORKSPACE) -scheme $(SCHEME_APPSTORE) -destination '$(DESTINATION)' \
-		-testPlan __APP__-UI $(if $(TESTS),-only-testing:$(TESTS)) $(XCODEBUILD_FLAGS) test $(XCODEBUILD_OUTPUT)
+		-testPlan __APP__-UI $(if $(TESTS),-only-testing:$(TESTS)) -derivedDataPath $(UI_TEST_DERIVED_DATA) $(XCODEBUILD_FLAGS) test $(XCODEBUILD_OUTPUT)
 
 .PHONY: test-until-failure
 test-until-failure: check-test-plan quit-built-app
 	set -o pipefail; $(XCODEBUILD_PREPARE) xcodebuild -workspace $(WORKSPACE) -scheme $(SCHEME_APPSTORE) -destination '$(DESTINATION)' \
 		$(if $(TESTS),-only-testing:$(TESTS)) -test-iterations $(ITERATIONS) -run-tests-until-failure \
-		$(XCODEBUILD_FLAGS) test $(XCODEBUILD_OUTPUT)
+		-derivedDataPath $(TEST_DERIVED_DATA) $(XCODEBUILD_FLAGS) test $(XCODEBUILD_OUTPUT)
 
 .PHONY: check-release
 check-release:
@@ -419,31 +421,32 @@ test-scripts:
 
 .PHONY: test-result
 test-result: check-test-plan
-	xcodebuild -workspace $(WORKSPACE) -scheme $(SCHEME_APPSTORE) -destination '$(DESTINATION)' $(XCODEBUILD_FLAGS) test > $(TEST_LOG) 2>&1; status=$$?; \
+	xcodebuild -workspace $(WORKSPACE) -scheme $(SCHEME_APPSTORE) -destination '$(DESTINATION)' -derivedDataPath $(TEST_DERIVED_DATA) $(XCODEBUILD_FLAGS) test > $(TEST_LOG) 2>&1; status=$$?; \
 	grep -E "^Test Suite .* (passed|failed)|\*\* TEST (SUCCEEDED|FAILED) \*\*|Executed [0-9]+ test" $(TEST_LOG); \
 	exit $$status
 
 .PHONY: test-unit-result
 test-unit-result: check-test-plan
-	xcodebuild -workspace $(WORKSPACE) -scheme $(SCHEME_APPSTORE) -destination '$(DESTINATION)' -testPlan __APP__-Unit $(XCODEBUILD_FLAGS) test > $(TEST_LOG) 2>&1; status=$$?; \
+	xcodebuild -workspace $(WORKSPACE) -scheme $(SCHEME_APPSTORE) -destination '$(DESTINATION)' -testPlan __APP__-Unit -derivedDataPath $(TEST_DERIVED_DATA) $(XCODEBUILD_FLAGS) test > $(TEST_LOG) 2>&1; status=$$?; \
 	grep -E "^Test Suite .* (passed|failed)|\*\* TEST (SUCCEEDED|FAILED) \*\*|Executed [0-9]+ test" $(TEST_LOG); \
 	exit $$status
 
 .PHONY: test-failures
 test-failures: check-test-plan
-	xcodebuild -workspace $(WORKSPACE) -scheme $(SCHEME_APPSTORE) -destination '$(DESTINATION)' $(XCODEBUILD_FLAGS) test > $(TEST_LOG) 2>&1; status=$$?; \
+	xcodebuild -workspace $(WORKSPACE) -scheme $(SCHEME_APPSTORE) -destination '$(DESTINATION)' -derivedDataPath $(TEST_DERIVED_DATA) $(XCODEBUILD_FLAGS) test > $(TEST_LOG) 2>&1; status=$$?; \
 	grep -E "error:|failed|FAILED|Fatal error|Issue recorded|✘" $(TEST_LOG) || echo "no failures found in $(TEST_LOG)"; \
 	exit $$status
 
 .PHONY: test-unit-failures
 test-unit-failures: check-test-plan
-	xcodebuild -workspace $(WORKSPACE) -scheme $(SCHEME_APPSTORE) -destination '$(DESTINATION)' -testPlan __APP__-Unit $(XCODEBUILD_FLAGS) test > $(TEST_LOG) 2>&1; status=$$?; \
+	xcodebuild -workspace $(WORKSPACE) -scheme $(SCHEME_APPSTORE) -destination '$(DESTINATION)' -testPlan __APP__-Unit -derivedDataPath $(TEST_DERIVED_DATA) $(XCODEBUILD_FLAGS) test > $(TEST_LOG) 2>&1; status=$$?; \
 	grep -E "error:|failed|FAILED|Fatal error|Issue recorded|✘" $(TEST_LOG) || echo "no failures found in $(TEST_LOG)"; \
 	exit $$status
 
 .PHONY: clean
 clean:
 	xcodebuild -workspace $(WORKSPACE) -scheme $(SCHEME_APPSTORE) clean
+	rm -rf $(TEST_DERIVED_DATA) $(UI_TEST_DERIVED_DATA)
 
 .PHONY: unregister
 unregister:
