@@ -80,8 +80,8 @@ Don't introduce these. Left = banned, right = use instead.
 - Group cross-cutting concerns under `Core/` (extensions, shared models, keyboard, etc).
   Consolidate single concern in one folder rather than scatter across features.
   No grab-bag "bridge"/"helpers" files holding multiple unrelated types — one type per file.
-- Concrete implementation of protocol seam → `Default…` prefix, or `Live…` for real/
-  system-backed one paired with test double.
+- Name the real implementation of a protocol seam plainly, with no `Live…` or `Default…`
+  prefix; prefix its test double `Fake…`.
 
 ## Databases
 
