@@ -20,7 +20,7 @@ ALWAYS:
 - Run `make plan-repos` for repo changes: it plans only GitHub repos, so no AWS, Cloudflare or Netlify credentials are needed; use `make plan` only for the other resources.
 - Add a new repo with `make new-repo NAME= DESCRIPTION=` (private, no wiki).
 - Read the full plan output before any apply; it saves `tfplan`, and `make apply` applies exactly that file.
-- Run every terraform command through `make` - it loads `.env` and `GITHUB_TOKEN`; plain `terraform` fails on missing credentials.
+- Run every terraform command through `make` - it loads the API tokens from 1Password (`.env.op`) and `GITHUB_TOKEN`; plain `terraform` fails on missing credentials.
 - Show the plan to the user and get explicit approval before every apply, even a rerun of an already-approved plan.
 - Stop and explain exactly what would change if the plan shows anything beyond a clean `+ create` (destroy, in-place update, visibility→public, name change) — wait for confirmation naming that specific resource.
 - Add matching config to `repos.auto.tfvars` before importing a manually-created repo.
