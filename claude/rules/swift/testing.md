@@ -42,6 +42,7 @@ Each test gets a fresh instance — set up in `init`, tear down in `deinit`. No 
 - Serialise every suite that runs `NSAppleScript` (`@Suite(.serialized)`); separate executor instances running in parallel corrupt each other's error info.
 - Never delete Xcode's local StoreKit store (`group.com.apple.storekit/.../Octane/<bundle ID>`); a `.debug` build then falls back to the sandbox, which has no products for that bundle ID. Clear test purchases in Xcode with Debug › StoreKit › Manage Transactions.
 - Give test builds their own `-derivedDataPath`, and UI test builds another: a test build turns local package products into frameworks, and the standalone `.swiftmodule` an app-only build leaves in `Products/` shadows them, so a changed package API reads as a missing member.
+- Inject `URLSession` into network clients and test them with a stub `URLProtocol` in the session configuration; never add a posting protocol as a test seam.
 - Pass an explicit UTC time zone (`TimeZone.gmt`) to date code under test; never rely on the machine's or the test plan's time zone.
 - Build fixture dates from ISO 8601 strings (`try Date("2026-02-09T23:00:00Z", strategy: .iso8601)`), never from raw epoch numbers.
 

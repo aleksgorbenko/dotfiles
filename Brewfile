@@ -12,6 +12,7 @@ tap "tsonglew/dutis" # set default apps for file types (needed for Alfred Workfl
 tap "hashicorp/tap"
 tap "hotchpotch/trn"
 tap "openai/tools"
+tap "armitage-labs/creem" # creem - selling digital products
 
 # set arguments for all 'brew install --cask' commands
 cask_args appdir: "/Applications", require_sha: true
@@ -158,6 +159,7 @@ brew "xctesthtmlreport" # generates html reports from xcodebuild logs
 
 # selling digital products
 brew "antiwork/cli/gumroad"
+brew "creem" # alternative to LemonSqueezy, Gumroad, etc.
 
 # terminal
 cask "ghostty" # minimal terminal
