@@ -23,7 +23,7 @@ func userCreationValidatesEmail() throws {
 ## Logging
 
 - Never assert on log output — logs are not a behavioural contract
-- Never inject a `Logger` into a type as a DI/test seam — create it inline as `private let logger = Logger(category: "…")`
+- Never inject a `Logger` into a type as a DI/test seam — give the type one stored `private let logger` (or `private static let logger`) and never call `Logger(…)` at a log site
 - To verify behaviour, assert on return values or an injected protocol double, never on log lines
 
 ## Test Isolation
