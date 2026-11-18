@@ -12,6 +12,8 @@ ruff = "0.17.1"
 ruby = "latest"
 terraform = "latest"
 uv = "latest"
+"npm:markdownlint-cli2" = "latest"
+"npm:ctx7" = "latest"
 
 [settings]
 lockfile = true

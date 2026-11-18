@@ -77,6 +77,10 @@ brew "shfmt"
 brew "actionlint"
 brew "yamllint"
 brew "taplo"
+brew "checkmake" # Makefile linter
+brew "vale" # prose linter
+brew "lychee" # link checker
+brew "zizmor" # GitHub Actions security audit
 brew "blueutil" # bluetooth connect and disconnect
 
 # langs
@@ -103,6 +107,9 @@ brew "tlrc" # rust client for tldr - alternative to cheat + macOS specific comma
 brew "hugo" # work on my blog https://aleksgorbenko.dev
 brew "tsonglew/dutis/dutis" # set default apps for file types. Used in Alfred
 brew "glow" # pretty print markdown in CLI
+brew "exiftool" # read and strip image metadata
+brew "pngquant" # lossy PNG compression
+brew "oxipng" # lossless PNG optimiser
 brew "hotchpotch/trn/trn" # translate via Apple on-device translation
 
 # aws
